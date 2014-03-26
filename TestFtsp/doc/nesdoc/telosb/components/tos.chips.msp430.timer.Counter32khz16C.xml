@@ -1,0 +1,83 @@
+<?xml version="1.0" ?><component loc="41:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Counter32khz16C.nc" nicename="tos.chips.msp430.timer.Counter32khz16C" qname="Counter32khz16C">
+      <documentation loc="33:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Counter32khz16C.nc">
+        <short>
+ Counter32khz16C provides at 16-bit counter at 32768 ticks per second.</short>
+        <long>
+ Counter32khz16C provides at 16-bit counter at 32768 ticks per second.
+
+ @author Cory Sharp &lt;cssharp@eecs.berkeley.edu&gt;
+ @see  Please refer to TEP 102 for more information about this component and its
+          intended use.
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="49:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Counter32khz16C.nc">
+          <from><interface-ref name="Counter" ref="0x4130a010" scoped=""/></from>
+          <to><interface-ref name="Msp430Counter32khz" ref="0x408f3c50" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="43:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Counter32khz16C.nc" name="Counter" provided="1" ref="0x4130a010">
+      <component-ref nicename="tos.chips.msp430.timer.Counter32khz16C" qname="Counter32khz16C"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Counter" ref="0x4130a010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Counter" qname="Counter"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd288"/>
+            <typename><typedef-ref name="T32khz" ref="0x406bd450"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x4130a760" scoped=""/>
+        <function-ref name="clearOverflow" ref="0x4130ac50" scoped=""/>
+        <function-ref name="isOverflowPending" ref="0x4130a9d8" scoped=""/>
+        <function-ref name="overflow" ref="0x4130aec8" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="60:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430Counter32khzC.nc" name="Msp430Counter32khz" provided="1" ref="0x408f3c50">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.Msp430Counter32khzC" qname="Msp430Counter32khzC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Msp430Counter32khz" ref="0x408f3c50" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Counter" qname="Counter"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd288"/>
+            <typename><typedef-ref name="T32khz" ref="0x406bd450"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x408f03f0" scoped=""/>
+        <function-ref name="clearOverflow" ref="0x408f08e0" scoped=""/>
+        <function-ref name="isOverflowPending" ref="0x408f0668" scoped=""/>
+        <function-ref name="overflow" ref="0x408f0b58" scoped=""/>
+      </interface-functions>
+    </interface><component loc="58:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430Counter32khzC.nc" nicename="tos.platforms.telosa.chips.cc2420x.tmicro.Msp430Counter32khzC" qname="Msp430Counter32khzC">
+      <documentation loc="50:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430Counter32khzC.nc">
+        <short>
+ Msp430Counter32khC provides the standard 32khz counter for the MSP430.</short>
+        <long>
+ Msp430Counter32khC provides the standard 32khz counter for the MSP430.
+
+ @author Cory Sharp &lt;cssharp@eecs.berkeley.edu&gt;
+ @see  Please refer to TEP 102 for more information about this component and its
+          intended use.
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="67:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430Counter32khzC.nc">
+          <from><interface-ref name="Msp430Counter32khz" ref="0x408f3c50" scoped=""/></from>
+          <to><interface-ref name="Counter" ref="0x408ee768" scoped=""/></to>
+        </wire>
+        <wire loc="68:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430Counter32khzC.nc">
+          <from><interface-ref name="Msp430Timer" ref="0x408ed870" scoped=""/></from>
+          <to><interface-ref name="TimerA" ref="0x40611e68" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component></referenced></component>

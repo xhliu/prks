@@ -1,0 +1,27 @@
+# @auther: Xiaohui Liu
+# @date: 9/30/10 12:36 AM
+# @This program parses the log file from NetEye and store the result for Matlab analysis
+
+echo 'Usage: ./parser <job#>'
+
+job=$1
+dir='/home/xiaohui/Downloads/'
+
+#src=${dir}'output/'$job
+dest='/home/xiaohui/Projects/tOR/RawData/'$job
+#echo $src $dest
+
+mkdir $dest
+cd $dir
+#unzip the result
+zfile=$job'.zip'
+unzip $zfile
+unzip "Job$job*.zip"
+mv Job*.txt $dest
+# for var in *.zip
+# do
+# 	unzip $var
+# 	mv 
+# done
+
+rm $zfile Job*.zip

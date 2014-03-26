@@ -1,0 +1,574 @@
+/* *
+ * @ author: Xiaohui Liu (whulxh@gmail.com) 
+ * @ updated: 06/27/2012 
+ * @ description: data plane of iMAC, including data & ctrl packets
+ *
+ * priority calculation: f(link, t) = link_idx ^ (t & 0xFF)
+ * 1) efficient: only involves native bit operation and link_idx is pre-computed only once
+ * 2) fair: Semi round-robin as t goes repeatedly from 0 to 255
+ 
+ * in CONTROL slot
+ * besides CONTROL packets, ftsp beacon is also sent
+ 
+// * slot integrity: tx/rx at most 1 pkt to ensure everything finishes within a slot
+//		|- DATA channel
+//			|-- enforce: DATA and ACK can be lost bcoz ACKs are not filter by h/w address recognition
+//			|-- Not enforce (current solution): if contention resolution works, a sender not rx DATA & a receiver at most 1 DATA bcoz of h/w addr recognition. Acks may cause issue but they are short so hopefully processing them does not go beyond a slot
+//		|- CTRL channel
+//			|-- sender: not allowed to rx
+//			|-- receiver: at most 1 rx
+ */
+#include "IMACForwarder.h"
+#include "IMAC.h"
+#include "Util.h"
+#include "IMACController.h"
+#include "SignalMap.h"
+#include <Tasklet.h>
+
+module IMACForwarderP {
+	provides {
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
+		
+		interface AsyncSplitControl as SplitControl;
+		interface Init;
+		interface ForwarderInfo;
+	};
+	
+	uses {
+		// DATA pkt
+		interface AsyncAMSend as SubSend;
+		interface AsyncReceive as SubReceive;
+		interface AsyncReceive as SubSnoop;
+		interface AsyncPacket as SubPacket;
+		interface AsyncAMPacket as SubAMPacket;
+		// control pkt
+		interface AsyncAMSend as CtrlSend;
+	#if defined(TX_ER)	
+		interface PacketAcknowledgements as Acks;
+	#endif
+//		interface CC2420Config;
+		interface CC2420Packet;
+		interface RadioState;
+		interface PacketField<uint8_t> as PacketTransmitPower;
+		//interface GeneralIO as CCA;
+		
+		interface LinkEstimator;
+		interface SignalMap;
+		interface IMACController as Controller;
+		
+		interface LocalTime<TMicro>;
+		interface GlobalTime<TMicro>;
+		interface Alarm<TMicro, uint16_t> as SlotTimer;
+		
+		interface Random;
+		interface Util;
+		interface BusyWait<TMicro, uint16_t>;
+		interface UartLog;
+		interface DriverInfo;
+	};
+}
+
+implementation {
+
+uint16_t seqno;
+am_addr_t my_ll_addr;
+
+uint8_t my_local_link_idx;
+
+// receiver address of the unicast data pkt being transmitted
+am_addr_t m_data_addr;
+message_t *m_data_p;
+uint8_t m_data_len;
+message_t *m_control_p;
+message_t m_control;
+
+bool is_data_pending;
+bool is_1st_tx_slot;
+
+#ifdef VARY_PDR_REQ
+#warning VARY_PDR_REQ enabled
+bool is_pdr_req_switched;
+bool is_inc;
+uint8_t pdr_req_idx;
+uint8_t pdr_reqs[] = {70, 80, 90, 95};
+#endif
+
+link_t *activeLinks;
+uint8_t active_link_size;
+
+local_link_er_table_entry_t *localLinkERTable;
+link_er_table_entry_t *linkERTable;
+
+// prefix "g_" represents global time
+uint32_t g_next_firing_time;
+
+// tx ftsp beacon instead of ctrl pkt 1 out of const_ctrl_slot_ftsp_chance when ctrl channel available
+// initially be small for quick convergence of ftsp
+uint16_t const_ctrl_slot_ftsp_chance_mask;
+
+// # of consecutive CCA contension failure
+//uint8_t cca_fail_cnt;
+
+// is forwarder enabled
+bool enabled;
+task void splitControlStartDoneTask() {
+	signal SplitControl.startDone(SUCCESS);	
+}
+
+// start data tx/rx after ftsp converges
+async command error_t SplitControl.start() {
+	atomic enabled = TRUE;
+	atomic const_ctrl_slot_ftsp_chance_mask = CTRL_SLOT_FTSP_CHANCE_MASK;
+#ifdef VARY_PDR_REQ	
+	is_pdr_req_switched = FALSE;
+	is_inc = TRUE;
+	pdr_req_idx = 0;
+	call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, pdr_req_idx);
+	call Controller.setLinkPdrReq(pdr_reqs[pdr_req_idx]);
+#endif
+	// we can look up once here bcoz my_link's position in localLinkERTable does not change
+	atomic my_local_link_idx = call Controller.findMyLinkLocalIdx();
+	post splitControlStartDoneTask();
+	#warning "freeze SM"
+	call SignalMap.freeze();
+	return SUCCESS;
+}
+
+
+async command error_t SplitControl.stop() {
+	atomic enabled = FALSE;
+	call SlotTimer.stop();
+	return SUCCESS;
+}
+
+async command bool ForwarderInfo.isForwarderEnabled() {
+	bool enabled_;
+	atomic enabled_ = enabled;
+	return enabled_;
+}
+
+//async command bool ForwarderInfo.isDataPending() {
+//	bool is_data_pending_;
+//	atomic is_data_pending_ = is_data_pending;
+//	return is_data_pending_;
+//}
+
+inline void* getPacketPayload(message_t* msg, uint8_t len);
+inline uint8_t getPacketPayloadLength(message_t *msg);
+uint8_t addLinkEstHeaderAndFooter(message_t *msg, uint8_t len, uint32_t next_slot_by_tx);
+
+// get the link estimation header in the packet
+imac_header_t* getHeader(message_t* m) {
+	return (imac_header_t*)call SubPacket.getPayload(m, sizeof(imac_header_t));
+}
+// get the pdr footer in the packet
+// @param len: payload length of this layer
+void* getFooter(message_t* m, uint8_t len) {
+	return (void*)(len + (uint8_t *)getPacketPayload(m, len + sizeof(imac_header_t)));
+}
+
+command error_t Init.init() {
+	call SlotTimer.start(SM_BEACON_PERIOD_MILLI << 10);
+	g_next_firing_time = INVALID_TIME;
+	const_ctrl_slot_ftsp_chance_mask = INIT_CTRL_SLOT_FTSP_CHANCE_MASK;
+	atomic {
+		enabled = FALSE;
+		seqno = 0;
+		is_data_pending = FALSE;
+	}
+	is_1st_tx_slot = TRUE;
+
+	my_ll_addr = call SubAMPacket.address();
+	activeLinks = call Util.getActiveLinks(&active_link_size);
+	localLinkERTable = call Controller.getLocalLinkERTable();
+	linkERTable = call Controller.getLinkERTable();
+	m_control_p = &m_control;
+	return SUCCESS;
+}
+
+uint32_t tdma_cnt = 0;
+//uint32_t tx_win_cnt = 0;
+//uint32_t rx_win_cnt = 0;
+uint32_t start_time;
+// prevent start_time being override
+bool pending;
+
+#include "IMACForwarderPUtil.nc"
+
+// --------------------------------------------------------------------------------------
+// 							TDMA
+// --------------------------------------------------------------------------------------
+// each slot starts
+async event void SlotTimer.fired() {
+	bool is_fired_early = FALSE;
+	uint16_t backoff;
+	uint32_t g_now, local_interval, elapsed_interval;
+	uint32_t slack = 0;
+	start_time = call LocalTime.get();
+	if (enabled) {
+		// jump start finishes and sync
+		if (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) {
+			// align to the next next slot boundary
+			// elapsed_interval = g_now & SLOT_HEX_MODULAR;
+			elapsed_interval = g_now % SLOT_LEN;
+			
+			if (g_next_firing_time != INVALID_TIME) {
+				// too early
+				//if (g_now < g_next_firing_time) {
+				if ((int32_t)(g_next_firing_time - g_now) > 0) {
+					is_fired_early = TRUE;
+					local_interval = (uint32_t)2 * SLOT_LEN - elapsed_interval;
+					call SlotTimer.start(local_interval);
+					// expected next firing instant
+					g_next_firing_time = g_now + local_interval;
+					
+					slack = SLOT_LEN - elapsed_interval;
+					// wait till slot starts to be aligned; g_next_firing_time remains
+					call BusyWait.wait(slack);
+					// do not have to be precise; fine as long as the corresponding slot is right
+					g_now += slack;
+				} else {
+					// too late
+					local_interval = SLOT_LEN - elapsed_interval;
+					g_next_firing_time = g_now + local_interval;
+				}
+			} else {
+				// last slot was invalid, fire after (SLOT_LEN - elapsed_interval)
+				local_interval = SLOT_LEN - elapsed_interval;
+				g_next_firing_time = g_now + local_interval;
+			}
+		#ifdef VARY_PDR_REQ
+			#warning online pdr req change
+			// change period: 2 ^ 32 us; scale 100 times to avoid skipped slots
+			if (g_now < ((uint32_t)SLOT_LEN * 100)) {
+				if (!is_pdr_req_switched) {
+					is_pdr_req_switched = TRUE;
+					// 70 -> 80 -> 90 -> 95 -> 90 -> 80 ->70
+					// 0 -> 1 -> 2 -> 3 -> 2 -> 1 -> 0
+					pdr_req_idx  = is_inc ? (pdr_req_idx + 1) : (pdr_req_idx - 1);
+					if (pdr_req_idx == sizeof(pdr_reqs) / sizeof(pdr_reqs[0])) {
+						is_inc = FALSE;
+						pdr_req_idx = pdr_req_idx - 2;
+					}
+					if (0 == pdr_req_idx)
+						is_inc = TRUE;
+					call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, pdr_req_idx);
+					call Controller.setLinkPdrReq(pdr_reqs[pdr_req_idx]);
+				}
+			} else {
+				is_pdr_req_switched = FALSE;
+			}
+		#endif	
+		} else {
+			// indicate invalid global time; overridden in getGlobalTime()
+			g_now = INVALID_TIME;
+			g_next_firing_time = INVALID_TIME;
+			// in case not sync
+			local_interval = SLOT_LEN;
+		}
+		if (!is_fired_early)
+			call SlotTimer.start(local_interval);
+		//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, is_fired_early, local_interval >> 16, local_interval, g_now >> 16, g_now, start_time);
+
+		scheduleSlot(g_now);
+    } else {
+//#warning disable forwarder
+    	// start TDMA together; otherwise receiver who has not started may miss DATA packets
+    	if (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) {
+    		if (g_now >= GLOBAL_TDMA_START_TIME) {
+    			call UartLog.logEntry(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, g_now - GLOBAL_TDMA_START_TIME);
+    			call SplitControl.start();
+    		}
+    	}
+    	local_interval = (SM_BEACON_PERIOD_MILLI << 10);
+		call SlotTimer.start(local_interval);
+    	// always in CTRL channel b4 forwarder is started
+    	//call RadioState.setChannel(CC2420_CONTROL_CHANNEL);
+//		signal ForwarderInfo.slotStarted(FALSE);
+		// directly tx/rx control; no contention resolution or channel switch
+		backoff = call Random.rand16();
+//		#warning dbg
+//		if ((backoff & 0x7F) == 0)
+//			call UartLog.logEntry(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, 0);
+		backoff &= CW_HEX_MODULAR;
+		// backoff is to random backoff for channel contention
+		call BusyWait.wait(backoff);
+		txrxCtrl();
+    }
+    // do not start timer here bcoz long processing time of scheduleSlot() & txrxCtrl(), to name a few
+	//call SlotTimer.start(local_interval);
+}
+
+// do scheduling in a slot specified by g_slot_time
+void scheduleSlot(uint32_t g_slot_time) {
+	uint16_t backoff;
+	uint32_t next_slot_by_tx = 0;
+	uint32_t current_slot;
+	uint8_t status;
+	uint8_t newlen;
+	
+	tdma_cnt++;
+	/*
+	 * DATA: unicast, regular power, channel CC2420_DEF_CHANNEL
+	 * CONTROL: broadcast, highest power, channel CC2420_CONTROL_CHANNEL
+     * 
+     *	switch to DATA channel
+     *  compute next slot to tx at receiver
+     *	if reach my slot to tx
+     *		compute next slot to tx
+     *		tx data as sender if any
+     *	elif reach my slot to rx
+     *		stay in DATA channel
+     *	else
+     *		switch to CONTROL channel		
+     *		random backoff: implicit through processing jitter and global time jitter
+     *		if CCA clear (CCA not done here, at CC2420TransceiverP$CC2420XDriverConfig$requiresRssiCca())
+     *			set max power
+     *			tx ctrl pkt
+     *		fi
+     *		// switch back to DATA channel: not switch here bcoz it's hard to guess when ctrl tx finishes and alarm firing jitter
+     *	fi
+     */
+	// stay in default DATA channel to avoid DATA miss due to switch to channel late    
+	call RadioState.setChannel(CC2420X_DEF_CHANNEL);
+	// contention resolution
+
+ 	// convert global time to time slot index bcoz
+	// 1) even 1 jiffy's difference in global time across diff. nodes can lead to priority inconsistency and thus "collision"; while time slot index is consensus if sync error is less than one slot
+	// 2) implicit assumption: alarm fires right after perfect slot boundary, almost never before it, which can be seem from "alarm_firing_modulo_1024.fig"
+	current_slot = g_slot_time / SLOT_LEN;
+
+	//start_time1 = call LocalTime.get();
+	// receiver-based tx slot; computed every slot
+	nextRxSlot(current_slot);
+	// jump start
+	if (is_1st_tx_slot && g_slot_time != INVALID_TIME) {
+		is_1st_tx_slot = FALSE;
+		next_slot_by_tx = nextTxSlot(current_slot);
+		//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, 0, 0, 0, 0, next_slot_by_tx - current_slot, next_slot_by_tx);
+	}
+	
+	// signal start of a slot in CONTROL channel, DATA channel mostly unnecessary bcoz of h/w address recoginition; used in CC2420TransmitP to ensure slot integrity?? no h/w addr recog in cc2420x
+	//signal ForwarderInfo.slotStarted(tx_win || rx_win);
+//	backoff = call Random.rand16();
+//	backoff &= CW_HEX_MODULAR;
+	if (call Controller.isTxSlot(current_slot)) {
+		status = 0;
+		
+		// ensure receiver has switched to DATA channel
+		call BusyWait.wait(MIN_CW);
+//	#warning
+//		// randomize to sample NI during rx
+//		call BusyWait.wait(MIN_CW + backoff);
+		next_slot_by_tx = nextTxSlot(current_slot);
+		//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, 0, 0, 0, 0, next_slot_by_tx - current_slot, next_slot_by_tx);
+		if (is_data_pending) {
+		#if defined(TX_ER)
+			call Acks.requestAck(m_data_p);
+		#endif
+			// piggyback right before tx
+			newlen = addLinkEstHeaderAndFooter(m_data_p, m_data_len, next_slot_by_tx);
+			call SubSend.send(m_data_addr, m_data_p, newlen);
+			//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, 0, g_slot_time >> 16, g_slot_time, status, next_slot_by_tx - current_slot, current_slot);
+		} else {
+			// this can happen if AMSend.send() is called within task; not serious
+			//assert(tdma_cnt);
+		}
+		// log here to account for tx slots w/o data		
+		call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, is_data_pending, g_slot_time >> 16, g_slot_time, getConflictSetSize(), next_slot_by_tx - current_slot, current_slot);
+	} else if (call Controller.isRxSlot(current_slot)) {
+		status = 1;
+	} else {
+		status = 2;
+		// switch to control channel
+		//call CC2420Config.switchChannel(CC2420_CONTROL_CHANNEL);
+		call RadioState.setChannel(CC2420_CONTROL_CHANNEL);
+
+		backoff = call Random.rand16();
+		backoff &= CW_HEX_MODULAR;
+		//MIN_CW is wait to tx to prevent rx before receiver's SlotTimer fires, causing jitter and slot misalignment
+		// backoff is to random backoff for channel contention
+		call BusyWait.wait(MIN_CW + backoff);
+		txrxCtrl();
+	}
+	//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, is_data_pending, status, 0, getConflictSetSize(), next_slot_by_tx - current_slot, current_slot);
+}
+
+// tx/rx control packets & ftsp beacons
+// wait for reception if not sent 
+void txrxCtrl() {
+	uint16_t rnd = call Random.rand16();
+	if ((rnd & const_ctrl_slot_ftsp_chance_mask) != 0) {
+		// ftsp beacon is sent at regular power
+		//call CC2420Packet.setPower(m_control_p, CONTROL_POWER_LEVEL);
+		call PacketTransmitPower.set(m_control_p, CONTROL_POWER_LEVEL);
+		call CtrlSend.send(AM_BROADCAST_ADDR, m_control_p, 0);
+	} else {
+		call GlobalTime.sendFtspBeacon();
+	}
+}
+
+async event void SubSend.sendDone(message_t* msg, error_t error) {
+	am_addr_t m_data_addr_;
+
+	atomic {
+		is_data_pending = FALSE;
+		m_data_addr_ = m_data_addr;
+	}
+	signal AMSend.sendDone(msg, error);
+	// pin the receiver; only chance for m_data_addr to be in neighbor table if it never sends
+	call LinkEstimator.pinNeighbor(m_data_addr_);
+#if defined(TX_ER)
+	if (SUCCESS == error) {
+		// data driven
+		if (call Acks.wasAcked(msg)) {
+			call LinkEstimator.txAck(m_data_addr_);
+		} else {
+			call LinkEstimator.txNoAck(m_data_addr_);
+		}
+	}
+#endif
+}
+
+
+// TODO: add busy protection to ctrl pkt 
+async event void CtrlSend.sendDone(message_t* msg, error_t error) {
+//	call UartLog.logEntry(DBG_FLAG, DBG_DELAY_FLAG, __LINE__, call LocalTime.get() - start_time);
+}
+
+// channel switched
+//async event void CC2420Config.syncDone(error_t error) {}
+tasklet_async event void RadioState.done() {}
+
+
+//-------------------------------------------------------------------------------
+// Interface AMSend
+//-------------------------------------------------------------------------------
+// called right before SubSend$send(), not in AMSend$send(), to piggyback latest info
+uint8_t addLinkEstHeaderAndFooter(message_t *msg, uint8_t len, uint32_t next_slot_by_tx) {
+	int16_t k;
+	uint8_t newlen;
+	
+	imac_header_t *hdr;
+	link_er_footer_t *er_footer;
+
+	hdr = getHeader(msg);
+  	er_footer = (link_er_footer_t *)getFooter(msg, len);
+
+	k = call Controller.loadLinkER(er_footer);
+	
+  	hdr->seqno = seqno++;
+  	hdr->link_er_cnt = k;
+  	hdr->next_slot_by_tx = next_slot_by_tx;
+  	newlen = sizeof(imac_header_t) + len + k * sizeof(link_er_footer_t);
+	//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, 0, hdr->link_er_cnt, er_footer[0].sender, er_footer[0].receiver, er_footer[0].rx_er_version, hdr->seqno);
+	return newlen;
+}
+
+async command error_t AMSend.send(am_addr_t addr, message_t* msg, uint8_t len) {
+	atomic {
+		if (is_data_pending)						return EBUSY;
+	}
+	if (len > call AMSend.maxPayloadLength())		return ESIZE;
+	// not accept broadcast now for simplicity
+	if (AM_BROADCAST_ADDR == addr) 					return FAIL;
+
+	atomic {
+		is_data_pending = TRUE;
+		// "store" data pkt for later tx
+		m_data_addr = addr;
+		m_data_p = msg;
+		m_data_len = len;
+	}
+	//call Packet.setPayloadLength(msg, len);
+	return SUCCESS;
+}
+
+// cascade the calls down
+async command uint8_t AMSend.cancel(message_t* msg) {
+	return call SubSend.cancel(msg);
+}
+
+async command uint8_t AMSend.maxPayloadLength() {
+	return call Packet.maxPayloadLength();
+}
+
+async command void* AMSend.getPayload(message_t* msg, uint8_t len) {
+	return call Packet.getPayload(msg, len);
+}
+
+// new messages are received here
+async event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) {
+	am_addr_t from = call SubAMPacket.source(msg);
+	imac_header_t *hdr = getHeader(msg);
+	link_er_footer_t *er_footer = (link_er_footer_t *)getFooter(msg, getPacketPayloadLength(msg));
+	
+	// update next rx slot from piggyback info
+	call Controller.updateNextSlot(from, TRUE, hdr->next_slot_by_tx);
+	// received; do not have to conservatively wait in DATA channel anymore
+	call Controller.clearDataPending(from);
+	
+	call Controller.updateLinkERTable(er_footer, hdr->link_er_cnt, from, hdr->seqno);
+	//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, from, hdr->link_er_cnt, er_footer[0].sender, er_footer[0].receiver, er_footer[0].rx_er_version, hdr->seqno);
+	return signal Receive.receive(msg, call Packet.getPayload(msg, call Packet.payloadLength(msg)), call Packet.payloadLength(msg));
+}
+
+// overhear
+async event message_t* SubSnoop.receive(message_t* msg, void* payload, uint8_t len) {
+	am_addr_t from = call SubAMPacket.source(msg);
+	imac_header_t *hdr = getHeader(msg);
+	link_er_footer_t *er_footer = (link_er_footer_t *)getFooter(msg, getPacketPayloadLength(msg));
+	//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, from, hdr->link_er_cnt, er_footer[0].sender, er_footer[0].receiver, er_footer[0].rx_er_version, hdr->seqno);
+	call Controller.updateLinkERTable(er_footer, hdr->link_er_cnt, from, hdr->seqno);
+	return msg;
+}
+//------------------------------------------------------------------------
+// Interface Packet
+//------------------------------------------------------------------------
+async command void Packet.clear(message_t* msg) {
+	call SubPacket.clear(msg);
+}
+
+// subtract the space occupied by the signal map header and footer from the incoming payload size
+async command uint8_t Packet.payloadLength(message_t* msg) {
+	return getPacketPayloadLength(msg);
+}
+
+inline uint8_t getPacketPayloadLength(message_t *msg) {
+	imac_header_t *hdr = getHeader(msg);
+	return (call SubPacket.payloadLength(msg) - sizeof(imac_header_t) - hdr->link_er_cnt * sizeof(link_er_footer_t));
+}
+
+// account for the space used by header and footer while setting the payload length
+async command void Packet.setPayloadLength(message_t* msg, uint8_t len) {
+	imac_header_t *hdr = getHeader(msg);
+	call SubPacket.setPayloadLength(msg, len + sizeof(imac_header_t) + hdr->link_er_cnt * sizeof(link_er_footer_t));
+}
+
+async command uint8_t Packet.maxPayloadLength() {
+	return (call SubPacket.maxPayloadLength() - sizeof(imac_header_t));
+}
+
+// application payload pointer is just past the link estimation header
+async command void* Packet.getPayload(message_t* msg, uint8_t len) {
+	return getPacketPayload(msg, len);
+}
+inline void* getPacketPayload(message_t* msg, uint8_t len) {
+	void* payload = call SubPacket.getPayload(msg, len + sizeof(imac_header_t));
+	if (payload != NULL) {
+		payload += sizeof(imac_header_t);
+	}
+	return payload;
+}
+
+default async event void AMSend.sendDone(message_t* msg, error_t error ) {}
+default async event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
+	return msg;
+}
+
+// new inbound data/ack pdr arrives
+async event error_t LinkEstimator.inLinkPdrUpdated(am_addr_t nb, bool is_ack) {	return SUCCESS;	}
+
+}

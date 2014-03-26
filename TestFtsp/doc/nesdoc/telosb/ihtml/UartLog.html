@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: UartLog</title>
+  </head>
+  <body>
+    <h2>Interface: UartLog</h2>
+    <b>interface UartLog</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command error_t <a href="#logByteStream">logByteStream</a>(nx_uint8_t *log_p, uint8_t len)
+      </span></div><div id=funcsig><span id=funcnameshort>command error_t <a href="#logEntry">logEntry</a>(nx_uint8_t type, nx_uint8_t sourceId, nx_uint16_t seq, nx_uint32_t timestamp)
+      </span></div><div id=funcsig><span id=funcnameshort>command error_t <a href="#logTxRx">logTxRx</a>(nx_uint8_t type, nx_uint8_t sourceId, nx_uint16_t seq, nx_uint8_t last_hop, nx_uint16_t last_hop_ntw_seq, nx_uint16_t last_hop_seq, nx_uint16_t local_ntw_seq, nx_uint16_t local_seq, nx_uint32_t timestamp)
+      </span></div><p><div id=heading>Commands - Details</div>
+    <a name="logByteStream"></a>
+    <h4>logByteStream
+    </h4>
+    <span id=funcnameshort>command error_t <b>logByteStream</b>(nx_uint8_t *log_p, uint8_t len)
+    </span><hr>
+    <a name="logEntry"></a>
+    <h4>logEntry
+    </h4>
+    <span id=funcnameshort>command error_t <b>logEntry</b>(nx_uint8_t type, nx_uint8_t sourceId, nx_uint16_t seq, nx_uint32_t timestamp)
+    </span><hr>
+    <a name="logTxRx"></a>
+    <h4>logTxRx
+    </h4>
+    <span id=funcnameshort>command error_t <b>logTxRx</b>(nx_uint8_t type, nx_uint8_t sourceId, nx_uint16_t seq, nx_uint8_t last_hop, nx_uint16_t last_hop_ntw_seq, nx_uint16_t last_hop_seq, nx_uint16_t local_ntw_seq, nx_uint16_t local_seq, nx_uint32_t timestamp)
+    </span>
+  </body>
+</html>

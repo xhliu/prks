@@ -1,0 +1,17 @@
+<?xml version="1.0" ?><component abstract="" loc="35:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/LowPowerListeningDummyP.nc" nicename="tos.lib.rfxlink.layers.LowPowerListeningDummyP" qname="LowPowerListeningDummyP">
+      <parameters>
+      </parameters>
+      <module/>
+    <specification><interface loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/LowPowerListeningDummyP.nc" name="LowPowerListening" provided="1" ref="0x40c18628">
+      <component-ref nicename="tos.lib.rfxlink.layers.LowPowerListeningDummyP" qname="LowPowerListeningDummyP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LowPowerListening" ref="0x40c18628" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.LowPowerListening" qname="LowPowerListening"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="setRemoteWakeupInterval" ref="0x40c18800" scoped=""/>
+        <function-ref name="getRemoteWakeupInterval" ref="0x40c188e0" scoped=""/>
+        <function-ref name="getLocalWakeupInterval" ref="0x40c189c0" scoped=""/>
+        <function-ref name="setLocalWakeupInterval" ref="0x40c18aa0" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

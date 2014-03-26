@@ -1,0 +1,90 @@
+/* *
+ * @ author: Xiaohui Liu (whulxh@gmail.com) 
+ * @ updated: 06/27/2012 
+ * @ description: data plane of iMAC, including data & ctrl packets
+ */
+#include "IMACForwarder.h"
+#include "IMAC.h"
+
+configuration IMACForwarderC {
+ 	provides {
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
+ 		
+ 		interface AsyncSplitControl as SplitControl;
+ 		interface ForwarderInfo;
+ 	};
+}
+
+implementation {
+	components IMACForwarderP as Forwarder;
+	AMSend = Forwarder;
+	Receive = Forwarder;
+	Packet = Forwarder;
+	SplitControl = Forwarder;
+	ForwarderInfo = Forwarder;
+
+	components MainC;
+	MainC.SoftwareInit -> Forwarder;
+	
+	components LinkEstimatorC as LE;
+	Forwarder.SubSend -> LE;
+	Forwarder.SubReceive -> LE.Receive;
+	Forwarder.SubSnoop -> LE.Snoop;
+	Forwarder.SubPacket -> LE;
+//	Forwarder.SubAMPacket -> ActiveMessageC;
+	components AsyncCC2420TransceiverC as AM;
+	Forwarder.SubAMPacket -> AM;
+	
+	components IMACControllerC as Controller;
+	Forwarder.CtrlSend -> Controller;
+
+#if defined(TX_ER)
+	components ActiveMessageC;
+	Forwarder.Acks -> ActiveMessageC;
+#endif
+//	components CC2420ControlC;
+//	Forwarder.CC2420Config -> CC2420ControlC;
+//	components CC2420ActiveMessageC;
+//	Forwarder.CC2420Packet -> CC2420ActiveMessageC;
+//	Forwarder.CC2420Packet -> AM;
+	components CC2420XDriverLayerC as Driver;
+	Forwarder.RadioState -> Driver;
+	Forwarder.PacketTransmitPower -> Driver.PacketTransmitPower;
+	
+	//components HplCC2420PinsC as Pins;
+	//Forwarder.CCA -> Pins.CCA;
+	
+	
+	Forwarder.LinkEstimator -> LE;
+	components SignalMapC as SM;
+	Forwarder.SignalMap -> SM;
+	Forwarder.Controller -> Controller;
+	
+	
+	// ForwarderInfoting time
+	components LocalTimeMicroC;
+	Forwarder.LocalTime -> LocalTimeMicroC;
+	// ftsp
+	components TimeSyncMicroC as TimeSyncC;
+	MainC.SoftwareInit -> TimeSyncC;
+	TimeSyncC.Boot -> MainC;
+	Forwarder.GlobalTime -> TimeSyncC;
+	
+//	components new AlarmMicro16C() as BackoffTimer;
+//	Forwarder.BackoffTimer -> BackoffTimer;
+	components new AlarmMicro16C() as SlotTimer;
+	Forwarder.SlotTimer -> SlotTimer;
+	
+	components RandomC;
+	Forwarder.Random -> RandomC;
+	components UtilC;
+	Forwarder.Util -> UtilC;
+	components BusyWaitMicroC;
+	Forwarder.BusyWait -> BusyWaitMicroC;
+	components UartLogC;
+	Forwarder.UartLog -> UartLogC;
+	components CC2420XDriverLayerP;
+	Forwarder.DriverInfo -> CC2420XDriverLayerP;
+}

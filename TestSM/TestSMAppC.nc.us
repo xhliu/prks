@@ -1,0 +1,50 @@
+#include "TestSM.h"
+
+/**
+ * @author Xiaohui Liu
+ * @date   12/29/2011
+ */
+
+configuration TestSMAppC {}
+implementation {
+	components MainC, TestSMC as App, LedsC;
+	components new AMSenderC(AM_RADIO_COUNT_MSG);
+	components new AMReceiverC(AM_RADIO_COUNT_MSG);
+	components new TimerMilliC();
+	components ActiveMessageC;
+	
+	components SignalMapP as SM;
+	components CC2420ActiveMessageC;
+	//components DummyUartLogC as LogC;
+	components UartLogC as LogC;
+	components CC2420ControlC;
+	
+	App.Boot -> MainC.Boot;
+	App.AMControl -> ActiveMessageC;
+	App.Leds -> LedsC;
+	//App.MilliTimer -> TimerMilliC;
+
+	//wire SignalMapP
+	SM.SubSend -> AMSenderC;	
+	SM.SubReceive -> AMReceiverC;
+	SM.SubPacket -> AMSenderC;
+	SM.SubAMPacket -> AMSenderC;
+	SM.CC2420Packet -> CC2420ActiveMessageC;
+	MainC.SoftwareInit -> SM;
+	SM.UartLog -> LogC;
+	
+	App.Send -> SM;	
+	App.Receive -> SM;
+	App.Packet -> SM;
+	App.AMPacket -> AMSenderC;
+	App.SignalMap -> SM;
+	App.UartLog -> LogC;
+	
+	//components Msp430CounterMicroC;
+	components new AlarmMicro16C();
+	components LocalTimeMicroC;
+	App.Alarm -> AlarmMicro16C;
+	App.LocalTime -> LocalTimeMicroC;
+}
+
+

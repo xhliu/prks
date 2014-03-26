@@ -1,0 +1,100 @@
+<?xml version="1.0" ?><interfacedef loc="41:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc" nicename="tos.lib.rfxlink.util.NeighborhoodFlag" qname="NeighborhoodFlag">
+      <documentation loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc">
+        <short>
+ This interface provides one bit storage for each neighbor in a very
+ fast and conveint way (without using shifts for example).</short>
+        <long>
+ This interface provides one bit storage for each neighbor in a very
+ fast and conveint way (without using shifts for example). 
+</long>
+      </documentation>
+      <function command="" loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc" name="clear" provided="0" ref="0x40bda730">
+        <documentation loc="53:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc">
+          <short>
+ Clears the flag for the given index.</short>
+          <long>
+ Clears the flag for the given index. The flag is automatically
+ cleared after the Neighborhood.evicted event is fired.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.NeighborhoodFlag" qname="NeighborhoodFlag"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc" name="idx" ref="0x40bda5d8">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="62:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc" name="clearAll" provided="0" ref="0x40bdabb0">
+        <documentation loc="59:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc">
+          <short>
+ Clears the flag for all indices
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.NeighborhoodFlag" qname="NeighborhoodFlag"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc" name="get" provided="0" ref="0x40bdfc68">
+        <documentation loc="43:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc">
+          <short>
+ Returns the value of the flag for the given index
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.NeighborhoodFlag" qname="NeighborhoodFlag"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc" name="idx" ref="0x40bdfb10">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="51:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc" name="set" provided="0" ref="0x40bda1e0">
+        <documentation loc="48:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc">
+          <short>
+ Sets the flag for the given index
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.NeighborhoodFlag" qname="NeighborhoodFlag"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="51:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodFlag.nc" name="idx" ref="0x40bda088">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+    </interfacedef>

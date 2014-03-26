@@ -1,0 +1,104 @@
+<?xml version="1.0" ?><component loc="8:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" nicename="UartLogP" qname="UartLogP">
+      <module/>
+    <specification><interface loc="44:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="uartSendTask" provided="0" ref="0x4110ccc0">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="uartSendTask" ref="0x4110ccc0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TaskBasic" qname="TaskBasic"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="postTask" ref="0x4110ce98" scoped=""/>
+        <function-ref name="runTask" ref="0x4110a010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="20:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="LocalTime" provided="0" ref="0x4110e980">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTime" ref="0x4110e980" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x4110d010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="11:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="Init" provided="1" ref="0x41110260">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Init" ref="0x41110260" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x41110438" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="19:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="Leds" provided="0" ref="0x4110fb98">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x4110fb98" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x4110fd70" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x4110fe50" scoped=""/>
+        <function-ref name="led1On" ref="0x4110e010" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x4110e0f0" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x4110e1d0" scoped=""/>
+        <function-ref name="get" ref="0x4110e2b0" scoped=""/>
+        <function-ref name="led1Off" ref="0x4110e390" scoped=""/>
+        <function-ref name="led2Off" ref="0x4110e710" scoped=""/>
+        <function-ref name="set" ref="0x4110e470" scoped=""/>
+        <function-ref name="led0On" ref="0x4110e550" scoped=""/>
+        <function-ref name="led2On" ref="0x4110e630" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="18:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="UartPacket" provided="0" ref="0x4110f4d0">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartPacket" ref="0x4110f4d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x4110f6a8" scoped=""/>
+        <function-ref name="payloadLength" ref="0x4110f788" scoped=""/>
+        <function-ref name="getPayload" ref="0x4110f868" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4110f948" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x4110fa28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="16:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="UartSend" provided="0" ref="0x41110d48">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartSend" ref="0x41110d48" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x41110f20" scoped=""/>
+        <function-ref name="getPayload" ref="0x4110f018" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4110f0f8" scoped=""/>
+        <function-ref name="cancel" ref="0x4110f1d8" scoped=""/>
+        <function-ref name="sendDone" ref="0x4110f2b8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="15:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="UartControl" provided="0" ref="0x411106d8">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartControl" ref="0x411106d8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x411108b0" scoped=""/>
+        <function-ref name="stopDone" ref="0x41110990" scoped=""/>
+        <function-ref name="start" ref="0x41110a70" scoped=""/>
+        <function-ref name="stop" ref="0x41110b50" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="10:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="UartLog" provided="1" ref="0x41115d38">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartLog" ref="0x41115d38" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="UartLog" qname="UartLog"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="logEntry" ref="0x41115f10" scoped=""/>
+        <function-ref name="logTxRx" ref="0x41110010" scoped=""/>
+        <function-ref name="logByteStream" ref="0x411100f0" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

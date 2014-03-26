@@ -1,0 +1,99 @@
+<?xml version="1.0" ?><component abstract="" loc="38:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC">
+      <parameters>
+      </parameters>
+      <module/>
+    <specification><interface loc="49:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" name="SubSend" provided="0" ref="0x40c9cd78">
+      <component-ref nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubSend" ref="0x40c9cd78" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioSend" qname="RadioSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40c9b010" scoped=""/>
+        <function-ref name="ready" ref="0x40c9b0f0" scoped=""/>
+        <function-ref name="sendDone" ref="0x40c9b1d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="50:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" name="SubReceive" provided="0" ref="0x40c9b418">
+      <component-ref nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubReceive" ref="0x40c9b418" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioReceive" qname="RadioReceive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40c9b5f0" scoped=""/>
+        <function-ref name="header" ref="0x40c9b6d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="51:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" name="RadioAlarm" provided="0" ref="0x40c9b878">
+      <component-ref nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioAlarm" ref="0x40c9b878" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioAlarm" qname="RadioAlarm"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x40c9ba50" scoped=""/>
+        <function-ref name="wait" ref="0x40c9bb30" scoped=""/>
+        <function-ref name="cancel" ref="0x40c9bc10" scoped=""/>
+        <function-ref name="isFree" ref="0x40c9bcf0" scoped=""/>
+        <function-ref name="getNow" ref="0x40c9bdd0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="54:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" name="AckReceivedFlag" provided="0" ref="0x40c95618">
+      <component-ref nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AckReceivedFlag" ref="0x40c95618" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketFlag" qname="PacketFlag"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40c957f0" scoped=""/>
+        <function-ref name="get" ref="0x40c958d0" scoped=""/>
+        <function-ref name="setValue" ref="0x40c959b0" scoped=""/>
+        <function-ref name="set" ref="0x40c95a90" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="53:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" name="Config" provided="0" ref="0x40c9a030">
+      <component-ref nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Config" ref="0x40c9a030" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.SoftwareAckConfig" qname="SoftwareAckConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="reportChannelError" ref="0x40c9a208" scoped=""/>
+        <function-ref name="createAckPacket" ref="0x40c9a2e8" scoped=""/>
+        <function-ref name="requiresAckWait" ref="0x40c9a3c8" scoped=""/>
+        <function-ref name="isAckPacket" ref="0x40c9a4a8" scoped=""/>
+        <function-ref name="verifyAckPacket" ref="0x40c9a588" scoped=""/>
+        <function-ref name="getAckTimeout" ref="0x40c9a668" scoped=""/>
+        <function-ref name="setAckRequired" ref="0x40c9a748" scoped=""/>
+        <function-ref name="requiresAckReply" ref="0x40c9a828" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" name="RadioReceive" provided="1" ref="0x40c9c2b0">
+      <component-ref nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioReceive" ref="0x40c9c2b0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioReceive" qname="RadioReceive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40c9c488" scoped=""/>
+        <function-ref name="header" ref="0x40c9c568" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" name="RadioSend" provided="1" ref="0x40c9fcc8">
+      <component-ref nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioSend" ref="0x40c9fcc8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioSend" qname="RadioSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40c9fea0" scoped=""/>
+        <function-ref name="ready" ref="0x40c9c010" scoped=""/>
+        <function-ref name="sendDone" ref="0x40c9c0f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SoftwareAckLayerC.nc" name="PacketAcknowledgements" provided="1" ref="0x40c9c788">
+      <component-ref nicename="tos.lib.rfxlink.layers.SoftwareAckLayerC" qname="SoftwareAckLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketAcknowledgements" ref="0x40c9c788" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketAcknowledgements" qname="PacketAcknowledgements"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="requestAck" ref="0x40c9c960" scoped=""/>
+        <function-ref name="noAck" ref="0x40c9ca40" scoped=""/>
+        <function-ref name="wasAcked" ref="0x40c9cb20" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

@@ -1,0 +1,19 @@
+<area shape="rect" href="../chtml/tos.lib.timer.TransformAlarmC.html" title="TransformAlarmC\n(Transform)" alt="" coords="99,120,256,168">
+<area shape="poly" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;TMilli, uint32_t&gt;" alt="" coords="180,53 180,107 175,107 175,53">
+<area shape="rect" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;TMilli, uint32_t&gt;" alt="" coords="173,49,181,57">
+<area shape="rect" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;TMilli, uint32_t&gt;" alt="" coords="173,116,181,124">
+<area shape="rect" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;TMilli, uint32_t&gt;" alt="" coords="177,78,327,95">
+<area shape="rect" href="../chtml/tos.chips.msp430.timer.Alarm32khz16C.html" title="Alarm32khz16C\n(AlarmFrom)" alt="" coords="293,235,448,293">
+<area shape="poly" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint16_t&gt;" alt="" coords="212,166 246,190 271,208 300,226 297,230 268,213 242,194 209,170">
+<area shape="rect" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint16_t&gt;" alt="" coords="207,164,215,172">
+<area shape="rect" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint16_t&gt;" alt="" coords="307,231,315,239">
+<area shape="rect" href="../ihtml/tos.lib.timer.Alarm.html" title="Alarm&lt;T32khz, uint16_t&gt;" alt="" coords="269,193,435,210">
+<area shape="rect" href="../chtml/tos.chips.msp430.timer.CounterMilli32C.html" title="CounterMilli32C" alt="" coords="5,235,155,293">
+<area shape="poly" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;TMilli, uint32_t&gt;" alt="" coords="109,170 84,193 77,222 72,221 79,191 105,166">
+<area shape="rect" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;TMilli, uint32_t&gt;" alt="" coords="103,164,111,172">
+<area shape="rect" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;TMilli, uint32_t&gt;" alt="" coords="71,231,79,239">
+<area shape="rect" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;TMilli, uint32_t&gt;" alt="" coords="81,193,244,210">
+<area shape="poly" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="464,169 442,212 429,227 425,224 438,209 459,167">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="457,164,465,172">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="412,231,420,239">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="451,193,469,210">

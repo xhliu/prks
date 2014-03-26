@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.layers.UniqueConfig</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.layers.UniqueConfig</h2>
+    <b>interface UniqueConfig</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command am_addr_t <a href="#getSender">getSender</a>(message_t *msg)
+      </span><menu>
+ Returns the sender of the packet.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#getSequenceNumber">getSequenceNumber</a>(message_t *msg)
+      </span><menu>
+ Returns the sequence number of the packet.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#reportChannelError">reportChannelError</a>()
+      </span><menu>
+ This command is called when the unqiue layer detects a missing (jump 
+ in the data sequence number) or a duplicate packet.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setSequenceNumber">setSequenceNumber</a>(message_t *msg, uint8_t number)
+      </span><menu>
+ Sets the sequence number of the packet.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="getSender"></a>
+    <h4>getSender
+    </h4>
+    <span id=funcnameshort>command am_addr_t <b>getSender</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the sender of the packet. 
+
+    </menu>
+    <hr>
+    <a name="getSequenceNumber"></a>
+    <h4>getSequenceNumber
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>getSequenceNumber</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the sequence number of the packet.
+
+    </menu>
+    <hr>
+    <a name="reportChannelError"></a>
+    <h4>reportChannelError
+    </h4>
+    <span id=funcnameshort>command void <b>reportChannelError</b>()
+    </span>
+    <p>
+    <menu>
+      
+ This command is called when the unqiue layer detects a missing (jump 
+ in the data sequence number) or a duplicate packet.
+
+    </menu>
+    <hr>
+    <a name="setSequenceNumber"></a>
+    <h4>setSequenceNumber
+    </h4>
+    <span id=funcnameshort>command void <b>setSequenceNumber</b>(message_t *msg, uint8_t number)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the sequence number of the packet.
+
+    </menu>
+  </body>
+</html>

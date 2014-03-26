@@ -1,0 +1,15 @@
+<?xml version="1.0" ?><component loc="38:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/TaskletC.nc" nicename="tos.lib.rfxlink.util.TaskletC" qname="TaskletC">
+      <module/>
+    <specification><interface loc="40:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/TaskletC.nc" name="Tasklet" provided="1" ref="0x40a81888">
+      <component-ref nicename="tos.lib.rfxlink.util.TaskletC" qname="TaskletC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Tasklet" ref="0x40a81888" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.Tasklet" qname="Tasklet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="schedule" ref="0x40a81a60" scoped=""/>
+        <function-ref name="suspend" ref="0x40a81b40" scoped=""/>
+        <function-ref name="resume" ref="0x40a81c20" scoped=""/>
+        <function-ref name="run" ref="0x40a81d00" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

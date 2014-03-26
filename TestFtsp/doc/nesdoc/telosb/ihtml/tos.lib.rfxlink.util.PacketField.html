@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.PacketField</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.PacketField</h2>
+    <b>interface PacketField&lt;typedef value_type&gt;</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command void <a href="#clear">clear</a>(message_t *msg)
+      </span><menu>
+ Clears the isSet flag.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command value_type <a href="#get">get</a>(message_t *msg)
+      </span><menu>
+ Returns the stored value of this field in the message.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#isSet">isSet</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the value is set for this message.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#set">set</a>(message_t *msg, value_type value)
+      </span><menu>
+ Sets the isSet false to TRUE and the time stamp value to the 
+ specified value.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="clear"></a>
+    <h4>clear
+    </h4>
+    <span id=funcnameshort>command void <b>clear</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Clears the isSet flag.
+
+    </menu>
+    <hr>
+    <a name="get"></a>
+    <h4>get
+    </h4>
+    <span id=funcnameshort>command value_type <b>get</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the stored value of this field in the message. If the
+ value is not set, then the returned value is undefined.
+
+    </menu>
+    <hr>
+    <a name="isSet"></a>
+    <h4>isSet
+    </h4>
+    <span id=funcnameshort>command bool <b>isSet</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the value is set for this message.
+
+    </menu>
+    <hr>
+    <a name="set"></a>
+    <h4>set
+    </h4>
+    <span id=funcnameshort>command void <b>set</b>(message_t *msg, value_type value)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the isSet false to TRUE and the time stamp value to the 
+ specified value.
+
+    </menu>
+  </body>
+</html>

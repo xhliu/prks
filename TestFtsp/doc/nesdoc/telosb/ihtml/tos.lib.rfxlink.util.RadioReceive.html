@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.RadioReceive</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.RadioReceive</h2>
+    <b>interface RadioReceive</b><p><p><div id=heading>Events</div><div id=funcsig><span id=funcnameshort>event bool <a href="#header">header</a>(message_t *msg)
+      </span><menu>
+ This event is fired when the header is received/downloaded and the 
+ higher layers are consulted whether it needs to be downloaded and 
+ further processed.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>event message_t *<a href="#receive">receive</a>(message_t *msg)
+      </span><menu>
+ Signals the reception of a message, but only for those messages for
+ which SUCCESS was returned in the header event.
+      </menu>
+    </div><p><div id=heading>Events - Details</div>
+    <a name="header"></a>
+    <h4>header
+    </h4>
+    <span id=funcnameshort>event bool <b>header</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ This event is fired when the header is received/downloaded and the 
+ higher layers are consulted whether it needs to be downloaded and 
+ further processed. Return FALSE if the message should be discarded.
+ In particular, the message buffer layer returns FALSE if there is
+ no space for a new message, so this message will not get acknowledged.
+
+    </menu>
+    <hr>
+    <a name="receive"></a>
+    <h4>receive
+    </h4>
+    <span id=funcnameshort>event message_t *<b>receive</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Signals the reception of a message, but only for those messages for
+ which SUCCESS was returned in the header event. The usual owner rules 
+ apply to the message pointers.
+
+    </menu>
+  </body>
+</html>

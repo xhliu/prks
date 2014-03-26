@@ -1,0 +1,813 @@
+<?xml version="1.0" ?><component loc="56:TestFtspAppC.nc" nicename="TestFtspAppC" qname="TestFtspAppC">
+      <documentation loc="45:TestFtspAppC.nc">
+        <short>
+ Configuration for the TestFtsp application.</short>
+        <long>
+ Configuration for the TestFtsp application. TestFtsp 
+ maintains a 4Hz counter, broadcasting its value in an AM packet 
+ every time it gets updated. A TestFtsp node that hears a counter 
+ displays the bottom three bits on its LEDs. This application is a useful 
+ test to show that basic AM communication and timers work.
+
+ @author Philip Levis
+ @date   June 6 2005
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="74:TestFtspAppC.nc">
+          <from><interface-ref name="Receive" ref="0x40704d50" scoped=""/></from>
+          <to><interface-ref name="Receive" ref="0x40993b18" scoped=""/>
+          <arguments>
+            <value cst="I:1">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="75:TestFtspAppC.nc">
+          <from><interface-ref name="AMSend" ref="0x40712380" scoped=""/></from>
+          <to><interface-ref name="AMSend" ref="0x40993158" scoped=""/>
+          <arguments>
+            <value cst="I:1">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="76:TestFtspAppC.nc">
+          <from><interface-ref name="AMControl" ref="0x4071ea10" scoped=""/></from>
+          <to><interface-ref name="SplitControl" ref="0x40996840" scoped=""/></to>
+        </wire>
+        <wire loc="77:TestFtspAppC.nc">
+          <from><interface-ref name="Packet" ref="0x40719ce8" scoped=""/></from>
+          <to><interface-ref name="Packet" ref="0x409b1a58" scoped=""/></to>
+        </wire>
+        <wire loc="78:TestFtspAppC.nc">
+          <from><interface-ref name="AMPacket" ref="0x40725a98" scoped=""/></from>
+          <to><interface-ref name="AMPacket" ref="0x409b01a8" scoped=""/></to>
+        </wire>
+        <wire loc="79:TestFtspAppC.nc">
+          <from><interface-ref name="PacketTimeStamp" ref="0x40720b78" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampRadio" ref="0x409b92e8" scoped=""/></to>
+        </wire>
+        <wire loc="82:TestFtspAppC.nc">
+          <from><interface-ref name="Boot" ref="0x406d1960" scoped=""/></from>
+          <to><interface-ref name="Boot" ref="0x405ca458" scoped=""/></to>
+        </wire>
+        <wire loc="84:TestFtspAppC.nc">
+          <from><interface-ref name="Leds" ref="0x406cbca8" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x405c9820" scoped=""/></to>
+        </wire>
+        <wire loc="85:TestFtspAppC.nc">
+          <from><interface-ref name="MilliTimer" ref="0x4070d4e0" scoped=""/></from>
+          <to><interface-ref name="Timer" ref="0x40894cd8" scoped=""/></to>
+        </wire>
+        <wire loc="87:TestFtspAppC.nc">
+          <from><interface-ref name="UartLog" ref="0x4072ea18" scoped=""/></from>
+          <to><interface-ref name="UartLog" ref="0x41115390" scoped=""/></to>
+        </wire>
+        <wire loc="96:TestFtspAppC.nc">
+          <from><interface-ref name="SyncSend" ref="0x40735010" scoped=""/></from>
+          <to><interface-ref name="AMSend" ref="0x40993158" scoped=""/>
+          <arguments>
+            <value cst="I:12">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="97:TestFtspAppC.nc">
+          <from><interface-ref name="SyncPacket" ref="0x40735b60" scoped=""/></from>
+          <to><interface-ref name="Packet" ref="0x409b1a58" scoped=""/></to>
+        </wire>
+        <wire loc="98:TestFtspAppC.nc">
+          <from><interface-ref name="SyncReceive" ref="0x40735780" scoped=""/></from>
+          <to><interface-ref name="Receive" ref="0x40993b18" scoped=""/>
+          <arguments>
+            <value cst="I:12">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="101:TestFtspAppC.nc">
+          <from><interface-ref name="SoftwareInit" ref="0x405ba0b0" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x41396438" scoped=""/></to>
+        </wire>
+        <wire loc="102:TestFtspAppC.nc">
+          <from><interface-ref name="Boot" ref="0x413960d0" scoped=""/></from>
+          <to><interface-ref name="Boot" ref="0x405ca458" scoped=""/></to>
+        </wire>
+        <wire loc="103:TestFtspAppC.nc">
+          <from><interface-ref name="GlobalTime" ref="0x407415d0" scoped=""/></from>
+          <to><interface-ref name="GlobalTime" ref="0x41396d28" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification/><referenced><interface loc="58:/opt/tinyos-2.1.2/tos/system/MainC.nc" name="SoftwareInit" provided="0" ref="0x405ba0b0">
+      <component-ref nicename="tos.system.MainC" qname="MainC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SoftwareInit" ref="0x405ba0b0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x405ba288" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="8:TestFtspC.nc" name="Receive" provided="0" ref="0x40704d50">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Receive" ref="0x40704d50" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40704f28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="9:TestFtspC.nc" name="AMSend" provided="0" ref="0x40712380">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMSend" ref="0x40712380" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40712558" scoped=""/>
+        <function-ref name="getPayload" ref="0x40712638" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40712718" scoped=""/>
+        <function-ref name="cancel" ref="0x407127f8" scoped=""/>
+        <function-ref name="sendDone" ref="0x407128d8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="14:TestFtspC.nc" name="AMPacket" provided="0" ref="0x40725a98">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMPacket" ref="0x40725a98" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMPacket" qname="AMPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="group" ref="0x40725c70" scoped=""/>
+        <function-ref name="source" ref="0x40725d50" scoped=""/>
+        <function-ref name="address" ref="0x40725e30" scoped=""/>
+        <function-ref name="destination" ref="0x40725f10" scoped=""/>
+        <function-ref name="setSource" ref="0x4071d010" scoped=""/>
+        <function-ref name="setDestination" ref="0x4071d0f0" scoped=""/>
+        <function-ref name="type" ref="0x4071d1d0" scoped=""/>
+        <function-ref name="setType" ref="0x4071d2b0" scoped=""/>
+        <function-ref name="isForMe" ref="0x4071d390" scoped=""/>
+        <function-ref name="setGroup" ref="0x4071d470" scoped=""/>
+        <function-ref name="localGroup" ref="0x4071d550" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="22:TestFtspC.nc" name="GlobalTime" provided="0" ref="0x407415d0">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="GlobalTime" ref="0x407415d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getLocalTime" ref="0x40741c18" scoped=""/>
+        <function-ref name="global2Local" ref="0x4072d430" scoped=""/>
+        <function-ref name="getGlobalTime" ref="0x40741e90" scoped=""/>
+        <function-ref name="local2Global" ref="0x4072d170" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="15:TestFtspC.nc" name="PacketTimeStamp" provided="0" ref="0x40720b78">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStamp" ref="0x40720b78" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x407186b8" scoped=""/>
+        <function-ref name="clear" ref="0x40718a68" scoped=""/>
+        <function-ref name="isValid" ref="0x40718308" scoped=""/>
+        <function-ref name="set" ref="0x40718e18" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="6:TestFtspC.nc" name="Leds" provided="0" ref="0x406cbca8">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x406cbca8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x406cbe80" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x406d1010" scoped=""/>
+        <function-ref name="led1On" ref="0x406d10f0" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x406d11d0" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x406d12b0" scoped=""/>
+        <function-ref name="get" ref="0x406d1390" scoped=""/>
+        <function-ref name="led1Off" ref="0x406d1470" scoped=""/>
+        <function-ref name="led2Off" ref="0x406d17f0" scoped=""/>
+        <function-ref name="set" ref="0x406d1550" scoped=""/>
+        <function-ref name="led0On" ref="0x406d1630" scoped=""/>
+        <function-ref name="led2On" ref="0x406d1710" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="37:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc" name="Receive" provided="1" ref="0x40993b18">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XActiveMessageC" qname="CC2420XActiveMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Receive" ref="0x40993b18" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40993cf0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="16:TestFtspC.nc" name="UartLog" provided="0" ref="0x4072ea18">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartLog" ref="0x4072ea18" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="UartLog" qname="UartLog"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="logEntry" ref="0x4072ebf0" scoped=""/>
+        <function-ref name="logTxRx" ref="0x4072ecd0" scoped=""/>
+        <function-ref name="logByteStream" ref="0x4072edb0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="19:TestFtspC.nc" name="SyncSend" provided="0" ref="0x40735010">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SyncSend" ref="0x40735010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x407351e8" scoped=""/>
+        <function-ref name="getPayload" ref="0x407352c8" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x407353a8" scoped=""/>
+        <function-ref name="cancel" ref="0x40735488" scoped=""/>
+        <function-ref name="sendDone" ref="0x40735568" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="11:TestFtspC.nc" name="AMControl" provided="0" ref="0x4071ea10">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMControl" ref="0x4071ea10" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x4071ebe8" scoped=""/>
+        <function-ref name="stopDone" ref="0x4071ecc8" scoped=""/>
+        <function-ref name="start" ref="0x4071eda8" scoped=""/>
+        <function-ref name="stop" ref="0x4071ee88" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="20:TestFtspC.nc" name="SyncReceive" provided="0" ref="0x40735780">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SyncReceive" ref="0x40735780" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40735958" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/system/LedsC.nc" name="Leds" provided="1" ref="0x405c9820">
+      <component-ref nicename="tos.system.LedsC" qname="LedsC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x405c9820" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x405c99f8" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x405c9ad8" scoped=""/>
+        <function-ref name="led1On" ref="0x405c9bb8" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x405c9c98" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x405c9d78" scoped=""/>
+        <function-ref name="get" ref="0x405c9e58" scoped=""/>
+        <function-ref name="led1Off" ref="0x40748010" scoped=""/>
+        <function-ref name="led2Off" ref="0x40748390" scoped=""/>
+        <function-ref name="set" ref="0x407480f0" scoped=""/>
+        <function-ref name="led0On" ref="0x407481d0" scoped=""/>
+        <function-ref name="led2On" ref="0x407482b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="60:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc" name="PacketTimeStampRadio" provided="1" ref="0x409b92e8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XActiveMessageC" qname="CC2420XActiveMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStampRadio" ref="0x409b92e8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x409b9de8" scoped=""/>
+        <function-ref name="clear" ref="0x409b81b8" scoped=""/>
+        <function-ref name="isValid" ref="0x409b9a38" scoped=""/>
+        <function-ref name="set" ref="0x409b8568" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc" name="Packet" provided="1" ref="0x409b1a58">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XActiveMessageC" qname="CC2420XActiveMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Packet" ref="0x409b1a58" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x409b1c30" scoped=""/>
+        <function-ref name="payloadLength" ref="0x409b1d10" scoped=""/>
+        <function-ref name="getPayload" ref="0x409b1df0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x409b1ed0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x409b0010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:TimeSyncMicroC.nc" name="GlobalTime" provided="1" ref="0x41396d28">
+      <component-ref nicename="TimeSyncMicroC" qname="TimeSyncMicroC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="GlobalTime" ref="0x41396d28" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getLocalTime" ref="0x41395390" scoped=""/>
+        <function-ref name="global2Local" ref="0x41395b88" scoped=""/>
+        <function-ref name="getGlobalTime" ref="0x41395608" scoped=""/>
+        <function-ref name="local2Global" ref="0x413958c8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:TimeSyncMicroC.nc" name="Init" provided="1" ref="0x41396438">
+      <component-ref nicename="TimeSyncMicroC" qname="TimeSyncMicroC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Init" ref="0x41396438" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x41396610" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="34:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc" name="SplitControl" provided="1" ref="0x40996840">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XActiveMessageC" qname="CC2420XActiveMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SplitControl" ref="0x40996840" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x40996a18" scoped=""/>
+        <function-ref name="stopDone" ref="0x40996af8" scoped=""/>
+        <function-ref name="start" ref="0x40996bd8" scoped=""/>
+        <function-ref name="stop" ref="0x40996cb8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="12:TestFtspC.nc" name="Packet" provided="0" ref="0x40719ce8">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Packet" ref="0x40719ce8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40719ec0" scoped=""/>
+        <function-ref name="payloadLength" ref="0x4070b010" scoped=""/>
+        <function-ref name="getPayload" ref="0x4070b0f0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4070b1d0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x4070b2b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="5:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc" name="UartLog" provided="1" ref="0x41115390">
+      <component-ref nicename="UartLogC" qname="UartLogC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartLog" ref="0x41115390" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="UartLog" qname="UartLog"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="logEntry" ref="0x41115568" scoped=""/>
+        <function-ref name="logTxRx" ref="0x41115648" scoped=""/>
+        <function-ref name="logByteStream" ref="0x41115728" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="10:TestFtspC.nc" name="MilliTimer" provided="0" ref="0x4070d4e0">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="MilliTimer" ref="0x4070d4e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x40703010" scoped=""/>
+        <function-ref name="fired" ref="0x406c92a0" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x406c99a8" scoped=""/>
+        <function-ref name="isOneShot" ref="0x406c9750" scoped=""/>
+        <function-ref name="getdt" ref="0x407034c0" scoped=""/>
+        <function-ref name="gett0" ref="0x40703268" scoped=""/>
+        <function-ref name="isRunning" ref="0x406c94f8" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x4070db08" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x406c9cc8" scoped=""/>
+        <function-ref name="startOneShot" ref="0x4070dd88" scoped=""/>
+        <function-ref name="stop" ref="0x406c9048" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="57:/opt/tinyos-2.1.2/tos/system/MainC.nc" name="Boot" provided="1" ref="0x405ca458">
+      <component-ref nicename="tos.system.MainC" qname="MainC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Boot" ref="0x405ca458" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Boot" qname="Boot"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="booted" ref="0x405ca630" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="21:TestFtspC.nc" name="SyncPacket" provided="0" ref="0x40735b60">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SyncPacket" ref="0x40735b60" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40735db8" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40735e98" scoped=""/>
+        <function-ref name="getPayload" ref="0x40734010" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x407340f0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x407341d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc" name="AMPacket" provided="1" ref="0x409b01a8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XActiveMessageC" qname="CC2420XActiveMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMPacket" ref="0x409b01a8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMPacket" qname="AMPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="group" ref="0x409b0380" scoped=""/>
+        <function-ref name="source" ref="0x409b0460" scoped=""/>
+        <function-ref name="address" ref="0x409b0540" scoped=""/>
+        <function-ref name="destination" ref="0x409b0620" scoped=""/>
+        <function-ref name="setSource" ref="0x409b0700" scoped=""/>
+        <function-ref name="setDestination" ref="0x409b07e0" scoped=""/>
+        <function-ref name="type" ref="0x409b08c0" scoped=""/>
+        <function-ref name="setType" ref="0x409b09a0" scoped=""/>
+        <function-ref name="isForMe" ref="0x409b0a80" scoped=""/>
+        <function-ref name="setGroup" ref="0x409b0b60" scoped=""/>
+        <function-ref name="localGroup" ref="0x409b0c40" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="36:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc" name="AMSend" provided="1" ref="0x40993158">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XActiveMessageC" qname="CC2420XActiveMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMSend" ref="0x40993158" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="send" ref="0x40993330" scoped=""/>
+        <function-ref name="getPayload" ref="0x40993410" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x409934f0" scoped=""/>
+        <function-ref name="cancel" ref="0x409935d0" scoped=""/>
+        <function-ref name="sendDone" ref="0x409936b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:TimeSyncMicroC.nc" name="Boot" provided="0" ref="0x413960d0">
+      <component-ref nicename="TimeSyncMicroC" qname="TimeSyncMicroC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Boot" ref="0x413960d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Boot" qname="Boot"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="booted" ref="0x413962a8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="7:TestFtspC.nc" name="Boot" provided="0" ref="0x406d1960">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Boot" ref="0x406d1960" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Boot" qname="Boot"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="booted" ref="0x406d1b38" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:/opt/tinyos-2.1.2/tos/system/TimerMilliC.nc" name="Timer" provided="1" ref="0x40894cd8">
+      <component-ref nicename="tos.system.TimerMilliC" qname="TestFtspAppC.TimerMilliC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Timer" ref="0x40894cd8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x409758a8" scoped=""/>
+        <function-ref name="fired" ref="0x408a9aa8" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x40975268" scoped=""/>
+        <function-ref name="isOneShot" ref="0x40975010" scoped=""/>
+        <function-ref name="getdt" ref="0x40975d58" scoped=""/>
+        <function-ref name="gett0" ref="0x40975b00" scoped=""/>
+        <function-ref name="isRunning" ref="0x408a9d00" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x408a9350" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x40975588" scoped=""/>
+        <function-ref name="startOneShot" ref="0x408a95d0" scoped=""/>
+        <function-ref name="stop" ref="0x408a9850" scoped=""/>
+      </interface-functions>
+    </interface><component loc="4:TestFtspC.nc" nicename="TestFtspC" qname="TestFtspC" safe="">
+      <module/>
+    </component><component loc="44(TestFtspAppC.TimerMilliC):/opt/tinyos-2.1.2/tos/system/TimerMilliC.nc" nicename="tos.system.TimerMilliC" qname="TestFtspAppC.TimerMilliC">
+      <documentation loc="33:/opt/tinyos-2.1.2/tos/system/TimerMilliC.nc">
+        <short>
+ The virtualized millisecond timer abstraction.</short>
+        <long>
+ The virtualized millisecond timer abstraction. Instantiating this 
+ component gives an independent millisecond granularity timer.
+
+ @author Philip Levis
+ @date   January 16 2006
+ @see    TEP 102: Timers
+</long>
+      </documentation>
+      <instance number="0">
+        <component-ref nicename="tos.system.TimerMilliC" qname="TimerMilliC"/>
+      </instance>
+      <configuration/>
+      <wiring>
+        <wire loc="52:/opt/tinyos-2.1.2/tos/system/TimerMilliC.nc">
+          <from><interface-ref name="Timer" ref="0x40894cd8" scoped=""/></from>
+          <to><interface-ref name="TimerMilli" ref="0x408a83f0" scoped=""/>
+          <arguments>
+            <value cst="I:0">
+              <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned=""/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+      </wiring>
+    </component><component loc="3:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc" nicename="UartLogC" qname="UartLogC">
+      <configuration/>
+      <wiring>
+        <wire loc="12:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="UartLog" ref="0x41115390" scoped=""/></from>
+          <to><interface-ref name="UartLog" ref="0x41115d38" scoped=""/></to>
+        </wire>
+        <wire loc="19:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="UartControl" ref="0x411106d8" scoped=""/></from>
+          <to><interface-ref name="SplitControl" ref="0x41127280" scoped=""/></to>
+        </wire>
+        <wire loc="20:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="UartSend" ref="0x41110d48" scoped=""/></from>
+          <to><interface-ref name="AMSend" ref="0x41350760" scoped=""/></to>
+        </wire>
+        <wire loc="21:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="UartPacket" ref="0x4110f4d0" scoped=""/></from>
+          <to><interface-ref name="Packet" ref="0x411268b0" scoped=""/></to>
+        </wire>
+        <wire loc="22:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="SoftwareInit" ref="0x405ba0b0" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x41110260" scoped=""/></to>
+        </wire>
+        <wire loc="23:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="Leds" ref="0x4110fb98" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x405c9820" scoped=""/></to>
+        </wire>
+        <wire loc="26:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="LocalTime" ref="0x4110e980" scoped=""/></from>
+          <to><interface-ref name="LocalTime" ref="0x40cf22f0" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="40:TimeSyncMicroC.nc" nicename="TimeSyncMicroC" qname="TimeSyncMicroC">
+      <configuration/>
+      <wiring>
+        <wire loc="57:TimeSyncMicroC.nc">
+          <from><interface-ref name="GlobalTime" ref="0x41396d28" scoped=""/></from>
+          <to><interface-ref name="GlobalTime" ref="0x41408688" scoped=""/></to>
+        </wire>
+        <wire loc="61:TimeSyncMicroC.nc">
+          <from><interface-ref name="TimeSyncInfo" ref="0x4138f370" scoped=""/></from>
+          <to><interface-ref name="TimeSyncInfo" ref="0x414067e8" scoped=""/></to>
+        </wire>
+        <wire loc="59:TimeSyncMicroC.nc">
+          <from><interface-ref name="Init" ref="0x41396438" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x4138bed0" scoped=""/></to>
+        </wire>
+        <wire loc="62:TimeSyncMicroC.nc">
+          <from><interface-ref name="TimeSyncMode" ref="0x4138d100" scoped=""/></from>
+          <to><interface-ref name="TimeSyncMode" ref="0x41405070" scoped=""/></to>
+        </wire>
+        <wire loc="63:TimeSyncMicroC.nc">
+          <from><interface-ref name="TimeSyncNotify" ref="0x4138c230" scoped=""/></from>
+          <to><interface-ref name="TimeSyncNotify" ref="0x41405548" scoped=""/></to>
+        </wire>
+        <wire loc="58:TimeSyncMicroC.nc">
+          <from><interface-ref name="StdControl" ref="0x413967d8" scoped=""/></from>
+          <to><interface-ref name="StdControl" ref="0x41408200" scoped=""/></to>
+        </wire>
+        <wire loc="60:TimeSyncMicroC.nc">
+          <from><interface-ref name="Boot" ref="0x41405970" scoped=""/></from>
+          <to><interface-ref name="Boot" ref="0x413960d0" scoped=""/></to>
+        </wire>
+        <wire loc="66:TimeSyncMicroC.nc">
+          <from><interface-ref name="RadioControl" ref="0x41405ca8" scoped=""/></from>
+          <to><interface-ref name="SplitControl" ref="0x413f9840" scoped=""/></to>
+        </wire>
+        <wire loc="68:TimeSyncMicroC.nc">
+          <from><interface-ref name="Send" ref="0x41404450" scoped=""/></from>
+          <to><interface-ref name="TimeSyncAMSendRadio" ref="0x413f2e38" scoped=""/>
+          <arguments>
+            <value cst="I:62">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="69:TimeSyncMicroC.nc">
+          <from><interface-ref name="Receive" ref="0x41403b60" scoped=""/></from>
+          <to><interface-ref name="Receive" ref="0x413f6158" scoped=""/>
+          <arguments>
+            <value cst="I:62">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="70:TimeSyncMicroC.nc">
+          <from><interface-ref name="TimeSyncPacket" ref="0x413fd350" scoped=""/></from>
+          <to><interface-ref name="TimeSyncPacketRadio" ref="0x414398a8" scoped=""/></to>
+        </wire>
+        <wire loc="73:TimeSyncMicroC.nc">
+          <from><interface-ref name="LocalTime" ref="0x413fc050" scoped=""/></from>
+          <to><interface-ref name="LocalTime" ref="0x4108d1a0" scoped=""/></to>
+        </wire>
+        <wire loc="76:TimeSyncMicroC.nc">
+          <from><interface-ref name="Timer" ref="0x41403f08" scoped=""/></from>
+          <to><interface-ref name="Timer" ref="0x414d6b28" scoped=""/></to>
+        </wire>
+        <wire loc="79:TimeSyncMicroC.nc">
+          <from><interface-ref name="Random" ref="0x413fe108" scoped=""/></from>
+          <to><interface-ref name="Random" ref="0x40c81478" scoped=""/></to>
+        </wire>
+        <wire loc="86:TimeSyncMicroC.nc">
+          <from><interface-ref name="Leds" ref="0x413fe500" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x4151d0a0" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="45:/opt/tinyos-2.1.2/tos/system/LedsC.nc" nicename="tos.system.LedsC" qname="LedsC">
+      <documentation loc="34:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+        <short>
+
+ The basic TinyOS LEDs abstraction.</short>
+        <long>
+
+ The basic TinyOS LEDs abstraction.
+
+ @author Phil Buonadonna
+ @author David Gay
+ @author Philip Levis
+ @author Joe Polastre
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="51:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Leds" ref="0x405c9820" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x40745010" scoped=""/></to>
+        </wire>
+        <wire loc="53:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Init" ref="0x4075fa38" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x40748c10" scoped=""/></to>
+        </wire>
+        <wire loc="54:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Led0" ref="0x40759e10" scoped=""/></from>
+          <to><interface-ref name="Led0" ref="0x40747c30" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Led1" ref="0x40744820" scoped=""/></from>
+          <to><interface-ref name="Led1" ref="0x40760680" scoped=""/></to>
+        </wire>
+        <wire loc="56:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Led2" ref="0x407432e0" scoped=""/></from>
+          <to><interface-ref name="Led2" ref="0x4075f0b0" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="30:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc" nicename="tos.chips.cc2420x.CC2420XActiveMessageC" qname="CC2420XActiveMessageC">
+      <documentation loc="60:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/RadioConfig.h">
+        <short>
+ The base two logarithm of the number of radio alarm ticks per one millisecond
+</short>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="76:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="SplitControl" ref="0x40996840" scoped=""/></from>
+          <to><interface-ref name="SplitControl" ref="0x409d1de0" scoped=""/></to>
+        </wire>
+        <wire loc="96:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="PacketRSSI" ref="0x409bb138" scoped=""/></from>
+          <to><interface-ref name="PacketRSSI" ref="0x409f4f08" scoped=""/></to>
+        </wire>
+        <wire loc="100:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="PacketTimeStampMilli" ref="0x409b8ca0" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampMilli" ref="0x409efd18" scoped=""/></to>
+        </wire>
+        <wire loc="81:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="SendNotifier" ref="0x409af908" scoped=""/></from>
+          <to><interface-ref name="SendNotifier" ref="0x409cde10" scoped=""/></to>
+        </wire>
+        <wire loc="86:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="Packet" ref="0x409b1a58" scoped=""/></from>
+          <to><interface-ref name="PacketForActiveMessage" ref="0x409cad28" scoped=""/></to>
+        </wire>
+        <wire loc="78:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="AMSend" ref="0x40993158" scoped=""/></from>
+          <to><interface-ref name="AMSend" ref="0x409ce710" scoped=""/></to>
+        </wire>
+        <wire loc="80:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="Snoop" ref="0x409921f8" scoped=""/></from>
+          <to><interface-ref name="Snoop" ref="0x409cd798" scoped=""/></to>
+        </wire>
+        <wire loc="95:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="PacketTransmitPower" ref="0x409a6da8" scoped=""/></from>
+          <to><interface-ref name="PacketTransmitPower" ref="0x409d4ae8" scoped=""/></to>
+        </wire>
+        <wire loc="90:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="LowPowerListening" ref="0x409ae010" scoped=""/></from>
+          <to><interface-ref name="LowPowerListening" ref="0x409da2e0" scoped=""/></to>
+        </wire>
+        <wire loc="103:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="PacketTimeStamp32khz" ref="0x409b3670" scoped=""/></from>
+          <to><interface-ref name="UnimplementedPacketTimeStamp32khz" ref="0x409d2180" scoped=""/></to>
+        </wire>
+        <wire loc="79:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="Receive" ref="0x40993b18" scoped=""/></from>
+          <to><interface-ref name="Receive" ref="0x409cd100" scoped=""/></to>
+        </wire>
+        <wire loc="101:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="PacketTimeStampRadio" ref="0x409b92e8" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampRadio" ref="0x409f0260" scoped=""/></to>
+        </wire>
+        <wire loc="99:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="LocalTimeRadio" ref="0x409b5720" scoped=""/></from>
+          <to><interface-ref name="LocalTimeRadio" ref="0x409f1678" scoped=""/></to>
+        </wire>
+        <wire loc="94:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="PacketLinkQuality" ref="0x409bd9c8" scoped=""/></from>
+          <to><interface-ref name="PacketLinkQuality" ref="0x409d5730" scoped=""/></to>
+        </wire>
+        <wire loc="89:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="PacketAcknowledgements" ref="0x409a8308" scoped=""/></from>
+          <to><interface-ref name="PacketAcknowledgements" ref="0x409decb0" scoped=""/></to>
+        </wire>
+        <wire loc="83:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="ReceiveDefault" ref="0x409b1020" scoped=""/></from>
+          <to><interface-ref name="ReceiveDefault" ref="0x409cb538" scoped=""/></to>
+        </wire>
+        <wire loc="91:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="PacketLink" ref="0x409c2918" scoped=""/></from>
+          <to><interface-ref name="PacketLink" ref="0x409da900" scoped=""/></to>
+        </wire>
+        <wire loc="87:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="AMPacket" ref="0x409b01a8" scoped=""/></from>
+          <to><interface-ref name="AMPacket" ref="0x409ca010" scoped=""/></to>
+        </wire>
+        <wire loc="92:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="RadioChannel" ref="0x409c0300" scoped=""/></from>
+          <to><interface-ref name="RadioChannel" ref="0x409d5040" scoped=""/></to>
+        </wire>
+        <wire loc="97:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="LinkPacketMetadata" ref="0x409b5228" scoped=""/></from>
+          <to><interface-ref name="LinkPacketMetadata" ref="0x409f1180" scoped=""/></to>
+        </wire>
+        <wire loc="84:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XActiveMessageC.nc">
+          <from><interface-ref name="SnoopDefault" ref="0x409b1700" scoped=""/></from>
+          <to><interface-ref name="SnoopDefault" ref="0x409cbc18" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="56:/opt/tinyos-2.1.2/tos/system/MainC.nc" nicename="tos.system.MainC" qname="MainC">
+      <documentation loc="45:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+        <short>
+ MainC is the system interface the TinyOS boot sequence.</short>
+        <long>
+ MainC is the system interface the TinyOS boot sequence. It wires the
+ boot sequence implementation to the scheduler and hardware resources.
+
+ @author Philip Levis
+ @date   August 6 2005
+ @see    TEP 107: Boot Sequence
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="72:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+          <from><interface-ref name="Boot" ref="0x405ca458" scoped=""/></from>
+          <to><interface-ref name="Boot" ref="0x405c2df8" scoped=""/></to>
+        </wire>
+        <wire loc="67:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+          <from><interface-ref name="Scheduler" ref="0x405d91d0" scoped=""/></from>
+          <to><interface-ref name="Scheduler" ref="0x403305f0" scoped=""/></to>
+        </wire>
+        <wire loc="68:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+          <from><interface-ref name="PlatformInit" ref="0x405d9798" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x405ba970" scoped=""/></to>
+        </wire>
+        <wire loc="71:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+          <from><interface-ref name="SoftwareInit" ref="0x405d9ba0" scoped=""/></from>
+          <to><interface-ref name="SoftwareInit" ref="0x405ba0b0" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component></referenced></component>

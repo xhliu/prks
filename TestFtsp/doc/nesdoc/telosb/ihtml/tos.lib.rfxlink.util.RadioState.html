@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.RadioState</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.RadioState</h2>
+    <b>interface RadioState</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#getChannel">getChannel</a>()
+      </span><menu>
+ Returns the currently selected channel.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command error_t <a href="#setChannel">setChannel</a>(uint8_t channel)
+      </span><menu>
+ Sets the current channel.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command error_t <a href="#standby">standby</a>()
+      </span><menu>
+ The same as the turnOff command, except it is not as deep sleep, and
+ it is quicker to recover from this state.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command error_t <a href="#turnOff">turnOff</a>()
+      </span><menu>
+ Moves to radio into sleep state with the lowest power consumption but 
+ highest wakeup time.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command error_t <a href="#turnOn">turnOn</a>()
+      </span><menu>
+ Goes into receive state.
+      </menu>
+    </div><p><div id=heading>Events</div><div id=funcsig><span id=funcnameshort>event void <a href="#done">done</a>()
+      </span><menu>
+ This event is signaled exactly once for each sucessfully posted state 
+ transition and setChannel command when it is completed.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="getChannel"></a>
+    <h4>getChannel
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>getChannel</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the currently selected channel.
+
+    </menu>
+    <hr>
+    <a name="setChannel"></a>
+    <h4>setChannel
+    </h4>
+    <span id=funcnameshort>command error_t <b>setChannel</b>(uint8_t channel)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the current channel. Returns EBUSY if the stack is unable
+ to change the channel this time (some other operation is in progress)
+ SUCCESS otherwise.
+
+    </menu>
+    <hr>
+    <a name="standby"></a>
+    <h4>standby
+    </h4>
+    <span id=funcnameshort>command error_t <b>standby</b>()
+    </span>
+    <p>
+    <menu>
+      
+ The same as the turnOff command, except it is not as deep sleep, and
+ it is quicker to recover from this state.
+
+    </menu>
+    <hr>
+    <a name="turnOff"></a>
+    <h4>turnOff
+    </h4>
+    <span id=funcnameshort>command error_t <b>turnOff</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Moves to radio into sleep state with the lowest power consumption but 
+ highest wakeup time. The radio cannot send or receive in this state 
+ and releases all access to shared resources (e.g. SPI bus). 
+
+    </menu>
+    <hr>
+    <a name="turnOn"></a>
+    <h4>turnOn
+    </h4>
+    <span id=funcnameshort>command error_t <b>turnOn</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Goes into receive state. The radio continuously receive messages 
+ and able to transmit.
+
+    </menu>
+    <p><div id=heading>Events - Details</div>
+    <a name="done"></a>
+    <h4>done
+    </h4>
+    <span id=funcnameshort>event void <b>done</b>()
+    </span>
+    <p>
+    <menu>
+      
+ This event is signaled exactly once for each sucessfully posted state 
+ transition and setChannel command when it is completed.
+
+    </menu>
+  </body>
+</html>

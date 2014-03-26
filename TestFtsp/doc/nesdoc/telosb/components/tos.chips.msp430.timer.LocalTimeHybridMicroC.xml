@@ -1,0 +1,228 @@
+<?xml version="1.0" ?><component loc="38:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc" nicename="tos.chips.msp430.timer.LocalTimeHybridMicroC" qname="LocalTimeHybridMicroC">
+      <configuration/>
+      <wiring>
+        <wire loc="49:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc">
+          <from><interface-ref name="LocalTime" ref="0x4108a638" scoped=""/></from>
+          <to><interface-ref name="LocalTime" ref="0x410c5260" scoped=""/></to>
+        </wire>
+        <wire loc="50:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc">
+          <from><interface-ref name="Counter" ref="0x410c5bf8" scoped=""/></from>
+          <to><interface-ref name="Counter" ref="0x410c91e0" scoped=""/></to>
+        </wire>
+        <wire loc="51:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc">
+          <from><interface-ref name="CounterFrom" ref="0x410c8428" scoped=""/></from>
+          <to><interface-ref name="Counter2ghz" ref="0x41089748" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="40:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc" name="LocalTime" provided="1" ref="0x4108a638">
+      <component-ref nicename="tos.chips.msp430.timer.LocalTimeHybridMicroC" qname="LocalTimeHybridMicroC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTime" ref="0x4108a638" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x4108ac80" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="39:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc" name="Counter2ghz" provided="1" ref="0x41089748">
+      <component-ref nicename="tos.chips.msp430.timer.Msp430HybridAlarmCounterC" qname="Msp430HybridAlarmCounterC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Counter2ghz" ref="0x41089748" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Counter" qname="Counter"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:1"><struct-ref name="T2ghz" ref="0x4108df08"/>
+            <typename><typedef-ref name="T2ghz" ref="0x4108a290"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x41089e98" scoped=""/>
+        <function-ref name="clearOverflow" ref="0x410c03a8" scoped=""/>
+        <function-ref name="isOverflowPending" ref="0x410c0130" scoped=""/>
+        <function-ref name="overflow" ref="0x410c0620" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="49:/opt/tinyos-2.1.2/tos/lib/timer/CounterToLocalTimeC.nc" name="Counter" provided="0" ref="0x410c5bf8">
+      <component-ref nicename="tos.lib.timer.CounterToLocalTimeC" qname="LocalTimeHybridMicroC.CounterToLocalTimeC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Counter" ref="0x410c5bf8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Counter" qname="Counter"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x410c4380" scoped=""/>
+        <function-ref name="clearOverflow" ref="0x410c4870" scoped=""/>
+        <function-ref name="isOverflowPending" ref="0x410c45f8" scoped=""/>
+        <function-ref name="overflow" ref="0x410c4ae8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="48:/opt/tinyos-2.1.2/tos/lib/timer/CounterToLocalTimeC.nc" name="LocalTime" provided="1" ref="0x410c5260">
+      <component-ref nicename="tos.lib.timer.CounterToLocalTimeC" qname="LocalTimeHybridMicroC.CounterToLocalTimeC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTime" ref="0x410c5260" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x410c58a8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="63:/opt/tinyos-2.1.2/tos/lib/timer/TransformCounterC.nc" name="CounterFrom" provided="0" ref="0x410c8428">
+      <component-ref nicename="tos.lib.timer.TransformCounterC" qname="LocalTimeHybridMicroC.TransformCounterC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="CounterFrom" ref="0x410c8428" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Counter" qname="Counter"/>
+        <arguments>
+          <type-tag alignment="I:1" size="I:1"><struct-ref name="T2ghz" ref="0x4108df08"/>
+            <typename><typedef-ref name="T2ghz" ref="0x4108a290"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x410c8b78" scoped=""/>
+        <function-ref name="clearOverflow" ref="0x410c6088" scoped=""/>
+        <function-ref name="isOverflowPending" ref="0x410c8df0" scoped=""/>
+        <function-ref name="overflow" ref="0x410c6300" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="62:/opt/tinyos-2.1.2/tos/lib/timer/TransformCounterC.nc" name="Counter" provided="1" ref="0x410c91e0">
+      <component-ref nicename="tos.lib.timer.TransformCounterC" qname="LocalTimeHybridMicroC.TransformCounterC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Counter" ref="0x410c91e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Counter" qname="Counter"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x410c9930" scoped=""/>
+        <function-ref name="clearOverflow" ref="0x410c9e20" scoped=""/>
+        <function-ref name="isOverflowPending" ref="0x410c9ba8" scoped=""/>
+        <function-ref name="overflow" ref="0x410c80b8" scoped=""/>
+      </interface-functions>
+    </interface><component loc="46(LocalTimeHybridMicroC.CounterToLocalTimeC):/opt/tinyos-2.1.2/tos/lib/timer/CounterToLocalTimeC.nc" nicename="tos.lib.timer.CounterToLocalTimeC" qname="LocalTimeHybridMicroC.CounterToLocalTimeC">
+      <documentation loc="36:/opt/tinyos-2.1.2/tos/lib/timer/CounterToLocalTimeC.nc">
+        <short>
+ CounterToLocalTimeC converts a 32-bit LocalTime to a Counter.</short>
+        <long>
+ CounterToLocalTimeC converts a 32-bit LocalTime to a Counter.  
+
+ &lt;p&gt;See TEP102 for more details.
+ @param precision_tag A type indicating the precision of the LocalTime and
+ Counter being converted.
+
+ @author Cory Sharp &lt;cssharp@eecs.berkeley.edu&gt;
+</long>
+      </documentation>
+      <instance number="1">
+        <component-ref nicename="tos.lib.timer.CounterToLocalTimeC" qname="CounterToLocalTimeC"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <module/>
+    </component><component loc="37:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc" nicename="tos.chips.msp430.timer.Msp430HybridAlarmCounterC" qname="Msp430HybridAlarmCounterC">
+      <configuration/>
+      <wiring>
+        <wire loc="60:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc">
+          <from><interface-ref name="Counter2ghz" ref="0x41089748" scoped=""/></from>
+          <to><interface-ref name="Counter2ghz" ref="0x410b3118" scoped=""/></to>
+        </wire>
+        <wire loc="61:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc">
+          <from><interface-ref name="Alarm2ghz" ref="0x410c0a98" scoped=""/></from>
+          <to><interface-ref name="Alarm2ghz" ref="0x410b1488" scoped=""/></to>
+        </wire>
+        <wire loc="53:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc">
+          <from><interface-ref name="Counter32khz" ref="0x410b90b0" scoped=""/></from>
+          <to><interface-ref name="Msp430Counter32khz" ref="0x408f3c50" scoped=""/></to>
+        </wire>
+        <wire loc="54:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc">
+          <from><interface-ref name="CounterMicro" ref="0x410bed18" scoped=""/></from>
+          <to><interface-ref name="Msp430CounterMicro" ref="0x40e07e68" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc">
+          <from><interface-ref name="Alarm32khz" ref="0x410b5098" scoped=""/></from>
+          <to><interface-ref name="Alarm" ref="0x410d1530" scoped=""/></to>
+        </wire>
+        <wire loc="56:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc">
+          <from><interface-ref name="AlarmMicro" ref="0x410b8498" scoped=""/></from>
+          <to><interface-ref name="Alarm" ref="0x410cfda0" scoped=""/></to>
+        </wire>
+        <wire loc="58:/opt/tinyos-2.1.2/tos/chips/msp430/timer/Msp430HybridAlarmCounterC.nc">
+          <from><interface-ref name="McuPowerOverride" ref="0x403c3e78" scoped=""/></from>
+          <to><interface-ref name="McuPowerOverride" ref="0x410b4b38" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="54(LocalTimeHybridMicroC.TransformCounterC):/opt/tinyos-2.1.2/tos/lib/timer/TransformCounterC.nc" nicename="tos.lib.timer.TransformCounterC" qname="LocalTimeHybridMicroC.TransformCounterC">
+      <documentation loc="34:/opt/tinyos-2.1.2/tos/lib/timer/TransformCounterC.nc">
+        <short>
+ TransformCounterC decreases precision and/or widens an Counter.</short>
+        <long>
+ TransformCounterC decreases precision and/or widens an Counter.
+
+ &lt;p&gt;See TEP102 for more details.
+
+ @param to_precision_tag A type indicating the precision of the transformed
+   Counter.
+ @param to_size_type The type for the width of the transformed Counter.
+ @param from_precision_tag A type indicating the precision of the original
+   Counter.
+ @param from_size_type The type for the width of the original Counter.
+ @param bit_shift_right Original time units will be 2 to the power 
+   &lt;code&gt;bit_shift_right&lt;/code&gt; larger than transformed time units.
+ @param upper_count_type A type large enough to store the upper bits --
+   those needed above from_size_type after its shift right to fill
+   to_size_type.
+
+ @author Cory Sharp &lt;cssharp@eecs.berkeley.edu&gt;
+</long>
+      </documentation>
+      <instance number="1">
+        <component-ref nicename="tos.lib.timer.TransformCounterC" qname="TransformCounterC"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+          <type-tag alignment="I:1" size="I:1"><struct-ref name="T2ghz" ref="0x4108df08"/>
+            <typename><typedef-ref name="T2ghz" ref="0x4108a290"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+          <value cst="I:11">
+            <type-int alignment="I:2" cname="int" size="I:2"/>
+          </value>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <module/>
+    </component></referenced></component>

@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Component: tos.system.SimpleFcfsArbiterC</title>
+  </head>
+  <body>
+    <h2>Component: tos.system.SimpleFcfsArbiterC
+    </h2>
+    <b>generic configuration SimpleFcfsArbiterC(char *resourceName)</b>
+    <p>
+ Please refer to TEP 108 for more information about this component and its
+ intended use.<br><br>
+
+ This component provides the Resource, ArbiterInfo, and Resource
+ Controller interfaces and uses the ResourceConfigure interface as
+ described in TEP 108.  It provides arbitration to a shared resource in
+ an FCFS fashion.  An array is used to keep track of which users have put
+ in requests for the resource.  Upon the release of the resource by one
+ of these users, the array is checked and the next user (in FCFS order)
+ that has a pending request will ge granted control of the resource.  If
+ there are no pending requests, then the resource becomes idle and any
+ user can put in a request and immediately receive access to the
+ Resource.
+
+ 
+    <p>
+    <dl>
+      <dt><b>Parameters:</b>
+      <dd>
+        <b>resourceName</b> -- The name of the Resource being shared
+ 
+ 
+      </dd>
+      <dt><b>Author:</b>
+      <dd>
+        Kevin Klues (klues@tkn.tu-berlin.de)
+ 
+      </dd>
+      <dd>
+        Philip Levis
+
+      </dd>
+    </dl>
+    <p><p><div id=heading>Provides</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.ArbiterInfo.html">ArbiterInfo</a></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Resource.html">Resource</a>[uint8_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.ResourceRequested.html">ResourceRequested</a>[uint8_t]</div><p><div id=heading>Uses</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.ResourceConfigure.html">ResourceConfigure</a>[uint8_t]</div><p><div id=heading>Wiring</div><p>
+    <map name="comp">
+      <area shape="rect" href="../chtml/tos.system.SimpleArbiterP.html" title="SimpleArbiterP\n(Arbiter)" alt="" coords="259,125,392,173">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="123,53 130,75 143,94 160,104 184,114 246,132 245,137 182,119 157,109 140,98 125,77 117,54">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="116,49,124,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="255,133,263,141">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="141,78,320,95">
+
+      <area shape="rect" href="../chtml/tos.system.FcfsResourceQueueC.html" title="FcfsResourceQueueC\n(Queue)" alt="" coords="409,245,599,293">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.ResourceQueue.html" title="ResourceQueue" alt="" coords="359,171 400,201 426,219 451,235 448,240 422,224 397,205 356,176">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceQueue.html" title="ResourceQueue" alt="" coords="353,169,361,177">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceQueue.html" title="ResourceQueue" alt="" coords="456,241,464,249">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceQueue.html" title="ResourceQueue" alt="" coords="423,203,523,221">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="260,174 242,187 228,204 223,217 221,232 216,232 217,216 223,201 238,183 257,170">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="255,168,263,176">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="215,241,223,249">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="225,203,399,221">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="328,53 328,112 323,112 323,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="321,49,329,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="321,121,329,129">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="325,78,437,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="470,54 460,77 445,98 406,125 402,120 441,94 456,74 466,52">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="464,49,472,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="388,124,396,132">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="456,78,523,95">
+
+      <area shape="rect" href="../chtml/tos.system.MainC.html" title="MainC" alt="" coords="517,120,600,179">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="549,180 532,222 526,234 522,232 527,220 544,178">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="543,175,551,183">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="513,241,521,249">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="535,203,553,221">
+
+    </map>
+    <img src="tos.system.SimpleFcfsArbiterC.png" usemap="#comp" id=imgwiring>
+  </body>
+</html>

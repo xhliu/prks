@@ -1,0 +1,37 @@
+<?xml version="1.0" ?><component loc="40:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430ClockP.nc" nicename="tos.platforms.telosa.chips.cc2420x.tmicro.Msp430ClockP" qname="Msp430ClockP" safe="">
+      <module/>
+    <specification><interface loc="43:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430ClockP.nc" name="Msp430ClockInit" provided="1" ref="0x405eb568">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.Msp430ClockP" qname="Msp430ClockP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Msp430ClockInit" ref="0x405eb568" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.timer.Msp430ClockInit" qname="Msp430ClockInit"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="defaultInitClocks" ref="0x405ebd60" scoped=""/>
+        <function-ref name="initTimerB" ref="0x405eb820" scoped=""/>
+        <function-ref name="defaultInitTimerA" ref="0x405eb900" scoped=""/>
+        <function-ref name="initTimerA" ref="0x405eb9e0" scoped=""/>
+        <function-ref name="defaultInitTimerB" ref="0x405eb740" scoped=""/>
+        <function-ref name="defaultSetupDcoCalibrate" ref="0x405ebac0" scoped=""/>
+        <function-ref name="setupDcoCalibrate" ref="0x405ebba0" scoped=""/>
+        <function-ref name="initClocks" ref="0x405ebc80" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430ClockP.nc" name="McuPowerOverride" provided="1" ref="0x405ea010">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.Msp430ClockP" qname="Msp430ClockP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="McuPowerOverride" ref="0x405ea010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.McuPowerOverride" qname="McuPowerOverride"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="lowestState" ref="0x405ea1e8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/Msp430ClockP.nc" name="Init" provided="1" ref="0x405eb198">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.Msp430ClockP" qname="Msp430ClockP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Init" ref="0x405eb198" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x405eb370" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

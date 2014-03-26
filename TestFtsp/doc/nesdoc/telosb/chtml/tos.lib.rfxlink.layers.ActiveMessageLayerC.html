@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Component: tos.lib.rfxlink.layers.ActiveMessageLayerC</title>
+  </head>
+  <body>
+    <h2>Component: tos.lib.rfxlink.layers.ActiveMessageLayerC
+    </h2>
+    <b>generic configuration ActiveMessageLayerC()</b>
+    <p><p><div id=heading>Provides</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.AMPacket.html">AMPacket</a></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.AMSend.html">AMSend</a>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Packet.html">Packet</a></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Receive.html">Receive</a>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Receive.html">Receive</a> as <b>ReceiveDefault</b>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.SendNotifier.html">SendNotifier</a>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Receive.html">Receive</a> as <b>Snoop</b>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Receive.html">Receive</a> as <b>SnoopDefault</b>[am_id_t]</div><p><div id=heading>Uses</div><div id=funcsig>interface <a href="../ihtml/tos.lib.rfxlink.layers.ActiveMessageConfig.html">ActiveMessageConfig</a> as <b>Config</b></div><div id=funcsig>interface <a href="../ihtml/tos.lib.rfxlink.util.RadioPacket.html">RadioPacket</a> as <b>SubPacket</b></div><div id=funcsig>interface <a href="../ihtml/tos.lib.rfxlink.util.BareReceive.html">BareReceive</a> as <b>SubReceive</b></div><div id=funcsig>interface <a href="../ihtml/tos.lib.rfxlink.util.BareSend.html">BareSend</a> as <b>SubSend</b></div><p><div id=heading>Wiring</div><p>
+    <map name="comp">
+      <area shape="rect" href="../chtml/tos.lib.rfxlink.layers.ActiveMessageLayerP.html" title="ActiveMessageLayerP" alt="" coords="456,120,645,168">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.SendNotifier.html" title="SendNotifier[am_id_t]" alt="" coords="89,52 101,75 119,94 163,106 245,117 443,135 442,140 245,122 162,111 116,98 97,78 84,55">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SendNotifier.html" title="SendNotifier[am_id_t]" alt="" coords="83,49,91,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SendNotifier.html" title="SendNotifier[am_id_t]" alt="" coords="452,135,460,143">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SendNotifier.html" title="SendNotifier[am_id_t]" alt="" coords="118,78,258,95">
+
+      <area shape="rect" href="../chtml/ActiveMessageAddressC.html" title="ActiveMessageAddressC" alt="" coords="107,235,317,283">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.ActiveMessageAddress.html" title="ActiveMessageAddress" alt="" coords="456,160 363,176 324,185 296,194 270,209 247,227 244,223 267,205 294,190 322,180 362,171 456,155">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ActiveMessageAddress.html" title="ActiveMessageAddress" alt="" coords="452,153,460,161">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ActiveMessageAddress.html" title="ActiveMessageAddress" alt="" coords="231,231,239,239">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.ActiveMessageAddress.html" title="ActiveMessageAddress" alt="" coords="298,193,446,210">
+
+      <area shape="poly" href="../ihtml/tos.lib.rfxlink.util.RadioPacket.html" title="RadioPacket" alt="" coords="505,170 470,194 435,227 431,223 466,190 503,166">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.RadioPacket.html" title="RadioPacket" alt="" coords="500,164,508,172">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.RadioPacket.html" title="RadioPacket" alt="" coords="420,232,428,240">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.RadioPacket.html" title="RadioPacket" alt="" coords="469,193,547,210">
+
+      <area shape="poly" href="../ihtml/tos.lib.rfxlink.util.BareSend.html" title="BareSend" alt="" coords="553,168 553,221 548,221 548,168">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.BareSend.html" title="BareSend" alt="" coords="547,164,555,172">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.BareSend.html" title="BareSend" alt="" coords="547,231,555,239">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.BareSend.html" title="BareSend" alt="" coords="550,193,613,210">
+
+      <area shape="poly" href="../ihtml/tos.lib.rfxlink.util.BareReceive.html" title="BareReceive" alt="" coords="587,166 620,190 666,226 662,230 617,194 584,170">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.BareReceive.html" title="BareReceive" alt="" coords="581,164,589,172">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.BareReceive.html" title="BareReceive" alt="" coords="671,232,679,240">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.BareReceive.html" title="BareReceive" alt="" coords="638,193,717,210">
+
+      <area shape="poly" href="../ihtml/tos.lib.rfxlink.layers.ActiveMessageConfig.html" title="ActiveMessageConfig" alt="" coords="646,164 724,190 763,209 800,231 797,236 761,214 722,194 645,169">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.layers.ActiveMessageConfig.html" title="ActiveMessageConfig" alt="" coords="641,163,649,171">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.layers.ActiveMessageConfig.html" title="ActiveMessageConfig" alt="" coords="807,236,815,244">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.layers.ActiveMessageConfig.html" title="ActiveMessageConfig" alt="" coords="755,193,891,210">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="246,50 267,74 293,94 319,104 355,114 443,129 442,135 354,119 318,109 291,98 263,78 242,54">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="240,48,248,56">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="452,129,460,137">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="292,78,335,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="347,54 345,75 352,94 365,105 386,114 443,128 442,133 384,119 362,110 347,98 340,76 341,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="340,49,348,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="452,129,460,137">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="349,78,464,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="476,54 474,74 480,95 490,109 486,112 475,97 469,75 471,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="469,49,477,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="495,116,503,124">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="477,78,587,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="604,54 595,97 588,111 583,108 589,95 599,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="597,49,605,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="572,116,580,124">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="596,78,705,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="750,55 734,78 712,98 660,125 657,120 709,94 730,74 746,52">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="744,49,752,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="641,123,649,131">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="729,78,839,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="910,54 881,78 845,98 812,109 766,119 659,135 658,129 765,114 811,104 843,94 877,73 906,50">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="904,48,912,56">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="641,129,649,137">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="877,78,939,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1057,53 1005,77 946,99 873,116 797,128 659,141 658,136 797,123 872,111 945,93 1003,72 1055,48">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1052,47,1060,55">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="641,136,649,144">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1003,78,1112,95">
+
+    </map>
+    <img src="tos.lib.rfxlink.layers.ActiveMessageLayerC.png" usemap="#comp" id=imgwiring>
+  </body>
+</html>

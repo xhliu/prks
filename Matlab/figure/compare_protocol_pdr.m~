@@ -1,0 +1,91 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Author: Xiaohui Liu (whulxh@gmail.com)
+%   Date:   1/14/14
+%   Function: display pdr vs pdr req for various protocols
+%% 
+% pdr_req = [70 80 90 95];
+% pdr_req_str = {'70', '80', '90', '95'};
+MAIN_DIR = '~/Projects/tOR/RawData/';
+% MAIN_DIR = '~/Downloads/Indriya/';
+idx = 0;
+PROTOCOL_CNT = 2;
+% jobs = cell(4, PROTOCOL_CNT);
+data = cell(4, PROTOCOL_CNT);
+
+%% PRKS
+fprintf('processing PRKS\n');
+% pdr req 70
+job{1} = [20858 20867];
+% 80
+job{2} = [20859 20866];
+% 90
+job{3} = [20857 20865];
+% 95
+job{4} = [20856 ];
+len = length(job);
+tmp = cell(len, 1);
+% each pdr req
+for i = 1 : len
+    pdr_job = job{i};
+    % each job
+    for j = 1 : length(pdr_job)
+        fprintf('processing job %d\n', pdr_job(j));
+        job_dir = [MAIN_DIR num2str(pdr_job(j))];
+        cd(job_dir);
+        load link_pdrs;
+        s = link_pdrs(:, end);
+        tmp{i} = [tmp{i}; s];
+    end
+end
+idx = idx + 1;
+data(:, idx) = tmp;
+
+%% SCREAM
+fprintf('processing SCREAM\n');
+% pdr req 70
+job{1} = [20849 : 20853];
+% 80
+job{2} = job{1};
+% 90
+job{3} = job{1};
+% 95
+job{4} = job{1};
+len = length(job);
+tmp = cell(len, 1);
+% each pdr req
+for i = 1 : len
+    pdr_job = job{i};
+    % each job
+    for j = 1 : length(pdr_job)
+        fprintf('processing job %d\n', pdr_job(j));
+        job_dir = [MAIN_DIR num2str(pdr_job(j))];
+        cd(job_dir);
+        load link_pdrs;
+        s = link_pdrs(:, end);
+        tmp{i} = [tmp{i}; s];
+    end
+end
+idx = idx + 1;
+data(:, idx) = tmp;
+
+%% process data
+M = size(data, 1);
+N = size(data, 2);
+barvalue = nan(size(data));
+error = nan(size(data));
+for i = 1 : M
+    for j = 1 : N
+        barvalue(i, j) = mean(data{i, j});
+        error(i, j) = std(data{i, j});
+    end
+end
+
+%% display
+groupnames = {'70', '80', '90', '95'};
+bw_xlabel = 'PDR requirement (%)';
+%bw_legend = {'PRKS', 'CSMA', 'RTS-CTS', 'RIDB', 'CMAC', 'SCREAM'};
+bw_legend = {'PRKS', 'SCREAM'};
+% bw: short for barweb
+%barweb(barvalues, errors, width, groupnames, bw_title, bw_xlabel,
+%bw_ylabel, bw_colormap, gridstatus, bw_legend, error_sides, legend_type)
+barweb(barvalue, error, [], groupnames, [], bw_xlabel);

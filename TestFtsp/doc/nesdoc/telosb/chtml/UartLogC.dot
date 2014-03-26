@@ -1,0 +1,23 @@
+digraph "UartLogC" {
+  n0x41115390 [shape=ellipse, style=filled, label="UartLog", fontsize=12];
+  "UartLogP" [fontsize=12, shape=box, URL="../chtml/UartLogP.html"];
+  "UartLogP" [fontsize=12, shape=box, URL="../chtml/UartLogP.html"];
+  "SerialActiveMessageC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.lib.serial.SerialActiveMessageC.html"];
+  "UartLogP" [fontsize=12, shape=box, URL="../chtml/UartLogP.html"];
+  "UartLogC.SerialSender" [fontsize=12, shape=box,peripheries=2, style=dashed, label="SerialAMSenderC\n(SerialSender)", URL="../chtml/tos.lib.serial.SerialAMSenderC.html"];
+  "UartLogP" [fontsize=12, shape=box, URL="../chtml/UartLogP.html"];
+  "SerialActiveMessageC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.lib.serial.SerialActiveMessageC.html"];
+  "MainC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.system.MainC.html"];
+  "UartLogP" [fontsize=12, shape=box, URL="../chtml/UartLogP.html"];
+  "UartLogP" [fontsize=12, shape=box, URL="../chtml/UartLogP.html"];
+  "LedsC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.system.LedsC.html"];
+  "UartLogP" [fontsize=12, shape=box, URL="../chtml/UartLogP.html"];
+  "LocalTimeMilliC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.system.LocalTimeMilliC.html"];
+  "n0x41115390" -> "UartLogP" [label="UartLog", URL="../ihtml/UartLog.html", fontsize=10];
+  "UartLogP" -> "SerialActiveMessageC" [label="SplitControl", URL="../ihtml/tos.interfaces.SplitControl.html", fontsize=10];
+  "UartLogP" -> "UartLogC.SerialSender" [label="AMSend", URL="../ihtml/tos.interfaces.AMSend.html", fontsize=10];
+  "UartLogP" -> "SerialActiveMessageC" [label="Packet", URL="../ihtml/tos.interfaces.Packet.html", fontsize=10];
+  "MainC" -> "UartLogP" [label="Init", URL="../ihtml/tos.interfaces.Init.html", fontsize=10];
+  "UartLogP" -> "LedsC" [label="Leds", URL="../ihtml/tos.interfaces.Leds.html", fontsize=10];
+  "UartLogP" -> "LocalTimeMilliC" [label="LocalTime<TMilli>", URL="../ihtml/tos.lib.timer.LocalTime.html", fontsize=10];
+}

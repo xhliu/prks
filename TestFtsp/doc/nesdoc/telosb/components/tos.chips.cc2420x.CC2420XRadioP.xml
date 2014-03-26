@@ -1,0 +1,191 @@
+<?xml version="1.0" ?><component loc="28:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP">
+      <module/>
+    <specification><interface loc="40:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="DummyConfig" provided="1" ref="0x40a17e78">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="DummyConfig" ref="0x40a17e78" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.DummyConfig" qname="DummyConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="nothing" ref="0x40a14070" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="36:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="TrafficMonitorConfig" provided="1" ref="0x409f7880">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TrafficMonitorConfig" ref="0x409f7880" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.TrafficMonitorConfig" qname="TrafficMonitorConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getBytes" ref="0x409f7a58" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="39:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="ActiveMessageConfig" provided="1" ref="0x40a0ef00">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="ActiveMessageConfig" ref="0x40a0ef00" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.ActiveMessageConfig" qname="ActiveMessageConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="group" ref="0x40a170f0" scoped=""/>
+        <function-ref name="checkFrame" ref="0x40a171d0" scoped=""/>
+        <function-ref name="source" ref="0x40a172b0" scoped=""/>
+        <function-ref name="destination" ref="0x40a17390" scoped=""/>
+        <function-ref name="setSource" ref="0x40a17470" scoped=""/>
+        <function-ref name="setDestination" ref="0x40a17550" scoped=""/>
+        <function-ref name="setGroup" ref="0x40a17630" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="38:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="SlottedCollisionConfig" provided="1" ref="0x40a11498">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SlottedCollisionConfig" ref="0x40a11498" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.SlottedCollisionConfig" qname="SlottedCollisionConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getInitialDelay" ref="0x40a11670" scoped=""/>
+        <function-ref name="getScheduleExponent" ref="0x40a11750" scoped=""/>
+        <function-ref name="getCollisionWindowLength" ref="0x40a11830" scoped=""/>
+        <function-ref name="getTransmitTime" ref="0x40a11910" scoped=""/>
+        <function-ref name="getCollisionWindowStart" ref="0x40a119f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="50:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="RadioAlarm" provided="0" ref="0x40a1a098">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioAlarm" ref="0x40a1a098" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioAlarm" qname="RadioAlarm"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x40a1a270" scoped=""/>
+        <function-ref name="wait" ref="0x40a1a350" scoped=""/>
+        <function-ref name="cancel" ref="0x40a1a430" scoped=""/>
+        <function-ref name="isFree" ref="0x40a1a510" scoped=""/>
+        <function-ref name="getNow" ref="0x40a1a5f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="53:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="PacketTimeStamp" provided="0" ref="0x40a3ac88">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStamp" ref="0x40a3ac88" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x40a1e828" scoped=""/>
+        <function-ref name="clear" ref="0x40a1ebd8" scoped=""/>
+        <function-ref name="isValid" ref="0x40a1e478" scoped=""/>
+        <function-ref name="set" ref="0x40a39010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="32:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="CC2420XDriverConfig" provided="1" ref="0x40a04010">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="CC2420XDriverConfig" ref="0x40a04010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.cc2420x.CC2420XDriverConfig" qname="CC2420XDriverConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="maxPayloadLength" ref="0x40a041e8" scoped=""/>
+        <function-ref name="headerLength" ref="0x40a042c8" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40a043a8" scoped=""/>
+        <function-ref name="headerPreloadLength" ref="0x40a04488" scoped=""/>
+        <function-ref name="requiresRssiCca" ref="0x40a04568" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="35:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="CsmaConfig" provided="1" ref="0x40a03b40">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="CsmaConfig" ref="0x40a03b40" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.CsmaConfig" qname="CsmaConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="requiresSoftwareCCA" ref="0x40a03d18" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="33:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="SoftwareAckConfig" provided="1" ref="0x409fa408">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SoftwareAckConfig" ref="0x409fa408" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.SoftwareAckConfig" qname="SoftwareAckConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="reportChannelError" ref="0x409fa5e0" scoped=""/>
+        <function-ref name="createAckPacket" ref="0x409fa6c0" scoped=""/>
+        <function-ref name="requiresAckWait" ref="0x409fa7a0" scoped=""/>
+        <function-ref name="isAckPacket" ref="0x409fa880" scoped=""/>
+        <function-ref name="verifyAckPacket" ref="0x409fa960" scoped=""/>
+        <function-ref name="getAckTimeout" ref="0x409faa40" scoped=""/>
+        <function-ref name="setAckRequired" ref="0x409fab20" scoped=""/>
+        <function-ref name="requiresAckReply" ref="0x409fac00" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="49:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="Ieee154PacketLayer" provided="0" ref="0x40a1faa8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Ieee154PacketLayer" ref="0x40a1faa8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getDestPan" ref="0x40a1fc80" scoped=""/>
+        <function-ref name="getDSN" ref="0x40a1fd60" scoped=""/>
+        <function-ref name="setFCF" ref="0x40a1fe40" scoped=""/>
+        <function-ref name="isAckFrame" ref="0x40a1ff20" scoped=""/>
+        <function-ref name="setSrcAddr" ref="0x40a0c018" scoped=""/>
+        <function-ref name="createDataFrame" ref="0x40a0c0f8" scoped=""/>
+        <function-ref name="setDSN" ref="0x40a0c1d8" scoped=""/>
+        <function-ref name="createAckReply" ref="0x40a0c2b8" scoped=""/>
+        <function-ref name="getSrcAddr" ref="0x40a0c398" scoped=""/>
+        <function-ref name="isDataFrame" ref="0x40a0c478" scoped=""/>
+        <function-ref name="getAckRequired" ref="0x40a0c558" scoped=""/>
+        <function-ref name="verifyAckReply" ref="0x40a0c638" scoped=""/>
+        <function-ref name="localAddr" ref="0x40a0c718" scoped=""/>
+        <function-ref name="requiresAckWait" ref="0x40a0c878" scoped=""/>
+        <function-ref name="localPan" ref="0x40a0c958" scoped=""/>
+        <function-ref name="setDestAddr" ref="0x40a0ca38" scoped=""/>
+        <function-ref name="createAckFrame" ref="0x40a0cb18" scoped=""/>
+        <function-ref name="setFramePending" ref="0x40a0cbf8" scoped=""/>
+        <function-ref name="setDestPan" ref="0x40a0ccd8" scoped=""/>
+        <function-ref name="isForMe" ref="0x40a0cdb8" scoped=""/>
+        <function-ref name="setAckRequired" ref="0x40a0ce98" scoped=""/>
+        <function-ref name="getFCF" ref="0x40a0b010" scoped=""/>
+        <function-ref name="requiresAckReply" ref="0x40a0b0f0" scoped=""/>
+        <function-ref name="getDestAddr" ref="0x40a0b1d0" scoped=""/>
+        <function-ref name="getFramePending" ref="0x40a0b2b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="51:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="CC2420XPacket" provided="0" ref="0x40a3a2c0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="CC2420XPacket" ref="0x40a3a2c0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40a3a498" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40a3a578" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40a3a658" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40a3a738" scoped=""/>
+        <function-ref name="headerLength" ref="0x40a3a818" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40a3a8f8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="34:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="UniqueConfig" provided="1" ref="0x409f8ac8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UniqueConfig" ref="0x409f8ac8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.UniqueConfig" qname="UniqueConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="setSequenceNumber" ref="0x409f8ca0" scoped=""/>
+        <function-ref name="reportChannelError" ref="0x409f8d80" scoped=""/>
+        <function-ref name="getSequenceNumber" ref="0x409f8e60" scoped=""/>
+        <function-ref name="getSender" ref="0x40a03010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="37:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XRadioP.nc" name="RandomCollisionConfig" provided="1" ref="0x40a15990">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XRadioP" qname="CC2420XRadioP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RandomCollisionConfig" ref="0x40a15990" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.RandomCollisionConfig" qname="RandomCollisionConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getCongestionBackoff" ref="0x40a15b68" scoped=""/>
+        <function-ref name="getInitialBackoff" ref="0x40a15c48" scoped=""/>
+        <function-ref name="getMinimumBackoff" ref="0x40a15d28" scoped=""/>
+        <function-ref name="getTransmitBarrier" ref="0x40a15e08" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

@@ -1,0 +1,829 @@
+<?xml version="1.0" ?><interfacedef loc="45:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer">
+      <documentation loc="38:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+        <short>
+ This interface encapsulates IEEE 802.15.4 intrapan data frames with 
+ 16-bit destination pan, source and destination addresses.</short>
+        <long>
+ This interface encapsulates IEEE 802.15.4 intrapan data frames with 
+ 16-bit destination pan, source and destination addresses. It also 
+ supports 6LowPan interoperability mode, and acknowledgement frames.
+ Note, that this interface does not support the CRC-16 value, which
+ should be verified before the data can be trusted.
+</long>
+      </documentation>
+      <function command="" loc="131:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="getDestPan" provided="0" ref="0x40a24440">
+        <documentation loc="127:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ returns the destination PAN id, values &lt;= 255 are tinyos groups,
+ valid only for data frames
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="131:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a242e8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="120:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="getDSN" provided="0" ref="0x40a25620">
+        <documentation loc="117:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns the data sequence number
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="120:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a254c8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="setFCF" provided="0" ref="0x40a0a418">
+        <documentation loc="53:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the frame control field.</short>
+          <long>
+ Sets the frame control field. This method should not be used, 
+ createDataFrame and createAckFrame should be used instead.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+              <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a0a0c8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="fcf" ref="0x40a0a2b8">
+            <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+              <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="75:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="isAckFrame" provided="0" ref="0x40a09800">
+        <documentation loc="71:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns TRUE if the message is an acknowledgement frame supported
+ by this interface (based on the value of the FCF).</short>
+          <long>
+ Returns TRUE if the message is an acknowledgement frame supported
+ by this interface (based on the value of the FCF).
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="75:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a096a8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="156:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="setSrcAddr" provided="0" ref="0x40a22940">
+        <documentation loc="153:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the source address, valid only for data frames
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+              <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="156:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a225e0">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="156:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="addr" ref="0x40a227e0">
+            <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+              <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="69:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="createDataFrame" provided="0" ref="0x40a09168">
+        <documentation loc="65:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the FCF to create a data frame supported by this interface.</short>
+          <long>
+ Sets the FCF to create a data frame supported by this interface.
+ You may call setAckRequired and setFramePending commands after this.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="69:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a09010">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="125:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="setDSN" provided="0" ref="0x40a25e18">
+        <documentation loc="122:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the data sequence number
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="125:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a25ad8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="125:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="dsn" ref="0x40a25cb8">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="88:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="createAckReply" provided="0" ref="0x40a07798">
+        <documentation loc="83:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Creates an acknowledgement packet for the given data packet.</short>
+          <long>
+ Creates an acknowledgement packet for the given data packet.
+ This also sets the DSN value. The data message must be a 
+ data frame, the ack message will be overwritten.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="88:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="data" ref="0x40a07420">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="88:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="ack" ref="0x40a07638">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="151:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="getSrcAddr" provided="0" ref="0x40a22168">
+        <documentation loc="148:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns the source address, valid only for data frames
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="151:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a22010">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="63:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="isDataFrame" provided="0" ref="0x40a0aa80">
+        <documentation loc="59:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns TRUE if the message is a data frame supported by 
+ this interface (based on the value of the FCF).</short>
+          <long>
+ Returns TRUE if the message is a data frame supported by 
+ this interface (based on the value of the FCF).
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="63:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a0a928">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="99:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="getAckRequired" provided="0" ref="0x40a28820">
+        <documentation loc="96:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns TRUE if the ACK required field is set in the FCF.</short>
+          <long>
+ Returns TRUE if the ACK required field is set in the FCF.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="99:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a286c8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="94:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="verifyAckReply" provided="0" ref="0x40a28170">
+        <documentation loc="90:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns TRUE if the acknowledgement packet corresponds to the
+ data packet.</short>
+          <long>
+ Returns TRUE if the acknowledgement packet corresponds to the
+ data packet. The data message must be a data packet.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="94:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="data" ref="0x40a07d28">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="94:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="ack" ref="0x40a28010">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="178:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="localAddr" provided="0" ref="0x40a1f138">
+        <documentation loc="175:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns the local address of the node (AM address)
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="ieee154_saddr_t" ref="0x409c64e0"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="162:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="requiresAckWait" provided="0" ref="0x40a20010">
+        <documentation loc="158:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns TRUE if the packet is a data packet, the ACK_REQ field
+ is set and the destination address is not the broadcast address.</short>
+          <long>
+ Returns TRUE if the packet is a data packet, the ACK_REQ field
+ is set and the destination address is not the broadcast address.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="162:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a22e10">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="173:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="localPan" provided="0" ref="0x40a20c80">
+        <documentation loc="170:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns the local pan id (AM group)
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="ieee154_panid_t" ref="0x409c6248"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="146:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="setDestAddr" provided="0" ref="0x40a23a80">
+        <documentation loc="143:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the destination address, valid only for data frames
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+              <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="146:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a23720">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="146:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="addr" ref="0x40a23920">
+            <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+              <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="81:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="createAckFrame" provided="0" ref="0x40a09eb0">
+        <documentation loc="77:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the FCF to create an acknowledgement frame supported by
+ this interface.</short>
+          <long>
+ Sets the FCF to create an acknowledgement frame supported by
+ this interface. You may call setFramePending after this.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="81:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a09d58">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="115:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="setFramePending" provided="0" ref="0x40a25010">
+        <documentation loc="112:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the frame pending field in the FCF.</short>
+          <long>
+ Sets the frame pending field in the FCF.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="115:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a27bf8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="115:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="pending" ref="0x40a27de8">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="136:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="setDestPan" provided="0" ref="0x40a24c28">
+        <documentation loc="133:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the destination PAN id, valid only for data frames
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+              <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="136:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a248d8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="136:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="pan" ref="0x40a24ac8">
+            <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+              <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="185:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="isForMe" provided="0" ref="0x40a1f710">
+        <documentation loc="180:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns TRUE if the destionation of this message is either 0xFFFF
+ or is the local address of the node, and the pan address is the
+ local one.</short>
+          <long>
+ Returns TRUE if the destionation of this message is either 0xFFFF
+ or is the local address of the node, and the pan address is the
+ local one.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="185:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a1f5b8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="105:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="setAckRequired" provided="0" ref="0x40a27060">
+        <documentation loc="101:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Sets the ACK required field in the FCF, should never be set
+ for acknowledgement frames.</short>
+          <long>
+ Sets the ACK required field in the FCF, should never be set
+ for acknowledgement frames.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="105:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a28d00">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="105:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="ack" ref="0x40a28ec8">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="51:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="getFCF" provided="0" ref="0x40a14bf0">
+        <documentation loc="47:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns the frame control field.</short>
+          <long>
+ Returns the frame control field. This method should not be used, 
+ isDataFrame and isAckFrame should be used instead.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="51:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a14a98">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="168:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="requiresAckReply" provided="0" ref="0x40a20720">
+        <documentation loc="164:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns TRUE if the packet is a data packet, the ACK_REQ field
+ is set and the destionation address is this node.</short>
+          <long>
+ Returns TRUE if the packet is a data packet, the ACK_REQ field
+ is set and the destionation address is this node.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="168:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a205c8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="141:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="getDestAddr" provided="0" ref="0x40a232a0">
+        <documentation loc="138:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns the destination address, valid only for data frames
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="141:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a23148">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="110:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="getFramePending" provided="0" ref="0x40a27710">
+        <documentation loc="107:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc">
+          <short>
+ Returns TRUE if the frame pending field is set in the FCF.</short>
+          <long>
+ Returns TRUE if the frame pending field is set in the FCF.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="110:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayer.nc" name="msg" ref="0x40a275b8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+    </interfacedef>

@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.BareSend</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.BareSend</h2>
+    <b>interface BareSend</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command error_t <a href="#cancel">cancel</a>(message_t *msg)
+      </span><menu>
+ Cancel a requested transmission.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command error_t <a href="#send">send</a>(message_t *msg)
+      </span><menu>
+ Starts the transmission of the given message.
+      </menu>
+    </div><p><div id=heading>Events</div><div id=funcsig><span id=funcnameshort>event void <a href="#sendDone">sendDone</a>(message_t *msg, error_t error)
+      </span><menu>
+ Signals the completion of the send command, exactly once for each 
+ successfull send command.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="cancel"></a>
+    <h4>cancel
+    </h4>
+    <span id=funcnameshort>command error_t <b>cancel</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Cancel a requested transmission. Returns SUCCESS if the 
+ transmission was cancelled properly (not sent in its
+ entirety). Note that the component may not know
+ if the send was successfully cancelled, if the radio is
+ handling much of the logic; in this case, a component
+ should be conservative and return an appropriate error code.
+
+    </menu>
+    <hr>
+    <a name="send"></a>
+    <h4>send
+    </h4>
+    <span id=funcnameshort>command error_t <b>send</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Starts the transmission of the given message. This command must not
+ be called while another send is in progress (so one must wait for the
+ sendDone event). Returns EBUSY if a reception is in progress or for
+ some other reason the request cannot be temporarily satisfied (e.g.
+ the SPI bus access could not be acquired). In this case the send 
+ command could be retried from a task. Returns SUCCESS if the 
+ transmission could be started. In this case sendDone will be fired.
+
+    </menu>
+    <p><div id=heading>Events - Details</div>
+    <a name="sendDone"></a>
+    <h4>sendDone
+    </h4>
+    <span id=funcnameshort>event void <b>sendDone</b>(message_t *msg, error_t error)
+    </span>
+    <p>
+    <menu>
+      
+ Signals the completion of the send command, exactly once for each 
+ successfull send command. If the returned error code is SUCCESS, then 
+ the message was sent (may not have been acknowledged), otherwise 
+ the message was not transmitted over the air.
+
+    </menu>
+  </body>
+</html>

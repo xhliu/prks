@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.layers.SoftwareAckConfig</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.layers.SoftwareAckConfig</h2>
+    <b>interface SoftwareAckConfig</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command void <a href="#createAckPacket">createAckPacket</a>(message_t *data, message_t *ack)
+      </span><menu>
+ Creates an acknowledgement packet for the given data packet.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getAckTimeout">getAckTimeout</a>()
+      </span><menu>
+ Returns the acknowledgement timeout (in the radio clock units),
+ in which a sent packet must be acknowledged.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#isAckPacket">isAckPacket</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the received packet is an acknowledgement packet.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#reportChannelError">reportChannelError</a>()
+      </span><menu>
+ This command is called when a sent packet did not receive an
+ acknowledgement.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#requiresAckReply">requiresAckReply</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the received packet needs software acknowledgements
+ to be sent back to the sender.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#requiresAckWait">requiresAckWait</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the layer should wait for a software acknowledgement
+ to be received after this packet was transmitted.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setAckRequired">setAckRequired</a>(message_t *msg, bool ack)
+      </span><menu>
+ Sets the flag in the message indicating to the receiver whether
+ the message should be acknowledged.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#verifyAckPacket">verifyAckPacket</a>(message_t *data, message_t *ack)
+      </span><menu>
+ Returns TRUE if the acknowledgement packet corresponds to the
+ data packet.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="createAckPacket"></a>
+    <h4>createAckPacket
+    </h4>
+    <span id=funcnameshort>command void <b>createAckPacket</b>(message_t *data, message_t *ack)
+    </span>
+    <p>
+    <menu>
+      
+ Creates an acknowledgement packet for the given data packet.
+
+    </menu>
+    <hr>
+    <a name="getAckTimeout"></a>
+    <h4>getAckTimeout
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getAckTimeout</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the acknowledgement timeout (in the radio clock units),
+ in which a sent packet must be acknowledged.
+
+    </menu>
+    <hr>
+    <a name="isAckPacket"></a>
+    <h4>isAckPacket
+    </h4>
+    <span id=funcnameshort>command bool <b>isAckPacket</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the received packet is an acknowledgement packet.
+ The AckedSend layer will filter out all received acknowledgement
+ packets and uses  only the matching one for the acknowledgement.
+
+    </menu>
+    <hr>
+    <a name="reportChannelError"></a>
+    <h4>reportChannelError
+    </h4>
+    <span id=funcnameshort>command void <b>reportChannelError</b>()
+    </span>
+    <p>
+    <menu>
+      
+ This command is called when a sent packet did not receive an
+ acknowledgement.
+
+    </menu>
+    <hr>
+    <a name="requiresAckReply"></a>
+    <h4>requiresAckReply
+    </h4>
+    <span id=funcnameshort>command bool <b>requiresAckReply</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the received packet needs software acknowledgements
+ to be sent back to the sender.
+
+    </menu>
+    <hr>
+    <a name="requiresAckWait"></a>
+    <h4>requiresAckWait
+    </h4>
+    <span id=funcnameshort>command bool <b>requiresAckWait</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the layer should wait for a software acknowledgement
+ to be received after this packet was transmitted.
+
+    </menu>
+    <hr>
+    <a name="setAckRequired"></a>
+    <h4>setAckRequired
+    </h4>
+    <span id=funcnameshort>command void <b>setAckRequired</b>(message_t *msg, bool ack)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the flag in the message indicating to the receiver whether
+ the message should be acknowledged.
+
+    </menu>
+    <hr>
+    <a name="verifyAckPacket"></a>
+    <h4>verifyAckPacket
+    </h4>
+    <span id=funcnameshort>command bool <b>verifyAckPacket</b>(message_t *data, message_t *ack)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the acknowledgement packet corresponds to the
+ data packet. The acknowledgement packect was already verified 
+ to be a valid acknowledgement packet via the isAckPacket command.
+
+    </menu>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.RadioCCA</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.RadioCCA</h2>
+    <b>interface RadioCCA</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command error_t <a href="#request">request</a>()
+      </span><menu>
+ Starts the clear channel assesment procedure.
+      </menu>
+    </div><p><div id=heading>Events</div><div id=funcsig><span id=funcnameshort>event void <a href="#done">done</a>(error_t error)
+      </span><menu>
+ Signals the completion of the clear channel assesment send command.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="request"></a>
+    <h4>request
+    </h4>
+    <span id=funcnameshort>command error_t <b>request</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Starts the clear channel assesment procedure. Returns EBUSY if the radio
+ is currently servicing a clear channel assesment, and SUCCESS otherwise.
+ The check will be performed only in the RX_READY state.
+
+    </menu>
+    <p><div id=heading>Events - Details</div>
+    <a name="done"></a>
+    <h4>done
+    </h4>
+    <span id=funcnameshort>event void <b>done</b>(error_t error)
+    </span>
+    <p>
+    <menu>
+      
+ Signals the completion of the clear channel assesment send command.
+ SUCCESS means the channel is clear, EBUSY means the channel is not
+ clear, and FAIL means that the clear channel assesment could not
+ be finished or the operation was cancelled.
+
+    </menu>
+  </body>
+</html>

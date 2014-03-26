@@ -1,0 +1,5 @@
+digraph "tos.lib.rfxlink.util.NeighborhoodFlagC" {
+  n0x40bf69a8 [shape=ellipse, style=filled, label="NeighborhoodFlag", fontsize=12];
+  "NeighborhoodP" [fontsize=12, shape=box, URL="../chtml/tos.lib.rfxlink.util.NeighborhoodP.html"];
+  "n0x40bf69a8" -> "NeighborhoodP" [label="NeighborhoodFlag", URL="../ihtml/tos.lib.rfxlink.util.NeighborhoodFlag.html", fontsize=10];
+}

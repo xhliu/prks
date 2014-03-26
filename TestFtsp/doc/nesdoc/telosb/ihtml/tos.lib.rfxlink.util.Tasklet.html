@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.Tasklet</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.Tasklet</h2>
+    <b>interface Tasklet</b><p>
+ This interface is useful in building state machines when the state 
+ transitions should be executed atomically but with interrupts enabled. 
+ All state transitions should take place in the run event handler or
+ in blocks protected by the suspend and resume commands.
+
+    <p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command void <a href="#resume">resume</a>()
+      </span><menu>
+ Leaves the critical section.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#schedule">schedule</a>()
+      </span><menu>
+ Makes sure that the run event is called at least once more.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#suspend">suspend</a>()
+      </span><menu>
+ Enters a critical section of the code and meakes sure that the
+ run event is not called while in this section.
+      </menu>
+    </div><p><div id=heading>Events</div><div id=funcsig><span id=funcnameshort>event void <a href="#run">run</a>()
+      </span><menu>
+ This method is executed atomically.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="resume"></a>
+    <h4>resume
+    </h4>
+    <span id=funcnameshort>command void <b>resume</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Leaves the critical section. This call is conly possible from 
+ task context. If there were scheduled executions of the run
+ event, then those will be called before this command returns.
+
+    </menu>
+    <hr>
+    <a name="schedule"></a>
+    <h4>schedule
+    </h4>
+    <span id=funcnameshort>command void <b>schedule</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Makes sure that the run event is called at least once more. If the 
+ run event is currently not executing, then it  is called immediately 
+ and this command returns only after the completion of the run event. 
+ If the run event is currently executed, then this method returns at 
+ once, and makes sure that the run event is called once more when 
+ it is finished. If this method is called from a task, then by the 
+ above rules, the run event will be called from a task as well.
+
+    </menu>
+    <hr>
+    <a name="suspend"></a>
+    <h4>suspend
+    </h4>
+    <span id=funcnameshort>command void <b>suspend</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Enters a critical section of the code and meakes sure that the
+ run event is not called while in this section. No long running
+ computation should be called from the critical session, and
+ in particular no user event should be fired. This call is only
+ possible from task context, otherwise we cannot guarantee that
+ the run event is not currently running. The suspend calls
+ can be nested. It is very important that the same number of
+ resume commands must be called in all control paths, e.g. be very
+ careful with the return and break commands.
+
+    </menu>
+    <p><div id=heading>Events - Details</div>
+    <a name="run"></a>
+    <h4>run
+    </h4>
+    <span id=funcnameshort>event void <b>run</b>()
+    </span>
+    <p>
+    <menu>
+      
+ This method is executed atomically. 
+
+    </menu>
+  </body>
+</html>

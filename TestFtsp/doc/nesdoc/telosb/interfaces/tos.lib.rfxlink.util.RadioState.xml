@@ -1,0 +1,132 @@
+<?xml version="1.0" ?><interfacedef loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc" nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState">
+      <function command="" loc="44:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc" name="turnOff" provided="0" ref="0x40c31350">
+        <documentation loc="39:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc">
+          <short>
+ Moves to radio into sleep state with the lowest power consumption but 
+ highest wakeup time.</short>
+          <long>
+ Moves to radio into sleep state with the lowest power consumption but 
+ highest wakeup time. The radio cannot send or receive in this state 
+ and releases all access to shared resources (e.g. SPI bus). 
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="56:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc" name="turnOn" provided="0" ref="0x40c31d88">
+        <documentation loc="52:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc">
+          <short>
+ Goes into receive state.</short>
+          <long>
+ Goes into receive state. The radio continuously receive messages 
+ and able to transmit.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="63:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc" name="setChannel" provided="0" ref="0x40c30410">
+        <documentation loc="58:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc">
+          <short>
+ Sets the current channel.</short>
+          <long>
+ Sets the current channel. Returns EBUSY if the stack is unable
+ to change the channel this time (some other operation is in progress)
+ SUCCESS otherwise.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="63:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc" name="channel" ref="0x40c302b8">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function event="" loc="69:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc" name="done" provided="0" ref="0x40c30880">
+        <documentation loc="65:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc">
+          <short>
+ This event is signaled exactly once for each sucessfully posted state 
+ transition and setChannel command when it is completed.</short>
+          <long>
+ This event is signaled exactly once for each sucessfully posted state 
+ transition and setChannel command when it is completed.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="50:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc" name="standby" provided="0" ref="0x40c31890">
+        <documentation loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc">
+          <short>
+ The same as the turnOff command, except it is not as deep sleep, and
+ it is quicker to recover from this state.</short>
+          <long>
+ The same as the turnOff command, except it is not as deep sleep, and
+ it is quicker to recover from this state.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="74:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc" name="getChannel" provided="0" ref="0x40c30dc0">
+        <documentation loc="71:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioState.nc">
+          <short>
+ Returns the currently selected channel.</short>
+          <long>
+ Returns the currently selected channel.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+    </interfacedef>

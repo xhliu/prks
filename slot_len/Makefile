@@ -1,0 +1,12 @@
+COMPONENT=TestSlotLenC
+
+UTILDIR = $(TOSROOT)/../Programming/TinyOS/Utils
+
+CFLAGS +=	-I$(UTILDIR)	\
+			-I../iMAC_TDMA/ftsp
+CFLAGS += -DCC2420_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
+CFLAGS += -DTOSH_DATA_LENGTH=114
+CFLAGS += -DCC2420_DEF_CHANNEL=26
+
+PFLAGS += -DTIMESYNC_RATE=3
+include $(MAKERULES)

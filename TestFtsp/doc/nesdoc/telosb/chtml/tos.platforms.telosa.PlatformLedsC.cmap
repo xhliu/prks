@@ -1,0 +1,33 @@
+<area shape="rect" href="../chtml/tos.chips.msp430.pins.Msp430GpioC.html" title="Msp430GpioC\n(Led0Impl)" alt="" coords="5,120,133,168">
+<area shape="poly" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="72,53 72,107 67,107 67,53">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="65,49,73,57">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="65,116,73,124">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="70,78,133,95">
+<area shape="rect" href="../chtml/tos.chips.msp430.pins.HplMsp430GeneralIOC.html" title="HplMsp430GeneralIOC" alt="" coords="132,235,337,293">
+<area shape="poly" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="76,167 84,190 97,209 122,229 118,233 93,212 79,192 71,169">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="69,164,77,172">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="128,233,136,241">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="95,193,230,210">
+<area shape="rect" href="../chtml/tos.chips.msp430.pins.Msp430GpioC.html" title="Msp430GpioC\n(Led1Impl)" alt="" coords="171,120,299,168">
+<area shape="poly" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="237,53 237,107 232,107 232,53">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="231,49,239,57">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="231,116,239,124">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="234,78,297,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="237,168 237,221 232,221 232,168">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="231,164,239,172">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="231,231,239,239">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="234,193,369,210">
+<area shape="rect" href="../chtml/tos.chips.msp430.pins.Msp430GpioC.html" title="Msp430GpioC\n(Led2Impl)" alt="" coords="336,120,464,168">
+<area shape="poly" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="403,53 403,107 397,107 397,53">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="396,49,404,57">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="396,116,404,124">
+<area shape="rect" href="../ihtml/tos.interfaces.GeneralIO.html" title="GeneralIO" alt="" coords="399,78,462,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="397,169 387,192 373,213 350,230 346,226 369,209 383,190 392,167">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="391,164,399,172">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="332,231,340,239">
+<area shape="rect" href="../ihtml/tos.chips.msp430.pins.HplMsp430GeneralIO.html" title="HplMsp430GeneralIO" alt="" coords="383,193,518,210">
+<area shape="rect" href="../chtml/tos.platforms.telosa.PlatformP.html" title="PlatformP" alt="" coords="476,5,572,53">
+<area shape="poly" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="527,53 527,107 521,107 521,53">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="520,49,528,57">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="520,116,528,124">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="524,78,543,95">

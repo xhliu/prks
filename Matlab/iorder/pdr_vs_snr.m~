@@ -1,0 +1,5 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Author: Xiaohui Liu (whulxh@gmail.com)
+%   Date:   1/10/2014
+%   Function: generate pdr vs snr theoretical curve for CC2420 radio
+[pdr snr] = function

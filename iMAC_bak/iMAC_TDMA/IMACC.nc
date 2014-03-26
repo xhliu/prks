@@ -1,0 +1,29 @@
+/*
+ * @ author: Xiaohui Liu (whulxh@gmail.com)
+ * 
+ * @ updated: 	06/27/2012 
+ 				04/07/2012 03:23:55 PM
+ 				07/02/2012  
+ * @ description: wiring for iMAC
+ */
+configuration IMACC {
+ 	provides {
+		interface FastSend as AMSend;
+		interface FastReceive as Receive;
+		interface FastPacket as Packet;
+
+ 		interface AsyncSplitControl as ForwarderSwitch;
+ 		interface AsyncStdControl as ControllerSwitch;
+ 	};
+}
+
+implementation {
+	components IMACForwarderC as Forwarder;
+	AMSend = Forwarder;
+	Receive = Forwarder;
+	Packet = Forwarder;
+	ForwarderSwitch = Forwarder;
+	
+	components IMACControllerC as Controller;
+	ControllerSwitch = Controller;
+}

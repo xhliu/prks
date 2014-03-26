@@ -1,0 +1,14 @@
+digraph "tos.lib.power.AsyncStdControlPowerManagerC" {
+  "AsyncStdControlPowerManagerC.PowerManager" [fontsize=12, shape=box, style=dashed, label="AsyncPowerManagerP\n(PowerManager)", URL="../chtml/tos.lib.power.AsyncPowerManagerP.html"];
+  n0x41336060 [shape=ellipse, style=filled, label="AsyncStdControl", fontsize=12];
+  "AsyncStdControlPowerManagerC.PowerManager" [fontsize=12, shape=box, style=dashed, label="AsyncPowerManagerP\n(PowerManager)", URL="../chtml/tos.lib.power.AsyncPowerManagerP.html"];
+  n0x41335010 [shape=ellipse, style=filled, label="PowerDownCleanup", fontsize=12];
+  "AsyncStdControlPowerManagerC.PowerManager" [fontsize=12, shape=box, style=dashed, label="AsyncPowerManagerP\n(PowerManager)", URL="../chtml/tos.lib.power.AsyncPowerManagerP.html"];
+  n0x413353f8 [shape=ellipse, style=filled, label="ResourceDefaultOwner", fontsize=12];
+  "AsyncStdControlPowerManagerC.PowerManager" [fontsize=12, shape=box, style=dashed, label="AsyncPowerManagerP\n(PowerManager)", URL="../chtml/tos.lib.power.AsyncPowerManagerP.html"];
+  n0x41335b00 [shape=ellipse, style=filled, label="ArbiterInfo", fontsize=12];
+  "AsyncStdControlPowerManagerC.PowerManager" -> "n0x41336060" [label="AsyncStdControl", URL="../ihtml/tos.interfaces.AsyncStdControl.html", fontsize=10];
+  "AsyncStdControlPowerManagerC.PowerManager" -> "n0x41335010" [label="PowerDownCleanup", URL="../ihtml/tos.lib.power.PowerDownCleanup.html", fontsize=10];
+  "AsyncStdControlPowerManagerC.PowerManager" -> "n0x413353f8" [label="ResourceDefaultOwner", URL="../ihtml/tos.interfaces.ResourceDefaultOwner.html", fontsize=10];
+  "AsyncStdControlPowerManagerC.PowerManager" -> "n0x41335b00" [label="ArbiterInfo", URL="../ihtml/tos.interfaces.ArbiterInfo.html", fontsize=10];
+}

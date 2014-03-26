@@ -1,0 +1,5 @@
+digraph "tos.chips.msp430.timer.LocalTimeMicroC" {
+  n0x4108d1a0 [shape=ellipse, style=filled, label="LocalTime", fontsize=12];
+  "LocalTimeHybridMicroC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.chips.msp430.timer.LocalTimeHybridMicroC.html"];
+  "n0x4108d1a0" -> "LocalTimeHybridMicroC" [label="LocalTime<TMicro>", URL="../ihtml/tos.lib.timer.LocalTime.html", fontsize=10];
+}

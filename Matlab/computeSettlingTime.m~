@@ -1,0 +1,309 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Author: Xiaohui Liu (whulxh@gmail.com)
+%   Date:   10/30/2013
+%   Function: compute convergence time, both for link and network
+%% 
+load debugs;
+t = debugs;
+type = DBG_CONTROLLER_FLAG;
+line = 1022; %1019
+t = t(t(:, 3) == type, :);
+t = t(t(:, 4) == line, :);
+
+%% line # if changed
+% s = t;
+% s = s(:, 4);
+% cdfplot(s);
+% unique(s)
+
+%% controller
+% (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample,
+% le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
+load link_pdrs;
+% fprintf('warning: varying link pdr\n');
+pdr_req = 90;
+for link_id = 1 : size(link_pdrs, 1)
+    fprintf('link %d\n', link_id);
+%     fprintf('warning: fixed link id\n');
+%     link_id = 75;
+    
+    s = t;
+    % receiver
+    s = s(s(:, 2) == link_pdrs(link_id, 2), :);
+    % sender
+    s = s(s(:, 5) == link_pdrs(link_id, 1), :);
+    
+    % various pdr req
+    if isempty(s)
+        fprintf('empty\n');
+        continue;
+    end
+    
+%     % find pdr_req
+%     m = r(r(:, 2) == link_pdrs(link_id, 1), :);
+%     pdr_req = m(1, 10);
+    
+    %if ~all(pdr_req == s(:, 9))
+    if length(unique(s(:, 9))) ~= 1
+        fprintf('error\n');
+        return;
+    end
+    
+    % rising time; approximate 
+%     % convert signed integer
+%     x = s(:, 10);
+%     ix = (x >= 2 ^ 31);
+%     x(ix) = x(ix) - 2 ^ 32;
+%     s(:, 10) = x / 128;
+
+%     sinr = -25 - s(:, 9) + s(:, 10);
+%     ewma = 0.9 * s(:, 6) + 0.1 * s(:, 7);
+
+%     plot([s(:, [6 8]) repmat(pdr_req, size(s, 1), 1)]);
+%     plot([s(:, [6 7 8 9 10]) ewma repmat(pdr_req, size(s, 1), 1) repmat(0, size(s, 1), 1)]);
+%     plot([s(:, [6 7 8]) sinr repmat(pdr_req, size(s, 1), 1)]);
+%     title(['link ' num2str(link_id) ' , pdr req ' num2str(pdr_req)]);
+%     title(['link ' num2str(link_id)]);
+%     legend({'pdr', 'ER size'}, 'Location', 'Best');
+%     legend({'pdr', 'pdr sample', 'ER size', 'pdr req', 'deltaI', 'ewma'});
+end
+
+%%
+
+%% 0 means invalid
+link_settling_time = ...
+[
+
+% prks-l
+12 20 0 0 0 0 32 23 30 21 ...
+25 21 0 28 20 1 0 29 0 0 ...
+33 28 10 13 29 35 0 23 0 25 ...
+49 34 34 14 19 18 33 25 27 25 ...
+25 40 44 34 0 0 31 23 22 58 ...
+0 30 0 42 73 25 0 0 48 0 ...
+0 38 15 0 0 0 0 27 28 0 ...
+39 0 51 0 0 41 0 40 41 30 ...
+25 16 34 24 31 19 20 0 54 0 ...
+0 28 39 40 37 19 ]; % 21614
+
+% prks-r
+% 8 30 7 0 0 24 42 0 29 30 ...
+% 30 29 25 25 27 23 18 22 0 0 ...
+% 28 35 15 1 29 29 27 31 0 31 ...
+% 32 30 28 21 0 18 35 32 27 0 ...
+% 21 39 37 35 0 40 29 25 23 57 ...
+% 0 30 0 0 53 31 0 0 46 0  ...
+% 23 37 1 0 0 29 0 30 0 30 ...
+% 35 0 53 0 21 38 0 46 36 29 ...
+% 18 17 32 25 22 18 21 34 46 0 ...
+% 0 25 38 38 43 15 
+% ]; % 21615
+
+%% old lama
+% prks
+% 1 1 1 10 1 1 16 1 1 1 ...
+% 14 1 1 32 5 36 11 0 1 45 ...
+% 0 20 1 1 1 1 1 19 1 6 ...
+% 1 4 1 1 0 21 8 15 1 1 ...
+% 1 1 0 1 1 33 0 1 25 0 ...
+% 0 0 0 0 20 22 1 0 1 1 ...
+% 11 1 7 0 1 15 9 1 0 0 ...
+% 1 1 1 1 0 0 0 1 1 1  ...
+% 1 1 1 0 24 0 1 1 1 1  ...
+% 1]; % 19479
+% 13 1 0 13 9 1 1 1 1 14 ...
+% 7 1 7 42 1 31 1 1 5 0 ...  
+% 17 29 1 1 1 8 1 0 1 3 ...
+% 1 1 0 1 8 21 1 0 6 0 ... 
+% 1 19 0 1 1 1 0 1 19 0 ... 
+% 1 1 3 4 0 17 1 18 1 1 ...
+% 0 2 0 2 1 1 19 1 1 1 ...
+% 3 0 1 7 0 2 24 32 1 1 ...
+% 12 14 1 14 21 0 1 4 8 1 ...
+% 1]; % 19517
+% 27 1 0 1 10 2 1 1 1 0 ...
+% 17 1 0 39 1 0 5 0 1 0 ...
+% 19 24 1 1 3 1 1 0 1 5 ...
+% 5 1 1 1 0 20 4 1 1 29 ...
+% 1 1 0 1 0 0 0 25 1 0 ...
+% 0 32 0 1 0 25 0 18 6 1 ...
+% 1 1 0 1 1 1 14 1 1 1 ...
+% 1 0 1 18 0 1 26 12 1 5 ...
+% 1 17 13 1 30 0 1 7 1 0 ...
+% 1 ]; % 19518
+
+% prks-l
+% 10 0 0 0 0 0 0 1 1 1 ...
+% 24 1 8 0 0 0 4 0 15 11 ...
+% 13 30 1 1 0 12 37 0 1 1 ... 
+% 5 5 6 1 0 0 5 0 15 0 ...
+% 6 13 1 1 0 22 0 12 0 22 ...
+% 1 1 1 0 0 20 33 22 40 1 ...
+% 1 1 54 1 1 1 0 1 15 0 ...
+% 16 1 27 1 1 0 0 21 0 1 ...
+% 1 1 0 0 1 0 0 26 1 1 ...
+% 1 0]; % 19815
+% 34 2 0 10 0 0 0 7 9 1 ...
+% 15 0 0 16 7 0 4 0 0 0 ...
+% 12 40 1 8 1 1 0 0 19 5 ...
+% 0 0 0 5 0 23 10 0 0 15 ...
+% 0 0 1 28 0 0 0 33 1 1 ...
+% 0 1 0 0 0 1 20 0 0 26 ...
+% 10 0 0 1 0 8 34 32 0 1 ...
+% 10 1 13 7 1 0 0 31 1 1 ...
+% 1 15 0 20 20 0 1 1 40 22 ...
+% 4 0]; % 19802
+
+% prks pid
+% 17 1 14 0 17 1 0 1 1 12 ...
+% 0 0 0 25 10 0 1 0 18 0 ...
+% 0 0 0 1 0 0 1 0 1 1 ...
+% 1 1 1 15 0 26 1 15 1 0 ...
+% 28 0 0 0 0 0 0 1 0 12 ...
+% 0 20 0 0 0 0 23 28 18 1 ...
+% 0 0 20 1 0 15 1 0 16 0 ...
+% 1 1 1 1 1 0 0 1 0 1 ...
+% 4 1 1 16 30 0 0 0 1 1 ...
+% 1 0]; %19891
+% 21 0 25 0 21 1 0 1 1 1 ...
+% 25 0 32 24 0 0 4 4 0 0 ...
+% 10 30 0 0 0 0 30 0 1 1 ...
+% 1 1 1 1 0 1 1 0 8 0 ...
+% 24 22 40 1 0 18 0 38 0 1 ...
+% 0  10 1 1 0 18 34 1 19 1 ...
+% 0 1 1 0 0 1 0 1 0 0 ...
+%  1 18 12 0 0 0 1 0 0 1 ...
+% 1 18 14 0 0 0 0 0 1 10 ...
+% 11 0]; % 19897
+
+%%
+% if length(link_settling_time) ~= size(link_pdrs, 1)
+%     fprintf('Caution: number inequal!\n');
+% else
+%     save('link_settling_time.mat', 'link_settling_time');
+% end
+t = link_settling_time;
+t(t == 0) = [];
+% hold on;
+cdfplot(t);
+%%
+% data = cell(2, 1);
+% data{2} = [data{2}; t'];
+s = [s; t'];
+%%
+group = zeros(0);
+dataDisp = zeros(0);
+for i = 1 : size(data, 1)
+    group = [group ; ones(size(data{i})) + i - 1];
+    dataDisp = [dataDisp ; data{i}];
+end
+figure;
+boxplot(dataDisp, group, 'notch', 'on');
+%% cdf
+% cdfplot(data{2});
+legend({'PRKS', 'PRKS-L'});
+
+%%
+% convergence
+job{1} = [19479 19517 19518];
+job{2} = [19802 19815];
+job{3} = [19891 19897];
+
+% % parameter K
+% job{1} = [19918];
+% job{2} = [19917];
+% job{3} = [19916];
+main_dir = '~/Projects/tOR/RawData/';
+
+len = length(job);
+data = cell(len, 1);
+
+LINK_EWMA_PDR_IDX = 6;
+
+% not scaled
+LINK_GAIN_IDX = 9;
+BORDER_GAIN_IDX = 10;
+INVALID_GAIN = 255;
+MAX_SETTLING_TIME = 1; %50;
+
+PDR_REQ = 90;
+% each protocol
+for i = 1 : len
+    pdr_job = job{i};
+    % each job
+    for j = 1 : length(pdr_job)
+        fprintf('processing job %d\n', pdr_job(j));
+        job_dir = [main_dir num2str(pdr_job(j))];
+        cd(job_dir);
+        
+        load link_settling_time;
+        
+        % convergence time
+        s = link_settling_time;
+        % remove invalid entries
+        s(s == 0) = [];
+        data{i} = [data{i}; s'];
+        
+%         % PDR deviation
+%         load link_pdrs;
+%         load debugs;
+%         t = debugs;
+%         type = DBG_CONTROLLER_FLAG;
+%         % line = 791;
+%         t = t(t(:, 3) == type, :);
+%         % do not consider line # bcoz sender and receiver id check later remove
+%         % such line anyway
+%         % t = t(t(:, 4) == line, :);
+%         for link_id = 1 : size(link_pdrs, 1)
+%             %link_id = 20;
+%             s = t;
+%             % receiver
+%             s = s(s(:, 2) == link_pdrs(link_id, 2), :);
+%             % sender
+%             s = s(s(:, 5) == link_pdrs(link_id, 1), :);
+% 
+%             convergence_step = link_settling_time(link_id);
+%             fprintf('processing link %d which converges in %d steps\n', link_id, convergence_step);
+%             % ever converge
+%             if convergence_step > 0
+%                 % after convergence
+%                 samples = s(convergence_step : end, LINK_EWMA_PDR_IDX);
+% %                 % deviation
+% %                 err = abs(samples - PDR_REQ);
+% %                 data{i} = [data{i}; mean(err)];
+%                 % cov
+%                 data{i} = [data{i}; std(samples) / mean(samples)];
+%             end
+            
+%             % ratio K
+%             s(s(:, LINK_GAIN_IDX) == INVALID_GAIN, :) = [];
+%             % ER is empty
+%             s(s(:, BORDER_GAIN_IDX) == INVALID_GAIN, BORDER_GAIN_IDX) = 0;
+%             link_gain = s(:, LINK_GAIN_IDX);
+%             border_gain = s(:, BORDER_GAIN_IDX);
+%             k = border_gain - link_gain;
+%             % filter out transient region
+%             if length(k) > MAX_SETTLING_TIME
+%                 k = k(MAX_SETTLING_TIME : end);
+%                 data{i} = [data{i}; median(k)];
+%             end
+%         end
+    end
+end
+% %% boxplot
+group = zeros(0);
+dataDisp = zeros(0);
+for i = 1 : size(data, 1)
+    group = [group ; ones(size(data{i})) + i - 1];
+    dataDisp = [dataDisp ; data{i}];
+end
+figure;
+boxplot(dataDisp, group, 'notch', 'on');
+set(gca, 'xticklabel', {'PRKS', 'PRKS-L', 'PRKS-R'});
+%% cdf
+% figure;
+% hold on;
+% for i = 1 : size(data, 1)
+%     cdfplot(data{i});
+% end
+% legend({'PRKS', 'PRKS-L', 'PRKS-R'});

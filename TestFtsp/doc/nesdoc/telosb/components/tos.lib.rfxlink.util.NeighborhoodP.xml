@@ -1,0 +1,42 @@
+<?xml version="1.0" ?><component loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodP.nc" nicename="tos.lib.rfxlink.util.NeighborhoodP" qname="NeighborhoodP">
+      <module/>
+    <specification><interface loc="43:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodP.nc" name="NeighborhoodFlag" provided="1" ref="0x40bf1348">
+      <component-ref nicename="tos.lib.rfxlink.util.NeighborhoodP" qname="NeighborhoodP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="NeighborhoodFlag" ref="0x40bf1348" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.NeighborhoodFlag" qname="NeighborhoodFlag"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40bf1520" scoped=""/>
+        <function-ref name="clearAll" ref="0x40bf1600" scoped=""/>
+        <function-ref name="get" ref="0x40bf16e0" scoped=""/>
+        <function-ref name="set" ref="0x40bf17c0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodP.nc" name="Neighborhood" provided="1" ref="0x40bf4908">
+      <component-ref nicename="tos.lib.rfxlink.util.NeighborhoodP" qname="NeighborhoodP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Neighborhood" ref="0x40bf4908" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.Neighborhood" qname="Neighborhood"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getAge" ref="0x40bf4ae0" scoped=""/>
+        <function-ref name="insertNode" ref="0x40bf4bc0" scoped=""/>
+        <function-ref name="getNode" ref="0x40bf4ca0" scoped=""/>
+        <function-ref name="evicted" ref="0x40bf4d80" scoped=""/>
+        <function-ref name="getIndex" ref="0x40bf4e60" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="41:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/NeighborhoodP.nc" name="Init" provided="1" ref="0x40bf4570">
+      <component-ref nicename="tos.lib.rfxlink.util.NeighborhoodP" qname="NeighborhoodP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Init" ref="0x40bf4570" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x40bf4748" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

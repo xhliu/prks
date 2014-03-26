@@ -1,0 +1,44 @@
+<?xml version="1.0" ?><component loc="29:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/TelosSerialP.nc" nicename="tos.platforms.telosa.chips.cc2420x.TelosSerialP" qname="TelosSerialP">
+      <documentation loc="24:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/TelosSerialP.nc">
+        <short>
+We need to set the proper USART config values since SMCLK is configured to
+tick at 4MHz (SMCLK=DCO).</short>
+        <long>
+We need to set the proper USART config values since SMCLK is configured to
+tick at 4MHz (SMCLK=DCO).
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="31:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/TelosSerialP.nc" name="Msp430UartConfigure" provided="1" ref="0x4131eb40">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.TelosSerialP" qname="TelosSerialP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Msp430UartConfigure" ref="0x4131eb40" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.usart.Msp430UartConfigure" qname="Msp430UartConfigure"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getConfig" ref="0x4131ed18" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="32:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/TelosSerialP.nc" name="Resource" provided="0" ref="0x4131eed0">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.TelosSerialP" qname="TelosSerialP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Resource" ref="0x4131eed0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Resource" qname="Resource"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="release" ref="0x4131b0c0" scoped=""/>
+        <function-ref name="immediateRequest" ref="0x4131b1a0" scoped=""/>
+        <function-ref name="request" ref="0x4131b280" scoped=""/>
+        <function-ref name="granted" ref="0x4131b360" scoped=""/>
+        <function-ref name="isOwner" ref="0x4131b440" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="30:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/TelosSerialP.nc" name="StdControl" provided="1" ref="0x4131e668">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.TelosSerialP" qname="TelosSerialP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="StdControl" ref="0x4131e668" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.StdControl" qname="StdControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="start" ref="0x4131e840" scoped=""/>
+        <function-ref name="stop" ref="0x4131e920" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

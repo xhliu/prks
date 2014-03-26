@@ -1,0 +1,71 @@
+<?xml version="1.0" ?><component abstract="" loc="58:/opt/tinyos-2.1.2/tos/lib/power/AsyncPowerManagerP.nc" nicename="tos.lib.power.AsyncPowerManagerP" qname="AsyncPowerManagerP" safe="">
+      <documentation loc="41:/opt/tinyos-2.1.2/tos/lib/power/AsyncPowerManagerP.nc">
+        <short>
+ Please refer to TEP 115 for more information about this component and its
+ intended use.&lt;br&gt;&lt;br&gt;
+
+ This is the internal implementation of the standard power management
+ policy for managing the power states of non-virtualized devices.</short>
+        <long>
+ Please refer to TEP 115 for more information about this component and its
+ intended use.&lt;br&gt;&lt;br&gt;
+
+ This is the internal implementation of the standard power management
+ policy for managing the power states of non-virtualized devices.
+ Non-virtualized devices are shared using a parameterized Resource
+ interface, and are powered down according to some policy whenever there
+ are no more pending requests to that Resource.  The policy implemented
+ by this component is to power down a device as soon as it becomes free.
+ Such a policy is useful whenever a device has a negligible wake-up
+ latency.  There is no cost associated with waiting for the device to
+ power up, so it can be powered on and off as often as possible.
+ 
+ @author Kevin Klues (klueska@cs.wustl.edu)
+</long>
+      </documentation>
+      <parameters>
+      </parameters>
+      <module/>
+    <specification><interface loc="62:/opt/tinyos-2.1.2/tos/lib/power/AsyncPowerManagerP.nc" name="PowerDownCleanup" provided="0" ref="0x413311f8">
+      <component-ref nicename="tos.lib.power.AsyncPowerManagerP" qname="AsyncPowerManagerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PowerDownCleanup" ref="0x413311f8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.power.PowerDownCleanup" qname="PowerDownCleanup"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="cleanup" ref="0x413313d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="63:/opt/tinyos-2.1.2/tos/lib/power/AsyncPowerManagerP.nc" name="ResourceDefaultOwner" provided="0" ref="0x413315e0">
+      <component-ref nicename="tos.lib.power.AsyncPowerManagerP" qname="AsyncPowerManagerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="ResourceDefaultOwner" ref="0x413315e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.ResourceDefaultOwner" qname="ResourceDefaultOwner"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="release" ref="0x413317b8" scoped=""/>
+        <function-ref name="requested" ref="0x41331898" scoped=""/>
+        <function-ref name="granted" ref="0x41331978" scoped=""/>
+        <function-ref name="isOwner" ref="0x41331a58" scoped=""/>
+        <function-ref name="immediateRequested" ref="0x41331b38" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="60:/opt/tinyos-2.1.2/tos/lib/power/AsyncPowerManagerP.nc" name="AsyncStdControl" provided="0" ref="0x41334cc0">
+      <component-ref nicename="tos.lib.power.AsyncPowerManagerP" qname="AsyncPowerManagerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AsyncStdControl" ref="0x41334cc0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AsyncStdControl" qname="AsyncStdControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="start" ref="0x41334e98" scoped=""/>
+        <function-ref name="stop" ref="0x41331010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="64:/opt/tinyos-2.1.2/tos/lib/power/AsyncPowerManagerP.nc" name="ArbiterInfo" provided="0" ref="0x41331ce8">
+      <component-ref nicename="tos.lib.power.AsyncPowerManagerP" qname="AsyncPowerManagerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="ArbiterInfo" ref="0x41331ce8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.ArbiterInfo" qname="ArbiterInfo"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="inUse" ref="0x41331ec0" scoped=""/>
+        <function-ref name="userId" ref="0x41330010" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

@@ -1,0 +1,469 @@
+<?xml version="1.0" ?><component loc="30:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP">
+      <module/>
+    <specification><interface loc="61:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="FIFO" provided="0" ref="0x40d5b2e0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="FIFO" ref="0x40d5b2e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x40d5b4b8" scoped=""/>
+        <function-ref name="isInput" ref="0x40d5b598" scoped=""/>
+        <function-ref name="toggle" ref="0x40d5b678" scoped=""/>
+        <function-ref name="isOutput" ref="0x40d5b758" scoped=""/>
+        <function-ref name="get" ref="0x40d5b838" scoped=""/>
+        <function-ref name="makeOutput" ref="0x40d5b918" scoped=""/>
+        <function-ref name="set" ref="0x40d5b9f8" scoped=""/>
+        <function-ref name="clr" ref="0x40d5bad8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="39:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="RadioCCA" provided="1" ref="0x40d3ddf8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioCCA" ref="0x40d3ddf8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioCCA" qname="RadioCCA"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="done" ref="0x40d3c010" scoped=""/>
+        <function-ref name="request" ref="0x40d3c0f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="52:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="BusyWait" provided="0" ref="0x40d317c0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="BusyWait" ref="0x40d317c0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.BusyWait" qname="BusyWait"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="wait" ref="0x40d32010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="PacketRSSI" provided="1" ref="0x40d39010">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketRSSI" ref="0x40d39010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketField" qname="PacketField"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d39bd8" scoped=""/>
+        <function-ref name="get" ref="0x40d39918" scoped=""/>
+        <function-ref name="isSet" ref="0x40d39658" scoped=""/>
+        <function-ref name="set" ref="0x40d39e98" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="68:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="RSSIFlag" provided="0" ref="0x40d574d0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RSSIFlag" ref="0x40d574d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketFlag" qname="PacketFlag"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d576a8" scoped=""/>
+        <function-ref name="get" ref="0x40d57788" scoped=""/>
+        <function-ref name="setValue" ref="0x40d57868" scoped=""/>
+        <function-ref name="set" ref="0x40d57948" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="34:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="SoftwareInit" provided="1" ref="0x40d3e820">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SoftwareInit" ref="0x40d3e820" scoped=""/></type-interface>
+      <attribute-value>
+        <attribute-ref name="exactlyonce" ref="0x40333e58"/>
+        <value-structured>
+          <type-tag alignment="I:1" size="I:0"><attribute-ref name="exactlyonce" ref="0x40333e58"/></type-tag>
+        </value-structured>
+      </attribute-value>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x40d3e9f8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="62:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="FIFOP" provided="0" ref="0x40d5bcd0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="FIFOP" ref="0x40d5bcd0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x40d5bea8" scoped=""/>
+        <function-ref name="isInput" ref="0x40d5a010" scoped=""/>
+        <function-ref name="toggle" ref="0x40d5a0f0" scoped=""/>
+        <function-ref name="isOutput" ref="0x40d5a1d0" scoped=""/>
+        <function-ref name="get" ref="0x40d5a2b0" scoped=""/>
+        <function-ref name="makeOutput" ref="0x40d5a390" scoped=""/>
+        <function-ref name="set" ref="0x40d5a470" scoped=""/>
+        <function-ref name="clr" ref="0x40d5a550" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="71:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="PacketTimeStamp" provided="0" ref="0x40d543a8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStamp" ref="0x40d543a8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x40d54ea8" scoped=""/>
+        <function-ref name="clear" ref="0x40d52280" scoped=""/>
+        <function-ref name="isValid" ref="0x40d54af8" scoped=""/>
+        <function-ref name="set" ref="0x40d52630" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="60:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="RSTN" provided="0" ref="0x40d2e820">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RSTN" ref="0x40d2e820" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x40d2e9f8" scoped=""/>
+        <function-ref name="isInput" ref="0x40d2ead8" scoped=""/>
+        <function-ref name="toggle" ref="0x40d2ebb8" scoped=""/>
+        <function-ref name="isOutput" ref="0x40d2ec98" scoped=""/>
+        <function-ref name="get" ref="0x40d2ed78" scoped=""/>
+        <function-ref name="makeOutput" ref="0x40d2ee58" scoped=""/>
+        <function-ref name="set" ref="0x40d5b010" scoped=""/>
+        <function-ref name="clr" ref="0x40d5b0f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="74:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="RadioAlarm" provided="0" ref="0x40d500c8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioAlarm" ref="0x40d500c8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioAlarm" qname="RadioAlarm"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x40d502a0" scoped=""/>
+        <function-ref name="wait" ref="0x40d50380" scoped=""/>
+        <function-ref name="cancel" ref="0x40d50460" scoped=""/>
+        <function-ref name="isFree" ref="0x40d50540" scoped=""/>
+        <function-ref name="getNow" ref="0x40d50620" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="36:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="RadioState" provided="1" ref="0x40d3eba0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioState" ref="0x40d3eba0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="turnOff" ref="0x40d3ed78" scoped=""/>
+        <function-ref name="turnOn" ref="0x40d3ee58" scoped=""/>
+        <function-ref name="setChannel" ref="0x40d3d010" scoped=""/>
+        <function-ref name="done" ref="0x40d3d0f0" scoped=""/>
+        <function-ref name="standby" ref="0x40d3d1d0" scoped=""/>
+        <function-ref name="getChannel" ref="0x40d3d2b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="53:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="LocalTime" provided="0" ref="0x40d32378">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTime" ref="0x40d32378" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x40d329c0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="PacketTransmitPower" provided="1" ref="0x40d3cc40">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTransmitPower" ref="0x40d3cc40" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketField" qname="PacketField"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d3b818" scoped=""/>
+        <function-ref name="get" ref="0x40d3b558" scoped=""/>
+        <function-ref name="isSet" ref="0x40d3b298" scoped=""/>
+        <function-ref name="set" ref="0x40d3bad8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="40:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="RadioPacket" provided="1" ref="0x40d3c2a0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioPacket" ref="0x40d3c2a0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d3c478" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40d3c558" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40d3c638" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40d3c718" scoped=""/>
+        <function-ref name="headerLength" ref="0x40d3c7f8" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40d3c8d8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="65:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="FifopInterrupt" provided="0" ref="0x40d53610">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="FifopInterrupt" ref="0x40d53610" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioInterrupt" qname="GpioInterrupt"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="fired" ref="0x40d538e8" scoped=""/>
+        <function-ref name="disable" ref="0x40d539c8" scoped=""/>
+        <function-ref name="enableFallingEdge" ref="0x40d53aa8" scoped=""/>
+        <function-ref name="enableRisingEdge" ref="0x40d53b88" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="54:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="Config" provided="0" ref="0x40d32cf0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Config" ref="0x40d32cf0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.cc2420x.CC2420XDriverConfig" qname="CC2420XDriverConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="maxPayloadLength" ref="0x40d32ec8" scoped=""/>
+        <function-ref name="headerLength" ref="0x40d30010" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40d300f0" scoped=""/>
+        <function-ref name="headerPreloadLength" ref="0x40d301d0" scoped=""/>
+        <function-ref name="requiresRssiCca" ref="0x40d302b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="38:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="RadioReceive" provided="1" ref="0x40d3d9a8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioReceive" ref="0x40d3d9a8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioReceive" qname="RadioReceive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40d3db80" scoped=""/>
+        <function-ref name="header" ref="0x40d3dc60" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="57:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="CSN" provided="0" ref="0x40d5c988">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="CSN" ref="0x40d5c988" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x40d5cb60" scoped=""/>
+        <function-ref name="isInput" ref="0x40d5cc40" scoped=""/>
+        <function-ref name="toggle" ref="0x40d5cd20" scoped=""/>
+        <function-ref name="isOutput" ref="0x40d5ce00" scoped=""/>
+        <function-ref name="get" ref="0x40d5cee0" scoped=""/>
+        <function-ref name="makeOutput" ref="0x40d2f010" scoped=""/>
+        <function-ref name="set" ref="0x40d2f0f0" scoped=""/>
+        <function-ref name="clr" ref="0x40d2f1d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="58:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="VREN" provided="0" ref="0x40d2f3c0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="VREN" ref="0x40d2f3c0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x40d2f598" scoped=""/>
+        <function-ref name="isInput" ref="0x40d2f678" scoped=""/>
+        <function-ref name="toggle" ref="0x40d2f758" scoped=""/>
+        <function-ref name="isOutput" ref="0x40d2f838" scoped=""/>
+        <function-ref name="get" ref="0x40d2f918" scoped=""/>
+        <function-ref name="makeOutput" ref="0x40d2f9f8" scoped=""/>
+        <function-ref name="set" ref="0x40d2fad8" scoped=""/>
+        <function-ref name="clr" ref="0x40d2fbb8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="1102:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="releaseSpi" provided="0" ref="0x40da5cd0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="releaseSpi" ref="0x40da5cd0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TaskBasic" qname="TaskBasic"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="postTask" ref="0x40da5ea8" scoped=""/>
+        <function-ref name="runTask" ref="0x40dd4010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="PacketTimeSyncOffset" provided="1" ref="0x40d383f8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeSyncOffset" ref="0x40d383f8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketField" qname="PacketField"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d37010" scoped=""/>
+        <function-ref name="get" ref="0x40d38d00" scoped=""/>
+        <function-ref name="isSet" ref="0x40d38a40" scoped=""/>
+        <function-ref name="set" ref="0x40d372d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="51:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="SpiResource" provided="0" ref="0x40d35e78">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SpiResource" ref="0x40d35e78" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Resource" qname="Resource"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="release" ref="0x40d34070" scoped=""/>
+        <function-ref name="immediateRequest" ref="0x40d34150" scoped=""/>
+        <function-ref name="request" ref="0x40d34230" scoped=""/>
+        <function-ref name="granted" ref="0x40d34310" scoped=""/>
+        <function-ref name="isOwner" ref="0x40d343f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="59:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="CCA" provided="0" ref="0x40d2fd98">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="CCA" ref="0x40d2fd98" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x40d2e010" scoped=""/>
+        <function-ref name="isInput" ref="0x40d2e0f0" scoped=""/>
+        <function-ref name="toggle" ref="0x40d2e1d0" scoped=""/>
+        <function-ref name="isOutput" ref="0x40d2e2b0" scoped=""/>
+        <function-ref name="get" ref="0x40d2e390" scoped=""/>
+        <function-ref name="makeOutput" ref="0x40d2e470" scoped=""/>
+        <function-ref name="set" ref="0x40d2e550" scoped=""/>
+        <function-ref name="clr" ref="0x40d2e630" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="63:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="SFD" provided="0" ref="0x40d5a730">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SFD" ref="0x40d5a730" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x40d5a908" scoped=""/>
+        <function-ref name="isInput" ref="0x40d5a9e8" scoped=""/>
+        <function-ref name="toggle" ref="0x40d5aac8" scoped=""/>
+        <function-ref name="isOutput" ref="0x40d5aba8" scoped=""/>
+        <function-ref name="get" ref="0x40d5ac88" scoped=""/>
+        <function-ref name="makeOutput" ref="0x40d5ad68" scoped=""/>
+        <function-ref name="set" ref="0x40d5ae48" scoped=""/>
+        <function-ref name="clr" ref="0x40d5af28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="79:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="Leds" provided="0" ref="0x40d50790">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x40d50790" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x40d50968" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x40d50a48" scoped=""/>
+        <function-ref name="led1On" ref="0x40d50b28" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x40d50c08" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x40d50ce8" scoped=""/>
+        <function-ref name="get" ref="0x40d50dc8" scoped=""/>
+        <function-ref name="led1Off" ref="0x40d50ea8" scoped=""/>
+        <function-ref name="led2Off" ref="0x40d4f2b0" scoped=""/>
+        <function-ref name="set" ref="0x40d4f010" scoped=""/>
+        <function-ref name="led0On" ref="0x40d4f0f0" scoped=""/>
+        <function-ref name="led2On" ref="0x40d4f1d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="PacketLinkQuality" provided="1" ref="0x40d377e0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketLinkQuality" ref="0x40d377e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketField" qname="PacketField"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d353b8" scoped=""/>
+        <function-ref name="get" ref="0x40d350f8" scoped=""/>
+        <function-ref name="isSet" ref="0x40d37e28" scoped=""/>
+        <function-ref name="set" ref="0x40d35678" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="37:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="RadioSend" provided="1" ref="0x40d3d450">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioSend" ref="0x40d3d450" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioSend" qname="RadioSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40d3d628" scoped=""/>
+        <function-ref name="ready" ref="0x40d3d708" scoped=""/>
+        <function-ref name="sendDone" ref="0x40d3d7e8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="56:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="FastSpiByte" provided="0" ref="0x40d5c330">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="FastSpiByte" ref="0x40d5c330" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.FastSpiByte" qname="FastSpiByte"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="splitWrite" ref="0x40d5c508" scoped=""/>
+        <function-ref name="splitReadWrite" ref="0x40d5c5e8" scoped=""/>
+        <function-ref name="splitRead" ref="0x40d5c6c8" scoped=""/>
+        <function-ref name="write" ref="0x40d5c7a8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="64:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="SfdCapture" provided="0" ref="0x40d55868">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SfdCapture" ref="0x40d55868" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GpioCapture" qname="GpioCapture"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="captureFallingEdge" ref="0x40d55a40" scoped=""/>
+        <function-ref name="disable" ref="0x40d55b20" scoped=""/>
+        <function-ref name="captured" ref="0x40d55c00" scoped=""/>
+        <function-ref name="captureRisingEdge" ref="0x40d55ce0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="69:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="TimeSyncFlag" provided="0" ref="0x40d57b90">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncFlag" ref="0x40d57b90" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketFlag" qname="PacketFlag"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d57d68" scoped=""/>
+        <function-ref name="get" ref="0x40d57e48" scoped=""/>
+        <function-ref name="setValue" ref="0x40d57f28" scoped=""/>
+        <function-ref name="set" ref="0x40d54018" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="67:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="TransmitPowerFlag" provided="0" ref="0x40d53e00">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TransmitPowerFlag" ref="0x40d53e00" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketFlag" qname="PacketFlag"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d57010" scoped=""/>
+        <function-ref name="get" ref="0x40d570f0" scoped=""/>
+        <function-ref name="setValue" ref="0x40d571d0" scoped=""/>
+        <function-ref name="set" ref="0x40d572b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="LinkPacketMetadata" provided="1" ref="0x40d35a28">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LinkPacketMetadata" ref="0x40d35a28" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.LinkPacketMetadata" qname="LinkPacketMetadata"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="highChannelQuality" ref="0x40d35c00" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="73:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverLayerP.nc" name="Tasklet" provided="0" ref="0x40d52a70">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XDriverLayerP" qname="CC2420XDriverLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Tasklet" ref="0x40d52a70" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.Tasklet" qname="Tasklet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="schedule" ref="0x40d52c48" scoped=""/>
+        <function-ref name="suspend" ref="0x40d52d28" scoped=""/>
+        <function-ref name="resume" ref="0x40d52e08" scoped=""/>
+        <function-ref name="run" ref="0x40d52ee8" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

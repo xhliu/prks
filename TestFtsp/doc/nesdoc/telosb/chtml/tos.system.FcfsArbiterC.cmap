@@ -1,0 +1,31 @@
+<area shape="rect" href="../chtml/tos.system.ArbiterP.html" title="ArbiterP\n(Arbiter)" alt="" coords="440,125,525,173">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="146,51 178,74 214,94 269,113 326,127 427,143 426,148 325,132 268,118 212,98 175,78 142,56">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="140,49,148,57">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="436,143,444,151">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="213,78,392,95">
+<area shape="rect" href="../chtml/tos.system.FcfsResourceQueueC.html" title="FcfsResourceQueueC\n(Queue)" alt="" coords="567,245,756,293">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceQueue.html" title="ResourceQueue" alt="" coords="516,171 558,201 583,219 608,235 605,240 580,224 554,205 513,176">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceQueue.html" title="ResourceQueue" alt="" coords="511,169,519,177">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceQueue.html" title="ResourceQueue" alt="" coords="613,241,621,249">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceQueue.html" title="ResourceQueue" alt="" coords="581,203,681,221">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="441,164 409,180 396,191 385,204 380,217 379,232 373,232 375,216 380,201 392,187 406,175 439,159">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="436,157,444,165">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="372,241,380,249">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="383,203,556,221">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceDefaultOwner.html" title="ResourceDefaultOwner" alt="" coords="390,52 402,74 417,94 438,115 434,119 413,98 398,77 386,55">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceDefaultOwner.html" title="ResourceDefaultOwner" alt="" coords="384,49,392,57">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceDefaultOwner.html" title="ResourceDefaultOwner" alt="" coords="443,121,451,129">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceDefaultOwner.html" title="ResourceDefaultOwner" alt="" coords="415,78,559,95">
+<area shape="poly" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="584,54 574,76 561,98 538,119 534,115 557,94 570,74 579,52">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="577,49,585,57">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="521,121,529,129">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="569,78,681,95">
+<area shape="poly" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="727,55 710,78 688,98 652,118 613,132 539,148 538,143 612,127 650,113 685,94 707,74 723,52">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="721,49,729,57">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="521,143,529,151">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="707,78,773,95">
+<area shape="rect" href="../chtml/tos.system.MainC.html" title="MainC" alt="" coords="675,120,757,179">
+<area shape="poly" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="706,180 689,222 684,234 679,232 684,220 702,178">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="700,175,708,183">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="671,241,679,249">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="692,203,711,221">

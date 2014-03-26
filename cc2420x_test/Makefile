@@ -1,0 +1,30 @@
+# be verbose
+#PFLAGS+=-v
+
+#PFLAGS+=-DTASKLET_IS_TASK
+
+# rfxlink debugging
+#PFLAGS+=-I$(TOSDIR)/lib/diagmsg
+#PFLAGS+=-DRADIO_DEBUG
+#PFLAGS+=-DRADIO_DEBUG_IRQ
+#PFLAGS+=-DRADIO_DEBUG_STATE
+#CFLAGS += -DRADIO_DEBUG_MESSAGES
+#CFLAGS += -DDIAGMSG_RECORDED_MSGS=60
+
+# we alter the default data length to allow for long messages
+PFLAGS+=-DTOSH_DATA_LENGTH=114
+
+#XL
+UTILDIR = $(HOME)/Dropbox/Programming/TinyOS
+PFLAGS +=	-I$(UTILDIR)/Utils
+#CFLAGS += -DDIAGMSG_RECORDED_MSGS=50
+PFLAGS += -I../iMAC_TDMA/cc2420x/ \
+			-I../iMAC_TDMA/async
+
+CFLAGS += -DCC2420X_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
+CFLAGS += -DCC2420X_DEF_CHANNEL=26
+
+COMPONENT=RadioCountToLedsAppC
+
+include $(MAKERULES)
+

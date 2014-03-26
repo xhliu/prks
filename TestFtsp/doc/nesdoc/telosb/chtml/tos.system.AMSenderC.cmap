@@ -1,0 +1,17 @@
+<area shape="rect" href="../chtml/tos.system.DirectAMSenderC.html" title="DirectAMSenderC\n(SenderC)" alt="" coords="161,120,329,179">
+<area shape="poly" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend" alt="" coords="87,49 149,94 177,111 175,116 147,98 84,53">
+<area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend" alt="" coords="81,47,89,55">
+<area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend" alt="" coords="184,116,192,124">
+<area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend" alt="" coords="148,78,201,95">
+<area shape="poly" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="196,51 225,107 220,109 191,53">
+<area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="189,48,197,56">
+<area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="225,116,233,124">
+<area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="213,78,256,95">
+<area shape="poly" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="300,55 270,109 266,107 295,52">
+<area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="293,49,301,57">
+<area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="257,116,265,124">
+<area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="282,78,345,95">
+<area shape="poly" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="412,51 352,98 323,116 320,111 349,94 409,47">
+<area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="407,45,415,53">
+<area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="305,116,313,124">
+<area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="378,78,545,95">

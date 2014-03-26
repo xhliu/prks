@@ -1,0 +1,187 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Component: tos.chips.cc2420x.CC2420XActiveMessageC</title>
+  </head>
+  <body>
+    <h2>Component: tos.chips.cc2420x.CC2420XActiveMessageC
+    </h2>
+    <b>configuration CC2420XActiveMessageC</b>
+    <p>
+ The base two logarithm of the number of radio alarm ticks per one millisecond
+
+    <p><p><div id=heading>Provides</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.AMPacket.html">AMPacket</a></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.AMSend.html">AMSend</a>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.LinkPacketMetadata.html">LinkPacketMetadata</a></div><div id=funcsig>interface <a href="../ihtml/tos.lib.timer.LocalTime.html">LocalTime</a>&lt;TRadio&gt; as <b>LocalTimeRadio</b></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.LowPowerListening.html">LowPowerListening</a></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Packet.html">Packet</a></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.PacketAcknowledgements.html">PacketAcknowledgements</a></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.PacketLink.html">PacketLink</a></div><div id=funcsig>interface <a href="../ihtml/tos.lib.rfxlink.util.PacketField.html">PacketField</a>&lt;uint8_t&gt; as <b>PacketLinkQuality</b></div><div id=funcsig>interface <a href="../ihtml/tos.lib.rfxlink.util.PacketField.html">PacketField</a>&lt;uint8_t&gt; as <b>PacketRSSI</b></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.PacketTimeStamp.html">PacketTimeStamp</a>&lt;T32khz, uint32_t&gt; as <b>PacketTimeStamp32khz</b></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.PacketTimeStamp.html">PacketTimeStamp</a>&lt;TMilli, uint32_t&gt; as <b>PacketTimeStampMilli</b></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.PacketTimeStamp.html">PacketTimeStamp</a>&lt;TRadio, uint32_t&gt; as <b>PacketTimeStampRadio</b></div><div id=funcsig>interface <a href="../ihtml/tos.lib.rfxlink.util.PacketField.html">PacketField</a>&lt;uint8_t&gt; as <b>PacketTransmitPower</b></div><div id=funcsig>interface <a href="../ihtml/tos.lib.rfxlink.util.RadioChannel.html">RadioChannel</a></div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Receive.html">Receive</a>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Receive.html">Receive</a> as <b>ReceiveDefault</b>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.SendNotifier.html">SendNotifier</a>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Receive.html">Receive</a> as <b>Snoop</b>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.Receive.html">Receive</a> as <b>SnoopDefault</b>[am_id_t]</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.SplitControl.html">SplitControl</a></div><p><div id=heading>Uses</div><div id=funcsig>interface <a href="../ihtml/tos.interfaces.PacketTimeStamp.html">PacketTimeStamp</a>&lt;T32khz, uint32_t&gt; as <b>UnimplementedPacketTimeStamp32khz</b></div><p><div id=heading>Wiring</div><p>
+    <map name="comp">
+      <area shape="rect" href="../chtml/tos.chips.cc2420x.CC2420XRadioC.html" title="CC2420XRadioC" alt="" coords="1679,120,1836,179">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.SplitControl.html" title="SplitControl" alt="" coords="108,48 155,73 209,93 299,106 452,116 873,132 1326,141 1665,145 1665,151 1326,146 873,137 451,122 298,111 207,99 153,78 105,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SplitControl.html" title="SplitControl" alt="" coords="103,47,111,55">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SplitControl.html" title="SplitControl" alt="" coords="1675,144,1683,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SplitControl.html" title="SplitControl" alt="" coords="208,78,283,95">
+
+      <area shape="poly" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="260,50 289,74 325,93 388,102 517,111 903,126 1665,145 1665,151 903,131 517,116 387,108 323,99 286,79 257,54">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="255,48,263,56">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="1675,144,1683,152">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="324,78,460,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;TMilli, uint32_t&gt;" alt="" coords="453,52 466,75 485,94 538,104 650,114 987,129 1368,140 1665,145 1665,151 1368,145 987,135 650,119 537,110 483,98 462,78 448,55">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;TMilli, uint32_t&gt;" alt="" coords="447,49,455,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;TMilli, uint32_t&gt;" alt="" coords="1675,144,1683,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;TMilli, uint32_t&gt;" alt="" coords="485,78,713,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.SendNotifier.html" title="SendNotifier[am_id_t]" alt="" coords="690,50 719,74 754,93 808,105 899,115 1154,130 1437,140 1665,145 1665,151 1437,146 1154,136 899,120 807,110 752,99 716,79 686,54">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SendNotifier.html" title="SendNotifier[am_id_t]" alt="" coords="684,48,692,56">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SendNotifier.html" title="SendNotifier[am_id_t]" alt="" coords="1675,144,1683,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.SendNotifier.html" title="SendNotifier[am_id_t]" alt="" coords="754,78,894,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="841,46 893,71 954,93 1015,105 1095,116 1290,131 1496,140 1665,145 1665,151 1495,146 1290,136 1094,121 1014,111 953,99 891,76 839,50">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="836,44,844,52">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="1675,144,1683,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="953,78,996,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="960,48 1000,73 1045,93 1097,106 1166,116 1335,131 1514,141 1665,145 1665,151 1514,146 1335,137 1166,121 1096,111 1043,99 997,78 957,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="955,47,963,55">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="1675,144,1683,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="1044,78,1159,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1089,43 1154,70 1231,93 1348,115 1465,130 1666,145 1665,151 1464,136 1347,121 1230,99 1152,75 1087,48">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1084,41,1092,49">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1675,144,1683,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1231,78,1340,95">
+
+      <area shape="poly" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="1288,50 1341,73 1402,93 1470,110 1539,123 1666,140 1665,145 1538,128 1469,115 1401,99 1340,78 1286,54">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="1283,48,1291,56">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="1675,140,1683,148">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="1401,78,1537,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.LowPowerListening.html" title="LowPowerListening" alt="" coords="1515,51 1542,74 1572,94 1618,115 1666,129 1665,135 1617,119 1569,98 1538,78 1512,55">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.LowPowerListening.html" title="LowPowerListening" alt="" coords="1509,49,1517,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.LowPowerListening.html" title="LowPowerListening" alt="" coords="1675,131,1683,139">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.LowPowerListening.html" title="LowPowerListening" alt="" coords="1571,78,1690,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;T32khz, uint32_t&gt;" alt="" coords="3987,53 3987,112 3981,112 3981,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;T32khz, uint32_t&gt;" alt="" coords="3980,49,3988,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;T32khz, uint32_t&gt;" alt="" coords="3980,121,3988,129">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;T32khz, uint32_t&gt;" alt="" coords="3984,78,4227,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1685,52 1706,95 1717,108 1713,111 1702,97 1680,55">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1679,49,1687,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1720,116,1728,124">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1704,78,1813,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;TRadio, uint32_t&gt;" alt="" coords="1855,55 1815,98 1801,113 1797,109 1811,94 1851,52">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;TRadio, uint32_t&gt;" alt="" coords="1849,49,1857,57">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;TRadio, uint32_t&gt;" alt="" coords="1785,116,1793,124">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketTimeStamp.html" title="PacketTimeStamp&lt;TRadio, uint32_t&gt;" alt="" coords="1835,78,2075,95">
+
+      <area shape="poly" href="../ihtml/tos.lib.timer.LocalTime.html" title="LocalTime&lt;TRadio&gt;" alt="" coords="2110,54 2099,78 2082,98 2041,116 1983,130 1850,147 1849,141 1982,125 2040,111 2078,94 2095,75 2106,52">
+
+      <area shape="rect" href="../ihtml/tos.lib.timer.LocalTime.html" title="LocalTime&lt;TRadio&gt;" alt="" coords="2104,49,2112,57">
+
+      <area shape="rect" href="../ihtml/tos.lib.timer.LocalTime.html" title="LocalTime&lt;TRadio&gt;" alt="" coords="1832,141,1840,149">
+
+      <area shape="rect" href="../ihtml/tos.lib.timer.LocalTime.html" title="LocalTime&lt;TRadio&gt;" alt="" coords="2100,78,2228,95">
+
+      <area shape="poly" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="2302,55 2271,79 2234,98 2162,117 2061,131 1850,148 1849,143 2060,126 2161,111 2232,94 2268,74 2298,51">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="2296,49,2304,57">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="1832,141,1840,149">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.PacketField.html" title="PacketField&lt;uint8_t&gt;" alt="" coords="2272,78,2408,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="2542,54 2482,79 2414,99 2304,115 2151,129 1849,148 1849,143 2151,124 2303,110 2413,93 2480,74 2540,50">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="2537,48,2545,56">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="1832,141,1840,149">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="2485,78,2651,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="2796,52 2731,78 2657,99 2587,110 2495,120 2271,135 1849,151 1849,145 2271,129 2494,114 2586,105 2655,93 2729,73 2794,47">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="2791,45,2799,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1832,144,1840,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="2729,78,2839,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.PacketLink.html" title="PacketLink" alt="" coords="2974,52 2915,78 2845,99 2757,113 2641,124 2361,140 2074,148 1849,152 1849,147 2074,143 2361,135 2641,119 2756,107 2843,93 2913,73 2972,47">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketLink.html" title="PacketLink" alt="" coords="2969,45,2977,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketLink.html" title="PacketLink" alt="" coords="1832,145,1840,153">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.PacketLink.html" title="PacketLink" alt="" coords="2917,78,2984,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="3124,50 3062,77 2990,99 2920,107 2802,116 2478,131 1849,151 1849,145 2478,125 2802,110 2919,102 2989,93 3061,72 3122,46">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="3119,44,3127,52">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="1832,144,1840,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="3063,78,3126,95">
+
+      <area shape="poly" href="../ihtml/tos.lib.rfxlink.util.RadioChannel.html" title="RadioChannel" alt="" coords="3280,52 3210,78 3131,99 3052,108 2919,117 2552,132 1849,151 1849,145 2551,126 2919,111 3052,103 3130,93 3209,73 3278,47">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.RadioChannel.html" title="RadioChannel" alt="" coords="3275,45,3283,53">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.RadioChannel.html" title="RadioChannel" alt="" coords="1832,144,1840,152">
+
+      <area shape="rect" href="../ihtml/tos.lib.rfxlink.util.RadioChannel.html" title="RadioChannel" alt="" coords="3214,78,3301,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.LinkPacketMetadata.html" title="LinkPacketMetadata" alt="" coords="3482,52 3400,78 3306,99 3215,108 3062,116 2641,131 1849,151 1849,145 2641,126 3061,111 3214,102 3305,93 3398,73 3481,47">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.LinkPacketMetadata.html" title="LinkPacketMetadata" alt="" coords="3477,45,3485,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.LinkPacketMetadata.html" title="LinkPacketMetadata" alt="" coords="1832,144,1840,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.LinkPacketMetadata.html" title="LinkPacketMetadata" alt="" coords="3404,78,3532,95">
+
+      <area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="3704,52 3627,78 3538,99 3432,109 3252,119 2760,134 1849,151 1849,145 2760,129 3252,113 3431,104 3537,93 3625,73 3702,47">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="3699,45,3707,53">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="1832,144,1840,152">
+
+      <area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="3628,78,3737,95">
+
+    </map>
+    <img src="tos.chips.cc2420x.CC2420XActiveMessageC.png" usemap="#comp" id=imgwiring>
+  </body>
+</html>

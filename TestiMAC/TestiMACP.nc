@@ -1,0 +1,236 @@
+/*
+ * @ author: Xiaohui Liu (whulxh@gmail.com)
+ * @ updated: 9/2/2012
+ * @ description: test the async radio stack
+ */
+
+ 
+#include "TestiMAC.h"
+#include "IMAC.h"
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+	#include <Tasklet.h>
+#endif
+
+module TestiMACP {
+	uses {
+		interface Boot;
+	
+	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+		interface FastSend as AMSend;
+		interface FastReceive as Receive;
+		interface FastPacket as Packet;
+		interface FastAMPacket as AMPacket;
+		
+		interface AsyncSplitControl as ForwarderSwitch;
+		interface AsyncStdControl as ControllerSwitch;
+	#else
+		interface AMSend;
+		interface Receive;
+		interface Packet;
+	#endif
+		interface SplitControl as AMControl;		
+		interface Timer<TMilli> as MilliTimer;
+		//interface Alarm<TMilli, uint32_t> as MilliAlarm;
+		interface LocalTime<TMilli>;
+		
+	#if defined(TEST_FTSP)
+		// ftsp
+ 		//interface FastSend as SyncSend;
+ 		interface FastReceive as SyncReceive;
+ 		interface FastPacket as SyncPacket;
+ 		interface PacketTimeStamp<TMicro, uint32_t>;
+
+ 		interface GlobalTime<TMicro>;
+	#endif
+		interface Util;
+		interface UartLog;
+	}
+}
+implementation {
+
+message_t packet;
+
+bool is_sync;
+
+bool locked;
+uint16_t counter;
+
+uint32_t start_time;
+
+link_t *activeLinks;
+uint8_t active_link_size;
+am_addr_t my_receiver;
+
+//#include "TestiMACPUtils.nc"
+inline uint32_t getGlobalTime() {
+#if defined(TEST_FTSP)
+	uint32_t global_now;
+	return (call GlobalTime.getGlobalTime(&global_now) == SUCCESS) ? global_now : 0;
+#else
+#warning local time
+	return call LocalTime.get();
+#endif
+}
+
+event void Boot.booted() {
+	call AMControl.start();
+	is_sync = FALSE;
+	atomic locked = FALSE;
+	atomic counter = 0;
+	activeLinks = call Util.getActiveLinks(&active_link_size);
+	atomic my_receiver = call Util.getReceiver();
+}
+
+event void AMControl.startDone(error_t err) {
+	if (err == SUCCESS) {
+		call MilliTimer.startOneShot(START_DATA_TIME);
+	} else {
+		call AMControl.start();
+	}
+}
+
+event void AMControl.stopDone(error_t err) {}
+
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+void sendTask() {
+#else
+void task sendTask() {
+#endif
+	error_t ret;
+	radio_count_msg_t* hdr = (radio_count_msg_t*)call Packet.getPayload(&packet, sizeof(radio_count_msg_t));
+	hdr->src = TOS_NODE_ID;
+	atomic hdr->seqno = counter++;
+	ret = call AMSend.send(my_receiver, &packet, sizeof(radio_count_msg_t));
+	if (SUCCESS == ret) {
+		dbg("TestiMAC", "%s: sending pkt %hu.\n", __FUNCTION__, counter);
+		atomic locked = TRUE;
+		//#warning avoid log overload
+		call UartLog.logEntry(TX_SUCCESS_FLAG, my_receiver, hdr->seqno, getGlobalTime());
+	} else {
+		dbg("TestiMAC", "%s: sending pkt %hu failed.\n", __FUNCTION__, counter);
+		//#warning avoid log overload
+		call UartLog.logEntry(TX_FAIL_FLAG, ret, hdr->seqno, getGlobalTime());
+//	#if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
+//		#warning repost when tx fails
+//		post sendTask();
+//	#endif
+	}
+}
+
+//async event void MilliAlarm.fired() {
+event void MilliTimer.fired() {
+	bool locked_;
+	uint16_t counter_;
+	atomic {
+	#if !defined(CMAC)
+		locked_ = locked;
+	#else
+		// CMAC buffers message, no need to cleared; 
+		locked_ = FALSE;
+	#endif
+		counter_ = counter;
+	}
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+	if (0 == counter_) {
+		// turn on iMAC controller: initialize ER using signal map
+		call ControllerSwitch.start();
+		call UartLog.logEntry(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, my_receiver);
+		return;
+	}
+#endif
+	if (my_receiver == INVALID_ADDR)
+		return;
+
+	if (counter_ < MAX_PKT_CNT) {
+		call MilliTimer.startOneShot(PERIOD_MILLI);
+	}
+	if (!locked_) {
+	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+		sendTask();
+	#else
+		post sendTask();		
+	#endif
+	}
+//		interval = INITIAL_FTSP_TIME - INITIAL_ER_TIME;
+////		#warning sender waits for receiver
+////		if (my_receiver != INVALID_ADDR)
+////			interval += 20000;
+//		call MilliTimer.startOneShot(PERIOD_MILLI);
+//		atomic counter++;
+//		return;
+//	} 
+//	else if (1 == counter_) {
+////	#warning "freeze SM"
+////		call SignalMap.freeze();
+////		call SignalMap.printSignalMap(0);
+//	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+//		// turn on iMAC forwarder: tx DATA
+//		call ForwarderSwitch.start();
+//	#endif
+//	}
+
+//	// set back
+//	atomic locked = locked_;
+}
+
+task void startDataTask() {
+	call MilliTimer.startOneShot(PERIOD_MILLI);
+}
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async event void ForwarderSwitch.startDone(error_t error) {
+//	if (my_receiver != INVALID_ADDR)
+//		sendTask();
+	atomic counter++;
+	post startDataTask();
+}
+#endif
+
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async event void AMSend.sendDone(message_t* msg, error_t error) {
+#else
+event void AMSend.sendDone(message_t* msg, error_t error) {
+#endif
+	radio_count_msg_t* hdr = (radio_count_msg_t*)call Packet.getPayload(msg, sizeof(radio_count_msg_t));
+	dbg("TestiMAC", "%s: Packet %hu sendDone w/ %hhu.\n", __FUNCTION__, hdr->seqno, error);
+	if (SUCCESS == error) {
+		// CMAC block transfer
+	//#if !defined(CMAC)
+		call UartLog.logEntry(TX_DONE_FLAG, my_receiver, hdr->seqno, getGlobalTime());
+	//#endif
+	} else {
+		call UartLog.logEntry(TX_DONE_FAIL_FLAG, error, hdr->seqno, getGlobalTime());
+	}
+	atomic locked = FALSE;
+//#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+//	#warning saturate
+//	sendTask();
+//#endif
+}
+
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
+#else
+event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
+#endif
+	// CMAC block transfer
+//#if !defined(CMAC)
+	radio_count_msg_t* hdr = (radio_count_msg_t*)call Packet.getPayload(msg, sizeof(radio_count_msg_t));
+	dbg("TestiMAC", "%s: Receive packet %hu.\n", __FUNCTION__, hdr->seqno);
+	call UartLog.logEntry(RX_FLAG, hdr->src, hdr->seqno, getGlobalTime());
+//#endif
+	return msg;
+}
+
+
+#if defined(TEST_FTSP)
+//receive sync time
+async event message_t* SyncReceive.receive(message_t* msg, void* payload, uint8_t len) {
+     uint32_t local_rx_timestamp = call PacketTimeStamp.timestamp(msg);
+     uint32_t global_rx_timestamp = local_rx_timestamp;
+     error_t is_synced = call GlobalTime.local2Global(&global_rx_timestamp);
+     sync_header_t *hdr = (sync_header_t*) call SyncPacket.getPayload(msg, sizeof(sync_header_t));
+     call UartLog.logTxRx(DBG_FLAG, 255, call PacketTimeStamp.isValid(msg), call AMPacket.source(msg), is_synced, 0, 0, hdr->seqno, global_rx_timestamp);
+     return msg;
+}
+#endif
+}

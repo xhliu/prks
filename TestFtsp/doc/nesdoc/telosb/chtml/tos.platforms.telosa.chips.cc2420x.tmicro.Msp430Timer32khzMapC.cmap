@@ -1,0 +1,37 @@
+<area shape="rect" href="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html" title="Msp430TimerC" alt="" coords="660,120,807,179">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="98,39 54,46 18,58 7,66 0,74 0,83 7,94 32,102 89,110 264,125 647,144 647,149 263,130 88,116 31,107 4,98 -5,85 -5,72 3,62 16,54 53,41 97,33">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="93,32,101,40">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="656,143,664,151">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="6,78,146,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="171,53 170,76 178,94 200,105 242,115 367,130 515,140 647,145 647,151 514,145 367,136 241,121 198,110 174,98 164,77 165,53">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="164,49,172,57">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="656,144,664,152">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="177,78,317,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="229,45 317,75 345,86 371,93 516,122 647,139 646,144 515,127 370,99 343,91 315,80 227,51">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="224,44,232,52">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="656,139,664,147">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Timer.html" title="Msp430Timer[uint8_t]" alt="" coords="371,78,511,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="631,43 562,58 536,68 519,79 517,87 519,94 538,108 569,120 647,137 646,143 567,125 536,113 515,98 512,87 515,76 533,63 561,53 630,37">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="627,36,635,44">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="656,137,664,145">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="521,78,708,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="736,53 736,107 731,107 731,53">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="729,49,737,57">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="729,116,737,124">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="733,78,920,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="830,40 887,55 909,65 923,76 931,91 931,105 922,116 908,126 868,139 820,147 820,141 867,133 906,121 918,113 925,103 926,92 919,79 906,69 885,60 829,45">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="825,39,833,47">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="803,141,811,149">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html" title="Msp430TimerControl[uint8_t]" alt="" coords="927,78,1113,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1290,48 1170,80 1144,90 1119,99 1041,116 961,129 820,145 820,140 960,124 1040,110 1118,93 1143,85 1168,75 1289,43">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1285,41,1293,49">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="803,140,811,148">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1177,78,1340,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1360,54 1350,78 1334,98 1305,109 1257,118 1119,132 820,149 820,144 1119,127 1256,113 1304,104 1330,94 1346,75 1355,52">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1353,49,1361,57">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="803,143,811,151">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1347,78,1509,95">
+<area shape="poly" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1449,37 1483,47 1511,59 1520,67 1525,76 1524,87 1516,98 1486,108 1424,116 1233,131 820,149 820,144 1233,126 1423,111 1485,103 1513,94 1519,85 1520,77 1516,70 1508,64 1482,52 1447,43">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1444,36,1452,44">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="803,143,811,151">
+<area shape="rect" href="../ihtml/tos.chips.msp430.timer.Msp430Compare.html" title="Msp430Compare[uint8_t]" alt="" coords="1520,78,1683,95">

@@ -1,0 +1,83 @@
+COMPONENT=TestiMACC
+
+# all TDMA except RIDB w/o OLAMA
+MAINDIR = ../iMAC_TDMA
+#MAINDIR = ../RIDBNoOLAMA
+
+UTILDIR = $(HOME)/Dropbox/Programming/TinyOS
+
+CFLAGS += -DTOSH_DATA_LENGTH=114
+
+# -----------------------------------------------------------------------------
+# basic CSMA
+# -----------------------------------------------------------------------------
+#PFLAGS +=	-I$(UTILDIR)/Utils \
+#			-I$(MAINDIR) \
+#			-I$(MAINDIR)/util \
+
+#CFLAGS += -DCC2420_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
+#CFLAGS += -DCC2420_DEF_CHANNEL=26
+
+# -----------------------------------------------------------------------------
+# RTS-CTS & C-MAC: based on CC2420
+# -----------------------------------------------------------------------------
+#PROTOCOLDIR = ../CMAC
+##PROTOCOLDIR = ../RTSCTS
+#PFLAGS +=	-I$(UTILDIR)/Utils \
+#			-I$(PROTOCOLDIR) \
+#			-I$(PROTOCOLDIR)/beaconing \
+#			-I$(PROTOCOLDIR)/controller \
+#			-I$(PROTOCOLDIR)/forwarder \
+#			-I$(PROTOCOLDIR)/linkestimator \
+#			-I$(PROTOCOLDIR)/signalmap \
+#			-I$(PROTOCOLDIR)/cc2420 \
+#			-I$(MAINDIR) \
+#			-I$(MAINDIR)/util \
+#			
+#CFLAGS += -DCC2420_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
+#CFLAGS += -DCC2420_DEF_CHANNEL=26
+##enable snooping
+#CFLAGS+=-DCC2420_NO_ADDRESS_RECOGNITION
+
+# -----------------------------------------------------------------------------
+# PRKS based on CC2420X
+# -----------------------------------------------------------------------------
+PFLAGS +=	-I$(UTILDIR)/Utils \
+			-I$(MAINDIR) \
+			-I$(MAINDIR)/util \
+			-I$(MAINDIR)/async \
+			-I$(MAINDIR)/cc2420x \
+			-I$(MAINDIR)/ftsp \
+			-I$(MAINDIR)/cc2420x/ftsp \
+			-I$(MAINDIR)/signalmap \
+			-I$(MAINDIR)/forwarder \
+			-I$(MAINDIR)/controller \
+			-I$(MAINDIR)/linkestimator \
+
+#CC2420X defaults
+CFLAGS += -DCC2420X_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
+CFLAGS += -DCC2420X_DEF_CHANNEL=26
+# has to be here, if defined in FastCC2420TransceiverP, default 800 takes over
+CFLAGS += -DSOFTWAREACK_TIMEOUT=8000
+
+
+# -----------------------------------------------------------------------------
+# extra
+# -----------------------------------------------------------------------------
+# enable h/w ack
+#CFLAGS += -DCC2420_HW_ACKNOWLEDGEMENTS
+
+# ftsp beacon period not controlled here, but in forwarder
+#CFLAGS += -DTIMESYNC_RATE=2	#10
+
+# mig
+#BUILD_EXTRA_DEPS   += IndriyaSerial.class
+#CLEAN_EXTRA            = *.class .java
+
+#IndriyaSerial.class: $(wildcard *.java) IndriyaSerialMsg.java
+#	javac -source 1.4 -target 1.4 *.java
+
+#IndriyaSerialMsg.java: TestiMAC.h
+#	mig java -target=$(PLATFORM) $(CFLAGS) -java-classname=IndriyaSerialMsg TestiMAC.h imac_indriya_serial -o $@
+
+include $(MAKERULES)

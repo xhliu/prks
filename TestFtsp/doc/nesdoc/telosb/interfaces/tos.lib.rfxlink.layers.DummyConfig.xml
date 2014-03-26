@@ -1,0 +1,17 @@
+<?xml version="1.0" ?><interfacedef loc="35:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyConfig.nc" nicename="tos.lib.rfxlink.layers.DummyConfig" qname="DummyConfig">
+      <function command="" loc="40:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyConfig.nc" name="nothing" provided="0" ref="0x40a17cc8">
+        <documentation loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyConfig.nc">
+          <short>
+ We need to put something here, but this is not going to get called
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.DummyConfig" qname="DummyConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+    </interfacedef>

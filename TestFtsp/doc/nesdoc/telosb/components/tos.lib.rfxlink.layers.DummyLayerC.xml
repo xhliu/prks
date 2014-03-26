@@ -1,0 +1,243 @@
+<?xml version="1.0" ?><component abstract="" loc="35:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC">
+      <parameters>
+      </parameters>
+      <configuration/>
+      <wiring>
+        <wire loc="76:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="SplitControl" ref="0x40cac368" scoped=""/></from>
+          <to><interface-ref name="SubControl" ref="0x40ca7480" scoped=""/></to>
+        </wire>
+        <wire loc="73:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="RadioCCA" ref="0x40ca42c0" scoped=""/></from>
+          <to><interface-ref name="SubRadioCCA" ref="0x40cd0938" scoped=""/></to>
+        </wire>
+        <wire loc="70:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="RadioState" ref="0x40ca9268" scoped=""/></from>
+          <to><interface-ref name="SubState" ref="0x40ca6578" scoped=""/></to>
+        </wire>
+        <wire loc="74:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="RadioPacket" ref="0x40ca4728" scoped=""/></from>
+          <to><interface-ref name="SubPacket" ref="0x40cd0e20" scoped=""/></to>
+        </wire>
+        <wire loc="80:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="UnconnectedConfig" ref="0x40ca7010" scoped=""/></from>
+          <to><interface-ref name="Config" ref="0x40ccf680" scoped=""/></to>
+        </wire>
+        <wire loc="72:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="RadioReceive" ref="0x40ca8010" scoped=""/></from>
+          <to><interface-ref name="SubReceive" ref="0x40cd0458" scoped=""/></to>
+        </wire>
+        <wire loc="78:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="BareReceive" ref="0x40cacec0" scoped=""/></from>
+          <to><interface-ref name="SubBareReceive" ref="0x40ca6180" scoped=""/></to>
+        </wire>
+        <wire loc="71:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="RadioSend" ref="0x40ca9a40" scoped=""/></from>
+          <to><interface-ref name="SubSend" ref="0x40ca6e38" scoped=""/></to>
+        </wire>
+        <wire loc="77:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc">
+          <from><interface-ref name="BareSend" ref="0x40cac978" scoped=""/></from>
+          <to><interface-ref name="SubBareSend" ref="0x40ca7b20" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="39:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SplitControl" provided="1" ref="0x40cac368">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SplitControl" ref="0x40cac368" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x40cac540" scoped=""/>
+        <function-ref name="stopDone" ref="0x40cac620" scoped=""/>
+        <function-ref name="start" ref="0x40cac700" scoped=""/>
+        <function-ref name="stop" ref="0x40cac7e0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="RadioCCA" provided="1" ref="0x40ca42c0">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioCCA" ref="0x40ca42c0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioCCA" qname="RadioCCA"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="done" ref="0x40ca4498" scoped=""/>
+        <function-ref name="request" ref="0x40ca4578" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="59:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SubSend" provided="0" ref="0x40ca6e38">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubSend" ref="0x40ca6e38" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioSend" qname="RadioSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40cd0050" scoped=""/>
+        <function-ref name="ready" ref="0x40cd0130" scoped=""/>
+        <function-ref name="sendDone" ref="0x40cd0210" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="60:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SubReceive" provided="0" ref="0x40cd0458">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubReceive" ref="0x40cd0458" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioReceive" qname="RadioReceive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40cd0630" scoped=""/>
+        <function-ref name="header" ref="0x40cd0710" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="RadioState" provided="1" ref="0x40ca9268">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioState" ref="0x40ca9268" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="turnOff" ref="0x40ca9440" scoped=""/>
+        <function-ref name="turnOn" ref="0x40ca9520" scoped=""/>
+        <function-ref name="setChannel" ref="0x40ca9600" scoped=""/>
+        <function-ref name="done" ref="0x40ca96e0" scoped=""/>
+        <function-ref name="standby" ref="0x40ca97c0" scoped=""/>
+        <function-ref name="getChannel" ref="0x40ca98a0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="47:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="RadioPacket" provided="1" ref="0x40ca4728">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioPacket" ref="0x40ca4728" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40ca4900" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40ca49e0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40ca4ac0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40ca4ba0" scoped=""/>
+        <function-ref name="headerLength" ref="0x40ca4c80" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40ca4d60" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="58:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SubState" provided="0" ref="0x40ca6578">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubState" ref="0x40ca6578" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioState" qname="RadioState"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="turnOff" ref="0x40ca67d0" scoped=""/>
+        <function-ref name="turnOn" ref="0x40ca68b0" scoped=""/>
+        <function-ref name="setChannel" ref="0x40ca6990" scoped=""/>
+        <function-ref name="done" ref="0x40ca6a70" scoped=""/>
+        <function-ref name="standby" ref="0x40ca6b50" scoped=""/>
+        <function-ref name="getChannel" ref="0x40ca6c30" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="49:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="UnconnectedConfig" provided="1" ref="0x40ca7010">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UnconnectedConfig" ref="0x40ca7010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.DummyConfig" qname="DummyConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="nothing" ref="0x40ca71e8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="RadioReceive" provided="1" ref="0x40ca8010">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioReceive" ref="0x40ca8010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioReceive" qname="RadioReceive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40ca81e8" scoped=""/>
+        <function-ref name="header" ref="0x40ca82c8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="56:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SubBareReceive" provided="0" ref="0x40ca6180">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubBareReceive" ref="0x40ca6180" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.BareReceive" qname="BareReceive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40ca6358" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="54:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SubControl" provided="0" ref="0x40ca7480">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubControl" ref="0x40ca7480" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x40ca7658" scoped=""/>
+        <function-ref name="stopDone" ref="0x40ca7738" scoped=""/>
+        <function-ref name="start" ref="0x40ca7818" scoped=""/>
+        <function-ref name="stop" ref="0x40ca78f8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="62:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SubPacket" provided="0" ref="0x40cd0e20">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubPacket" ref="0x40cd0e20" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40ccf010" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40ccf0f0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40ccf1d0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40ccf2b0" scoped=""/>
+        <function-ref name="headerLength" ref="0x40ccf390" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40ccf470" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="41:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="BareReceive" provided="1" ref="0x40cacec0">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="BareReceive" ref="0x40cacec0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.BareReceive" qname="BareReceive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40ca90c0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="64:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="Config" provided="0" ref="0x40ccf680">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Config" ref="0x40ccf680" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.DummyConfig" qname="DummyConfig"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="nothing" ref="0x40ccf858" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="55:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SubBareSend" provided="0" ref="0x40ca7b20">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubBareSend" ref="0x40ca7b20" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.BareSend" qname="BareSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40ca7cf8" scoped=""/>
+        <function-ref name="cancel" ref="0x40ca7dd8" scoped=""/>
+        <function-ref name="sendDone" ref="0x40ca7eb8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="RadioSend" provided="1" ref="0x40ca9a40">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioSend" ref="0x40ca9a40" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioSend" qname="RadioSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40ca9c18" scoped=""/>
+        <function-ref name="ready" ref="0x40ca9cf8" scoped=""/>
+        <function-ref name="sendDone" ref="0x40ca9dd8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="61:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="SubRadioCCA" provided="0" ref="0x40cd0938">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubRadioCCA" ref="0x40cd0938" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioCCA" qname="RadioCCA"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="done" ref="0x40cd0b10" scoped=""/>
+        <function-ref name="request" ref="0x40cd0bf0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="40:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/DummyLayerC.nc" name="BareSend" provided="1" ref="0x40cac978">
+      <component-ref nicename="tos.lib.rfxlink.layers.DummyLayerC" qname="DummyLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="BareSend" ref="0x40cac978" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.BareSend" qname="BareSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40cacb50" scoped=""/>
+        <function-ref name="cancel" ref="0x40cacc30" scoped=""/>
+        <function-ref name="sendDone" ref="0x40cacd10" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

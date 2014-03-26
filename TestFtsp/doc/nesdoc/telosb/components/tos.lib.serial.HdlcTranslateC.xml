@@ -1,0 +1,63 @@
+<?xml version="1.0" ?><component loc="47:/opt/tinyos-2.1.2/tos/lib/serial/HdlcTranslateC.nc" nicename="tos.lib.serial.HdlcTranslateC" qname="HdlcTranslateC">
+      <documentation loc="71:/opt/tinyos-2.1.2/tos/lib/serial/Serial.h">
+        <short>
+ </short>
+        <long>
+ @author Phil Buonadonna
+ @author Lewis Girod
+ @author Ben Greenstein
+ @author Philip Levis
+ @date   August 7 2005
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="50:/opt/tinyos-2.1.2/tos/lib/serial/HdlcTranslateC.nc" name="UartStream" provided="0" ref="0x4126a990">
+      <component-ref nicename="tos.lib.serial.HdlcTranslateC" qname="HdlcTranslateC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartStream" ref="0x4126a990" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.UartStream" qname="UartStream"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x4126ab68" scoped=""/>
+        <function-ref name="receivedByte" ref="0x4126ac48" scoped=""/>
+        <function-ref name="receive" ref="0x4126ad28" scoped=""/>
+        <function-ref name="enableReceiveInterrupt" ref="0x4126ae08" scoped=""/>
+        <function-ref name="receiveDone" ref="0x4126aee8" scoped=""/>
+        <function-ref name="disableReceiveInterrupt" ref="0x4122d010" scoped=""/>
+        <function-ref name="sendDone" ref="0x4122d0f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="48:/opt/tinyos-2.1.2/tos/lib/serial/HdlcTranslateC.nc" name="SerialFrameComm" provided="1" ref="0x412316a8">
+      <component-ref nicename="tos.lib.serial.HdlcTranslateC" qname="HdlcTranslateC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SerialFrameComm" ref="0x412316a8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.serial.SerialFrameComm" qname="SerialFrameComm"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="putDelimiter" ref="0x41231880" scoped=""/>
+        <function-ref name="resetSend" ref="0x41231960" scoped=""/>
+        <function-ref name="dataReceived" ref="0x41231a40" scoped=""/>
+        <function-ref name="resetReceive" ref="0x41231b20" scoped=""/>
+        <function-ref name="putData" ref="0x41231c00" scoped=""/>
+        <function-ref name="putDone" ref="0x41231ce0" scoped=""/>
+        <function-ref name="delimiterReceived" ref="0x41231dc0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="51:/opt/tinyos-2.1.2/tos/lib/serial/HdlcTranslateC.nc" name="Leds" provided="0" ref="0x4122d260">
+      <component-ref nicename="tos.lib.serial.HdlcTranslateC" qname="HdlcTranslateC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x4122d260" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x4122d438" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x4122d518" scoped=""/>
+        <function-ref name="led1On" ref="0x4122d5f8" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x4122d6d8" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x4122d7b8" scoped=""/>
+        <function-ref name="get" ref="0x4122d898" scoped=""/>
+        <function-ref name="led1Off" ref="0x4122d978" scoped=""/>
+        <function-ref name="led2Off" ref="0x4122dcf8" scoped=""/>
+        <function-ref name="set" ref="0x4122da58" scoped=""/>
+        <function-ref name="led0On" ref="0x4122db38" scoped=""/>
+        <function-ref name="led2On" ref="0x4122dc18" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

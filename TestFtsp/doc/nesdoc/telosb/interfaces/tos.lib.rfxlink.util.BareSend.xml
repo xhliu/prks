@@ -1,0 +1,116 @@
+<?xml version="1.0" ?><interfacedef loc="35:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc" nicename="tos.lib.rfxlink.util.BareSend" qname="BareSend">
+      <function command="" loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc" name="send" provided="0" ref="0x40a94c90">
+        <documentation loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc">
+          <short>
+ Starts the transmission of the given message.</short>
+          <long>
+ Starts the transmission of the given message. This command must not
+ be called while another send is in progress (so one must wait for the
+ sendDone event). Returns EBUSY if a reception is in progress or for
+ some other reason the request cannot be temporarily satisfied (e.g.
+ the SPI bus access could not be acquired). In this case the send 
+ command could be retried from a task. Returns SUCCESS if the 
+ transmission could be started. In this case sendDone will be fired.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.BareSend" qname="BareSend"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc" name="msg" ref="0x40a94b38">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="64:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc" name="cancel" provided="0" ref="0x40a91d00">
+        <documentation loc="56:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc">
+          <short>
+ Cancel a requested transmission.</short>
+          <long>
+ Cancel a requested transmission. Returns SUCCESS if the 
+ transmission was cancelled properly (not sent in its
+ entirety). Note that the component may not know
+ if the send was successfully cancelled, if the radio is
+ handling much of the logic; in this case, a component
+ should be conservative and return an appropriate error code.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.BareSend" qname="BareSend"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="64:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc" name="msg" ref="0x40a91ba8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function event="" loc="54:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc" name="sendDone" provided="0" ref="0x40a91610">
+        <documentation loc="48:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc">
+          <short>
+ Signals the completion of the send command, exactly once for each 
+ successfull send command.</short>
+          <long>
+ Signals the completion of the send command, exactly once for each 
+ successfull send command. If the returned error code is SUCCESS, then 
+ the message was sent (may not have been acknowledged), otherwise 
+ the message was not transmitted over the air.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.BareSend" qname="BareSend"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="54:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc" name="msg" ref="0x40a912b8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="54:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/BareSend.nc" name="error" ref="0x40a914b0">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+    </interfacedef>

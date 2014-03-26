@@ -1,0 +1,245 @@
+01/05/2012 03:53:26 PM 
+Save v1
+
+02/28/2012 08:36:39 PM 
+Change to efficient dbm difference
+
+04/07/2012 01:05:21 PM 
+Save iMAC v1: basic handshake
+
+04/08/2012 09:29:42 PM 
+Save iMAC v2: beacon goes thru link estimator, which in turn goes thru signal map
+
+04/13/2012 
+Save iMAC v3: runnable in NetEye; and TestiMAC
+
+04/17/2012 
+Save iMAC v4 and TestiMAC w/ traffic provided by iOrder
+About to add bidirectional ER
+
+04/18/2012 
+Save iMAC
+About to inc signal map size to 2 bytes to accommodate more nodes, especially for future Kansei
+
+04/26/2012 
+Save 
+About to deal with reception of RTS to me while my RTS to others are pending
+
+05/01/2012 
+Save
+Impl min-variance controller
+
+05/03/2012 
+Save
+Impl early detection of transaction completion
+
+05/11/2012 
+Save
+Revise min var controller
+
+05/17/2012
+Save
+Revise power ctrl; \Delta I_u = 0; band interference <= |\Delta I_d| even when ER increases
+
+07/05/2012 11:23:06 AM 
+Save
+Ready to seperate link ER table from signal map
+
+07/19/2012 10:13:06 PM
+Ftsp does not switch to CONTROL channel and send beacon in DATA slot
+
+08/02/2012 08:39:10 PM 
+Ftsp does not switch channel to send in DATA channel, simply gives up. Otherwise, issues when CC2420Config.syncDone() event is triggered in both forwarder and ftsp whenever one CC2420Config.sync() is called
+
+08/05/2012 04:26:10 PM 
+Save version where ftsp timing is correct
+
+8/29/12
+Save and ready to use DATA channel as default; and switch back if used for control
+
+09/17/2012 12:20:35 PM 
+Save for SPI arbitration change
+
+09/20/2012 
+Save CC2420ReceiveP and change CSN flip
+
+09/21/2012 
+Save new USART non split-phase and to change ftsp to async
+
+10/03/2012 
+Save (ftsp is not working well: tens of jiffies) and to change d_0
+Also change signal map management policy bcoz of memory concern
+
+10/15/2012 
+Save after quick diffusion and corruption finished; ready for d_0
+
+10/24/2012
+Save after d_0 done & update to T2.1.2, w/ CC2420PacketP.nc & Msp430SpiNoDmaP.nc changed
+Debug ftsp 
+
+10/28/2012 
+Save and continue debug reset by watchdog timer issue
+Add runtime bound check first: both array & packet
+
+11/02/2012 
+Bug fix: CRC unit is byte, not word
+Drop priority-scheduler
+
+11/14/2012 
+Bug fix: stack overflow and CRC since it is incompatible w/ FTSP, which modifies TXFIFO during tx
+Save
+
+11/28/2012 
+Save
+Change timestamping of CC2420 radio stack
+
+12/27/12 3:10 PM
+Save
+Migrate from cc2420 to cc2420x
+
+01/06/2013 
+Change CC2420Packet interface to return dBm, instead of raw register value
+
+02/06/2013 
+Save timing correct and parameter optimized version
+Ready for pkt loss
+
+02/12/2013 
+Save d_0 version
+Ready for receiver-follow-sender hybrid version
+
+02/19/2013
+Fix CC2420X tx power bug
+
+02/21/2013 
+Taskize contention flag update
+Fix controller bug
+
+02/28/2013 
+Fix bug: sortLinkERTableIdx(), findMyLinkIdx() only looks up outgoing link once, but it can change due to sort
+
+03/27/2013
+Empty ER
+DATA piggyback
+a link ER always highest priority at ER's receiver
+
+03/28/2013 
+Save
+To do power ctrl (defer)
+
+04/02/2013 
+Save
+To dedicate slots for ctrl channel, mainly for ftsp
+
+04/03/2013 
+Save final version for data collection
+To implement other protocols
+
+05/22/2013
+Change ftsp to use power 31; power 3 somehow produces error up to 10's of seconds
+Between 4/3 and 5/22, fix not sending after 2^32 us bug
+
+07/08/2013 
+Save; to increase link set size
+
+07/23/2013 
+Save iMAC_TDMA plus TestiMAC
+To add e2e transfer, i.e., convergecast
+
+08/01/2013 
+Save sync e2e iMAC
+To recover e2e async iMAC to avoid pkt loss bcoz of long rx processing
+
+08/07/2013
+Fix isContend() decision including:
+- regard as conflict when gain unknown
+- change "task void updateContentionTask()" to function call
+- add control random backoff during bootstrap
+
+
+08/13/2013 
+//k = (prevSentIdx + i + 1) % SM_SIZE;
+//k = (prevSentIdx + i + 1) & SM_SIZE_MODULAR;
+k = (prevSentIdx + i + 1);
+if (k >= SM_SIZE)
+	k -= SM_SIZE;
+	
+08/15/2013 
+Save unbuffered CMAC
+Ready to add buffer
+
+08/19/2013 
+Save updated single hop PRKS & multihop
+To merge 1 hop update into multihop
+
+09/12/2013 
+Save 1 hop
+To use heterogeneous tx power
+
+10/13/2013 
+Save
+To impl. SCREAM
+
+10/17/2013 
+Save SCREAM
+To fix SCREAM bug
+
+10/22/2013
+fix bug SOFTWAREACK_TIMEOUT, causing ack always timeout
+
+10/31/2013 
+Fix PRKS-R bug, use link pdr sample, not EWMA, to compute K
+
+11/03/2013 
+Save variants
+To improve \delta_i_dB precision by replace dBm substraction with sum:
+use dbm sum instead of diff bcoz the later makes delta_I 0 when delta_i_dB is less than 1 dB due to precision loss, while the former does not; otherwise ER fails to adapt even when it should
+
+PID controller w/ filter
+
+11/04/2013 
+Bug fix: delta_i_dB overflow, inc from int16_t to int32_t; also dbmSumU
+
+11/15/2013 
+No ftsp in ctrl slot; ftsp only in dedicated slot CTRL_SLOT_FTSP_CHANCE_MASK
+
+11/19/2013 
+Save
+To implement O-LAMA
+
+12/5/13 1:22 PM
+Save O-LAMA beta before implement newer version
+
+12/6/13 8:52 PM
+Bug fix IMACControllerP$Send$send()
+if (newlen <= call Packet.maxPayloadLength()) {
+=>
+if (newlen <= call SubPacket.maxPayloadLength()) {
+
+12/10/2013 
+Bug fix IMACControllerP$updateLinkOLAMA()
+prio_slot = (current_slot - OLAMA_PRECOMPUTE_TIME + i);
+=>
+prio_slot = current_slot + MAX_SLOT_FORWARD + 1 + i;
+
+12/15/13 2:46 PM
+Bug fix: next slot state not always initialized; or overridden after initialized
+
+1/1/14 10:37 PM
+Bug fix: 
+is_next_state_initialized = FALSE;
+at IMACControllerPUtil$Controller$runOLAMA()
+=>
+async command void Controller.initOLAMA() {
+	is_next_state_initialized = FALSE;
+}
+
+1/3/14 3:59 PM
+save
+Ready to go from separate channel to same channel
+
+01/18/2014 
+Add OLAMA_DISABLED
+
+01/24/2014 (approximate)
+95% PDR: add deltaI bound of 7dB

@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.layers.SlottedCollisionConfig</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.layers.SlottedCollisionConfig</h2>
+    <b>interface SlottedCollisionConfig</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getCollisionWindowLength">getCollisionWindowLength</a>(message_t *msg)
+      </span><menu>
+ Returns the size of the collision window for this received message.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getCollisionWindowStart">getCollisionWindowStart</a>(message_t *msg)
+      </span><menu>
+ Returns the start of the collision window for this received message,
+ so transmit times in this range would be considered possible collisions.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getInitialDelay">getInitialDelay</a>()
+      </span><menu>
+ This command should return the approximate transmit delay between
+ setting an alarm, waiting for the fire event, calling send and
+ obtaining the timestamp for the transmitted message.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#getScheduleExponent">getScheduleExponent</a>()
+      </span><menu>
+ Must return a binary exponent so that the collision avoidance layer
+ can assign slots in the range of [0, 1 << exponent) of size collision
+ window.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getTransmitTime">getTransmitTime</a>(message_t *msg)
+      </span><menu>
+ This command must return the time when the message was transmitted.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="getCollisionWindowLength"></a>
+    <h4>getCollisionWindowLength
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getCollisionWindowLength</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the size of the collision window for this received message.
+
+    </menu>
+    <hr>
+    <a name="getCollisionWindowStart"></a>
+    <h4>getCollisionWindowStart
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getCollisionWindowStart</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the start of the collision window for this received message,
+ so transmit times in this range would be considered possible collisions.
+
+    </menu>
+    <hr>
+    <a name="getInitialDelay"></a>
+    <h4>getInitialDelay
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getInitialDelay</b>()
+    </span>
+    <p>
+    <menu>
+      
+ This command should return the approximate transmit delay between
+ setting an alarm, waiting for the fire event, calling send and
+ obtaining the timestamp for the transmitted message.
+
+    </menu>
+    <hr>
+    <a name="getScheduleExponent"></a>
+    <h4>getScheduleExponent
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>getScheduleExponent</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Must return a binary exponent so that the collision avoidance layer
+ can assign slots in the range of [0, 1 << exponent) of size collision
+ window.
+
+    </menu>
+    <hr>
+    <a name="getTransmitTime"></a>
+    <h4>getTransmitTime
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getTransmitTime</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ This command must return the time when the message was transmitted.
+
+    </menu>
+  </body>
+</html>

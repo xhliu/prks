@@ -1,0 +1,120 @@
+<?xml version="1.0" ?><interfacedef loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" nicename="tos.lib.rfxlink.layers.UniqueConfig" qname="UniqueConfig">
+      <function command="" loc="52:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" name="setSequenceNumber" provided="0" ref="0x409f83c8">
+        <documentation loc="49:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc">
+          <short>
+ Sets the sequence number of the packet.</short>
+          <long>
+ Sets the sequence number of the packet.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.UniqueConfig" qname="UniqueConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="52:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" name="msg" ref="0x409f8068">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+          <variable loc="52:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" name="number" ref="0x409f8268">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="58:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" name="reportChannelError" provided="0" ref="0x409f8860">
+        <documentation loc="54:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc">
+          <short>
+ This command is called when the unqiue layer detects a missing (jump 
+ in the data sequence number) or a duplicate packet.</short>
+          <long>
+ This command is called when the unqiue layer detects a missing (jump 
+ in the data sequence number) or a duplicate packet.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.UniqueConfig" qname="UniqueConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" name="getSequenceNumber" provided="0" ref="0x409f9540">
+        <documentation loc="39:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc">
+          <short>
+ Returns the sequence number of the packet.</short>
+          <long>
+ Returns the sequence number of the packet.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.UniqueConfig" qname="UniqueConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" name="msg" ref="0x409f93e8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="47:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" name="getSender" provided="0" ref="0x409f9b88">
+        <documentation loc="44:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc">
+          <short>
+ Returns the sender of the packet.</short>
+          <long>
+ Returns the sender of the packet. 
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.UniqueConfig" qname="UniqueConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="am_addr_t" ref="0x406fbcb0"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="47:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/UniqueConfig.nc" name="msg" ref="0x409f9a30">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+    </interfacedef>

@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.layers.ActiveMessageConfig</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.layers.ActiveMessageConfig</h2>
+    <b>interface ActiveMessageConfig</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command error_t <a href="#checkFrame">checkFrame</a>(message_t *msg)
+      </span><menu>
+ Check if the packet is properly formatted, and if the user 
+ forgot to call Packet.clear then format it properly.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command am_addr_t <a href="#destination">destination</a>(message_t *msg)
+      </span><menu> Same as AMPacket.destination *
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command am_group_t <a href="#group">group</a>(message_t *msg)
+      </span><menu> Same as AMPacket.group *
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setDestination">setDestination</a>(message_t *msg, am_addr_t addr)
+      </span><menu> Same as AMPacket.setDestination *
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setGroup">setGroup</a>(message_t *msg, am_group_t grp)
+      </span><menu> Same as AMPacket.setGroup *
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setSource">setSource</a>(message_t *msg, am_addr_t addr)
+      </span><menu> Same as AMPacket.setSource *
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command am_addr_t <a href="#source">source</a>(message_t *msg)
+      </span><menu> Same as AMPacket.source *
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="checkFrame"></a>
+    <h4>checkFrame
+    </h4>
+    <span id=funcnameshort>command error_t <b>checkFrame</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Check if the packet is properly formatted, and if the user 
+ forgot to call Packet.clear then format it properly.
+ Return SUCCESS if the frame is now properly set up, 
+ or FAIL of the send operation should be aborted.
+
+    </menu>
+    <hr>
+    <a name="destination"></a>
+    <h4>destination
+    </h4>
+    <span id=funcnameshort>command am_addr_t <b>destination</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+       Same as AMPacket.destination *
+    </menu>
+    <hr>
+    <a name="group"></a>
+    <h4>group
+    </h4>
+    <span id=funcnameshort>command am_group_t <b>group</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+       Same as AMPacket.group *
+    </menu>
+    <hr>
+    <a name="setDestination"></a>
+    <h4>setDestination
+    </h4>
+    <span id=funcnameshort>command void <b>setDestination</b>(message_t *msg, am_addr_t addr)
+    </span>
+    <p>
+    <menu>
+       Same as AMPacket.setDestination *
+    </menu>
+    <hr>
+    <a name="setGroup"></a>
+    <h4>setGroup
+    </h4>
+    <span id=funcnameshort>command void <b>setGroup</b>(message_t *msg, am_group_t grp)
+    </span>
+    <p>
+    <menu>
+       Same as AMPacket.setGroup *
+    </menu>
+    <hr>
+    <a name="setSource"></a>
+    <h4>setSource
+    </h4>
+    <span id=funcnameshort>command void <b>setSource</b>(message_t *msg, am_addr_t addr)
+    </span>
+    <p>
+    <menu>
+       Same as AMPacket.setSource *
+    </menu>
+    <hr>
+    <a name="source"></a>
+    <h4>source
+    </h4>
+    <span id=funcnameshort>command am_addr_t <b>source</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+       Same as AMPacket.source *
+    </menu>
+  </body>
+</html>

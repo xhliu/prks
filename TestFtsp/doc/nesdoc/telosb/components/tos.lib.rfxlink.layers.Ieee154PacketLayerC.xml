@@ -1,0 +1,224 @@
+<?xml version="1.0" ?><component abstract="" loc="35:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc" nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerC" qname="Ieee154PacketLayerC">
+      <parameters>
+      </parameters>
+      <configuration/>
+      <wiring>
+        <wire loc="56:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc">
+          <from><interface-ref name="Ieee154Packet" ref="0x40b73ab8" scoped=""/></from>
+          <to><interface-ref name="Ieee154Packet" ref="0x40bcae30" scoped=""/></to>
+        </wire>
+        <wire loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc">
+          <from><interface-ref name="RadioPacket" ref="0x40b72620" scoped=""/></from>
+          <to><interface-ref name="RadioPacket" ref="0x40bc9890" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc">
+          <from><interface-ref name="Ieee154PacketLayer" ref="0x40b74040" scoped=""/></from>
+          <to><interface-ref name="Ieee154PacketLayer" ref="0x40b6d428" scoped=""/></to>
+        </wire>
+        <wire loc="53:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc">
+          <from><interface-ref name="ActiveMessageAddress" ref="0x40bc8070" scoped=""/></from>
+          <to><interface-ref name="ActiveMessageAddress" ref="0x40addb70" scoped=""/></to>
+        </wire>
+        <wire loc="58:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc">
+          <from><interface-ref name="SubPacket" ref="0x40bc8648" scoped=""/></from>
+          <to><interface-ref name="SubPacket" ref="0x40b72ed8" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="40:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc" name="Ieee154Packet" provided="1" ref="0x40b73ab8">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerC" qname="Ieee154PacketLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Ieee154Packet" ref="0x40b73ab8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Ieee154Packet" qname="Ieee154Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="source" ref="0x40b73c90" scoped=""/>
+        <function-ref name="address" ref="0x40b73d70" scoped=""/>
+        <function-ref name="destination" ref="0x40b73e50" scoped=""/>
+        <function-ref name="setSource" ref="0x40b72010" scoped=""/>
+        <function-ref name="setDestination" ref="0x40b720f0" scoped=""/>
+        <function-ref name="pan" ref="0x40b721d0" scoped=""/>
+        <function-ref name="setPan" ref="0x40b722b0" scoped=""/>
+        <function-ref name="isForMe" ref="0x40b72390" scoped=""/>
+        <function-ref name="localPan" ref="0x40b72470" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="41:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc" name="RadioPacket" provided="1" ref="0x40b72620">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerC" qname="Ieee154PacketLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioPacket" ref="0x40b72620" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40b727f8" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40b728d8" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40b729b8" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40b72a98" scoped=""/>
+        <function-ref name="headerLength" ref="0x40b72b78" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40b72c58" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="39:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc" name="Ieee154PacketLayer" provided="1" ref="0x40b74040">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerC" qname="Ieee154PacketLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Ieee154PacketLayer" ref="0x40b74040" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getDestPan" ref="0x40b74218" scoped=""/>
+        <function-ref name="getDSN" ref="0x40b742f8" scoped=""/>
+        <function-ref name="setFCF" ref="0x40b743d8" scoped=""/>
+        <function-ref name="isAckFrame" ref="0x40b744b8" scoped=""/>
+        <function-ref name="setSrcAddr" ref="0x40b74598" scoped=""/>
+        <function-ref name="createDataFrame" ref="0x40b74678" scoped=""/>
+        <function-ref name="setDSN" ref="0x40b74758" scoped=""/>
+        <function-ref name="createAckReply" ref="0x40b74838" scoped=""/>
+        <function-ref name="getSrcAddr" ref="0x40b74918" scoped=""/>
+        <function-ref name="isDataFrame" ref="0x40b749f8" scoped=""/>
+        <function-ref name="getAckRequired" ref="0x40b74ad8" scoped=""/>
+        <function-ref name="verifyAckReply" ref="0x40b74bb8" scoped=""/>
+        <function-ref name="localAddr" ref="0x40b74c98" scoped=""/>
+        <function-ref name="requiresAckWait" ref="0x40b74df8" scoped=""/>
+        <function-ref name="localPan" ref="0x40b74ed8" scoped=""/>
+        <function-ref name="setDestAddr" ref="0x40b73010" scoped=""/>
+        <function-ref name="createAckFrame" ref="0x40b730f0" scoped=""/>
+        <function-ref name="setFramePending" ref="0x40b731d0" scoped=""/>
+        <function-ref name="setDestPan" ref="0x40b732b0" scoped=""/>
+        <function-ref name="isForMe" ref="0x40b73390" scoped=""/>
+        <function-ref name="setAckRequired" ref="0x40b73470" scoped=""/>
+        <function-ref name="getFCF" ref="0x40b73550" scoped=""/>
+        <function-ref name="requiresAckReply" ref="0x40b73630" scoped=""/>
+        <function-ref name="getDestAddr" ref="0x40b73710" scoped=""/>
+        <function-ref name="getFramePending" ref="0x40b737f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerC.nc" name="SubPacket" provided="0" ref="0x40b72ed8">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerC" qname="Ieee154PacketLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubPacket" ref="0x40b72ed8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40b710c0" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40b711a0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40b71280" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40b71360" scoped=""/>
+        <function-ref name="headerLength" ref="0x40b71440" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40b71520" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="54:ActiveMessageAddressC.nc" name="ActiveMessageAddress" provided="1" ref="0x40addb70">
+      <component-ref nicename="ActiveMessageAddressC" qname="ActiveMessageAddressC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="ActiveMessageAddress" ref="0x40addb70" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.ActiveMessageAddress" qname="ActiveMessageAddress"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="amAddress" ref="0x40addd48" scoped=""/>
+        <function-ref name="changed" ref="0x40adde28" scoped=""/>
+        <function-ref name="amGroup" ref="0x40addf08" scoped=""/>
+        <function-ref name="setAddress" ref="0x40ada010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerP.nc" name="RadioPacket" provided="1" ref="0x40bc9890">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerP" qname="Ieee154PacketLayerC.Ieee154PacketLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioPacket" ref="0x40bc9890" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40bc9a68" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40bc9b48" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40bc9c28" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40bc9d08" scoped=""/>
+        <function-ref name="headerLength" ref="0x40bc9de8" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40bc9ec8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="41:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerP.nc" name="Ieee154PacketLayer" provided="1" ref="0x40b6d428">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerP" qname="Ieee154PacketLayerC.Ieee154PacketLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Ieee154PacketLayer" ref="0x40b6d428" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayer" qname="Ieee154PacketLayer"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="getDestPan" ref="0x40b6d600" scoped=""/>
+        <function-ref name="getDSN" ref="0x40b6d6e0" scoped=""/>
+        <function-ref name="setFCF" ref="0x40b6d7c0" scoped=""/>
+        <function-ref name="isAckFrame" ref="0x40b6d8a0" scoped=""/>
+        <function-ref name="setSrcAddr" ref="0x40b6d980" scoped=""/>
+        <function-ref name="createDataFrame" ref="0x40b6da60" scoped=""/>
+        <function-ref name="setDSN" ref="0x40b6db40" scoped=""/>
+        <function-ref name="createAckReply" ref="0x40b6dc20" scoped=""/>
+        <function-ref name="getSrcAddr" ref="0x40b6dd00" scoped=""/>
+        <function-ref name="isDataFrame" ref="0x40b6dde0" scoped=""/>
+        <function-ref name="getAckRequired" ref="0x40b6dec0" scoped=""/>
+        <function-ref name="verifyAckReply" ref="0x40bca010" scoped=""/>
+        <function-ref name="localAddr" ref="0x40bca0f0" scoped=""/>
+        <function-ref name="requiresAckWait" ref="0x40bca250" scoped=""/>
+        <function-ref name="localPan" ref="0x40bca330" scoped=""/>
+        <function-ref name="setDestAddr" ref="0x40bca410" scoped=""/>
+        <function-ref name="createAckFrame" ref="0x40bca4f0" scoped=""/>
+        <function-ref name="setFramePending" ref="0x40bca5d0" scoped=""/>
+        <function-ref name="setDestPan" ref="0x40bca6b0" scoped=""/>
+        <function-ref name="isForMe" ref="0x40bca790" scoped=""/>
+        <function-ref name="setAckRequired" ref="0x40bca870" scoped=""/>
+        <function-ref name="getFCF" ref="0x40bca950" scoped=""/>
+        <function-ref name="requiresAckReply" ref="0x40bcaa30" scoped=""/>
+        <function-ref name="getDestAddr" ref="0x40bcab10" scoped=""/>
+        <function-ref name="getFramePending" ref="0x40bcabf0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="49:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerP.nc" name="SubPacket" provided="0" ref="0x40bc8648">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerP" qname="Ieee154PacketLayerC.Ieee154PacketLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubPacket" ref="0x40bc8648" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40bc8820" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40bc8900" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40bc89e0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40bc8ac0" scoped=""/>
+        <function-ref name="headerLength" ref="0x40bc8ba0" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40bc8c80" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerP.nc" name="Ieee154Packet" provided="1" ref="0x40bcae30">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerP" qname="Ieee154PacketLayerC.Ieee154PacketLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Ieee154Packet" ref="0x40bcae30" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Ieee154Packet" qname="Ieee154Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="source" ref="0x40bc9050" scoped=""/>
+        <function-ref name="address" ref="0x40bc9130" scoped=""/>
+        <function-ref name="destination" ref="0x40bc9210" scoped=""/>
+        <function-ref name="setSource" ref="0x40bc92f0" scoped=""/>
+        <function-ref name="setDestination" ref="0x40bc93d0" scoped=""/>
+        <function-ref name="pan" ref="0x40bc94b0" scoped=""/>
+        <function-ref name="setPan" ref="0x40bc9590" scoped=""/>
+        <function-ref name="isForMe" ref="0x40bc9670" scoped=""/>
+        <function-ref name="localPan" ref="0x40bc9750" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="48:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerP.nc" name="ActiveMessageAddress" provided="0" ref="0x40bc8070">
+      <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerP" qname="Ieee154PacketLayerC.Ieee154PacketLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="ActiveMessageAddress" ref="0x40bc8070" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.ActiveMessageAddress" qname="ActiveMessageAddress"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="amAddress" ref="0x40bc8248" scoped=""/>
+        <function-ref name="changed" ref="0x40bc8328" scoped=""/>
+        <function-ref name="amGroup" ref="0x40bc8408" scoped=""/>
+        <function-ref name="setAddress" ref="0x40bc84e8" scoped=""/>
+      </interface-functions>
+    </interface><component loc="52:ActiveMessageAddressC.nc" nicename="ActiveMessageAddressC" qname="ActiveMessageAddressC" safe="">
+      <documentation loc="45:ActiveMessageAddressC.nc">
+        <short>
+ Component that stores the node's active message address and group ID.</short>
+        <long>
+ Component that stores the node's active message address and group ID.
+
+ @author Philip Levis
+ @author David Moss
+</long>
+      </documentation>
+      <module/>
+    </component><component abstract="" loc="37(Ieee154PacketLayerC.Ieee154PacketLayerP):/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/Ieee154PacketLayerP.nc" nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerP" qname="Ieee154PacketLayerC.Ieee154PacketLayerP">
+      <instance>
+        <component-ref nicename="tos.lib.rfxlink.layers.Ieee154PacketLayerP" qname="Ieee154PacketLayerP"/>
+      </instance>
+      <module/>
+    </component></referenced></component>

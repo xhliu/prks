@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.RadioChannel</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.RadioChannel</h2>
+    <b>interface RadioChannel</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#getChannel">getChannel</a>()
+      </span><menu>
+ Returns the currently selected channel.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command error_t <a href="#setChannel">setChannel</a>(uint8_t channel)
+      </span><menu>
+ Sets the current channel.
+      </menu>
+    </div><p><div id=heading>Events</div><div id=funcsig><span id=funcnameshort>event void <a href="#setChannelDone">setChannelDone</a>()
+      </span><menu>
+ This event is signaled exactly once for each sucessfully posted state 
+ setChannel command when it is completed.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="getChannel"></a>
+    <h4>getChannel
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>getChannel</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the currently selected channel.
+
+    </menu>
+    <hr>
+    <a name="setChannel"></a>
+    <h4>setChannel
+    </h4>
+    <span id=funcnameshort>command error_t <b>setChannel</b>(uint8_t channel)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the current channel. Returns EBUSY if the stack is unable
+ to change the channel this time (some other operation is in progress),
+ EALREADY if the selected channel is already set, SUCCESS otherwise.
+
+    </menu>
+    <p><div id=heading>Events - Details</div>
+    <a name="setChannelDone"></a>
+    <h4>setChannelDone
+    </h4>
+    <span id=funcnameshort>event void <b>setChannelDone</b>()
+    </span>
+    <p>
+    <menu>
+      
+ This event is signaled exactly once for each sucessfully posted state 
+ setChannel command when it is completed.
+
+    </menu>
+  </body>
+</html>

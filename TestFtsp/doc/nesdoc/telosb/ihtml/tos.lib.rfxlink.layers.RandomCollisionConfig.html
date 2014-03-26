@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.layers.RandomCollisionConfig</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.layers.RandomCollisionConfig</h2>
+    <b>interface RandomCollisionConfig</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getCongestionBackoff">getCongestionBackoff</a>(message_t *msg)
+      </span><menu>
+ Returns the amount of maximum backoff when there is congestion
+ (the channel was busy for the first try)
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getInitialBackoff">getInitialBackoff</a>(message_t *msg)
+      </span><menu>
+ Returns the initial amount of maximum backoff for this message.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getMinimumBackoff">getMinimumBackoff</a>()
+      </span><menu>
+ Returns the minimum ticks before the message could be sent.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getTransmitBarrier">getTransmitBarrier</a>(message_t *msg)
+      </span><menu>
+ The provided message was just received, and this command should return 
+ the time till no transmission should be initiated.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="getCongestionBackoff"></a>
+    <h4>getCongestionBackoff
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getCongestionBackoff</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the amount of maximum backoff when there is congestion
+ (the channel was busy for the first try)
+
+    </menu>
+    <hr>
+    <a name="getInitialBackoff"></a>
+    <h4>getInitialBackoff
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getInitialBackoff</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the initial amount of maximum backoff for this message.
+
+    </menu>
+    <hr>
+    <a name="getMinimumBackoff"></a>
+    <h4>getMinimumBackoff
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getMinimumBackoff</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the minimum ticks before the message could be sent.
+
+    </menu>
+    <hr>
+    <a name="getTransmitBarrier"></a>
+    <h4>getTransmitBarrier
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getTransmitBarrier</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ The provided message was just received, and this command should return 
+ the time till no transmission should be initiated.
+
+    </menu>
+  </body>
+</html>

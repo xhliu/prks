@@ -1,0 +1,40 @@
+<area shape="rect" href="../chtml/tos.system.FcfsArbiterC.html" title="FcfsArbiterC\n(ArbiterC)" alt="" coords="405,245,533,304">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="126,172 139,198 159,219 199,237 259,250 392,267 392,272 258,255 198,242 156,224 135,201 122,175">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="120,169,128,177">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="401,267,409,275">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="157,203,336,221">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="472,304 472,357 467,357 467,304">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="465,300,473,308">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="465,367,473,375">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="469,329,643,346">
+<area shape="rect" href="../chtml/tos.chips.msp430.usart.Msp430UsartShareP.html" title="Msp430UsartShareP\n(UsartShareP)" alt="" coords="883,125,1064,173">
+<area shape="poly" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts[uint8_t]" alt="" coords="976,53 976,112 971,112 971,53">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts[uint8_t]" alt="" coords="969,49,977,57">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts[uint8_t]" alt="" coords="969,121,977,129">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts[uint8_t]" alt="" coords="973,78,1195,95">
+<area shape="poly" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="927,176 876,205 865,216 850,224 794,240 714,253 547,271 546,265 714,248 792,234 848,219 861,211 873,201 924,171">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="921,169,929,177">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="529,265,537,273">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="883,203,949,221">
+<area shape="rect" href="../chtml/tos.chips.msp430.usart.HplMsp430Usart1C.html" title="HplMsp430Usart1C" alt="" coords="768,245,949,304">
+<area shape="poly" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts" alt="" coords="971,174 963,199 949,223 933,239 929,235 945,220 958,197 965,173">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts" alt="" coords="964,169,972,177">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts" alt="" coords="916,241,924,249">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts" alt="" coords="960,203,1128,221">
+<area shape="poly" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="330,172 340,197 355,220 374,235 395,247 392,252 371,239 351,223 335,200 326,174">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="324,169,332,177">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="401,252,409,260">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="353,203,465,221">
+<area shape="poly" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="475,173 473,203 473,232 468,232 468,203 469,173">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="468,169,476,177">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="467,241,475,249">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="473,203,540,221">
+<area shape="rect" href="../chtml/tos.lib.power.AsyncStdControlPowerManagerC.html" title="AsyncStdControlPowerManagerC\n(PowerManagerC)" alt="" coords="568,120,856,179">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceDefaultOwner.html" title="ResourceDefaultOwner" alt="" coords="636,181 583,205 524,240 521,235 580,200 634,176">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceDefaultOwner.html" title="ResourceDefaultOwner" alt="" coords="631,175,639,183">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceDefaultOwner.html" title="ResourceDefaultOwner" alt="" coords="508,241,516,249">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceDefaultOwner.html" title="ResourceDefaultOwner" alt="" coords="589,203,733,221">
+<area shape="poly" href="../ihtml/tos.interfaces.AsyncStdControl.html" title="AsyncStdControl" alt="" coords="721,178 730,200 745,220 764,237 761,241 741,223 726,202 716,180">
+<area shape="rect" href="../ihtml/tos.interfaces.AsyncStdControl.html" title="AsyncStdControl" alt="" coords="715,175,723,183">
+<area shape="rect" href="../ihtml/tos.interfaces.AsyncStdControl.html" title="AsyncStdControl" alt="" coords="771,241,779,249">
+<area shape="rect" href="../ihtml/tos.interfaces.AsyncStdControl.html" title="AsyncStdControl" alt="" coords="743,203,849,221">

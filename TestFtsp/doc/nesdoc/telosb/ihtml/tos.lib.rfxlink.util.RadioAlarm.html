@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.RadioAlarm</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.RadioAlarm</h2>
+    <b>interface RadioAlarm</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command void <a href="#cancel">cancel</a>()
+      </span><menu>
+ Cancels the running alarm.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command tradio_size <a href="#getNow">getNow</a>()
+      </span><menu>
+ Returns the current time as measured by the radio stack.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#isFree">isFree</a>()
+      </span><menu>
+ Returns TRUE if the alarm is free and ready to be used.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#wait">wait</a>(tradio_size timeout)
+      </span><menu>
+ Waits till the specified timeout period expires.
+      </menu>
+    </div><p><div id=heading>Events</div><div id=funcsig><span id=funcnameshort>event void <a href="#fired">fired</a>()
+      </span><menu>
+ This event is fired when the specified timeout period expires.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="cancel"></a>
+    <h4>cancel
+    </h4>
+    <span id=funcnameshort>command void <b>cancel</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Cancels the running alarm. The alarm must be pending.
+
+    </menu>
+    <hr>
+    <a name="getNow"></a>
+    <h4>getNow
+    </h4>
+    <span id=funcnameshort>command tradio_size <b>getNow</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the current time as measured by the radio stack.
+
+    </menu>
+    <hr>
+    <a name="isFree"></a>
+    <h4>isFree
+    </h4>
+    <span id=funcnameshort>command bool <b>isFree</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the alarm is free and ready to be used. Once the alarm
+ is free, it cannot become nonfree in the same tasklet block. Note,
+ if the alarm is currently set (even if for ourselves) then it is not free.
+
+    </menu>
+    <hr>
+    <a name="wait"></a>
+    <h4>wait
+    </h4>
+    <span id=funcnameshort>command void <b>wait</b>(tradio_size timeout)
+    </span>
+    <p>
+    <menu>
+      
+ Waits till the specified timeout period expires. The alarm must be free.
+
+    </menu>
+    <p><div id=heading>Events - Details</div>
+    <a name="fired"></a>
+    <h4>fired
+    </h4>
+    <span id=funcnameshort>event void <b>fired</b>()
+    </span>
+    <p>
+    <menu>
+      
+ This event is fired when the specified timeout period expires.
+
+    </menu>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<area shape="rect" href="../chtml/tos.lib.serial.SerialDispatcherC.html" title="SerialDispatcherC" alt="" coords="228,245,396,304">
+<area shape="poly" href="../ihtml/tos.interfaces.SplitControl.html" title="SplitControl" alt="" coords="147,170 171,196 199,219 227,236 224,241 196,223 167,200 143,174">
+<area shape="rect" href="../ihtml/tos.interfaces.SplitControl.html" title="SplitControl" alt="" coords="141,168,149,176">
+<area shape="rect" href="../ihtml/tos.interfaces.SplitControl.html" title="SplitControl" alt="" coords="233,241,241,249">
+<area shape="rect" href="../ihtml/tos.interfaces.SplitControl.html" title="SplitControl" alt="" coords="197,203,272,221">
+<area shape="poly" href="../ihtml/tos.interfaces.Leds.html" title="Leds" alt="" coords="290,306 243,364 239,361 286,302">
+<area shape="rect" href="../ihtml/tos.interfaces.Leds.html" title="Leds" alt="" coords="284,300,292,308">
+<area shape="rect" href="../ihtml/tos.interfaces.Leds.html" title="Leds" alt="" coords="228,369,236,377">
+<area shape="rect" href="../ihtml/tos.interfaces.Leds.html" title="Leds" alt="" coords="267,329,298,346">
+<area shape="rect" href="../chtml/tos.lib.serial.SerialPacketInfoActiveMessageP.html" title="SerialPacketInfoActiveMessageP" alt="" coords="276,371,543,419">
+<area shape="poly" href="../ihtml/tos.lib.serial.SerialPacketInfo.html" title="SerialPacketInfo[uart_id_t]" alt="" coords="338,302 383,358 379,362 334,306">
+<area shape="rect" href="../ihtml/tos.lib.serial.SerialPacketInfo.html" title="SerialPacketInfo[uart_id_t]" alt="" coords="332,300,340,308">
+<area shape="rect" href="../ihtml/tos.lib.serial.SerialPacketInfo.html" title="SerialPacketInfo[uart_id_t]" alt="" coords="385,367,393,375">
+<area shape="rect" href="../ihtml/tos.lib.serial.SerialPacketInfo.html" title="SerialPacketInfo[uart_id_t]" alt="" coords="367,329,534,346">
+<area shape="rect" href="../chtml/tos.lib.serial.SerialActiveMessageP.html" title="SerialActiveMessageP\n(AM)" alt="" coords="219,125,405,173">
+<area shape="poly" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="77,50 97,74 121,94 144,105 163,109 207,117 213,119 211,124 206,123 162,115 142,110 119,98 93,77 73,54">
+<area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="71,48,79,56">
+<area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="221,121,229,129">
+<area shape="rect" href="../ihtml/tos.interfaces.AMSend.html" title="AMSend[am_id_t]" alt="" coords="120,78,235,95">
+<area shape="poly" href="../ihtml/tos.interfaces.Send.html" title="Send" alt="" coords="297,174 284,203 283,218 287,233 281,234 278,219 279,202 292,172">
+<area shape="rect" href="../ihtml/tos.interfaces.Send.html" title="Send" alt="" coords="291,169,299,177">
+<area shape="rect" href="../ihtml/tos.interfaces.Send.html" title="Send" alt="" coords="285,241,293,249">
+<area shape="rect" href="../ihtml/tos.interfaces.Send.html" title="Send" alt="" coords="281,203,314,221">
+<area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive" alt="" coords="316,173 317,203 317,232 312,232 312,203 311,173">
+<area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive" alt="" coords="309,169,317,177">
+<area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive" alt="" coords="309,241,317,249">
+<area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive" alt="" coords="315,203,363,221">
+<area shape="poly" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="215,49 281,114 277,118 211,53">
+<area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="209,47,217,55">
+<area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="284,121,292,129">
+<area shape="rect" href="../ihtml/tos.interfaces.Packet.html" title="Packet" alt="" coords="253,78,296,95">
+<area shape="poly" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="315,53 315,112 309,112 309,53">
+<area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="308,49,316,57">
+<area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="308,121,316,129">
+<area shape="rect" href="../ihtml/tos.interfaces.Receive.html" title="Receive[am_id_t]" alt="" coords="312,78,421,95">
+<area shape="poly" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="496,56 428,98 383,122 380,118 425,94 493,51">
+<area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="491,49,499,57">
+<area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="365,121,373,129">
+<area shape="rect" href="../ihtml/tos.interfaces.PacketAcknowledgements.html" title="PacketAcknowledgements" alt="" coords="462,78,629,95">
+<area shape="poly" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="725,53 684,78 635,99 575,113 527,116 478,116 418,123 407,125 406,120 417,117 478,111 526,110 574,108 634,93 682,73 723,48">
+<area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="720,47,728,55">
+<area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="389,121,397,129">
+<area shape="rect" href="../ihtml/tos.interfaces.AMPacket.html" title="AMPacket" alt="" coords="681,78,743,95">
+<area shape="rect" href="../chtml/tos.system.MainC.html" title="MainC" alt="" coords="429,120,512,179">
+<area shape="poly" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="435,181 362,239 358,235 432,177">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="429,175,437,183">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="345,241,353,249">
+<area shape="rect" href="../ihtml/tos.interfaces.Init.html" title="Init" alt="" coords="404,203,423,221">

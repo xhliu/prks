@@ -1,0 +1,51 @@
+<?xml version="1.0" ?><interfacedef loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioCCA.nc" nicename="tos.lib.rfxlink.util.RadioCCA" qname="RadioCCA">
+      <function event="" loc="52:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioCCA.nc" name="done" provided="0" ref="0x40ca4010">
+        <documentation loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioCCA.nc">
+          <short>
+ Signals the completion of the clear channel assesment send command.</short>
+          <long>
+ Signals the completion of the clear channel assesment send command.
+ SUCCESS means the channel is clear, EBUSY means the channel is not
+ clear, and FAIL means that the clear channel assesment could not
+ be finished or the operation was cancelled.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioCCA" qname="RadioCCA"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+            </type-int>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="52:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioCCA.nc" name="error" ref="0x40ca8e68">
+            <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+              <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+            </type-int>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="44:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioCCA.nc" name="request" provided="0" ref="0x40ca8988">
+        <documentation loc="39:/opt/tinyos-2.1.2/tos/lib/rfxlink/util/RadioCCA.nc">
+          <short>
+ Starts the clear channel assesment procedure.</short>
+          <long>
+ Starts the clear channel assesment procedure. Returns EBUSY if the radio
+ is currently servicing a clear channel assesment, and SUCCESS otherwise.
+ The check will be performed only in the RX_READY state.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioCCA" qname="RadioCCA"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+    </interfacedef>

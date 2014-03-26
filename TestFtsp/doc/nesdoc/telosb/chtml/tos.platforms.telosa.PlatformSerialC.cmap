@@ -1,0 +1,22 @@
+<area shape="rect" href="../chtml/tos.chips.msp430.usart.Msp430Uart1C.html" title="Msp430Uart1C\n(UartC)" alt="" coords="64,120,213,179">
+<area shape="poly" href="../ihtml/tos.interfaces.UartByte.html" title="UartByte" alt="" coords="80,52 116,107 111,109 75,55">
+<area shape="rect" href="../ihtml/tos.interfaces.UartByte.html" title="UartByte" alt="" coords="73,49,81,57">
+<area shape="rect" href="../ihtml/tos.interfaces.UartByte.html" title="UartByte" alt="" coords="116,116,124,124">
+<area shape="rect" href="../ihtml/tos.interfaces.UartByte.html" title="UartByte" alt="" coords="105,78,162,95">
+<area shape="rect" href="../chtml/tos.platforms.telosa.chips.cc2420x.TelosSerialP.html" title="TelosSerialP" alt="" coords="207,245,316,293">
+<area shape="poly" href="../ihtml/tos.chips.msp430.usart.Msp430UartConfigure.html" title="Msp430UartConfigure" alt="" coords="105,180 92,201 91,210 95,220 110,231 134,241 194,256 193,261 132,246 107,236 91,223 86,211 87,199 100,177">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.Msp430UartConfigure.html" title="Msp430UartConfigure" alt="" coords="99,175,107,183">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.Msp430UartConfigure.html" title="Msp430UartConfigure" alt="" coords="203,257,211,265">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.Msp430UartConfigure.html" title="Msp430UartConfigure" alt="" coords="93,203,232,221">
+<area shape="poly" href="../ihtml/tos.interfaces.UartStream.html" title="UartStream" alt="" coords="202,55 166,109 162,107 198,52">
+<area shape="rect" href="../ihtml/tos.interfaces.UartStream.html" title="UartStream" alt="" coords="196,49,204,57">
+<area shape="rect" href="../ihtml/tos.interfaces.UartStream.html" title="UartStream" alt="" coords="153,116,161,124">
+<area shape="rect" href="../ihtml/tos.interfaces.UartStream.html" title="UartStream" alt="" coords="181,78,257,95">
+<area shape="poly" href="../ihtml/tos.interfaces.StdControl.html" title="StdControl" alt="" coords="347,174 338,199 323,223 310,238 306,234 319,220 333,197 341,172">
+<area shape="rect" href="../ihtml/tos.interfaces.StdControl.html" title="StdControl" alt="" coords="340,169,348,177">
+<area shape="rect" href="../ihtml/tos.interfaces.StdControl.html" title="StdControl" alt="" coords="293,241,301,249">
+<area shape="rect" href="../ihtml/tos.interfaces.StdControl.html" title="StdControl" alt="" coords="331,203,399,221">
+<area shape="poly" href="../ihtml/tos.interfaces.Resource.html" title="Resource" alt="" coords="252,246 243,225 230,204 213,189 216,185 234,201 248,222 257,244">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource" alt="" coords="251,241,259,249">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource" alt="" coords="199,175,207,183">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource" alt="" coords="241,203,300,221">

@@ -1,0 +1,142 @@
+<?xml version="1.0" ?><interfacedef loc="24:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" nicename="tos.chips.cc2420x.CC2420XDriverConfig" qname="CC2420XDriverConfig">
+      <function command="" loc="35:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" name="maxPayloadLength" provided="0" ref="0x40a029a0">
+        <documentation loc="31:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc">
+          <short>
+ Returns the maximum length of the PHY payload including the 
+ length field but not counting the FCF field.</short>
+          <long>
+ Returns the maximum length of the PHY payload including the 
+ length field but not counting the FCF field.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.chips.cc2420x.CC2420XDriverConfig" qname="CC2420XDriverConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="29:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" name="headerLength" provided="0" ref="0x40a024a0">
+        <documentation loc="26:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc">
+          <short>
+ Returns the length of a dummy header to align the payload properly.</short>
+          <long>
+ Returns the length of a dummy header to align the payload properly.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.chips.cc2420x.CC2420XDriverConfig" qname="CC2420XDriverConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="29:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" name="msg" ref="0x40a02348">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="41:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" name="metadataLength" provided="0" ref="0x40a01090">
+        <documentation loc="37:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc">
+          <short>
+ Returns the length of a dummy metadata section to align the
+ metadata section properly.</short>
+          <long>
+ Returns the length of a dummy metadata section to align the
+ metadata section properly.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.chips.cc2420x.CC2420XDriverConfig" qname="CC2420XDriverConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="41:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" name="msg" ref="0x40a02f28">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="48:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" name="headerPreloadLength" provided="0" ref="0x40a015d8">
+        <documentation loc="43:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc">
+          <short>
+ Gets the number of bytes we should read before the RadioReceive.header
+ event is fired.</short>
+          <long>
+ Gets the number of bytes we should read before the RadioReceive.header
+ event is fired. If the length of the packet is less than this amount, 
+ then that event is fired earlier. The header length must be at least one.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.chips.cc2420x.CC2420XDriverConfig" qname="CC2420XDriverConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="54:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" name="requiresRssiCca" provided="0" ref="0x40a01d08">
+        <documentation loc="50:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc">
+          <short>
+ Returns TRUE if before sending this message we should make sure that
+ the channel is clear via a very basic (and quick) RSSI check.</short>
+          <long>
+ Returns TRUE if before sending this message we should make sure that
+ the channel is clear via a very basic (and quick) RSSI check.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.chips.cc2420x.CC2420XDriverConfig" qname="CC2420XDriverConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="bool" ref="0x4032de80"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="54:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XDriverConfig.nc" name="msg" ref="0x40a01bb0">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+    </interfacedef>

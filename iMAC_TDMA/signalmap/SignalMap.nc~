@@ -1,0 +1,34 @@
+/*
+ * Xiaohui Liu (whulxh@gmail.com)
+ * 12/28/2011
+ */
+#include "SignalMap.h"
+ 
+interface SignalMap {
+	// query the gain from the neighbor
+	// return is scaled by 128
+	// return: INVALID_GAIN if gain to the neighbor is unknown
+//	async command int16_t getInboundGain(am_addr_t nb);
+//	// query the gain to the neighbor
+//	async command int16_t getOutboundGain(am_addr_t nb);
+	async command error_t findNbIdxGain(am_addr_t nb, int16_t *idx_, int16_t *in_gain);
+	async command error_t getLocalGain(am_addr_t nb, int16_t *in_gain, int16_t *out_gain);
+	// get inbound & outbound gain from node to nb
+	async command error_t getGain(am_addr_t nb, am_addr_t node, int16_t *inbound_gain, int16_t *outbound_gain);
+
+	async command int16_t getSignalMapSize();
+	async command void getSignalMapSizeDbg(int16_t *num, int16_t *in_num, int16_t *out_num);
+	async command void getNbSignalMapSize(uint8_t *num, uint8_t *num0, uint8_t *num1, uint8_t *num2);
+	async command sm_entry_t *getSignalMap();
+	
+	// for debug
+	async command void printSignalMap(uint32_t time);
+	async command void freeze();
+	
+	async command int16_t level2Power(uint8_t power_level);
+
+#ifdef RIDB
+	async command int16_t getLocalNoise();
+#endif
+
+}

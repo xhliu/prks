@@ -1,0 +1,17 @@
+digraph "tos.lib.rfxlink.layers.LowPowerListeningDummyC" {
+  n0x40c1c010 [shape=ellipse, style=filled, label="SplitControl", fontsize=12];
+  n0x40c1a010 [shape=ellipse, style=filled, label="SubControl", fontsize=12];
+  n0x40c1c670 [shape=ellipse, style=filled, label="Send", fontsize=12];
+  n0x40c1a688 [shape=ellipse, style=filled, label="SubSend", fontsize=12];
+  n0x40c1b010 [shape=ellipse, style=filled, label="RadioPacket", fontsize=12];
+  n0x40c19090 [shape=ellipse, style=filled, label="SubPacket", fontsize=12];
+  n0x40c1b838 [shape=ellipse, style=filled, label="LowPowerListening", fontsize=12];
+  "LowPowerListeningDummyC.LowPowerListeningDummyP" [fontsize=12, shape=box, style=dashed, label="LowPowerListeningDummyP", URL="../chtml/tos.lib.rfxlink.layers.LowPowerListeningDummyP.html"];
+  n0x40c1cc20 [shape=ellipse, style=filled, label="Receive", fontsize=12];
+  n0x40c1ac58 [shape=ellipse, style=filled, label="SubReceive", fontsize=12];
+  "n0x40c1c010" -> "n0x40c1a010" [label="SplitControl", URL="../ihtml/tos.interfaces.SplitControl.html", fontsize=10];
+  "n0x40c1c670" -> "n0x40c1a688" [label="BareSend", URL="../ihtml/tos.lib.rfxlink.util.BareSend.html", fontsize=10];
+  "n0x40c1b010" -> "n0x40c19090" [label="RadioPacket", URL="../ihtml/tos.lib.rfxlink.util.RadioPacket.html", fontsize=10];
+  "n0x40c1b838" -> "LowPowerListeningDummyC.LowPowerListeningDummyP" [label="LowPowerListening", URL="../ihtml/tos.interfaces.LowPowerListening.html", fontsize=10];
+  "n0x40c1cc20" -> "n0x40c1ac58" [label="BareReceive", URL="../ihtml/tos.lib.rfxlink.util.BareReceive.html", fontsize=10];
+}

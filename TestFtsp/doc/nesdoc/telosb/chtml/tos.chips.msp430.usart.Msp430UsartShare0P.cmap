@@ -1,0 +1,39 @@
+<area shape="rect" href="../chtml/tos.system.FcfsArbiterC.html" title="FcfsArbiterC\n(ArbiterC)" alt="" coords="333,235,461,293">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="120,167 125,190 137,209 166,225 212,238 320,255 320,260 211,244 164,230 133,213 120,192 115,169">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="113,164,121,172">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="329,255,337,263">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceRequested.html" title="ResourceRequested[uint8_t]" alt="" coords="135,193,313,210">
+<area shape="poly" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="400,293 400,347 395,347 395,293">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="393,289,401,297">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="393,356,401,364">
+<area shape="rect" href="../ihtml/tos.interfaces.ResourceConfigure.html" title="ResourceConfigure[uint8_t]" alt="" coords="397,318,571,335">
+<area shape="rect" href="../chtml/tos.chips.msp430.usart.Msp430UsartShareP.html" title="Msp430UsartShareP\n(UsartShareP)" alt="" coords="573,120,755,168">
+<area shape="poly" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts[uint8_t]" alt="" coords="535,53 534,75 541,95 551,104 568,112 565,117 548,108 536,97 529,76 529,53">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts[uint8_t]" alt="" coords="528,49,536,57">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts[uint8_t]" alt="" coords="575,116,583,124">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts[uint8_t]" alt="" coords="538,78,761,95">
+<area shape="poly" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="614,170 522,213 474,234 472,230 520,208 612,166">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="609,164,617,172">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="457,233,465,241">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="561,193,628,210">
+<area shape="rect" href="../chtml/tos.chips.msp430.usart.HplMsp430Usart0C.html" title="HplMsp430Usart0C" alt="" coords="672,235,853,293">
+<area shape="poly" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts" alt="" coords="661,168 661,189 668,209 679,224 675,227 663,212 656,190 656,168">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts" alt="" coords="655,164,663,172">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts" alt="" coords="684,231,692,239">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430UsartInterrupts.html" title="HplMsp430UsartInterrupts" alt="" coords="665,193,833,210">
+<area shape="poly" href="../ihtml/tos.chips.msp430.usart.HplMsp430I2CInterrupts.html" title="HplMsp430I2CInterrupts" alt="" coords="755,157 804,172 823,180 835,190 840,200 840,209 830,227 826,224 835,208 835,201 831,194 820,185 802,176 754,163">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430I2CInterrupts.html" title="HplMsp430I2CInterrupts" alt="" coords="751,156,759,164">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430I2CInterrupts.html" title="HplMsp430I2CInterrupts" alt="" coords="813,231,821,239">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430I2CInterrupts.html" title="HplMsp430I2CInterrupts" alt="" coords="837,193,990,210">
+<area shape="poly" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="320,168 320,190 325,210 335,224 331,227 320,212 314,190 315,168">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="313,164,321,172">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="339,231,347,239">
+<area shape="rect" href="../ihtml/tos.interfaces.Resource.html" title="Resource[uint8_t]" alt="" coords="323,193,435,210">
+<area shape="poly" href="../ihtml/tos.chips.msp430.usart.HplMsp430I2CInterrupts.html" title="HplMsp430I2CInterrupts[uint8_t]" alt="" coords="786,54 778,77 763,98 743,115 740,111 759,94 773,74 782,52">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430I2CInterrupts.html" title="HplMsp430I2CInterrupts[uint8_t]" alt="" coords="780,49,788,57">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430I2CInterrupts.html" title="HplMsp430I2CInterrupts[uint8_t]" alt="" coords="725,116,733,124">
+<area shape="rect" href="../ihtml/tos.chips.msp430.usart.HplMsp430I2CInterrupts.html" title="HplMsp430I2CInterrupts[uint8_t]" alt="" coords="773,78,979,95">
+<area shape="poly" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="465,169 442,212 433,226 428,222 438,209 460,167">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="459,164,467,172">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="419,231,427,239">
+<area shape="rect" href="../ihtml/tos.interfaces.ArbiterInfo.html" title="ArbiterInfo" alt="" coords="449,193,516,210">

@@ -1,0 +1,113 @@
+<?xml version="1.0" ?><component loc="46:/opt/tinyos-2.1.2/tos/system/TinySchedulerC.nc" nicename="tos.system.TinySchedulerC" qname="TinySchedulerC">
+      <documentation loc="34:/opt/tinyos-2.1.2/tos/system/TinySchedulerC.nc">
+        <short>
+ The TinyOS scheduler.</short>
+        <long>
+ The TinyOS scheduler. It provides two interfaces: Scheduler,
+ for TinyOS to initialize and run tasks, and TaskBasic, the simplext
+ class of TinyOS tasks (reserved always at-most-once posting,
+ FIFO, parameter-free). For details and information on how to
+ replace the scheduler, refer to TEP 106.
+
+ @author  Phil Levis
+ @date    August 7 2005
+ @see     TEP 106: Tasks and Schedulers
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="54:/opt/tinyos-2.1.2/tos/system/TinySchedulerC.nc">
+          <from><interface-ref name="TaskBasic" ref="0x4033cd58" scoped=""/></from>
+          <to><interface-ref name="TaskBasic" ref="0x405a4c30" scoped=""/></to>
+        </wire>
+        <wire loc="53:/opt/tinyos-2.1.2/tos/system/TinySchedulerC.nc">
+          <from><interface-ref name="Scheduler" ref="0x403305f0" scoped=""/></from>
+          <to><interface-ref name="Scheduler" ref="0x405a43f8" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/system/TinySchedulerC.nc">
+          <from><interface-ref name="McuSleep" ref="0x405a38a8" scoped=""/></from>
+          <to><interface-ref name="McuSleep" ref="0x4033b248" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="48:/opt/tinyos-2.1.2/tos/system/TinySchedulerC.nc" name="TaskBasic" provided="1" ref="0x4033cd58">
+      <component-ref nicename="tos.system.TinySchedulerC" qname="TinySchedulerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TaskBasic" ref="0x4033cd58" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TaskBasic" qname="TaskBasic"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="postTask" ref="0x40332010" scoped=""/>
+        <function-ref name="runTask" ref="0x403320f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="47:/opt/tinyos-2.1.2/tos/system/TinySchedulerC.nc" name="Scheduler" provided="1" ref="0x403305f0">
+      <component-ref nicename="tos.system.TinySchedulerC" qname="TinySchedulerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Scheduler" ref="0x403305f0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Scheduler" qname="Scheduler"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x403307c8" scoped=""/>
+        <function-ref name="taskLoop" ref="0x403308a8" scoped=""/>
+        <function-ref name="runNextTask" ref="0x40330988" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="55:/opt/tinyos-2.1.2/tos/system/SchedulerBasicP.nc" name="Scheduler" provided="1" ref="0x405a43f8">
+      <component-ref nicename="tos.system.SchedulerBasicP" qname="SchedulerBasicP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Scheduler" ref="0x405a43f8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Scheduler" qname="Scheduler"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x405a45d0" scoped=""/>
+        <function-ref name="taskLoop" ref="0x405a46b0" scoped=""/>
+        <function-ref name="runNextTask" ref="0x405a4790" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="56:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/McuSleepC.nc" name="McuSleep" provided="1" ref="0x4033b248">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.McuSleepC" qname="McuSleepC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="McuSleep" ref="0x4033b248" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.McuSleep" qname="McuSleep"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="sleep" ref="0x4033b420" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="56:/opt/tinyos-2.1.2/tos/system/SchedulerBasicP.nc" name="TaskBasic" provided="1" ref="0x405a4c30">
+      <component-ref nicename="tos.system.SchedulerBasicP" qname="SchedulerBasicP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TaskBasic" ref="0x405a4c30" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TaskBasic" qname="TaskBasic"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="postTask" ref="0x405a4e08" scoped=""/>
+        <function-ref name="runTask" ref="0x405a4ee8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="57:/opt/tinyos-2.1.2/tos/system/SchedulerBasicP.nc" name="McuSleep" provided="0" ref="0x405a38a8">
+      <component-ref nicename="tos.system.SchedulerBasicP" qname="SchedulerBasicP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="McuSleep" ref="0x405a38a8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.McuSleep" qname="McuSleep"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="sleep" ref="0x405a3a80" scoped=""/>
+      </interface-functions>
+    </interface><component loc="54:/opt/tinyos-2.1.2/tos/system/SchedulerBasicP.nc" nicename="tos.system.SchedulerBasicP" qname="SchedulerBasicP" safe="">
+      <module/>
+    </component><component loc="54:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/McuSleepC.nc" nicename="tos.platforms.telosa.chips.cc2420x.tmicro.McuSleepC" qname="McuSleepC" safe="">
+      <documentation loc="50:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/McuSleepC.nc">
+        <short>
+We need prevent the MCU from sleeping when the microsecond alarm is set.</short>
+        <long>
+We need prevent the MCU from sleeping when the microsecond alarm is set.
+</long>
+      </documentation>
+      <module/>
+    </component></referenced></component>

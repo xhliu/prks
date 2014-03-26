@@ -1,0 +1,36 @@
+digraph "tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerMicroMapC" {
+  n0x4106e608 [shape=ellipse, style=filled, label="Msp430Timer", fontsize=12];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  n0x4106b5e8 [shape=ellipse, style=filled, label="Msp430TimerControl", fontsize=12];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  n0x4106a3c8 [shape=ellipse, style=filled, label="Msp430Compare", fontsize=12];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "Msp430TimerC" [fontsize=12, shape=box,peripheries=2, URL="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430TimerC.html"];
+  "n0x4106e608" -> "Msp430TimerC" [label="Msp430Timer[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Timer.html", fontsize=10];
+  "n0x4106b5e8" -> "Msp430TimerC" [label="Msp430TimerControl[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html", fontsize=10];
+  "n0x4106a3c8" -> "Msp430TimerC" [label="Msp430Compare[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Compare.html", fontsize=10];
+  "n0x4106e608" -> "Msp430TimerC" [label="Msp430Timer[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Timer.html", fontsize=10];
+  "n0x4106b5e8" -> "Msp430TimerC" [label="Msp430TimerControl[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html", fontsize=10];
+  "n0x4106a3c8" -> "Msp430TimerC" [label="Msp430Compare[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Compare.html", fontsize=10];
+  "n0x4106e608" -> "Msp430TimerC" [label="Msp430Timer[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Timer.html", fontsize=10];
+  "n0x4106b5e8" -> "Msp430TimerC" [label="Msp430TimerControl[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html", fontsize=10];
+  "n0x4106a3c8" -> "Msp430TimerC" [label="Msp430Compare[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Compare.html", fontsize=10];
+  "n0x4106e608" -> "Msp430TimerC" [label="Msp430Timer[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Timer.html", fontsize=10];
+  "n0x4106b5e8" -> "Msp430TimerC" [label="Msp430TimerControl[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html", fontsize=10];
+  "n0x4106a3c8" -> "Msp430TimerC" [label="Msp430Compare[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Compare.html", fontsize=10];
+  "n0x4106e608" -> "Msp430TimerC" [label="Msp430Timer[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Timer.html", fontsize=10];
+  "n0x4106b5e8" -> "Msp430TimerC" [label="Msp430TimerControl[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html", fontsize=10];
+  "n0x4106a3c8" -> "Msp430TimerC" [label="Msp430Compare[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Compare.html", fontsize=10];
+  "n0x4106e608" -> "Msp430TimerC" [label="Msp430Timer[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Timer.html", fontsize=10];
+  "n0x4106b5e8" -> "Msp430TimerC" [label="Msp430TimerControl[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430TimerControl.html", fontsize=10];
+  "n0x4106a3c8" -> "Msp430TimerC" [label="Msp430Compare[uint8_t]", style=bold, URL="../ihtml/tos.chips.msp430.timer.Msp430Compare.html", fontsize=10];
+}

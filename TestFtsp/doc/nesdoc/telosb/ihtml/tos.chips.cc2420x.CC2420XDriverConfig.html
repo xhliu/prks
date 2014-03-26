@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.chips.cc2420x.CC2420XDriverConfig</title>
+  </head>
+  <body>
+    <h2>Interface: tos.chips.cc2420x.CC2420XDriverConfig</h2>
+    <b>interface CC2420XDriverConfig</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#headerLength">headerLength</a>(message_t *msg)
+      </span><menu>
+ Returns the length of a dummy header to align the payload properly.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#headerPreloadLength">headerPreloadLength</a>()
+      </span><menu>
+ Gets the number of bytes we should read before the RadioReceive.header
+ event is fired.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#maxPayloadLength">maxPayloadLength</a>()
+      </span><menu>
+ Returns the maximum length of the PHY payload including the 
+ length field but not counting the FCF field.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#metadataLength">metadataLength</a>(message_t *msg)
+      </span><menu>
+ Returns the length of a dummy metadata section to align the
+ metadata section properly.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#requiresRssiCca">requiresRssiCca</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if before sending this message we should make sure that
+ the channel is clear via a very basic (and quick) RSSI check.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="headerLength"></a>
+    <h4>headerLength
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>headerLength</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the length of a dummy header to align the payload properly.
+
+    </menu>
+    <hr>
+    <a name="headerPreloadLength"></a>
+    <h4>headerPreloadLength
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>headerPreloadLength</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Gets the number of bytes we should read before the RadioReceive.header
+ event is fired. If the length of the packet is less than this amount, 
+ then that event is fired earlier. The header length must be at least one.
+
+    </menu>
+    <hr>
+    <a name="maxPayloadLength"></a>
+    <h4>maxPayloadLength
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>maxPayloadLength</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the maximum length of the PHY payload including the 
+ length field but not counting the FCF field.
+
+    </menu>
+    <hr>
+    <a name="metadataLength"></a>
+    <h4>metadataLength
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>metadataLength</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the length of a dummy metadata section to align the
+ metadata section properly.
+
+    </menu>
+    <hr>
+    <a name="requiresRssiCca"></a>
+    <h4>requiresRssiCca
+    </h4>
+    <span id=funcnameshort>command bool <b>requiresRssiCca</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if before sending this message we should make sure that
+ the channel is clear via a very basic (and quick) RSSI check.
+
+    </menu>
+  </body>
+</html>

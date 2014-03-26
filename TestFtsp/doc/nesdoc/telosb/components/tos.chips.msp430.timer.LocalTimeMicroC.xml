@@ -1,0 +1,53 @@
+<?xml version="1.0" ?><component loc="37:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeMicroC.nc" nicename="tos.chips.msp430.timer.LocalTimeMicroC" qname="LocalTimeMicroC">
+      <configuration/>
+      <wiring>
+        <wire loc="47:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeMicroC.nc">
+          <from><interface-ref name="LocalTime" ref="0x4108d1a0" scoped=""/></from>
+          <to><interface-ref name="LocalTime" ref="0x4108a638" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="39:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeMicroC.nc" name="LocalTime" provided="1" ref="0x4108d1a0">
+      <component-ref nicename="tos.chips.msp430.timer.LocalTimeMicroC" qname="LocalTimeMicroC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTime" ref="0x4108d1a0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x4108d7e8" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="40:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc" name="LocalTime" provided="1" ref="0x4108a638">
+      <component-ref nicename="tos.chips.msp430.timer.LocalTimeHybridMicroC" qname="LocalTimeHybridMicroC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTime" ref="0x4108a638" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x4108ac80" scoped=""/>
+      </interface-functions>
+    </interface><component loc="38:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc" nicename="tos.chips.msp430.timer.LocalTimeHybridMicroC" qname="LocalTimeHybridMicroC">
+      <configuration/>
+      <wiring>
+        <wire loc="49:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc">
+          <from><interface-ref name="LocalTime" ref="0x4108a638" scoped=""/></from>
+          <to><interface-ref name="LocalTime" ref="0x410c5260" scoped=""/></to>
+        </wire>
+        <wire loc="50:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc">
+          <from><interface-ref name="Counter" ref="0x410c5bf8" scoped=""/></from>
+          <to><interface-ref name="Counter" ref="0x410c91e0" scoped=""/></to>
+        </wire>
+        <wire loc="51:/opt/tinyos-2.1.2/tos/chips/msp430/timer/LocalTimeHybridMicroC.nc">
+          <from><interface-ref name="CounterFrom" ref="0x410c8428" scoped=""/></from>
+          <to><interface-ref name="Counter2ghz" ref="0x41089748" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component></referenced></component>

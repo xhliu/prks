@@ -1,0 +1,204 @@
+<?xml version="1.0" ?><component loc="4:TestFtspC.nc" nicename="TestFtspC" qname="TestFtspC" safe="">
+      <module/>
+    <specification><interface loc="11:TestFtspC.nc" name="AMControl" provided="0" ref="0x4071ea10">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMControl" ref="0x4071ea10" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x4071ebe8" scoped=""/>
+        <function-ref name="stopDone" ref="0x4071ecc8" scoped=""/>
+        <function-ref name="start" ref="0x4071eda8" scoped=""/>
+        <function-ref name="stop" ref="0x4071ee88" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="15:TestFtspC.nc" name="PacketTimeStamp" provided="0" ref="0x40720b78">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStamp" ref="0x40720b78" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x407186b8" scoped=""/>
+        <function-ref name="clear" ref="0x40718a68" scoped=""/>
+        <function-ref name="isValid" ref="0x40718308" scoped=""/>
+        <function-ref name="set" ref="0x40718e18" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="7:TestFtspC.nc" name="Boot" provided="0" ref="0x406d1960">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Boot" ref="0x406d1960" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Boot" qname="Boot"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="booted" ref="0x406d1b38" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="12:TestFtspC.nc" name="Packet" provided="0" ref="0x40719ce8">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Packet" ref="0x40719ce8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40719ec0" scoped=""/>
+        <function-ref name="payloadLength" ref="0x4070b010" scoped=""/>
+        <function-ref name="getPayload" ref="0x4070b0f0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4070b1d0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x4070b2b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="9:TestFtspC.nc" name="AMSend" provided="0" ref="0x40712380">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMSend" ref="0x40712380" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x40712558" scoped=""/>
+        <function-ref name="getPayload" ref="0x40712638" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40712718" scoped=""/>
+        <function-ref name="cancel" ref="0x407127f8" scoped=""/>
+        <function-ref name="sendDone" ref="0x407128d8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="22:TestFtspC.nc" name="GlobalTime" provided="0" ref="0x407415d0">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="GlobalTime" ref="0x407415d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TMicro" ref="0x406bd890"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getLocalTime" ref="0x40741c18" scoped=""/>
+        <function-ref name="global2Local" ref="0x4072d430" scoped=""/>
+        <function-ref name="getGlobalTime" ref="0x40741e90" scoped=""/>
+        <function-ref name="local2Global" ref="0x4072d170" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="21:TestFtspC.nc" name="SyncPacket" provided="0" ref="0x40735b60">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SyncPacket" ref="0x40735b60" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40735db8" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40735e98" scoped=""/>
+        <function-ref name="getPayload" ref="0x40734010" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x407340f0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x407341d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="19:TestFtspC.nc" name="SyncSend" provided="0" ref="0x40735010">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SyncSend" ref="0x40735010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x407351e8" scoped=""/>
+        <function-ref name="getPayload" ref="0x407352c8" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x407353a8" scoped=""/>
+        <function-ref name="cancel" ref="0x40735488" scoped=""/>
+        <function-ref name="sendDone" ref="0x40735568" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="8:TestFtspC.nc" name="Receive" provided="0" ref="0x40704d50">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Receive" ref="0x40704d50" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40704f28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="10:TestFtspC.nc" name="MilliTimer" provided="0" ref="0x4070d4e0">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="MilliTimer" ref="0x4070d4e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x40703010" scoped=""/>
+        <function-ref name="fired" ref="0x406c92a0" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x406c99a8" scoped=""/>
+        <function-ref name="isOneShot" ref="0x406c9750" scoped=""/>
+        <function-ref name="getdt" ref="0x407034c0" scoped=""/>
+        <function-ref name="gett0" ref="0x40703268" scoped=""/>
+        <function-ref name="isRunning" ref="0x406c94f8" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x4070db08" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x406c9cc8" scoped=""/>
+        <function-ref name="startOneShot" ref="0x4070dd88" scoped=""/>
+        <function-ref name="stop" ref="0x406c9048" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="6:TestFtspC.nc" name="Leds" provided="0" ref="0x406cbca8">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x406cbca8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x406cbe80" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x406d1010" scoped=""/>
+        <function-ref name="led1On" ref="0x406d10f0" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x406d11d0" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x406d12b0" scoped=""/>
+        <function-ref name="get" ref="0x406d1390" scoped=""/>
+        <function-ref name="led1Off" ref="0x406d1470" scoped=""/>
+        <function-ref name="led2Off" ref="0x406d17f0" scoped=""/>
+        <function-ref name="set" ref="0x406d1550" scoped=""/>
+        <function-ref name="led0On" ref="0x406d1630" scoped=""/>
+        <function-ref name="led2On" ref="0x406d1710" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="14:TestFtspC.nc" name="AMPacket" provided="0" ref="0x40725a98">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMPacket" ref="0x40725a98" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMPacket" qname="AMPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="group" ref="0x40725c70" scoped=""/>
+        <function-ref name="source" ref="0x40725d50" scoped=""/>
+        <function-ref name="address" ref="0x40725e30" scoped=""/>
+        <function-ref name="destination" ref="0x40725f10" scoped=""/>
+        <function-ref name="setSource" ref="0x4071d010" scoped=""/>
+        <function-ref name="setDestination" ref="0x4071d0f0" scoped=""/>
+        <function-ref name="type" ref="0x4071d1d0" scoped=""/>
+        <function-ref name="setType" ref="0x4071d2b0" scoped=""/>
+        <function-ref name="isForMe" ref="0x4071d390" scoped=""/>
+        <function-ref name="setGroup" ref="0x4071d470" scoped=""/>
+        <function-ref name="localGroup" ref="0x4071d550" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="16:TestFtspC.nc" name="UartLog" provided="0" ref="0x4072ea18">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartLog" ref="0x4072ea18" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="UartLog" qname="UartLog"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="logEntry" ref="0x4072ebf0" scoped=""/>
+        <function-ref name="logTxRx" ref="0x4072ecd0" scoped=""/>
+        <function-ref name="logByteStream" ref="0x4072edb0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="20:TestFtspC.nc" name="SyncReceive" provided="0" ref="0x40735780">
+      <component-ref nicename="TestFtspC" qname="TestFtspC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SyncReceive" ref="0x40735780" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x40735958" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

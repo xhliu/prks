@@ -1,0 +1,139 @@
+<?xml version="1.0" ?><interfacedef loc="36:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc" nicename="tos.lib.ftsp.TimeSyncInfo" qname="TimeSyncInfo">
+      <function command="" loc="55:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc" name="getSyncPoint" provided="0" ref="0x41392d88">
+        <documentation loc="50:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc">
+          <short>
+ Returns the local time of the last synchronization point.</short>
+          <long>
+ Returns the local time of the last synchronization point. This 
+ value is close to the current local time and updated when a new
+ time synchronization message arrives.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncInfo" qname="TimeSyncInfo"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="60:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc" name="getRootID" provided="0" ref="0x413912e8">
+        <documentation loc="57:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc">
+          <short>
+ Returns the current root to which this node is synchronized.</short>
+          <long>
+ Returns the current root to which this node is synchronized. 
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncInfo" qname="TimeSyncInfo"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="65:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc" name="getSeqNum" provided="0" ref="0x41391798">
+        <documentation loc="62:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc">
+          <short>
+ Returns the latest seq number seen from the current root.</short>
+          <long>
+ Returns the latest seq number seen from the current root.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncInfo" qname="TimeSyncInfo"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="41:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc" name="getOffset" provided="0" ref="0x41392408">
+        <documentation loc="38:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc">
+          <short>
+ Returns current offset of the local time wrt global time.</short>
+          <long>
+ Returns current offset of the local time wrt global time.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncInfo" qname="TimeSyncInfo"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="71:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc" name="getNumEntries" provided="0" ref="0x41391c68">
+        <documentation loc="67:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc">
+          <short>
+ Returns the number of entries stored currently in the 
+ regerssion table.</short>
+          <long>
+ Returns the number of entries stored currently in the 
+ regerssion table.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncInfo" qname="TimeSyncInfo"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="76:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc" name="getHeartBeats" provided="0" ref="0x4138f1a8">
+        <documentation loc="73:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc">
+          <short>
+ Returns the value of heartBeats variable.</short>
+          <long>
+ Returns the value of heartBeats variable. 
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncInfo" qname="TimeSyncInfo"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="48:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc" name="getSkew" provided="0" ref="0x41392850">
+        <documentation loc="43:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncInfo.nc">
+          <short>
+ Returns current skew of the local time wrt global time.</short>
+          <long>
+ Returns current skew of the local time wrt global time.
+ This value is normalized to 0.0 (1.0 is subtracted) to get maximum 
+ representation precision.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncInfo" qname="TimeSyncInfo"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-float alignment="I:2" cname="float" size="I:4"/>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+    </interfacedef>

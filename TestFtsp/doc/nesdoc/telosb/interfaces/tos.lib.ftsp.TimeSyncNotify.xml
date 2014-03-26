@@ -1,0 +1,39 @@
+<?xml version="1.0" ?><interfacedef loc="41:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncNotify.nc" nicename="tos.lib.ftsp.TimeSyncNotify" qname="TimeSyncNotify">
+      <documentation loc="36:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncNotify.nc">
+        <short>
+ time sync module (TimeSyncM) provides notification of arriving
+ and transmitted time-sync msgs through TimeSyncNotify interface:
+</short>
+      </documentation>
+      <function event="" loc="46:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncNotify.nc" name="msg_received" provided="0" ref="0x4138dc40">
+        <documentation loc="43:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncNotify.nc">
+          <short>
+ fired when time-sync msg is received and accepted
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncNotify" qname="TimeSyncNotify"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function event="" loc="52:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncNotify.nc" name="msg_sent" provided="0" ref="0x4138c070">
+        <documentation loc="48:/opt/tinyos-2.1.2/tos/lib/ftsp/TimeSyncNotify.nc">
+          <short>
+ fired when time-sync msg is sent by TimeSyncM or the sending did not
+ succeed
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.TimeSyncNotify" qname="TimeSyncNotify"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-void alignment="I:1" size="I:1"/>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+    </interfacedef>

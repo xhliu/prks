@@ -1,0 +1,143 @@
+<?xml version="1.0" ?><interfacedef loc="37:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime">
+      <parameters>
+        <typedef loc="37:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" name="precision_tag" ref="0x40734668">
+          <interfacedef-ref nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime"/>
+          <type-var alignment="U:" size="U:"><typedef-ref name="precision_tag" ref="0x40734668" scoped=""/></type-var>
+        </typedef>
+      </parameters>
+      <function command="" loc="42:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" name="getLocalTime" provided="0" ref="0x40734ba8">
+        <documentation loc="39:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc">
+          <short>
+ Returns the current local time of this mote.</short>
+          <long>
+ Returns the current local time of this mote.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="76:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" name="global2Local" provided="0" ref="0x407411e0">
+        <documentation loc="68:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc">
+          <short>
+ Converts the global time given in &lt;code&gt;time&lt;/code&gt; into the
+ correspoding local time and stores this again in
+ &lt;code&gt;time&lt;/code&gt;.</short>
+          <long>
+ Converts the global time given in &lt;code&gt;time&lt;/code&gt; into the
+ correspoding local time and stores this again in
+ &lt;code&gt;time&lt;/code&gt;. This method performs the inverse of the
+ &lt;code&gt;local2Global&lt;/clode&gt; transformation.
+
+ @return SUCCESS if this mote is synchronized, FAIL otherwise.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+                <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+              </type-int>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="76:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" name="time" ref="0x40741088">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+                <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+              </type-int>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="49:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" name="getGlobalTime" provided="0" ref="0x4072b230">
+        <documentation loc="44:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc">
+          <short>
+ Reads the current global time.</short>
+          <long>
+ Reads the current global time. This method is a combination
+ of &lt;code&gt;getLocalTime&lt;/code&gt; and &lt;code&gt;local2Global&lt;/code&gt;.
+ @return SUCCESS if this mote is synchronized, FAIL otherwise.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+                <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+              </type-int>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="49:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" name="time" ref="0x4072b0d8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+                <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+              </type-int>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="66:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" name="local2Global" provided="0" ref="0x4072b910">
+        <documentation loc="51:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc">
+          <short>
+ Converts the local time given in &lt;code&gt;time&lt;/code&gt; into the
+ corresponding global time and stores this again in
+ &lt;code&gt;time&lt;/code&gt;.</short>
+          <long>
+ Converts the local time given in &lt;code&gt;time&lt;/code&gt; into the
+ corresponding global time and stores this again in
+ &lt;code&gt;time&lt;/code&gt;. The following equation is used to compute the
+ conversion:
+
+	globalTime = localTime + offset + skew * (localTime - syncPoint)
+
+ The skew is normalized to 0.0 (1.0 is subtracted) to increase the
+ machine precision. The syncPoint value is periodically updated to
+ increase the machine precision of the floating point arithmetic and
+ also to allow time wrap.
+
+ @return SUCCESS if this mote is synchronized, FAIL otherwise.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.ftsp.GlobalTime" qname="GlobalTime"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="error_t" ref="0x40336da0"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+                <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+              </type-int>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="66:/opt/tinyos-2.1.2/tos/lib/ftsp/GlobalTime.nc" name="time" ref="0x4072b7b8">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+                <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+              </type-int>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+    </interfacedef>

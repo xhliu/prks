@@ -1,0 +1,50 @@
+<?xml version="1.0" ?><component abstract="" loc="38:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/MetadataFlagsLayerC.nc" nicename="tos.lib.rfxlink.layers.MetadataFlagsLayerC" qname="MetadataFlagsLayerC">
+      <parameters>
+      </parameters>
+      <module/>
+    <specification><interface loc="43:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/MetadataFlagsLayerC.nc" name="RadioPacket" provided="1" ref="0x40ce9dc8">
+      <component-ref nicename="tos.lib.rfxlink.layers.MetadataFlagsLayerC" qname="MetadataFlagsLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="RadioPacket" ref="0x40ce9dc8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d14010" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40d140f0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40d141d0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40d142b0" scoped=""/>
+        <function-ref name="headerLength" ref="0x40d14390" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40d14470" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="48:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/MetadataFlagsLayerC.nc" name="SubPacket" provided="0" ref="0x40d146f0">
+      <component-ref nicename="tos.lib.rfxlink.layers.MetadataFlagsLayerC" qname="MetadataFlagsLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubPacket" ref="0x40d146f0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.RadioPacket" qname="RadioPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40d148c8" scoped=""/>
+        <function-ref name="payloadLength" ref="0x40d149a8" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x40d14a88" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x40d14b68" scoped=""/>
+        <function-ref name="headerLength" ref="0x40d14c48" scoped=""/>
+        <function-ref name="metadataLength" ref="0x40d14d28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/MetadataFlagsLayerC.nc" name="PacketFlag" provided="1" ref="0x40ce97a0">
+      <component-ref nicename="tos.lib.rfxlink.layers.MetadataFlagsLayerC" qname="MetadataFlagsLayerC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketFlag" ref="0x40ce97a0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketFlag" qname="PacketFlag"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="clear" ref="0x40ce9978" scoped=""/>
+        <function-ref name="get" ref="0x40ce9a58" scoped=""/>
+        <function-ref name="setValue" ref="0x40ce9b38" scoped=""/>
+        <function-ref name="set" ref="0x40ce9c18" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

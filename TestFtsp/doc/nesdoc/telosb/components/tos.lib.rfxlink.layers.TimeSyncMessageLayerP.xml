@@ -1,0 +1,301 @@
+<?xml version="1.0" ?><component abstract="" loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP">
+      <parameters>
+      </parameters>
+      <module/>
+    <specification><interface loc="56:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="SubReceive" provided="0" ref="0x41449c00">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubReceive" ref="0x41449c00" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x41449dd8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="55:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="SubAMSend" provided="0" ref="0x41449498">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubAMSend" ref="0x41449498" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x41449670" scoped=""/>
+        <function-ref name="getPayload" ref="0x41449750" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x41449830" scoped=""/>
+        <function-ref name="cancel" ref="0x41449910" scoped=""/>
+        <function-ref name="sendDone" ref="0x414499f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="50:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="TimeSyncPacketMilli" provided="1" ref="0x4144b740">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncPacketMilli" ref="0x4144b740" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncPacket" qname="TimeSyncPacket"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="isValid" ref="0x4144be70" scoped=""/>
+        <function-ref name="eventTime" ref="0x41449130" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="Packet" provided="1" ref="0x41452350">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Packet" ref="0x41452350" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x41452528" scoped=""/>
+        <function-ref name="payloadLength" ref="0x41452608" scoped=""/>
+        <function-ref name="getPayload" ref="0x414526e8" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x414527c8" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x414528a8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="47:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="TimeSyncAMSendMilli" provided="1" ref="0x4144fd40">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncAMSendMilli" ref="0x4144fd40" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncAMSend" qname="TimeSyncAMSend"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="send" ref="0x4144e488" scoped=""/>
+        <function-ref name="getPayload" ref="0x4144c180" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4144eee8" scoped=""/>
+        <function-ref name="cancel" ref="0x4144e908" scoped=""/>
+        <function-ref name="sendDone" ref="0x4144eba8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="Snoop" provided="1" ref="0x41453398">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Snoop" ref="0x41453398" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="receive" ref="0x41453570" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="59:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="SubPacket" provided="0" ref="0x414470c0">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubPacket" ref="0x414470c0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x41447318" scoped=""/>
+        <function-ref name="payloadLength" ref="0x414473f8" scoped=""/>
+        <function-ref name="getPayload" ref="0x414474d8" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x414475b8" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x41447698" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="TimeSyncAMSendRadio" provided="1" ref="0x41450010">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncAMSendRadio" ref="0x41450010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncAMSend" qname="TimeSyncAMSend"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="send" ref="0x41450740" scoped=""/>
+        <function-ref name="getPayload" ref="0x4144f420" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4144f1c8" scoped=""/>
+        <function-ref name="cancel" ref="0x41450bc0" scoped=""/>
+        <function-ref name="sendDone" ref="0x41450e60" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="58:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="SubAMPacket" provided="0" ref="0x41448410">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubAMPacket" ref="0x41448410" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMPacket" qname="AMPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="group" ref="0x414485e8" scoped=""/>
+        <function-ref name="source" ref="0x414486c8" scoped=""/>
+        <function-ref name="address" ref="0x414487a8" scoped=""/>
+        <function-ref name="destination" ref="0x41448888" scoped=""/>
+        <function-ref name="setSource" ref="0x41448968" scoped=""/>
+        <function-ref name="setDestination" ref="0x41448a48" scoped=""/>
+        <function-ref name="type" ref="0x41448b28" scoped=""/>
+        <function-ref name="setType" ref="0x41448c08" scoped=""/>
+        <function-ref name="isForMe" ref="0x41448ce8" scoped=""/>
+        <function-ref name="setGroup" ref="0x41448dc8" scoped=""/>
+        <function-ref name="localGroup" ref="0x41448ea8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="41:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="Receive" provided="1" ref="0x41456ce8">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Receive" ref="0x41456ce8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="receive" ref="0x41456ec0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="49:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="TimeSyncPacketRadio" provided="1" ref="0x4144c7c0">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncPacketRadio" ref="0x4144c7c0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncPacket" qname="TimeSyncPacket"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="isValid" ref="0x4144cef0" scoped=""/>
+        <function-ref name="eventTime" ref="0x4144b1c0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="61:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="PacketTimeStampRadio" provided="0" ref="0x41447b18">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStampRadio" ref="0x41447b18" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x414466b8" scoped=""/>
+        <function-ref name="clear" ref="0x41446a68" scoped=""/>
+        <function-ref name="isValid" ref="0x41446308" scoped=""/>
+        <function-ref name="set" ref="0x41446e18" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="67:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="PacketTimeSyncOffset" provided="0" ref="0x414412e0">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeSyncOffset" ref="0x414412e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.rfxlink.util.PacketField" qname="PacketField"/>
+        <arguments>
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x41441ea8" scoped=""/>
+        <function-ref name="get" ref="0x41441be8" scoped=""/>
+        <function-ref name="isSet" ref="0x41441928" scoped=""/>
+        <function-ref name="set" ref="0x4143f190" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="64:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="LocalTimeRadio" provided="0" ref="0x41443dc0">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTimeRadio" ref="0x41443dc0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x41442428" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="65:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="LocalTimeMilli" provided="0" ref="0x41442818">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTimeMilli" ref="0x41442818" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x41442e60" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="AMPacket" provided="1" ref="0x41453708">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMPacket" ref="0x41453708" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMPacket" qname="AMPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="group" ref="0x414538e0" scoped=""/>
+        <function-ref name="source" ref="0x414539c0" scoped=""/>
+        <function-ref name="address" ref="0x41453aa0" scoped=""/>
+        <function-ref name="destination" ref="0x41453b80" scoped=""/>
+        <function-ref name="setSource" ref="0x41453c60" scoped=""/>
+        <function-ref name="setDestination" ref="0x41453d40" scoped=""/>
+        <function-ref name="type" ref="0x41453e20" scoped=""/>
+        <function-ref name="setType" ref="0x41453f00" scoped=""/>
+        <function-ref name="isForMe" ref="0x41452010" scoped=""/>
+        <function-ref name="setGroup" ref="0x414520f0" scoped=""/>
+        <function-ref name="localGroup" ref="0x414521d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="SubSnoop" provided="0" ref="0x41448010">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SubSnoop" ref="0x41448010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="receive" ref="0x414481e8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="62:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/TimeSyncMessageLayerP.nc" name="PacketTimeStampMilli" provided="0" ref="0x41444578">
+      <component-ref nicename="tos.lib.rfxlink.layers.TimeSyncMessageLayerP" qname="TimeSyncMessageLayerP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStampMilli" ref="0x41444578" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x41443088" scoped=""/>
+        <function-ref name="clear" ref="0x41443438" scoped=""/>
+        <function-ref name="isValid" ref="0x41444cc8" scoped=""/>
+        <function-ref name="set" ref="0x414437e8" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

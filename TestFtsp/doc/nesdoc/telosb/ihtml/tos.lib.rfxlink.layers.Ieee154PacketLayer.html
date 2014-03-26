@@ -1,0 +1,450 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.layers.Ieee154PacketLayer</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.layers.Ieee154PacketLayer</h2>
+    <b>interface Ieee154PacketLayer</b><p>
+ This interface encapsulates IEEE 802.15.4 intrapan data frames with 
+ 16-bit destination pan, source and destination addresses. It also 
+ supports 6LowPan interoperability mode, and acknowledgement frames.
+ Note, that this interface does not support the CRC-16 value, which
+ should be verified before the data can be trusted.
+
+    <p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command void <a href="#createAckFrame">createAckFrame</a>(message_t *msg)
+      </span><menu>
+ Sets the FCF to create an acknowledgement frame supported by
+ this interface.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#createAckReply">createAckReply</a>(message_t *data, message_t *ack)
+      </span><menu>
+ Creates an acknowledgement packet for the given data packet.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#createDataFrame">createDataFrame</a>(message_t *msg)
+      </span><menu>
+ Sets the FCF to create a data frame supported by this interface.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#getAckRequired">getAckRequired</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the ACK required field is set in the FCF.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getDestAddr">getDestAddr</a>(message_t *msg)
+      </span><menu>
+ Returns the destination address, valid only for data frames
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getDestPan">getDestPan</a>(message_t *msg)
+      </span><menu>
+ returns the destination PAN id, values <= 255 are tinyos groups,
+ valid only for data frames
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#getDSN">getDSN</a>(message_t *msg)
+      </span><menu>
+ Returns the data sequence number
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getFCF">getFCF</a>(message_t *msg)
+      </span><menu>
+ Returns the frame control field.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#getFramePending">getFramePending</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the frame pending field is set in the FCF.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint16_t <a href="#getSrcAddr">getSrcAddr</a>(message_t *msg)
+      </span><menu>
+ Returns the source address, valid only for data frames
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#isAckFrame">isAckFrame</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the message is an acknowledgement frame supported
+ by this interface (based on the value of the FCF).
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#isDataFrame">isDataFrame</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the message is a data frame supported by 
+ this interface (based on the value of the FCF).
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#isForMe">isForMe</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the destionation of this message is either 0xFFFF
+ or is the local address of the node, and the pan address is the
+ local one.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command ieee154_saddr_t <a href="#localAddr">localAddr</a>()
+      </span><menu>
+ Returns the local address of the node (AM address)
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command ieee154_panid_t <a href="#localPan">localPan</a>()
+      </span><menu>
+ Returns the local pan id (AM group)
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#requiresAckReply">requiresAckReply</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the packet is a data packet, the ACK_REQ field
+ is set and the destionation address is this node.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#requiresAckWait">requiresAckWait</a>(message_t *msg)
+      </span><menu>
+ Returns TRUE if the packet is a data packet, the ACK_REQ field
+ is set and the destination address is not the broadcast address.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setAckRequired">setAckRequired</a>(message_t *msg, bool ack)
+      </span><menu>
+ Sets the ACK required field in the FCF, should never be set
+ for acknowledgement frames.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setDestAddr">setDestAddr</a>(message_t *msg, uint16_t addr)
+      </span><menu>
+ Sets the destination address, valid only for data frames
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setDestPan">setDestPan</a>(message_t *msg, uint16_t pan)
+      </span><menu>
+ Sets the destination PAN id, valid only for data frames
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setDSN">setDSN</a>(message_t *msg, uint8_t dsn)
+      </span><menu>
+ Sets the data sequence number
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setFCF">setFCF</a>(message_t *msg, uint16_t fcf)
+      </span><menu>
+ Sets the frame control field.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setFramePending">setFramePending</a>(message_t *msg, bool pending)
+      </span><menu>
+ Sets the frame pending field in the FCF.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setSrcAddr">setSrcAddr</a>(message_t *msg, uint16_t addr)
+      </span><menu>
+ Sets the source address, valid only for data frames
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#verifyAckReply">verifyAckReply</a>(message_t *data, message_t *ack)
+      </span><menu>
+ Returns TRUE if the acknowledgement packet corresponds to the
+ data packet.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="createAckFrame"></a>
+    <h4>createAckFrame
+    </h4>
+    <span id=funcnameshort>command void <b>createAckFrame</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the FCF to create an acknowledgement frame supported by
+ this interface. You may call setFramePending after this.
+
+    </menu>
+    <hr>
+    <a name="createAckReply"></a>
+    <h4>createAckReply
+    </h4>
+    <span id=funcnameshort>command void <b>createAckReply</b>(message_t *data, message_t *ack)
+    </span>
+    <p>
+    <menu>
+      
+ Creates an acknowledgement packet for the given data packet.
+ This also sets the DSN value. The data message must be a 
+ data frame, the ack message will be overwritten.
+
+    </menu>
+    <hr>
+    <a name="createDataFrame"></a>
+    <h4>createDataFrame
+    </h4>
+    <span id=funcnameshort>command void <b>createDataFrame</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the FCF to create a data frame supported by this interface.
+ You may call setAckRequired and setFramePending commands after this.
+
+    </menu>
+    <hr>
+    <a name="getAckRequired"></a>
+    <h4>getAckRequired
+    </h4>
+    <span id=funcnameshort>command bool <b>getAckRequired</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the ACK required field is set in the FCF.
+
+    </menu>
+    <hr>
+    <a name="getDestAddr"></a>
+    <h4>getDestAddr
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getDestAddr</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the destination address, valid only for data frames
+
+    </menu>
+    <hr>
+    <a name="getDestPan"></a>
+    <h4>getDestPan
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getDestPan</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ returns the destination PAN id, values <= 255 are tinyos groups,
+ valid only for data frames
+
+    </menu>
+    <hr>
+    <a name="getDSN"></a>
+    <h4>getDSN
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>getDSN</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the data sequence number
+
+    </menu>
+    <hr>
+    <a name="getFCF"></a>
+    <h4>getFCF
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getFCF</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the frame control field. This method should not be used, 
+ isDataFrame and isAckFrame should be used instead.
+
+    </menu>
+    <hr>
+    <a name="getFramePending"></a>
+    <h4>getFramePending
+    </h4>
+    <span id=funcnameshort>command bool <b>getFramePending</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the frame pending field is set in the FCF.
+
+    </menu>
+    <hr>
+    <a name="getSrcAddr"></a>
+    <h4>getSrcAddr
+    </h4>
+    <span id=funcnameshort>command uint16_t <b>getSrcAddr</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the source address, valid only for data frames
+
+    </menu>
+    <hr>
+    <a name="isAckFrame"></a>
+    <h4>isAckFrame
+    </h4>
+    <span id=funcnameshort>command bool <b>isAckFrame</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the message is an acknowledgement frame supported
+ by this interface (based on the value of the FCF).
+
+    </menu>
+    <hr>
+    <a name="isDataFrame"></a>
+    <h4>isDataFrame
+    </h4>
+    <span id=funcnameshort>command bool <b>isDataFrame</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the message is a data frame supported by 
+ this interface (based on the value of the FCF).
+
+    </menu>
+    <hr>
+    <a name="isForMe"></a>
+    <h4>isForMe
+    </h4>
+    <span id=funcnameshort>command bool <b>isForMe</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the destionation of this message is either 0xFFFF
+ or is the local address of the node, and the pan address is the
+ local one.
+
+    </menu>
+    <hr>
+    <a name="localAddr"></a>
+    <h4>localAddr
+    </h4>
+    <span id=funcnameshort>command ieee154_saddr_t <b>localAddr</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the local address of the node (AM address)
+
+    </menu>
+    <hr>
+    <a name="localPan"></a>
+    <h4>localPan
+    </h4>
+    <span id=funcnameshort>command ieee154_panid_t <b>localPan</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the local pan id (AM group)
+
+    </menu>
+    <hr>
+    <a name="requiresAckReply"></a>
+    <h4>requiresAckReply
+    </h4>
+    <span id=funcnameshort>command bool <b>requiresAckReply</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the packet is a data packet, the ACK_REQ field
+ is set and the destionation address is this node.
+
+    </menu>
+    <hr>
+    <a name="requiresAckWait"></a>
+    <h4>requiresAckWait
+    </h4>
+    <span id=funcnameshort>command bool <b>requiresAckWait</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the packet is a data packet, the ACK_REQ field
+ is set and the destination address is not the broadcast address.
+
+    </menu>
+    <hr>
+    <a name="setAckRequired"></a>
+    <h4>setAckRequired
+    </h4>
+    <span id=funcnameshort>command void <b>setAckRequired</b>(message_t *msg, bool ack)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the ACK required field in the FCF, should never be set
+ for acknowledgement frames.
+
+    </menu>
+    <hr>
+    <a name="setDestAddr"></a>
+    <h4>setDestAddr
+    </h4>
+    <span id=funcnameshort>command void <b>setDestAddr</b>(message_t *msg, uint16_t addr)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the destination address, valid only for data frames
+
+    </menu>
+    <hr>
+    <a name="setDestPan"></a>
+    <h4>setDestPan
+    </h4>
+    <span id=funcnameshort>command void <b>setDestPan</b>(message_t *msg, uint16_t pan)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the destination PAN id, valid only for data frames
+
+    </menu>
+    <hr>
+    <a name="setDSN"></a>
+    <h4>setDSN
+    </h4>
+    <span id=funcnameshort>command void <b>setDSN</b>(message_t *msg, uint8_t dsn)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the data sequence number
+
+    </menu>
+    <hr>
+    <a name="setFCF"></a>
+    <h4>setFCF
+    </h4>
+    <span id=funcnameshort>command void <b>setFCF</b>(message_t *msg, uint16_t fcf)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the frame control field. This method should not be used, 
+ createDataFrame and createAckFrame should be used instead.
+
+    </menu>
+    <hr>
+    <a name="setFramePending"></a>
+    <h4>setFramePending
+    </h4>
+    <span id=funcnameshort>command void <b>setFramePending</b>(message_t *msg, bool pending)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the frame pending field in the FCF.
+
+    </menu>
+    <hr>
+    <a name="setSrcAddr"></a>
+    <h4>setSrcAddr
+    </h4>
+    <span id=funcnameshort>command void <b>setSrcAddr</b>(message_t *msg, uint16_t addr)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the source address, valid only for data frames
+
+    </menu>
+    <hr>
+    <a name="verifyAckReply"></a>
+    <h4>verifyAckReply
+    </h4>
+    <span id=funcnameshort>command bool <b>verifyAckReply</b>(message_t *data, message_t *ack)
+    </span>
+    <p>
+    <menu>
+      
+ Returns TRUE if the acknowledgement packet corresponds to the
+ data packet. The data message must be a data packet.
+
+    </menu>
+  </body>
+</html>

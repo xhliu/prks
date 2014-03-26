@@ -1,0 +1,434 @@
+<?xml version="1.0" ?><component loc="3:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc" nicename="UartLogC" qname="UartLogC">
+      <configuration/>
+      <wiring>
+        <wire loc="12:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="UartLog" ref="0x41115390" scoped=""/></from>
+          <to><interface-ref name="UartLog" ref="0x41115d38" scoped=""/></to>
+        </wire>
+        <wire loc="19:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="UartControl" ref="0x411106d8" scoped=""/></from>
+          <to><interface-ref name="SplitControl" ref="0x41127280" scoped=""/></to>
+        </wire>
+        <wire loc="20:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="UartSend" ref="0x41110d48" scoped=""/></from>
+          <to><interface-ref name="AMSend" ref="0x41350760" scoped=""/></to>
+        </wire>
+        <wire loc="21:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="UartPacket" ref="0x4110f4d0" scoped=""/></from>
+          <to><interface-ref name="Packet" ref="0x411268b0" scoped=""/></to>
+        </wire>
+        <wire loc="22:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="SoftwareInit" ref="0x405ba0b0" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x41110260" scoped=""/></to>
+        </wire>
+        <wire loc="23:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="Leds" ref="0x4110fb98" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x405c9820" scoped=""/></to>
+        </wire>
+        <wire loc="26:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc">
+          <from><interface-ref name="LocalTime" ref="0x4110e980" scoped=""/></from>
+          <to><interface-ref name="LocalTime" ref="0x40cf22f0" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="5:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogC.nc" name="UartLog" provided="1" ref="0x41115390">
+      <component-ref nicename="UartLogC" qname="UartLogC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartLog" ref="0x41115390" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="UartLog" qname="UartLog"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="logEntry" ref="0x41115568" scoped=""/>
+        <function-ref name="logTxRx" ref="0x41115648" scoped=""/>
+        <function-ref name="logByteStream" ref="0x41115728" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="58:/opt/tinyos-2.1.2/tos/system/MainC.nc" name="SoftwareInit" provided="0" ref="0x405ba0b0">
+      <component-ref nicename="tos.system.MainC" qname="MainC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SoftwareInit" ref="0x405ba0b0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x405ba288" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="15:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="UartControl" provided="0" ref="0x411106d8">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartControl" ref="0x411106d8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x411108b0" scoped=""/>
+        <function-ref name="stopDone" ref="0x41110990" scoped=""/>
+        <function-ref name="start" ref="0x41110a70" scoped=""/>
+        <function-ref name="stop" ref="0x41110b50" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc" name="SplitControl" provided="1" ref="0x41127280">
+      <component-ref nicename="tos.lib.serial.SerialActiveMessageC" qname="SerialActiveMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SplitControl" ref="0x41127280" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x41127458" scoped=""/>
+        <function-ref name="stopDone" ref="0x41127538" scoped=""/>
+        <function-ref name="start" ref="0x41127618" scoped=""/>
+        <function-ref name="stop" ref="0x411276f8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="20:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="LocalTime" provided="0" ref="0x4110e980">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTime" ref="0x4110e980" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x4110d010" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/system/LedsC.nc" name="Leds" provided="1" ref="0x405c9820">
+      <component-ref nicename="tos.system.LedsC" qname="LedsC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x405c9820" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x405c99f8" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x405c9ad8" scoped=""/>
+        <function-ref name="led1On" ref="0x405c9bb8" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x405c9c98" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x405c9d78" scoped=""/>
+        <function-ref name="get" ref="0x405c9e58" scoped=""/>
+        <function-ref name="led1Off" ref="0x40748010" scoped=""/>
+        <function-ref name="led2Off" ref="0x40748390" scoped=""/>
+        <function-ref name="set" ref="0x407480f0" scoped=""/>
+        <function-ref name="led0On" ref="0x407481d0" scoped=""/>
+        <function-ref name="led2On" ref="0x407482b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="16:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="UartSend" provided="0" ref="0x41110d48">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartSend" ref="0x41110d48" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x41110f20" scoped=""/>
+        <function-ref name="getPayload" ref="0x4110f018" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4110f0f8" scoped=""/>
+        <function-ref name="cancel" ref="0x4110f1d8" scoped=""/>
+        <function-ref name="sendDone" ref="0x4110f2b8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="10:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="UartLog" provided="1" ref="0x41115d38">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartLog" ref="0x41115d38" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="UartLog" qname="UartLog"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="logEntry" ref="0x41115f10" scoped=""/>
+        <function-ref name="logTxRx" ref="0x41110010" scoped=""/>
+        <function-ref name="logByteStream" ref="0x411100f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="11:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="Init" provided="1" ref="0x41110260">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Init" ref="0x41110260" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x41110438" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="49:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc" name="Packet" provided="1" ref="0x411268b0">
+      <component-ref nicename="tos.lib.serial.SerialActiveMessageC" qname="SerialActiveMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Packet" ref="0x411268b0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x41126a88" scoped=""/>
+        <function-ref name="payloadLength" ref="0x41126b68" scoped=""/>
+        <function-ref name="getPayload" ref="0x41126c48" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x41126d28" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x41126e08" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="19:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="Leds" provided="0" ref="0x4110fb98">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x4110fb98" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x4110fd70" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x4110fe50" scoped=""/>
+        <function-ref name="led1On" ref="0x4110e010" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x4110e0f0" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x4110e1d0" scoped=""/>
+        <function-ref name="get" ref="0x4110e2b0" scoped=""/>
+        <function-ref name="led1Off" ref="0x4110e390" scoped=""/>
+        <function-ref name="led2Off" ref="0x4110e710" scoped=""/>
+        <function-ref name="set" ref="0x4110e470" scoped=""/>
+        <function-ref name="led0On" ref="0x4110e550" scoped=""/>
+        <function-ref name="led2On" ref="0x4110e630" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="18:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" name="UartPacket" provided="0" ref="0x4110f4d0">
+      <component-ref nicename="UartLogP" qname="UartLogP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="UartPacket" ref="0x4110f4d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x4110f6a8" scoped=""/>
+        <function-ref name="payloadLength" ref="0x4110f788" scoped=""/>
+        <function-ref name="getPayload" ref="0x4110f868" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4110f948" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x4110fa28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="49:/opt/tinyos-2.1.2/tos/lib/serial/SerialAMSenderC.nc" name="AMSend" provided="1" ref="0x41350760">
+      <component-ref nicename="tos.lib.serial.SerialAMSenderC" qname="UartLogC.SerialSender"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMSend" ref="0x41350760" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMSend" qname="AMSend"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="send" ref="0x41350938" scoped=""/>
+        <function-ref name="getPayload" ref="0x41350a18" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x41350af8" scoped=""/>
+        <function-ref name="cancel" ref="0x41350bd8" scoped=""/>
+        <function-ref name="sendDone" ref="0x41350cb8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="20:/opt/tinyos-2.1.2/tos/system/LocalTimeMilliC.nc" name="LocalTime" provided="1" ref="0x40cf22f0">
+      <component-ref nicename="tos.system.LocalTimeMilliC" qname="LocalTimeMilliC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LocalTime" ref="0x40cf22f0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.LocalTime" qname="LocalTime"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="get" ref="0x40cf2938" scoped=""/>
+      </interface-functions>
+    </interface><component loc="19:/opt/tinyos-2.1.2/tos/system/LocalTimeMilliC.nc" nicename="tos.system.LocalTimeMilliC" qname="LocalTimeMilliC">
+      <documentation loc="11:/opt/tinyos-2.1.2/tos/system/LocalTimeMilliC.nc">
+        <short>
+ Provide current time via the LocalTime&lt;TMilli&gt; interface.</short>
+        <long>
+ Provide current time via the LocalTime&lt;TMilli&gt; interface.
+
+ @author David Gay
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="26:/opt/tinyos-2.1.2/tos/system/LocalTimeMilliC.nc">
+          <from><interface-ref name="LocalTime" ref="0x40cf22f0" scoped=""/></from>
+          <to><interface-ref name="LocalTime" ref="0x408b94d8" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="47(UartLogC.SerialSender):/opt/tinyos-2.1.2/tos/lib/serial/SerialAMSenderC.nc" nicename="tos.lib.serial.SerialAMSenderC" qname="UartLogC.SerialSender">
+      <documentation loc="71:/opt/tinyos-2.1.2/tos/lib/serial/Serial.h">
+        <short>
+ </short>
+        <long>
+ @author Phil Buonadonna
+ @author Lewis Girod
+ @author Ben Greenstein
+ @author Philip Levis
+ @date   August 7 2005
+</long>
+      </documentation>
+      <instance number="0">
+        <component-ref nicename="tos.lib.serial.SerialAMSenderC" qname="SerialAMSenderC"/>
+        <arguments>
+          <value cst="I:100">
+            <type-int alignment="I:2" cname="int" size="I:2"/>
+          </value>
+        </arguments>
+      </instance>
+      <configuration/>
+      <wiring>
+        <wire loc="63:/opt/tinyos-2.1.2/tos/lib/serial/SerialAMSenderC.nc">
+          <from><interface-ref name="AMSend" ref="0x41350760" scoped=""/></from>
+          <to><interface-ref name="AMSend" ref="0x41ac61f0" scoped=""/></to>
+        </wire>
+        <wire loc="64:/opt/tinyos-2.1.2/tos/lib/serial/SerialAMSenderC.nc">
+          <from><interface-ref name="Packet" ref="0x41350df8" scoped=""/></from>
+          <to><interface-ref name="Packet" ref="0x411268b0" scoped=""/></to>
+        </wire>
+        <wire loc="65:/opt/tinyos-2.1.2/tos/lib/serial/SerialAMSenderC.nc">
+          <from><interface-ref name="AMPacket" ref="0x4139e4d0" scoped=""/></from>
+          <to><interface-ref name="AMPacket" ref="0x41163010" scoped=""/></to>
+        </wire>
+        <wire loc="66:/opt/tinyos-2.1.2/tos/lib/serial/SerialAMSenderC.nc">
+          <from><interface-ref name="Acks" ref="0x4139d170" scoped=""/></from>
+          <to><interface-ref name="PacketAcknowledgements" ref="0x41163cc8" scoped=""/></to>
+        </wire>
+        <wire loc="60:/opt/tinyos-2.1.2/tos/lib/serial/SerialAMSenderC.nc">
+          <from><interface-ref name="Send" ref="0x41ac68b8" scoped=""/></from>
+          <to><interface-ref name="Send" ref="0x41341e48" scoped=""/>
+          <arguments>
+            <value cst="I:0">
+              <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned=""/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="61:/opt/tinyos-2.1.2/tos/lib/serial/SerialAMSenderC.nc">
+          <from><interface-ref name="AMPacket" ref="0x41ac5010" scoped=""/></from>
+          <to><interface-ref name="AMPacket" ref="0x41163010" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="44:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc" nicename="tos.lib.serial.SerialActiveMessageC" qname="SerialActiveMessageC">
+      <documentation loc="71:/opt/tinyos-2.1.2/tos/lib/serial/Serial.h">
+        <short>
+ </short>
+        <long>
+ @author Phil Buonadonna
+ @author Lewis Girod
+ @author Ben Greenstein
+ @author Philip Levis
+ @date   August 7 2005
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="61:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="SplitControl" ref="0x41127280" scoped=""/></from>
+          <to><interface-ref name="SplitControl" ref="0x411666e8" scoped=""/></to>
+        </wire>
+        <wire loc="63:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="AMSend" ref="0x41127b58" scoped=""/></from>
+          <to><interface-ref name="AMSend" ref="0x41160600" scoped=""/></to>
+        </wire>
+        <wire loc="65:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="Packet" ref="0x411268b0" scoped=""/></from>
+          <to><interface-ref name="Packet" ref="0x4115fc50" scoped=""/></to>
+        </wire>
+        <wire loc="64:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="Receive" ref="0x41126558" scoped=""/></from>
+          <to><interface-ref name="Receive" ref="0x41160d40" scoped=""/></to>
+        </wire>
+        <wire loc="67:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="PacketAcknowledgements" ref="0x41163cc8" scoped=""/></from>
+          <to><interface-ref name="PacketAcknowledgements" ref="0x4116a310" scoped=""/></to>
+        </wire>
+        <wire loc="66:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="AMPacket" ref="0x41163010" scoped=""/></from>
+          <to><interface-ref name="AMPacket" ref="0x4115f078" scoped=""/></to>
+        </wire>
+        <wire loc="59:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="SoftwareInit" ref="0x405ba0b0" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x41166350" scoped=""/></to>
+        </wire>
+        <wire loc="60:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="Leds" ref="0x4119fb00" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x41162290" scoped=""/></to>
+        </wire>
+        <wire loc="69:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="SubSend" ref="0x4116a838" scoped=""/></from>
+          <to><interface-ref name="Send" ref="0x41165618" scoped=""/>
+          <arguments>
+            <value cst="I:0">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="70:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="SubReceive" ref="0x4116aef0" scoped=""/></from>
+          <to><interface-ref name="Receive" ref="0x41165010" scoped=""/>
+          <arguments>
+            <value cst="I:0">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+        <wire loc="72:/opt/tinyos-2.1.2/tos/lib/serial/SerialActiveMessageC.nc">
+          <from><interface-ref name="SerialPacketInfo" ref="0x4119f5f8" scoped=""/>
+          <arguments>
+            <value cst="I:0">
+              <type-int alignment="I:2" cname="int" size="I:2"/>
+            </value>
+          </arguments>
+          </from>
+          <to><interface-ref name="Info" ref="0x4135a728" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="45:/opt/tinyos-2.1.2/tos/system/LedsC.nc" nicename="tos.system.LedsC" qname="LedsC">
+      <documentation loc="34:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+        <short>
+
+ The basic TinyOS LEDs abstraction.</short>
+        <long>
+
+ The basic TinyOS LEDs abstraction.
+
+ @author Phil Buonadonna
+ @author David Gay
+ @author Philip Levis
+ @author Joe Polastre
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="51:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Leds" ref="0x405c9820" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x40745010" scoped=""/></to>
+        </wire>
+        <wire loc="53:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Init" ref="0x4075fa38" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x40748c10" scoped=""/></to>
+        </wire>
+        <wire loc="54:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Led0" ref="0x40759e10" scoped=""/></from>
+          <to><interface-ref name="Led0" ref="0x40747c30" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Led1" ref="0x40744820" scoped=""/></from>
+          <to><interface-ref name="Led1" ref="0x40760680" scoped=""/></to>
+        </wire>
+        <wire loc="56:/opt/tinyos-2.1.2/tos/system/LedsC.nc">
+          <from><interface-ref name="Led2" ref="0x407432e0" scoped=""/></from>
+          <to><interface-ref name="Led2" ref="0x4075f0b0" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="56:/opt/tinyos-2.1.2/tos/system/MainC.nc" nicename="tos.system.MainC" qname="MainC">
+      <documentation loc="45:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+        <short>
+ MainC is the system interface the TinyOS boot sequence.</short>
+        <long>
+ MainC is the system interface the TinyOS boot sequence. It wires the
+ boot sequence implementation to the scheduler and hardware resources.
+
+ @author Philip Levis
+ @date   August 6 2005
+ @see    TEP 107: Boot Sequence
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="72:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+          <from><interface-ref name="Boot" ref="0x405ca458" scoped=""/></from>
+          <to><interface-ref name="Boot" ref="0x405c2df8" scoped=""/></to>
+        </wire>
+        <wire loc="67:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+          <from><interface-ref name="Scheduler" ref="0x405d91d0" scoped=""/></from>
+          <to><interface-ref name="Scheduler" ref="0x403305f0" scoped=""/></to>
+        </wire>
+        <wire loc="68:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+          <from><interface-ref name="PlatformInit" ref="0x405d9798" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x405ba970" scoped=""/></to>
+        </wire>
+        <wire loc="71:/opt/tinyos-2.1.2/tos/system/MainC.nc">
+          <from><interface-ref name="SoftwareInit" ref="0x405d9ba0" scoped=""/></from>
+          <to><interface-ref name="SoftwareInit" ref="0x405ba0b0" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="8:/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLogP.nc" nicename="UartLogP" qname="UartLogP">
+      <module/>
+    </component></referenced></component>

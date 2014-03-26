@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.NeighborhoodFlag</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.NeighborhoodFlag</h2>
+    <b>interface NeighborhoodFlag</b><p>
+ This interface provides one bit storage for each neighbor in a very
+ fast and conveint way (without using shifts for example). 
+
+    <p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command void <a href="#clear">clear</a>(uint8_t idx)
+      </span><menu>
+ Clears the flag for the given index.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#clearAll">clearAll</a>()
+      </span><menu>
+ Clears the flag for all indices
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command bool <a href="#get">get</a>(uint8_t idx)
+      </span><menu>
+ Returns the value of the flag for the given index
+
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#set">set</a>(uint8_t idx)
+      </span><menu>
+ Sets the flag for the given index
+
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="clear"></a>
+    <h4>clear
+    </h4>
+    <span id=funcnameshort>command void <b>clear</b>(uint8_t idx)
+    </span>
+    <p>
+    <menu>
+      
+ Clears the flag for the given index. The flag is automatically
+ cleared after the Neighborhood.evicted event is fired.
+
+    </menu>
+    <hr>
+    <a name="clearAll"></a>
+    <h4>clearAll
+    </h4>
+    <span id=funcnameshort>command void <b>clearAll</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Clears the flag for all indices
+
+    </menu>
+    <hr>
+    <a name="get"></a>
+    <h4>get
+    </h4>
+    <span id=funcnameshort>command bool <b>get</b>(uint8_t idx)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the value of the flag for the given index
+
+    </menu>
+    <hr>
+    <a name="set"></a>
+    <h4>set
+    </h4>
+    <span id=funcnameshort>command void <b>set</b>(uint8_t idx)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the flag for the given index
+
+    </menu>
+  </body>
+</html>

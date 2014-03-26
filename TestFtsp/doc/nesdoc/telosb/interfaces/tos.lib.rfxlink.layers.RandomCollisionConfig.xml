@@ -1,0 +1,115 @@
+<?xml version="1.0" ?><interfacedef loc="35:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc" nicename="tos.lib.rfxlink.layers.RandomCollisionConfig" qname="RandomCollisionConfig">
+      <function command="" loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc" name="getCongestionBackoff" provided="0" ref="0x40a16b48">
+        <documentation loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc">
+          <short>
+ Returns the amount of maximum backoff when there is congestion
+ (the channel was busy for the first try)
+</short>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.RandomCollisionConfig" qname="RandomCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="46:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc" name="msg" ref="0x40a169f0">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="40:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc" name="getInitialBackoff" provided="0" ref="0x40a16468">
+        <documentation loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc">
+          <short>
+ Returns the initial amount of maximum backoff for this message.</short>
+          <long>
+ Returns the initial amount of maximum backoff for this message.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.RandomCollisionConfig" qname="RandomCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="40:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc" name="msg" ref="0x40a16310">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="51:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc" name="getMinimumBackoff" provided="0" ref="0x40a15070">
+        <documentation loc="48:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc">
+          <short>
+ Returns the minimum ticks before the message could be sent.</short>
+          <long>
+ Returns the minimum ticks before the message could be sent.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.RandomCollisionConfig" qname="RandomCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc" name="getTransmitBarrier" provided="0" ref="0x40a15728">
+        <documentation loc="53:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc">
+          <short>
+ The provided message was just received, and this command should return 
+ the time till no transmission should be initiated.</short>
+          <long>
+ The provided message was just received, and this command should return 
+ the time till no transmission should be initiated.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.RandomCollisionConfig" qname="RandomCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="57:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/RandomCollisionConfig.nc" name="msg" ref="0x40a155d0">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+    </interfacedef>

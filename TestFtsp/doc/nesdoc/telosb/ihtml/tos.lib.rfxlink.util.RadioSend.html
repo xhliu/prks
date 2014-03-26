@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.RadioSend</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.RadioSend</h2>
+    <b>interface RadioSend</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command error_t <a href="#send">send</a>(message_t *msg)
+      </span><menu>
+ Starts the transmission of the given message.
+      </menu>
+    </div><p><div id=heading>Events</div><div id=funcsig><span id=funcnameshort>event void <a href="#ready">ready</a>()
+      </span><menu>
+ This event is fired when the component is most likely able to accept 
+ a send request.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>event void <a href="#sendDone">sendDone</a>(error_t error)
+      </span><menu>
+ Signals the completion of the send command, exactly once for each 
+ successfull send command.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="send"></a>
+    <h4>send
+    </h4>
+    <span id=funcnameshort>command error_t <b>send</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Starts the transmission of the given message. This command must not
+ be called while another send is in progress (so one must wait for the
+ sendDone event). Returns EBUSY if a reception is in progress or for
+ some other reason the request cannot be temporarily satisfied (e.g.
+ the SPI bus access could not be acquired). In this case the send 
+ command could be retried from a tasklet. Returns SUCCESS if the 
+ transmission could be started. In this case sendDone will be fired.
+
+    </menu>
+    <p><div id=heading>Events - Details</div>
+    <a name="ready"></a>
+    <h4>ready
+    </h4>
+    <span id=funcnameshort>event void <b>ready</b>()
+    </span>
+    <p>
+    <menu>
+      
+ This event is fired when the component is most likely able to accept 
+ a send request. If the send command has returned with a failure, then
+ this event will be called at least once in the near future.
+
+    </menu>
+    <hr>
+    <a name="sendDone"></a>
+    <h4>sendDone
+    </h4>
+    <span id=funcnameshort>event void <b>sendDone</b>(error_t error)
+    </span>
+    <p>
+    <menu>
+      
+ Signals the completion of the send command, exactly once for each 
+ successfull send command. If the returned error code is SUCCESS, then 
+ the message was sent (may not have been acknowledged), otherwise 
+ the message was not transmitted over the air.
+
+    </menu>
+  </body>
+</html>

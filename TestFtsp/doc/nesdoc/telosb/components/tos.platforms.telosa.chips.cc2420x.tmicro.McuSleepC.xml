@@ -1,0 +1,37 @@
+<?xml version="1.0" ?><component loc="54:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/McuSleepC.nc" nicename="tos.platforms.telosa.chips.cc2420x.tmicro.McuSleepC" qname="McuSleepC" safe="">
+      <documentation loc="50:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/McuSleepC.nc">
+        <short>
+We need prevent the MCU from sleeping when the microsecond alarm is set.</short>
+        <long>
+We need prevent the MCU from sleeping when the microsecond alarm is set.
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="60:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/McuSleepC.nc" name="McuPowerOverride" provided="0" ref="0x403c3e78">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.McuSleepC" qname="McuSleepC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="McuPowerOverride" ref="0x403c3e78" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.McuPowerOverride" qname="McuPowerOverride"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="lowestState" ref="0x40476070" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="56:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/McuSleepC.nc" name="McuSleep" provided="1" ref="0x4033b248">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.McuSleepC" qname="McuSleepC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="McuSleep" ref="0x4033b248" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.McuSleep" qname="McuSleep"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="sleep" ref="0x4033b420" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="57:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/McuSleepC.nc" name="McuPowerState" provided="1" ref="0x4033bef8">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.McuSleepC" qname="McuSleepC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="McuPowerState" ref="0x4033bef8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.McuPowerState" qname="McuPowerState"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="update" ref="0x403c30e0" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

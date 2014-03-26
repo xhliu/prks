@@ -1,0 +1,10 @@
+<area shape="rect" href="../chtml/tos.lib.timer.BusyWaitCounterC.html" title="BusyWaitCounterC" alt="" coords="27,120,195,168">
+<area shape="poly" href="../ihtml/tos.lib.timer.BusyWait.html" title="BusyWait&lt;TMicro, uint16_t&gt;" alt="" coords="113,53 113,107 108,107 108,53">
+<area shape="rect" href="../ihtml/tos.lib.timer.BusyWait.html" title="BusyWait&lt;TMicro, uint16_t&gt;" alt="" coords="107,49,115,57">
+<area shape="rect" href="../ihtml/tos.lib.timer.BusyWait.html" title="BusyWait&lt;TMicro, uint16_t&gt;" alt="" coords="107,116,115,124">
+<area shape="rect" href="../ihtml/tos.lib.timer.BusyWait.html" title="BusyWait&lt;TMicro, uint16_t&gt;" alt="" coords="110,78,290,95">
+<area shape="rect" href="../chtml/tos.platforms.telosa.chips.cc2420x.tmicro.Msp430CounterMicroC.html" title="Msp430CounterMicroC" alt="" coords="5,235,216,293">
+<area shape="poly" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;TMicro, uint16_t&gt;" alt="" coords="113,168 113,221 108,221 108,168">
+<area shape="rect" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;TMicro, uint16_t&gt;" alt="" coords="107,164,115,172">
+<area shape="rect" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;TMicro, uint16_t&gt;" alt="" coords="107,231,115,239">
+<area shape="rect" href="../ihtml/tos.lib.timer.Counter.html" title="Counter&lt;TMicro, uint16_t&gt;" alt="" coords="110,193,285,210">

@@ -1,0 +1,549 @@
+<?xml version="1.0" ?><component loc="27:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC">
+      <configuration/>
+      <wiring>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="SplitControl" ref="0x413f9840" scoped=""/></from>
+          <to><interface-ref name="SplitControl" ref="0x414319e0" scoped=""/></to>
+        </wire>
+        <wire loc="67:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="TimeSyncPacketMilli" ref="0x41432010" scoped=""/></from>
+          <to><interface-ref name="TimeSyncPacketMilli" ref="0x41421d68" scoped=""/></to>
+        </wire>
+        <wire loc="58:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="Packet" ref="0x413f6b48" scoped=""/></from>
+          <to><interface-ref name="Packet" ref="0x4142ecc8" scoped=""/></to>
+        </wire>
+        <wire loc="57:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="Snoop" ref="0x413f67f0" scoped=""/></from>
+          <to><interface-ref name="Snoop" ref="0x4142e970" scoped=""/></to>
+        </wire>
+        <wire loc="66:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="TimeSyncAMSendMilli" ref="0x41435530" scoped=""/></from>
+          <to><interface-ref name="TimeSyncAMSendMilli" ref="0x41422310" scoped=""/></to>
+        </wire>
+        <wire loc="69:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="LowPowerListening" ref="0x41432ce8" scoped=""/></from>
+          <to><interface-ref name="LowPowerListening" ref="0x4142c6c8" scoped=""/></to>
+        </wire>
+        <wire loc="62:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="TimeSyncAMSendRadio" ref="0x413f2e38" scoped=""/></from>
+          <to><interface-ref name="TimeSyncAMSendRadio" ref="0x41429ca0" scoped=""/></to>
+        </wire>
+        <wire loc="56:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="Receive" ref="0x413f6158" scoped=""/></from>
+          <to><interface-ref name="Receive" ref="0x4142e2d8" scoped=""/></to>
+        </wire>
+        <wire loc="61:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="PacketTimeStampRadio" ref="0x413f31c0" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampRadio" ref="0x4142b010" scoped=""/></to>
+        </wire>
+        <wire loc="63:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="TimeSyncPacketRadio" ref="0x414398a8" scoped=""/></from>
+          <to><interface-ref name="TimeSyncPacketRadio" ref="0x414276f8" scoped=""/></to>
+        </wire>
+        <wire loc="59:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="AMPacket" ref="0x413f5288" scoped=""/></from>
+          <to><interface-ref name="AMPacket" ref="0x4142d448" scoped=""/></to>
+        </wire>
+        <wire loc="65:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc">
+          <from><interface-ref name="PacketTimeStampMilli" ref="0x41438848" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampMilli" ref="0x41425670" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="31:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="SplitControl" provided="1" ref="0x413f9840">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SplitControl" ref="0x413f9840" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x413f9a18" scoped=""/>
+        <function-ref name="stopDone" ref="0x413f9af8" scoped=""/>
+        <function-ref name="start" ref="0x413f9bd8" scoped=""/>
+        <function-ref name="stop" ref="0x413f9cb8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="TimeSyncPacketMilli" provided="1" ref="0x41432010">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncPacketMilli" ref="0x41432010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncPacket" qname="TimeSyncPacket"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="isValid" ref="0x41432740" scoped=""/>
+        <function-ref name="eventTime" ref="0x414329e0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="35:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="Packet" provided="1" ref="0x413f6b48">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Packet" ref="0x413f6b48" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x413f6d20" scoped=""/>
+        <function-ref name="payloadLength" ref="0x413f6e00" scoped=""/>
+        <function-ref name="getPayload" ref="0x413f6ee0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x413f5010" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x413f50f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="34:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="Snoop" provided="1" ref="0x413f67f0">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Snoop" ref="0x413f67f0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="receive" ref="0x413f69c8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="TimeSyncAMSendMilli" provided="1" ref="0x41435530">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncAMSendMilli" ref="0x41435530" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncAMSend" qname="TimeSyncAMSend"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="send" ref="0x41435c60" scoped=""/>
+        <function-ref name="getPayload" ref="0x41434948" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x414346f0" scoped=""/>
+        <function-ref name="cancel" ref="0x41434110" scoped=""/>
+        <function-ref name="sendDone" ref="0x414343b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="46:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="LowPowerListening" provided="1" ref="0x41432ce8">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LowPowerListening" ref="0x41432ce8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.LowPowerListening" qname="LowPowerListening"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="setRemoteWakeupInterval" ref="0x41432ec0" scoped=""/>
+        <function-ref name="getRemoteWakeupInterval" ref="0x41431010" scoped=""/>
+        <function-ref name="getLocalWakeupInterval" ref="0x414310f0" scoped=""/>
+        <function-ref name="setLocalWakeupInterval" ref="0x414311d0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="39:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="TimeSyncAMSendRadio" provided="1" ref="0x413f2e38">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncAMSendRadio" ref="0x413f2e38" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncAMSend" qname="TimeSyncAMSend"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="send" ref="0x413f1580" scoped=""/>
+        <function-ref name="getPayload" ref="0x41439268" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x41439010" scoped=""/>
+        <function-ref name="cancel" ref="0x413f1a00" scoped=""/>
+        <function-ref name="sendDone" ref="0x413f1ca0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="33:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="Receive" provided="1" ref="0x413f6158">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Receive" ref="0x413f6158" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="receive" ref="0x413f6330" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="38:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="PacketTimeStampRadio" provided="1" ref="0x413f31c0">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStampRadio" ref="0x413f31c0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x413f3cc0" scoped=""/>
+        <function-ref name="clear" ref="0x413f2088" scoped=""/>
+        <function-ref name="isValid" ref="0x413f3910" scoped=""/>
+        <function-ref name="set" ref="0x413f2438" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="40:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="TimeSyncPacketRadio" provided="1" ref="0x414398a8">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncPacketRadio" ref="0x414398a8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncPacket" qname="TimeSyncPacket"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="isValid" ref="0x41438010" scoped=""/>
+        <function-ref name="eventTime" ref="0x414382b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="36:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="AMPacket" provided="1" ref="0x413f5288">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMPacket" ref="0x413f5288" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMPacket" qname="AMPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="group" ref="0x413f5460" scoped=""/>
+        <function-ref name="source" ref="0x413f5540" scoped=""/>
+        <function-ref name="address" ref="0x413f5620" scoped=""/>
+        <function-ref name="destination" ref="0x413f5700" scoped=""/>
+        <function-ref name="setSource" ref="0x413f57e0" scoped=""/>
+        <function-ref name="setDestination" ref="0x413f58c0" scoped=""/>
+        <function-ref name="type" ref="0x413f59a0" scoped=""/>
+        <function-ref name="setType" ref="0x413f5a80" scoped=""/>
+        <function-ref name="isForMe" ref="0x413f5b60" scoped=""/>
+        <function-ref name="setGroup" ref="0x413f5c40" scoped=""/>
+        <function-ref name="localGroup" ref="0x413f5d20" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/opt/tinyos-2.1.2/tos/platforms/telosa/chips/cc2420x/tmicro/am/TimeSyncMessageC.nc" name="PacketTimeStampMilli" provided="1" ref="0x41438848">
+      <component-ref nicename="tos.platforms.telosa.chips.cc2420x.tmicro.am.TimeSyncMessageC" qname="TimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStampMilli" ref="0x41438848" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x414373c0" scoped=""/>
+        <function-ref name="clear" ref="0x41437770" scoped=""/>
+        <function-ref name="isValid" ref="0x41437010" scoped=""/>
+        <function-ref name="set" ref="0x41437b20" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="34:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="Packet" provided="1" ref="0x4142ecc8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Packet" ref="0x4142ecc8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Packet" qname="Packet"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="clear" ref="0x4142eea0" scoped=""/>
+        <function-ref name="payloadLength" ref="0x4142d010" scoped=""/>
+        <function-ref name="getPayload" ref="0x4142d0f0" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x4142d1d0" scoped=""/>
+        <function-ref name="setPayloadLength" ref="0x4142d2b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="40:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="TimeSyncAMSendRadio" provided="1" ref="0x41429ca0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncAMSendRadio" ref="0x41429ca0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncAMSend" qname="TimeSyncAMSend"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="send" ref="0x414283f0" scoped=""/>
+        <function-ref name="getPayload" ref="0x414270b8" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x41428e50" scoped=""/>
+        <function-ref name="cancel" ref="0x41428870" scoped=""/>
+        <function-ref name="sendDone" ref="0x41428b10" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="41:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="TimeSyncPacketRadio" provided="1" ref="0x414276f8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncPacketRadio" ref="0x414276f8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncPacket" qname="TimeSyncPacket"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="isValid" ref="0x41427e28" scoped=""/>
+        <function-ref name="eventTime" ref="0x414250d8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="35:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="AMPacket" provided="1" ref="0x4142d448">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="AMPacket" ref="0x4142d448" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.AMPacket" qname="AMPacket"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="group" ref="0x4142d620" scoped=""/>
+        <function-ref name="source" ref="0x4142d700" scoped=""/>
+        <function-ref name="address" ref="0x4142d7e0" scoped=""/>
+        <function-ref name="destination" ref="0x4142d8c0" scoped=""/>
+        <function-ref name="setSource" ref="0x4142d9a0" scoped=""/>
+        <function-ref name="setDestination" ref="0x4142da80" scoped=""/>
+        <function-ref name="type" ref="0x4142db60" scoped=""/>
+        <function-ref name="setType" ref="0x4142dc40" scoped=""/>
+        <function-ref name="isForMe" ref="0x4142dd20" scoped=""/>
+        <function-ref name="setGroup" ref="0x4142de00" scoped=""/>
+        <function-ref name="localGroup" ref="0x4142dee0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="33:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="Snoop" provided="1" ref="0x4142e970">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Snoop" ref="0x4142e970" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="receive" ref="0x4142eb48" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="39:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="PacketTimeStampRadio" provided="1" ref="0x4142b010">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStampRadio" ref="0x4142b010" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x406bd6c8"/>
+            <typename><typedef-ref name="TRadio" ref="0x40996208"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x4142bb10" scoped=""/>
+        <function-ref name="clear" ref="0x4142bec0" scoped=""/>
+        <function-ref name="isValid" ref="0x4142b760" scoped=""/>
+        <function-ref name="set" ref="0x414292a0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="TimeSyncAMSendMilli" provided="1" ref="0x41422310">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncAMSendMilli" ref="0x41422310" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncAMSend" qname="TimeSyncAMSend"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="am_id_t" ref="0x406fb7f8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="send" ref="0x41422a40" scoped=""/>
+        <function-ref name="getPayload" ref="0x41421728" scoped=""/>
+        <function-ref name="maxPayloadLength" ref="0x414214d0" scoped=""/>
+        <function-ref name="cancel" ref="0x41422ec0" scoped=""/>
+        <function-ref name="sendDone" ref="0x41421190" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="32:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="Receive" provided="1" ref="0x4142e2d8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Receive" ref="0x4142e2d8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Receive" qname="Receive"/>
+      </instance>
+      <interface-parameters>
+        <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+          <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+        </type-int>
+      </interface-parameters>
+      <interface-functions>
+        <function-ref name="receive" ref="0x4142e4b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="37:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="LowPowerListening" provided="1" ref="0x4142c6c8">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LowPowerListening" ref="0x4142c6c8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.LowPowerListening" qname="LowPowerListening"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="setRemoteWakeupInterval" ref="0x4142c8a0" scoped=""/>
+        <function-ref name="getRemoteWakeupInterval" ref="0x4142c980" scoped=""/>
+        <function-ref name="getLocalWakeupInterval" ref="0x4142ca60" scoped=""/>
+        <function-ref name="setLocalWakeupInterval" ref="0x4142cb40" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="TimeSyncPacketMilli" provided="1" ref="0x41421d68">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="TimeSyncPacketMilli" ref="0x41421d68" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.TimeSyncPacket" qname="TimeSyncPacket"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="isValid" ref="0x4141f550" scoped=""/>
+        <function-ref name="eventTime" ref="0x4141f7f0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="PacketTimeStampMilli" provided="1" ref="0x41425670">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="PacketTimeStampMilli" ref="0x41425670" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.PacketTimeStamp" qname="PacketTimeStamp"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x405bcd68"/>
+            <typename><typedef-ref name="TMilli" ref="0x406bd010"/></typename>
+          </type-tag>
+          <type-int alignment="I:2" cname="unsigned long" size="I:4" unsigned="">
+            <typename><typedef-ref name="uint32_t" ref="0x40037250"/></typename>
+          </type-int>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="timestamp" ref="0x41424198" scoped=""/>
+        <function-ref name="clear" ref="0x41424548" scoped=""/>
+        <function-ref name="isValid" ref="0x41425dc0" scoped=""/>
+        <function-ref name="set" ref="0x414248f8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="30:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" name="SplitControl" provided="1" ref="0x414319e0">
+      <component-ref nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="SplitControl" ref="0x414319e0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.SplitControl" qname="SplitControl"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="startDone" ref="0x41431bb8" scoped=""/>
+        <function-ref name="stopDone" ref="0x41431c98" scoped=""/>
+        <function-ref name="start" ref="0x41431d78" scoped=""/>
+        <function-ref name="stop" ref="0x41431e58" scoped=""/>
+      </interface-functions>
+    </interface><component loc="26:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc" nicename="tos.chips.cc2420x.CC2420XTimeSyncMessageC" qname="CC2420XTimeSyncMessageC">
+      <configuration/>
+      <wiring>
+        <wire loc="53:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="SplitControl" ref="0x414319e0" scoped=""/></from>
+          <to><interface-ref name="SplitControl" ref="0x40996840" scoped=""/></to>
+        </wire>
+        <wire loc="67:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="TimeSyncPacketMilli" ref="0x41421d68" scoped=""/></from>
+          <to><interface-ref name="TimeSyncPacketMilli" ref="0x414ea578" scoped=""/></to>
+        </wire>
+        <wire loc="57:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="Packet" ref="0x4142ecc8" scoped=""/></from>
+          <to><interface-ref name="Packet" ref="0x414f0d28" scoped=""/></to>
+        </wire>
+        <wire loc="66:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="TimeSyncAMSendMilli" ref="0x41422310" scoped=""/></from>
+          <to><interface-ref name="TimeSyncAMSendMilli" ref="0x414ecc90" scoped=""/></to>
+        </wire>
+        <wire loc="56:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="Snoop" ref="0x4142e970" scoped=""/></from>
+          <to><interface-ref name="Snoop" ref="0x414f2d78" scoped=""/></to>
+        </wire>
+        <wire loc="59:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="LowPowerListening" ref="0x4142c6c8" scoped=""/></from>
+          <to><interface-ref name="LowPowerListening" ref="0x409ae010" scoped=""/></to>
+        </wire>
+        <wire loc="62:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="TimeSyncAMSendRadio" ref="0x41429ca0" scoped=""/></from>
+          <to><interface-ref name="TimeSyncAMSendRadio" ref="0x414ef5c8" scoped=""/></to>
+        </wire>
+        <wire loc="55:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="Receive" ref="0x4142e2d8" scoped=""/></from>
+          <to><interface-ref name="Receive" ref="0x414f2998" scoped=""/></to>
+        </wire>
+        <wire loc="63:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="TimeSyncPacketRadio" ref="0x414276f8" scoped=""/></from>
+          <to><interface-ref name="TimeSyncPacketRadio" ref="0x414eee78" scoped=""/></to>
+        </wire>
+        <wire loc="61:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="PacketTimeStampRadio" ref="0x4142b010" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampRadio" ref="0x409b92e8" scoped=""/></to>
+        </wire>
+        <wire loc="58:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="PacketAcknowledgements" ref="0x4142c140" scoped=""/></from>
+          <to><interface-ref name="PacketAcknowledgements" ref="0x409a8308" scoped=""/></to>
+        </wire>
+        <wire loc="54:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="AMPacket" ref="0x4142d448" scoped=""/></from>
+          <to><interface-ref name="AMPacket" ref="0x414f0150" scoped=""/></to>
+        </wire>
+        <wire loc="65:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="PacketTimeStampMilli" ref="0x41425670" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampMilli" ref="0x409b8ca0" scoped=""/></to>
+        </wire>
+        <wire loc="69:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="PacketTimeStampRadio" ref="0x414e83d8" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampRadio" ref="0x409b92e8" scoped=""/></to>
+        </wire>
+        <wire loc="70:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="PacketTimeStampMilli" ref="0x414e7b88" scoped=""/></from>
+          <to><interface-ref name="PacketTimeStampMilli" ref="0x409b8ca0" scoped=""/></to>
+        </wire>
+        <wire loc="73:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="LocalTimeRadio" ref="0x414e42e8" scoped=""/></from>
+          <to><interface-ref name="LocalTimeRadio" ref="0x40d1c8b8" scoped=""/></to>
+        </wire>
+        <wire loc="74:/opt/tinyos-2.1.2/tos/chips/cc2420x/CC2420XTimeSyncMessageC.nc">
+          <from><interface-ref name="PacketTimeSyncOffset" ref="0x414e4bf0" scoped=""/></from>
+          <to><interface-ref name="PacketTimeSyncOffset" ref="0x40d20d80" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component></referenced></component>

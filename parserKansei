@@ -1,0 +1,44 @@
+# @auther: Xiaohui Liu
+# @date: 10/29/2012 
+# @This program parses the log file from Kansei and store the result for Matlab analysis
+
+echo 'Usage: ./parser <job#>'
+
+job=$1
+src='/home/xiaohui/Downloads/'
+dst='/home/xiaohui/Projects/PRK/RawData/kansei/'$job
+#src=$HOME$'/Desktop'
+#dst=$HOME$'/Desktop/'$job
+#echo $src $dest
+
+cd $src
+mkdir $dst
+#decompress the result
+jobfile='job_'$job'.tar.gz'
+tar -xzvf $jobfile
+
+cd 'output/'$job
+ls -l
+
+for file in $(find . -type f -name "ret_"$job".tgz")
+do
+	echo $file
+	tar -xzvf $file
+done
+
+files=asflog-*.txt
+for file in $files
+do
+	echo $file
+	# remove first 2 columns
+	cut -d' ' -f3- $file >> tmp.txt
+	mv tmp.txt $file
+done
+
+# move to destination
+mv $files $dst
+
+# clean
+cd ../..
+rm -rf output
+rm $jobfile

@@ -1,0 +1,143 @@
+<?xml version="1.0" ?><interfacedef loc="35:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" nicename="tos.lib.rfxlink.layers.SlottedCollisionConfig" qname="SlottedCollisionConfig">
+      <function command="" loc="42:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" name="getInitialDelay" provided="0" ref="0x409f6650">
+        <documentation loc="37:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc">
+          <short>
+ This command should return the approximate transmit delay between
+ setting an alarm, waiting for the fire event, calling send and
+ obtaining the timestamp for the transmitted message.</short>
+          <long>
+ This command should return the approximate transmit delay between
+ setting an alarm, waiting for the fire event, calling send and
+ obtaining the timestamp for the transmitted message.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.SlottedCollisionConfig" qname="SlottedCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="49:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" name="getScheduleExponent" provided="0" ref="0x409f6c58">
+        <documentation loc="44:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc">
+          <short>
+ Must return a binary exponent so that the collision avoidance layer
+ can assign slots in the range of [0, 1 &lt;&lt; exponent) of size collision
+ window.</short>
+          <long>
+ Must return a binary exponent so that the collision avoidance layer
+ can assign slots in the range of [0, 1 &lt;&lt; exponent) of size collision
+ window.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.SlottedCollisionConfig" qname="SlottedCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:1" cname="unsigned char" size="I:1" unsigned="">
+            <typename><typedef-ref name="uint8_t" ref="0x40036dc8"/></typename>
+          </type-int>
+          <function-parameters>
+          </function-parameters>
+        </type-function>
+        <parameters>
+        </parameters>
+      </function>
+      <function command="" loc="65:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" name="getCollisionWindowLength" provided="0" ref="0x40a112a0">
+        <documentation loc="62:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc">
+          <short>
+ Returns the size of the collision window for this received message.</short>
+          <long>
+ Returns the size of the collision window for this received message.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.SlottedCollisionConfig" qname="SlottedCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="65:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" name="msg" ref="0x40a11148">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="54:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" name="getTransmitTime" provided="0" ref="0x40a133b8">
+        <documentation loc="51:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc">
+          <short>
+ This command must return the time when the message was transmitted.</short>
+          <long>
+ This command must return the time when the message was transmitted.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.SlottedCollisionConfig" qname="SlottedCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="54:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" name="msg" ref="0x40a13260">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+      <function command="" loc="60:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" name="getCollisionWindowStart" provided="0" ref="0x40a13ab0">
+        <documentation loc="56:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc">
+          <short>
+ Returns the start of the collision window for this received message,
+ so transmit times in this range would be considered possible collisions.</short>
+          <long>
+ Returns the start of the collision window for this received message,
+ so transmit times in this range would be considered possible collisions.
+</long>
+        </documentation>
+        <interfacedef-ref nicename="tos.lib.rfxlink.layers.SlottedCollisionConfig" qname="SlottedCollisionConfig"/>
+        <type-function alignment="I:1" size="I:1">
+          <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned="">
+            <typename><typedef-ref name="uint16_t" ref="0x40037010"/></typename>
+          </type-int>
+          <function-parameters>
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </function-parameters>
+        </type-function>
+        <parameters>
+          <variable loc="60:/opt/tinyos-2.1.2/tos/lib/rfxlink/layers/SlottedCollisionConfig.nc" name="msg" ref="0x40a13958">
+            <type-pointer alignment="I:2" size="I:2">
+              <type-tag alignment="I:1" size="I:138"><nx_struct-ref name="message_t" ref="0x40707430"/>
+                <typename><typedef-ref name="message_t" ref="0x407051e8"/></typename>
+              </type-tag>
+            </type-pointer>
+          </variable>
+        </parameters>
+      </function>
+    </interfacedef>

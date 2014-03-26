@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <LINK rel="stylesheet" href="nesdoc.css" type="text/css" media="screen"><title>Interface: tos.lib.rfxlink.util.RadioPacket</title>
+  </head>
+  <body>
+    <h2>Interface: tos.lib.rfxlink.util.RadioPacket</h2>
+    <b>interface RadioPacket</b><p><p><div id=heading>Commands</div><div id=funcsig><span id=funcnameshort>command void <a href="#clear">clear</a>(message_t *msg)
+      </span><menu>
+ Clears all metadata and sets all default values in the headers.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#headerLength">headerLength</a>(message_t *msg)
+      </span><menu>
+ This command returns the length of the header.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#maxPayloadLength">maxPayloadLength</a>()
+      </span><menu>
+ Returns the maximum length that can be set for this message.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#metadataLength">metadataLength</a>(message_t *msg)
+      </span><menu>
+ Returns the length of the metadata section.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command uint8_t <a href="#payloadLength">payloadLength</a>(message_t *msg)
+      </span><menu>
+ Returns the length of the payload.
+      </menu>
+    </div><div id=funcsig><span id=funcnameshort>command void <a href="#setPayloadLength">setPayloadLength</a>(message_t *msg, uint8_t length)
+      </span><menu>
+ Sets the length of the payload.
+      </menu>
+    </div><p><div id=heading>Commands - Details</div>
+    <a name="clear"></a>
+    <h4>clear
+    </h4>
+    <span id=funcnameshort>command void <b>clear</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Clears all metadata and sets all default values in the headers.
+
+    </menu>
+    <hr>
+    <a name="headerLength"></a>
+    <h4>headerLength
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>headerLength</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ This command returns the length of the header. The header
+ starts at the first byte of the message_t structure 
+ (some layers may add dummy bytes to allign the payload to
+ the msg->data section).
+
+    </menu>
+    <hr>
+    <a name="maxPayloadLength"></a>
+    <h4>maxPayloadLength
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>maxPayloadLength</b>()
+    </span>
+    <p>
+    <menu>
+      
+ Returns the maximum length that can be set for this message.
+
+    </menu>
+    <hr>
+    <a name="metadataLength"></a>
+    <h4>metadataLength
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>metadataLength</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the length of the metadata section. The metadata section
+ is at the very end of the message_t structure and grows downwards.
+
+    </menu>
+    <hr>
+    <a name="payloadLength"></a>
+    <h4>payloadLength
+    </h4>
+    <span id=funcnameshort>command uint8_t <b>payloadLength</b>(message_t *msg)
+    </span>
+    <p>
+    <menu>
+      
+ Returns the length of the payload. The payload starts right
+ after the header.
+
+    </menu>
+    <hr>
+    <a name="setPayloadLength"></a>
+    <h4>setPayloadLength
+    </h4>
+    <span id=funcnameshort>command void <b>setPayloadLength</b>(message_t *msg, uint8_t length)
+    </span>
+    <p>
+    <menu>
+      
+ Sets the length of the payload.
+
+    </menu>
+  </body>
+</html>

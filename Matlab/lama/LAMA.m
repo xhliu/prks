@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Author: Xiaohui Liu (whulxh@gmail.com)
+%   Date:   11/11/2013
+%   Function: to analyze the concurrency loss of LAMA vs ideal TDMA
+%   Updated: 
+%       12/18/13  change priority computation the same as in PRKS; add max OLAMA round
+%       12/19/13    use measured conflict graph
+%%
+% @param conflict_matrix: conflict graph
+% @param slot_len: # of slots to compute schedule for
+% @param max_round: LAMA if set to 1
+% @return: generated schedule and actual rounds to converge
+function [schedules rounds] = LAMA(conflict_matrix, slot_len, max_round, is_priority_randomized, is_optimized)
+    total_node_cnt = size(conflict_matrix, 1);
+    schedules = cell(slot_len, 1);
+    rounds = [];
+    
+    for i = 1 : slot_len
+        schedule = [];
+        if is_priority_randomized
+            fprintf('processing slot %d\n', i);
+            % assume: random numbers are distinct
+            prios = rand(total_node_cnt, 1);
+        else
+            fprintf('warning: not randomized, processing slot %d\n', i);
+            % same as PRKS
+            %prios = mod((1 : total_node_cnt)' + i - 1, total_node_cnt);
+            t = mod(i, 128);
+            prios = bitxor((1 : total_node_cnt)', t);
+        end
+        
+        if is_optimized
+            % local copy
+            local_conflict_matrix = conflict_matrix;
+            all_nodes = (1 : total_node_cnt)';
+            residual_nodes = all_nodes;
+            is_any_node_added = true;
+            
+            round = 0;
+            while is_any_node_added
+                len = length(residual_nodes);
+                if 0 == len
+                    break;
+                end
+                
+                % store nodes to be removed
+                removing_node_set = [];
+                tmp = local_conflict_matrix;
+                
+                is_any_node_added = false;
+                % each remaining node
+                for j = 1 : len
+                    node = residual_nodes(j);
+                    my_prio = prios(node);
+                    conflict_node_idx = local_conflict_matrix(:, node);
+                    interferer_prios = prios(conflict_node_idx);
+                    
+                    % I'm local maximum
+                    if sum(my_prio <= interferer_prios) == 0
+                        schedule = [schedule; node];
+                        %residual_nodes(residual_nodes == node) = [];
+                        removing_node_set = union(removing_node_set, node);
+                        is_any_node_added = true;
+                        
+                        % remove conflicting nodes w/ the newly added node, which do not participate
+                        % in contention anymore, i.e., not interfer w/ any
+                        % other node
+                        tmp(:, conflict_node_idx) = false;
+                        tmp(conflict_node_idx, :) = false;
+
+                        % also remove from remaining set bcoz they are
+                        % impossible to win the contention
+                        %residual_nodes = setdiff(residual_nodes, all_nodes(conflict_node_idx));
+                        removing_node_set = union(removing_node_set, all_nodes(conflict_node_idx));
+                    end
+                end
+                local_conflict_matrix = tmp;
+                residual_nodes = setdiff(residual_nodes, removing_node_set);
+                
+                round = round + 1;
+                if round >= max_round
+                    break;
+                end         
+            end
+            rounds = [rounds; round];
+        else
+            % each node
+            for j = 1 : total_node_cnt
+                my_prio = prios(j);
+                interferer_prios = prios(conflict_matrix(:, j));
+                % I'm local maximum
+                if sum(my_prio <= interferer_prios) == 0
+                    schedule = [schedule; j];
+                end
+            end
+        end
+        
+        schedules{i} = schedule;
+    end
+end
