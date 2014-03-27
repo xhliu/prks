@@ -141,7 +141,7 @@ uint32_t start_time;
 	
 	// XL:
 	uint16_t seqno = 0;
-	uint32_t local_time;
+	//uint32_t local_time;
 	
     async command uint32_t GlobalTime.getLocalTime()
     {
@@ -475,15 +475,15 @@ void printTable() {
         } else {
 			// XL: packet-level sync of localTime
 			error_t ret;
-			#warning ftsp also uses power 31
-			//call PacketTransmitPower.set(&outgoingMsgBuffer, CONTROL_POWER_LEVEL);
+			//#warning ftsp also uses power 31
+			call PacketTransmitPower.set(&outgoingMsgBuffer, CONTROL_POWER_LEVEL);
 			ret = call Send.send(AM_BROADCAST_ADDR, &outgoingMsgBuffer, TIMESYNCMSG_LEN, localTime);
 //			call UartLog.logTxRx(DBG_FLAG, DBG_FTSP_FLAG, __LINE__, call ForwarderInfo.isForwarderEnabled(), ret, outgoingMsg->rootID, outgoingMsg->nodeID, outgoingMsg->seqNum, outgoingMsg->globalTime);
 			if (ret != SUCCESS) {
 				atomic state &= ~STATE_SENDING;
 			} else {
 				// XL
-				local_time = localTime;
+				//local_time = localTime;
 				return SUCCESS;
 			}
        	}
@@ -506,7 +506,7 @@ void printTable() {
         	// do not log here bcoz outgoingMsg->seqNum may have been overwritten btw. send() and sendDone()
 //        	call UartLog.logTxRx(DBG_FLAG, DBG_FTSP_FLAG, __LINE__, call ForwarderInfo.isForwarderEnabled(), outgoingMsg->seqno, outgoingMsg->rootID, outgoingMsg->nodeID, outgoingMsg->seqNum, outgoingMsg->globalTime);
         	//uint32_t event_time = (call CC2420PacketBody.getMetadata(ptr))->event_time;
-        	//call UartLog.logTxRx(DBG_FLAG, DBG_FTSP_FLAG, 0, event_time == local_time, outgoingMsg->globalTime == local_time, outgoingMsg->seqno, event_time >> 16, event_time, local_time);
+        	//call UartLog.logTxRx(DBG_FLAG, DBG_FTSP_FLAG, __LINE__, event_time == local_time, outgoingMsg->globalTime == local_time, outgoingMsg->seqno, event_time >> 16, event_time, local_time);
             atomic ++heartBeats;
             call Leds.led1Toggle();
 
@@ -515,6 +515,7 @@ void printTable() {
         }
 
         atomic state &= ~STATE_SENDING;
+		//atomic call UartLog.logEntry(DBG_FLAG, DBG_FTSP_FLAG, __LINE__, call LocalTime.get() - local_time);
     }
     
     error_t timeSyncMsgSend() {}
@@ -530,6 +531,7 @@ void printTable() {
 	#endif
 		uint8_t state_;
 		atomic state_ = state;
+		//local_time = call LocalTime.get();
 //        call UartLog.logTxRx(DBG_FLAG, DBG_FTSP_FLAG, __LINE__, call ForwarderInfo.isForwarderEnabled(), outgoingMsg->seqno, outgoingMsg->rootID, numEntries, state_, ENTRY_THROWOUT_LIMIT);
         if( outgoingMsg->rootID != 0xFFFF && (state_ & STATE_SENDING) == 0 ) {
 	       atomic state |= STATE_SENDING;

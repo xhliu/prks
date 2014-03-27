@@ -25,22 +25,22 @@
 #include <TimeStampingLayer.h>
 #include <MetadataFlagsLayer.h>
 #include <ActiveMessageLayer.h>
-#include <FastCC2420Transceiver.h>
+#include <AsyncCC2420Transceiver.h>
 #include <CC2420XRadio.h>
 #include <RadioConfig.h>
 
 #include <Tasklet.h>
 
-module FastCC2420TransceiverP {
+module AsyncCC2420TransceiverP {
 	provides {
 		interface Init;
 		interface SplitControl;
 		
-		interface FastSend as Send[am_id_t id];
-		interface FastReceive as Receive[am_id_t id];
-		interface FastReceive as Snoop[am_id_t id];
-		interface FastAMPacket as AMPacket;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend[am_id_t id];
+		interface AsyncReceive as Receive[am_id_t id];
+		interface AsyncReceive as Snoop[am_id_t id];
+		interface AsyncAMPacket as AMPacket;
+		interface AsyncPacket as Packet;
 		// internal use
 		interface RadioPacket;
 		interface CC2420XDriverConfig;
@@ -133,11 +133,11 @@ command error_t SplitControl.stop() {
 
 
 //--------------------------------------------------------------------------------------
-// Send interface
+// AMSend interface
 //--------------------------------------------------------------------------------------
 uint16_t tx_cnt = 0;
 bool pending = FALSE;
-async command error_t Send.send[am_id_t id](am_addr_t addr, message_t* msg, uint8_t len) {
+async command error_t AMSend.send[am_id_t id](am_addr_t addr, message_t* msg, uint8_t len) {
 	error_t ret;
 	// need this protection; otherwise ongoing packet can be overwritten and wrong packet is signalled Done
 atomic {
@@ -177,23 +177,23 @@ async event void SubSend.sendDone(error_t error) {
 		p_msg_ = p_msg;
 	}
 //	call UartLog.logEntry(DBG_FLAG, call AMPacket.type(p_msg), __LINE__, tx_cnt);
-	signal Send.sendDone[call AMPacket.type(p_msg_)](p_msg_, error);
+	signal AMSend.sendDone[call AMPacket.type(p_msg_)](p_msg_, error);
 }
 
-inline async command error_t Send.cancel[am_id_t id](message_t* msg) {
+inline async command error_t AMSend.cancel[am_id_t id](message_t* msg) {
 	// TODO: dummy cancel
 	return SUCCESS;
 }
 
-inline async command uint8_t Send.maxPayloadLength[am_id_t id]() {
+inline async command uint8_t AMSend.maxPayloadLength[am_id_t id]() {
 	return call Packet.maxPayloadLength();
 }
 
-inline async command void* Send.getPayload[am_id_t id](message_t* msg, uint8_t len) {
+inline async command void* AMSend.getPayload[am_id_t id](message_t* msg, uint8_t len) {
 	return call Packet.getPayload(msg, len);
 }
 
-default async event void Send.sendDone[am_id_t id](message_t *msg, error_t error) {
+default async event void AMSend.sendDone[am_id_t id](message_t *msg, error_t error) {
 }
 
 //--------------------------------------------------------------------------------------

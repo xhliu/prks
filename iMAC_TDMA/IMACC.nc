@@ -8,9 +8,9 @@
  */
 configuration IMACC {
  	provides {
-		interface FastSend as AMSend;
-		interface FastReceive as Receive;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
 
  		interface AsyncSplitControl as ForwarderSwitch;
  		interface AsyncStdControl as ControllerSwitch;

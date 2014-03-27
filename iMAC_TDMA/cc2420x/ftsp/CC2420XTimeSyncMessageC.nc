@@ -29,7 +29,7 @@ configuration CC2420XTimeSyncMessageC
 	{
 		interface SplitControl;
 
-		interface FastReceive as Receive[uint8_t id];
+		interface AsyncReceive as Receive[uint8_t id];
 //		interface Receive as Snoop[am_id_t id];
 //		interface Packet;
 //		interface AMPacket;
@@ -49,7 +49,7 @@ configuration CC2420XTimeSyncMessageC
 implementation
 {
 //	components CC2420XActiveMessageC as ActiveMessageC, new TimeSyncMessageLayerC();
-	components FastCC2420TransceiverC as ActiveMessageC, new TimeSyncMessageLayerC();
+	components AsyncCC2420TransceiverC as ActiveMessageC, new TimeSyncMessageLayerC();
   
 	SplitControl	= ActiveMessageC;
 //	AMPacket	= TimeSyncMessageLayerC;

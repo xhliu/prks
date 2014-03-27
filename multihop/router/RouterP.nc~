@@ -8,14 +8,14 @@ module RouterP {
 		interface Init;
 		
 #if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
-		interface AsyncSend as Send;
-		interface AsyncReceive as Receive;
-		interface AsyncIntercept as Intercept;
-		interface AsyncPacket as Packet;
+		interface FastSend as Send;
+		interface FastReceive as Receive;
+		interface FastIntercept as Intercept;
+		interface FastPacket as Packet;
 #else
 		interface Send;
 		interface Receive;
-		interface AsyncIntercept as Intercept;
+		interface FastIntercept as Intercept;
 		interface Packet;
 #endif
 		interface RootControl;
@@ -23,10 +23,10 @@ module RouterP {
 
 	uses {
 	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
-		interface AsyncAMSend as SubSend;
-		interface AsyncReceive as SubReceive;
-		interface AsyncPacket as SubPacket;
-		interface AsyncAMPacket as SubAMPacket;
+		interface FastAMSend as SubSend;
+		interface FastReceive as SubReceive;
+		interface FastPacket as SubPacket;
+		interface FastAMPacket as SubAMPacket;
 	#else
 		interface AMSend as SubSend;
 		interface Receive as SubReceive;
@@ -280,7 +280,11 @@ inline bool matchInstance(message_t *m1, message_t* m2) {
 			getHeader(m1)->originSeqNo == getHeader(m2)->originSeqNo);
 }
 
-async event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) {
+
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async 
+#endif
+event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) {
     uint8_t i;
     fe_queue_entry_t* qe;
     bool duplicate = FALSE;
@@ -330,23 +334,38 @@ async event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t
 //-------------------------------------------------------------------------------------------------
 // Interface Packet
 //-------------------------------------------------------------------------------------------------
-async command void Packet.clear(message_t* msg) {
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async 
+#endif
+command void Packet.clear(message_t* msg) {
 	call SubPacket.clear(msg);
 }
 
-async command uint8_t Packet.payloadLength(message_t* msg) {
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async 
+#endif
+command uint8_t Packet.payloadLength(message_t* msg) {
 	return call SubPacket.payloadLength(msg) - sizeof(router_header_t);
 }
 
-async command void Packet.setPayloadLength(message_t* msg, uint8_t len) {
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async 
+#endif
+command void Packet.setPayloadLength(message_t* msg, uint8_t len) {
 	call SubPacket.setPayloadLength(msg, len + sizeof(router_header_t));
 }
 
-async command uint8_t Packet.maxPayloadLength() {
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async 
+#endif
+command uint8_t Packet.maxPayloadLength() {
 	return call SubPacket.maxPayloadLength() - sizeof(router_header_t);
 }
 
-async command void* Packet.getPayload(message_t* msg, uint8_t len) {
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+async 
+#endif
+command void* Packet.getPayload(message_t* msg, uint8_t len) {
 	uint8_t* payload = call SubPacket.getPayload(msg, len + sizeof(router_header_t));
 	if (payload != NULL) {
 		payload += sizeof(router_header_t);

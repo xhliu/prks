@@ -11,14 +11,14 @@ configuration RouterC {
 #if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
  		interface AsyncSplitControl as ForwarderSwitch;
  		interface AsyncStdControl as ControllerSwitch;
-		interface AsyncSend as Send;
-		interface AsyncReceive as Receive;
-		interface AsyncIntercept as Intercept;
-		interface AsyncPacket as Packet;
+		interface FastSend as Send;
+		interface FastReceive as Receive;
+		interface FastIntercept as Intercept;
+		interface FastPacket as Packet;
 #else
 		interface Send;
 		interface Receive;
-		interface AsyncIntercept as Intercept;
+		interface FastIntercept as Intercept;
 		interface Packet;
 #endif
 		interface RootControl;
@@ -34,9 +34,6 @@ implementation {
 #else
 	components ActiveMessageC as Forwarder;
 #endif
-//	Send = Forwarder;
-//	Receive = Forwarder;
-//	Packet = Forwarder;
 	components RouterP as ImplP;
 	
 	components MainC;
@@ -67,9 +64,9 @@ implementation {
 	components new AsyncCacheC(CACHE_SIZE) as SentCacheC;
 	ImplP.SentCache -> SentCacheC;
 	SentCacheC.SubPacket -> Forwarder;
-#ifdef ACK_LAYER	
+#ifdef ACK_LAYER
 #if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
-	components AsyncCC2420TransceiverC as AM;
+	components FastCC2420TransceiverC as AM;
 #else
 	components ActiveMessageC as AM;
 #endif

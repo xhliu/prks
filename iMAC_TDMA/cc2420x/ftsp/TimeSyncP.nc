@@ -49,7 +49,7 @@ generic module TimeSyncP(typedef precision_tag)
         interface Boot;
         interface SplitControl as RadioControl;
         interface AsyncTimeSyncAMSend<precision_tag,uint32_t> as Send;
-        interface FastReceive as Receive;
+        interface AsyncReceive as Receive;
         interface AsyncTimeSyncPacket<precision_tag,uint32_t> as TimeSyncPacket;
 //        interface Timer<TMilli>;
         interface Random;

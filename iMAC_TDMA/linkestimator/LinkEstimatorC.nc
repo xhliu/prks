@@ -6,10 +6,10 @@
 
 configuration LinkEstimatorC {
     provides {
-		interface FastSend as AMSend;
-		interface FastReceive as Receive;
-		interface FastReceive as Snoop;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncReceive as Snoop;
+		interface AsyncPacket as Packet;
 
         interface LinkEstimator;
     };
@@ -31,8 +31,8 @@ implementation {
 //	LE.SubReceive -> AMReceiverC;
 //	LE.SubPacket -> AMSenderC;
 //	LE.SubAMPacket -> AMSenderC;
-	components FastCC2420TransceiverC as AM;
-	LE.SubSend -> AM.Send[AM_IMAC_LE];
+	components AsyncCC2420TransceiverC as AM;
+	LE.SubSend -> AM.AMSend[AM_IMAC_LE];
 	LE.SubReceive -> AM.Receive[AM_IMAC_LE];
 	LE.SubSnoop -> AM.Snoop[AM_IMAC_LE];
 	LE.SubPacket -> AM;

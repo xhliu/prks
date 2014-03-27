@@ -5,14 +5,14 @@
  */
 #include <RadioConfig.h>
 
-configuration FastCC2420TransceiverC {
+configuration AsyncCC2420TransceiverC {
 	provides {
 		interface SplitControl;
-		interface FastSend as Send[am_id_t id];
-		interface FastReceive as Receive[am_id_t id];
-		interface FastReceive as Snoop[am_id_t id];
-		interface FastPacket as Packet;
-		interface FastAMPacket as AMPacket;
+		interface AsyncAMSend as AMSend[am_id_t id];
+		interface AsyncReceive as Receive[am_id_t id];
+		interface AsyncReceive as Snoop[am_id_t id];
+		interface AsyncPacket as Packet;
+		interface AsyncAMPacket as AMPacket;
 		interface PacketTimeStamp<TRadio, uint32_t> as PacketTimeStampRadio;
 		interface CC2420Packet;
 		
@@ -21,9 +21,9 @@ configuration FastCC2420TransceiverC {
 }
 
 implementation {
-	components FastCC2420TransceiverP as Impl;
+	components AsyncCC2420TransceiverP as Impl;
 	SplitControl = Impl;
-	Send = Impl;
+	AMSend = Impl;
 	Receive = Impl.Receive;
 	Snoop = Impl.Snoop;
 	Packet = Impl;
@@ -66,9 +66,6 @@ implementation {
 	RadioAlarmC.Alarm -> Driver;
 	Driver.RadioAlarm -> RadioAlarmC.RadioAlarm[unique(UQ_RADIO_ALARM)];
 	
-	components UartLogC;
-	Impl.UartLog -> UartLogC;
-		
     // ------ SoftwareAckLayerC
     components new SoftwareAckLayerC() as AckLayer;
     Impl.SubSend -> AckLayer;
@@ -79,6 +76,7 @@ implementation {
     AckLayer.RadioAlarm -> RadioAlarmC.RadioAlarm[unique(UQ_RADIO_ALARM)];
     AckLayer.Config -> Impl;
     AckLayer.AckReceivedFlag -> Impl.PacketFlag[unique(UQ_METADATA_FLAGS)];
-	AckLayer.UartLog -> UartLogC;
-	AckLayer.AMPacket -> Impl;
+	
+	components UartLogC;
+	Impl.UartLog -> UartLogC;
 }

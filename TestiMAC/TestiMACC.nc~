@@ -56,9 +56,10 @@ implementation {
  	App.SyncPacket -> FastAM;
  	App.SyncReceive -> FastAM.Receive[TYPE_SYNC];
  	App.PacketTimeStamp -> FastAM;
-#endif
+
  	components TimeSyncMicroC as TimeSyncC;
  	MainC.SoftwareInit -> TimeSyncC;
  	TimeSyncC.Boot -> MainC;
  	App.GlobalTime -> TimeSyncC;
+#endif
 }

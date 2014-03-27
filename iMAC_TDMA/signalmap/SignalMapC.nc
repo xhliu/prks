@@ -7,9 +7,9 @@
  */
 configuration SignalMapC {
  	provides {
-		interface FastSend as AMSend;
-		interface FastReceive as Receive;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
 		
  		interface SignalMap;
  	};
@@ -32,8 +32,8 @@ implementation {
 //	SM.SubReceive -> AMReceiverC;
 //	SM.SubPacket -> AMSenderC;
 //	SM.SubAMPacket -> AMSenderC;
-	components FastCC2420TransceiverC as AM;
-	SM.SubSend -> AM.Send[AM_IMAC_SM];
+	components AsyncCC2420TransceiverC as AM;
+	SM.SubSend -> AM.AMSend[AM_IMAC_SM];
 	SM.SubReceive -> AM.Receive[AM_IMAC_SM];
 	SM.SubPacket -> AM;
 	SM.SubAMPacket -> AM;

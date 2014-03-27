@@ -30,7 +30,7 @@ configuration TimeSyncMessageC
 	{
 		interface SplitControl;
 
-		interface FastReceive as Receive[uint8_t id];
+		interface AsyncReceive as Receive[uint8_t id];
 //		interface Receive as Snoop[am_id_t id];
 //		interface Packet;
 //		interface AMPacket;

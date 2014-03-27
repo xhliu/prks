@@ -36,8 +36,8 @@
 #else
 // PRKS specific
 	// run basic LAMA only: PRKS or RIDB
-//	#define OLAMA_DISABLED
-//	#warning OLAMA_DISABLED
+	#define OLAMA_DISABLED
+	#warning OLAMA_DISABLED
 	
 	// PRKS-L: do not use refined a(t) and use SINR-vs-PDR gradient directly even it's away from target
 //	#define PRKSL

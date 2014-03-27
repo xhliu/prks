@@ -5,9 +5,9 @@
  */
 configuration IMACControllerC {
  	provides {
-		interface FastSend as AMSend;
-		interface FastReceive as Receive;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
 		
 		interface AsyncStdControl as StdControl;
 		interface IMACController;
@@ -31,7 +31,7 @@ implementation {
 	Controller.SubPacket -> SM;
 //	components ActiveMessageC;
 //	Controller.SubAMPacket -> ActiveMessageC;
-	components FastCC2420TransceiverC as AM;
+	components AsyncCC2420TransceiverC as AM;
 	Controller.SubAMPacket -> AM;
 	Controller.CC2420Packet -> AM;
 	

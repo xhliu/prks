@@ -14,9 +14,9 @@
 
 module IMACControllerP {
 	provides {
-		interface FastSend as AMSend;
-		interface FastReceive as Receive;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
 		
 		interface AsyncStdControl as StdControl;
 		interface IMACController as Controller;
@@ -24,10 +24,10 @@ module IMACControllerP {
 	};
 	
 	uses {
-		interface FastSend as SubSend;
-		interface FastReceive as SubReceive;
-		interface FastPacket as SubPacket;
-		interface FastAMPacket as SubAMPacket;
+		interface AsyncSend as SubSend;
+		interface AsyncReceive as SubReceive;
+		interface AsyncPacket as SubPacket;
+		interface AsyncAMPacket as SubAMPacket;
 		interface CC2420Packet;
 		
 		interface ForwarderInfo;
@@ -1030,7 +1030,7 @@ error_t execController(am_addr_t nb, bool is_sender) {
 }
 
 // take a snap of controller status
-async command void getControllerStatus() {
+async command void Controller.getControllerStatus() {
 	uint8_t i;
 	uint8_t link_pdr, link_pdr_sample, link_pdr_version;
 	error_t ret;

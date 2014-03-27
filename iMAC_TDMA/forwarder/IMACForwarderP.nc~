@@ -27,9 +27,9 @@
 
 module IMACForwarderP {
 	provides {
-		interface FastSend as AMSend;
-		interface FastReceive as Receive;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
 		
 		interface AsyncSplitControl as SplitControl;
 		interface Init;
@@ -38,13 +38,13 @@ module IMACForwarderP {
 	
 	uses {
 		// DATA pkt
-		interface FastSend as SubSend;
-		interface FastReceive as SubReceive;
-		interface FastReceive as SubSnoop;
-		interface FastPacket as SubPacket;
-		interface FastAMPacket as SubAMPacket;
+		interface AsyncAMSend as SubSend;
+		interface AsyncReceive as SubReceive;
+		interface AsyncReceive as SubSnoop;
+		interface AsyncPacket as SubPacket;
+		interface AsyncAMPacket as SubAMPacket;
 		// control pkt
-		interface FastSend as CtrlSend;
+		interface AsyncAMSend as CtrlSend;
 	#ifdef SCREAM
 		interface GeneralIO as CCA;
 	#endif

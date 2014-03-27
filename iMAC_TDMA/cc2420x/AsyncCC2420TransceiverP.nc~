@@ -25,22 +25,22 @@
 #include <TimeStampingLayer.h>
 #include <MetadataFlagsLayer.h>
 #include <ActiveMessageLayer.h>
-#include <FastCC2420Transceiver.h>
+#include <AsyncCC2420Transceiver.h>
 #include <CC2420XRadio.h>
 #include <RadioConfig.h>
 
 #include <Tasklet.h>
 
-module FastCC2420TransceiverP {
+module AsyncCC2420TransceiverP {
 	provides {
 		interface Init;
 		interface SplitControl;
 		
-		interface FastSend as Send[am_id_t id];
-		interface FastReceive as Receive[am_id_t id];
-		interface FastReceive as Snoop[am_id_t id];
-		interface FastAMPacket as AMPacket;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend[am_id_t id];
+		interface AsyncReceive as Receive[am_id_t id];
+		interface AsyncReceive as Snoop[am_id_t id];
+		interface AsyncAMPacket as AMPacket;
+		interface AsyncPacket as Packet;
 		// internal use
 		interface RadioPacket;
 		interface CC2420XDriverConfig;
@@ -137,7 +137,7 @@ command error_t SplitControl.stop() {
 //--------------------------------------------------------------------------------------
 uint16_t tx_cnt = 0;
 bool pending = FALSE;
-async command error_t Send.send[am_id_t id](am_addr_t addr, message_t* msg, uint8_t len) {
+async command error_t AMSend.send[am_id_t id](am_addr_t addr, message_t* msg, uint8_t len) {
 	error_t ret;
 	// need this protection; otherwise ongoing packet can be overwritten and wrong packet is signalled Done
 atomic {
@@ -177,7 +177,7 @@ async event void SubSend.sendDone(error_t error) {
 		p_msg_ = p_msg;
 	}
 //	call UartLog.logEntry(DBG_FLAG, call AMPacket.type(p_msg), __LINE__, tx_cnt);
-	signal Send.sendDone[call AMPacket.type(p_msg_)](p_msg_, error);
+	signal AMSend.sendDone[call AMPacket.type(p_msg_)](p_msg_, error);
 }
 
 inline async command error_t Send.cancel[am_id_t id](message_t* msg) {
@@ -469,7 +469,6 @@ async command void SoftwareAckConfig.createAckPacket(message_t* data, message_t*
 
 //#warning to turn as 256 jiffies as in cc2420 and choose h/w or s/w Ack
 #ifndef SOFTWAREACK_TIMEOUT
-fd
 #define SOFTWAREACK_TIMEOUT 8000    // 1000
 #endif
 

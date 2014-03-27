@@ -38,7 +38,7 @@ generic module TimeSyncMessageLayerP()
 {
 	provides
 	{
-		interface FastReceive as Receive[am_id_t id];
+		interface AsyncReceive as Receive[am_id_t id];
 //		interface Receive as Snoop[am_id_t id];
 //		interface AMPacket;
 //		interface Packet;
@@ -52,11 +52,11 @@ generic module TimeSyncMessageLayerP()
 
 	uses
 	{
-		interface FastSend as SubAMSend;
-		interface FastReceive as SubReceive;
+		interface AsyncAMSend as SubAMSend;
+		interface AsyncReceive as SubReceive;
 //		interface Receive as SubSnoop;
-		interface FastAMPacket as SubAMPacket;
-		interface FastPacket as SubPacket;
+		interface AsyncAMPacket as SubAMPacket;
+		interface AsyncPacket as SubPacket;
 
 		interface PacketTimeStamp<TRadio, uint32_t> as PacketTimeStampRadio;
 //		interface PacketTimeStamp<TMilli, uint32_t> as PacketTimeStampMilli;

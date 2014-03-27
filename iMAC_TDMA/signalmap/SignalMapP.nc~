@@ -16,19 +16,19 @@
 
 module SignalMapP {
 	provides {
-		interface FastSend as AMSend;
-		interface FastReceive as Receive;
-		interface FastPacket as Packet;
+		interface AsyncAMSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
 		
 		interface SignalMap;
 		interface Init;
 	};
 	
 	uses {
-		interface FastSend as SubSend;
-		interface FastReceive as SubReceive;
-		interface FastPacket as SubPacket;
-		interface FastAMPacket as SubAMPacket;
+		interface AsyncSend as SubSend;
+		interface AsyncReceive as SubReceive;
+		interface AsyncPacket as SubPacket;
+		interface AsyncAMPacket as SubAMPacket;
 
 		interface LinkEstimator;
 		interface IMACController as Controller;
@@ -53,7 +53,7 @@ nb_signal_map_entry_t nbSignalMap[NB_SIGNAL_MAP_SIZE];
 // if there is not enough room in the packet to put all the signal map entries, in order to do round robin we need to remember which entry
 // we sent in the last beacon
 int16_t prevSentIdx = 0;
-uint16_t seqno;
+//uint16_t seqno;
 
 
 bool freezed = FALSE;
@@ -211,7 +211,7 @@ uint8_t addLinkEstHeaderAndFooter(message_t *msg, uint8_t len) {
 	// TODO: replace w/ actual level when power control is used
 	hdr->power_level = CONTROL_POWER_LEVEL;
 	hdr->footer_entry_cnts = j;
-	hdr->seqno = seqno++;
+	//hdr->seqno = seqno++;
 	newlen = sizeof(sm_header_t) + len + j * sizeof(sm_footer_t);
 	return newlen;
 }

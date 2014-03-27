@@ -29,7 +29,7 @@ implementation {
 	App.AMControl -> AM;
 #else
 	components IMACC;
-	components FastCC2420TransceiverC as AM;
+	components AsyncCC2420TransceiverC as AM;
 	App.AMSend -> IMACC;
 	App.Receive -> IMACC;
 	App.Packet -> IMACC;
@@ -52,10 +52,10 @@ implementation {
 
 #if defined(TEST_FTSP)
 	// ftsp
-	components FastCC2420TransceiverC as FastAM;
- 	App.SyncPacket -> FastAM;
- 	App.SyncReceive -> FastAM.Receive[TYPE_SYNC];
- 	App.PacketTimeStamp -> FastAM;
+	components AsyncCC2420TransceiverC as AsyncAM;
+ 	App.SyncPacket -> AsyncAM;
+ 	App.SyncReceive -> AsyncAM.Receive[TYPE_SYNC];
+ 	App.PacketTimeStamp -> AsyncAM;
 
  	components TimeSyncMicroC as TimeSyncC;
  	MainC.SoftwareInit -> TimeSyncC;

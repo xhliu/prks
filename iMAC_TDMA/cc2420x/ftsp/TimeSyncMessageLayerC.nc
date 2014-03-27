@@ -41,7 +41,7 @@ generic configuration TimeSyncMessageLayerC()
 {
 	provides
 	{
-		interface FastReceive as Receive[uint8_t id];
+		interface AsyncReceive as Receive[uint8_t id];
 //		interface Receive as Snoop[am_id_t id];
 //		interface AMPacket;
 //		interface Packet;
@@ -88,8 +88,8 @@ implementation
 //	components ActiveMessageC;
 //	TimeSyncMessageLayerP.SubReceive -> ActiveMessageC.Receive[AM_TIMESYNCMSG];
 //	TimeSyncMessageLayerP.SubSnoop -> ActiveMessageC.Snoop[AM_TIMESYNCMSG];;
-	components FastCC2420TransceiverC as AM;
-	TimeSyncMessageLayerP.SubAMSend -> AM.Send[AM_TIMESYNCMSG];
+	components AsyncCC2420TransceiverC as AM;
+	TimeSyncMessageLayerP.SubAMSend -> AM.AMSend[AM_TIMESYNCMSG];
 	TimeSyncMessageLayerP.SubAMPacket -> AM.AMPacket;
 	TimeSyncMessageLayerP.SubPacket -> AM.Packet;
 	TimeSyncMessageLayerP.SubReceive -> AM.Receive[AM_TIMESYNCMSG];

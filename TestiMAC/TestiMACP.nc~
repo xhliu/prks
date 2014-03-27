@@ -16,10 +16,10 @@ module TestiMACP {
 		interface Boot;
 	
 	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
-		interface FastSend as AMSend;
-		interface FastReceive as Receive;
-		interface FastPacket as Packet;
-		interface FastAMPacket as AMPacket;
+		interface AsyncSend as AMSend;
+		interface AsyncReceive as Receive;
+		interface AsyncPacket as Packet;
+		interface AsyncAMPacket as AMPacket;
 		
 		interface AsyncSplitControl as ForwarderSwitch;
 		interface AsyncStdControl as ControllerSwitch;
@@ -35,9 +35,9 @@ module TestiMACP {
 		
 	#if defined(TEST_FTSP)
 		// ftsp
- 		//interface FastSend as SyncSend;
- 		interface FastReceive as SyncReceive;
- 		interface FastPacket as SyncPacket;
+ 		//interface AsyncSend as SyncSend;
+ 		interface AsyncReceive as SyncReceive;
+ 		interface AsyncPacket as SyncPacket;
  		interface PacketTimeStamp<TMicro, uint32_t>;
 
  		interface GlobalTime<TMicro>;
