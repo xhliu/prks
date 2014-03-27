@@ -65,7 +65,7 @@ end
 %% 1) 
 % constraints: implicit, one node at most one outgoing link
 MAX_ACTIVE_LINK_SIZE = inf; %100;
-MAX_INCIDENT_LINK_SIZE = inf; %2;
+MAX_INCIDENT_LINK_SIZE = 2;
 % job 19976 generates exactly 100 links
 MIN_PDR = 0.99;
 
@@ -130,17 +130,18 @@ for i = 1 : len
 end
 
 %%
-save('links_pdr99.mat', 'links');
+save('links_indriya_iorder.mat', 'links');
 %% format
 clc;
 % links = node_parent;
 % to select a smaller topology, for debug purpose
-MAX_NODE_ID = 130;
+MAX_NODE_ID = 130;  % for control signalling TDMA to work
 for i = 1 : size(links, 1)
     if links(i, 1) < MAX_NODE_ID && links(i, 2) < MAX_NODE_ID
         fprintf('{%d, %d}, ', links(i, 1), links(i, 2));
     end
 end
+disp('\n');
 % 5 * 5
 % for i = 1 : size(links, 1)
 %     if mod(links(i, 1), 15) > 10 && links(i, 2) > 10
@@ -168,9 +169,11 @@ save('node_noise.mat', 'node_noise');
 
 
 %% link SNR
-% in job 18654/19012/19936
+% neteye: in job 18654/19012/19936
+% indriya: 46644
 load node_noise.mat;
-%% in job 18651/19011/19935 of tx power 0 dBm
+%% neteye: in job 18651/19011/19935 of tx power 0 dBm
+% indriya: 46654
 load link_pdr_rssi.mat;
 TX_POWER_OFFSET = 0; % - (-25);
 % power level 31

@@ -495,9 +495,9 @@ void scheduleSlot(uint32_t g_slot_time) {
 	// 1) even 1 jiffy's difference in global time across diff. nodes can lead to priority inconsistency and thus "collision"; while time slot index is consensus if sync error is less than one slot
 	// 2) implicit assumption: alarm fires right after perfect slot boundary, almost never before it, which can be seem from "alarm_firing_modulo_1024.fig"
 	current_slot = g_slot_time / SLOT_LEN;
-#warning take a snapshot of controller every 16 slots
-	if (0 == (current_slot & 0x0F))
-		call Controller.getControllerStatus();
+//#warning take a snapshot of controller every 16 slots
+//	if (0 == (current_slot & 0x0F))
+//		call Controller.getControllerStatus();
 	
 #ifndef SCREAM
 	// slot is divided into 2 subslots: communication subslot 0 to exchange ctrl info; computation subslot 1 to update OLAMA states
