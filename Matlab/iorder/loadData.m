@@ -3,20 +3,22 @@
 %   Date:   1/25/2014
 %   Function: load jobs and do some pre-processing
 %% link set
-load ~/Dropbox/iMAC/Xiaohui/links_olama; % link100.mat;
+% load ~/Dropbox/iMAC/Xiaohui/links_olama; % link100.mat;
 % indriya
 % load ~/Dropbox/iMAC/Xiaohui/links_olama_indriya;
+load ~/Dropbox/iMAC/Xiaohui/links_indriya_iorder;
 link = links;
-%% signal map: neteye   job 19935/20768;    indriya     job 46280/46281
-load ~/Projects/tOR/RawData/20768/link_snr_gain;
-% load ~/Projects/tOR/RawData/Indriya/46281/link_snr_gain;
+%% signal map: neteye   job 19935/20768;    indriya     job
+%% 46280/46281/46654(iOrder)
+% load ~/Projects/tOR/RawData/20768/link_snr_gain;
+load ~/Projects/tOR/RawData/Indriya/46654/link_snr_gain;
 t = signal_map;
 cnt = sum(sum(isnan(t))) - size(t, 1);
 fprintf('nan ratio %f\n', cnt / (size(t, 1) * size(t, 2)));
 %% noise floor: neteye job 18654/19012/19936/20769;     indriya     job
-%% 46279/46282
+%% 46279/46282/46644(iOrder)
 % load ~/Projects/tOR/RawData/20769/node_noise;
-load ~/Projects/tOR/RawData/Indriya/46282/node_noise;
+load ~/Projects/tOR/RawData/Indriya/46644/node_noise;
 %% power level 3
 TX_POWER = -25;
 

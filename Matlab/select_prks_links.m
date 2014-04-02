@@ -6,7 +6,9 @@
 %   Updated: 7/23/13 select reliable link based on link SNR and PDR w/o interference
 %                and then construct min hop tree after pruning unreliable links
 %% each iteration
-jobs = [19235 19236 19237 19238 19239 19248 19251 19258 19260];
+%jobs = [19235 19236 19237 19238 19239 19248 19251 19258 19260];
+jobs = [21890:2:21898 21900 21903 21904 21907:21910 21915 21916 21918 21919 21921 21926 21928 21937];
+
 for job_id = 1 : length(jobs)
     job = jobs(job_id);
     fprintf('processing job %d\n', job);
@@ -63,6 +65,7 @@ end
 
 %% %% link selection 
 %% 1) 
+load link_pdr_rssi;
 % constraints: implicit, one node at most one outgoing link
 MAX_ACTIVE_LINK_SIZE = inf; %100;
 MAX_INCIDENT_LINK_SIZE = 2;
@@ -141,7 +144,7 @@ for i = 1 : size(links, 1)
         fprintf('{%d, %d}, ', links(i, 1), links(i, 2));
     end
 end
-disp('\n');
+% disp('\n');
 % 5 * 5
 % for i = 1 : size(links, 1)
 %     if mod(links(i, 1), 15) > 10 && links(i, 2) > 10
@@ -229,62 +232,69 @@ bar(sum(connectivity));
 save('connectivity.mat', 'nodes', 'connectivity');
 
 %% prune the connectivity graph to reduce degree
-MAX_DEGREE = 6;
-for k = 1 : 1000
-load long_term_connectivity;
-% remove prob.
-p = 0.3;
-for i = 1 : size(connectivity, 1)
-    if rand() < p
-        % remove
-        connectivity(i, :) = 0;
-        connectivity(:, i) = 0;
-    end
-end
-
-% min hop tree
-% tmp = [];
-%for j = 1 : length(nodes)
-BASESTATION = 15; % nodes(j);
-% convert connectivity matric into link cost matrix
-link_cost = ones(size(connectivity));
-% no existent link
-link_cost(~connectivity) = inf;
-% parent is index, not necessarily equal to node id
-[hopcount, parent] = dijkstra(link_cost, BASESTATION, size(link_cost, 1));
-
-% final tree
-node_parent = [];
-for i = 1 : length(nodes)
-    node = nodes(i);
-    
-    if node == BASESTATION
-        ;%node_parent = [node_parent; node node];
-    else
-        if ~isnan(parent(i))
-            node_parent = [node_parent; node nodes(parent(i))];
+MAX_DEGREE = 4;
+MIN_LINK_SIZE = 40;
+MAX_LINK_SIZE = inf;
+for k = 1 : 10000
+    fprintf('round %d\n', k);
+    load long_term_connectivity;
+    % remove prob.
+    p = 0.5;
+    for i = 1 : size(connectivity, 1)
+        if rand() < p
+            % remove
+            connectivity(i, :) = 0;
+            connectivity(:, i) = 0;
         end
     end
-end
-%save('node_parent.mat', 'node_parent');
 
-if isempty(node_parent)
-    continue;
-end
-% node degree
-links = node_parent;
-node = [links(:, 1); links(:, 2)];
-[cnt x] = hist(node, unique(node));
-xcnt = [x cnt'];
-if max(cnt) <= MAX_DEGREE
-    save('long_term_tree.mat', 'node_parent');
-    break;
-end
-% hist(cnt);
-% tmp = [tmp; nodes(j) max(cnt)];
-end
+    % min hop tree
+    % tmp = [];
+    %for j = 1 : length(nodes)
+    BASESTATION = 15; % nodes(j);
+    % convert connectivity matric into link cost matrix
+    link_cost = ones(size(connectivity));
+    % no existent link
+    link_cost(~connectivity) = inf;
+    % parent is index, not necessarily equal to node id
+    [hopcount, parent] = dijkstra(link_cost, BASESTATION, size(link_cost, 1));
 
+    % final tree
+    node_parent = [];
+    for i = 1 : length(nodes)
+        node = nodes(i);
 
+        if node == BASESTATION
+            ;%node_parent = [node_parent; node node];
+        else
+            if ~isnan(parent(i))
+                node_parent = [node_parent; node nodes(parent(i))];
+            end
+        end
+    end
+    save('node_parent.mat', 'node_parent');
+
+    if isempty(node_parent)
+        continue;
+    end
+    % node degree
+    links = node_parent;
+    if size(links, 1) < MIN_LINK_SIZE || size(links, 1) > MAX_LINK_SIZE
+        continue;
+    end
+    node = [links(:, 1); links(:, 2)];
+    [cnt x] = hist(node, unique(node));
+    xcnt = [x cnt'];
+    fprintf('max degree: %d\n', max(cnt));
+    if max(cnt) <= MAX_DEGREE
+        save('long_term_tree.mat', 'node_parent');
+        fprintf('tree found\n');
+        return;
+    end
+    % hist(cnt);
+    % tmp = [tmp; nodes(j) max(cnt)];
+end
+fprintf('tree not found\n');
 
 
 %% %% select node tx power to ensure SNR_THRESHOLD
@@ -346,12 +356,14 @@ end
 
 %% %% select long-term reliable links
 % this works even nodes change over jobs
-PDR_THRESHOLD = 0.99;
+PDR_THRESHOLD = 0.97;
 NODE_NUM = 130;
 connectivity = ones(NODE_NUM, NODE_NUM);
 
 % jobs = [19235 19236 19237 19238 19239 19248 19251 19258 19260];
-jobs = [21811 21814 21832 21833 21836 21838];
+% jobs = [21811 21814 21832 21833 21836 21838];
+jobs = [21890:2:21898 21900 21903 21904 21907:21910 21915 21916 21918 21919 21921 21926 21928 21937];
+
 for k = 1 : length(jobs)
     job = jobs(k);
     fprintf('processing job %d\n', job);

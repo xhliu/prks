@@ -17,7 +17,7 @@ else
 end
 
 % directory to store figures
-FIGURE_DIR = '~/Dropbox/Projects/olama/figure/';
+FIGURE_DIR = '~/Dropbox/Projects/onama/figure/';
 fprintf('Warning: please change the directory to prevent overwriting\n');
 
 % # of protocols to compare
@@ -155,28 +155,47 @@ job = cell(0);
 %           43295 60;
 %           ];
 
+% globecom
+% % pdr req 70
+% job{1} = [43320 120;
+%           43302 60;
+%           43635 90;
+%           ];
+% % 80
+% job{2} = [43330 120;
+%           43311 90;
+%           43678 60;
+%           43705 90;
+%           ];
+% % 90
+% job{3} = [43324 120;
+% %           43301 60;
+%           43677 60;
+%           43704 90;
+%           ];
+% % 95
+% job{4} = [43329 120;
+% %           43300 120;
+%           43295 60;
+%           43634 90;
+%           ];
+
+% specifically to compare concurrency w/ iOrder
 % pdr req 70
-job{1} = [43320 120;
-          43302 60;
-          43635 90;
+job{1} = [46790 55;
+          46949 55;
           ];
 % 80
-job{2} = [43330 120;
-          43311 90;
-          43678 60;
-          43705 90;
+job{2} = [46792 55;
+          46950 55;
           ];
 % 90
-job{3} = [43324 120;
-%           43301 60;
-          43677 60;
-          43704 90;
+job{3} = [46791 55;
+          46941 55;
           ];
 % 95
-job{4} = [43329 120;
-%           43300 120;
-          43295 60;
-          43634 90;
+job{4} = [46825 60;
+          46930 55;
           ];
 prks_onama_job = job;
 

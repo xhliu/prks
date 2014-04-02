@@ -55,27 +55,32 @@ implementation {
 #endif
 	ImplP.SubPacket -> Forwarder;
 	
-	components new AsyncQueueC(fe_queue_entry_t*, QUEUE_SIZE) as SendQueueC;
+	components new AsyncQueueC(fe_queue_entry_t, QUEUE_SIZE) as SendQueueC;
 	ImplP.SendQueue -> SendQueueC;
-	components new AsyncPoolC(fe_queue_entry_t, POOL_SIZE) as QEntryPoolC;
-	ImplP.QEntryPool -> QEntryPoolC;
-	components new AsyncPoolC(message_t, POOL_SIZE) as MessagePoolC;
-	ImplP.MessagePool -> MessagePoolC;
 	components new AsyncCacheC(CACHE_SIZE) as SentCacheC;
 	ImplP.SentCache -> SentCacheC;
 	SentCacheC.SubPacket -> Forwarder;
-#ifdef ACK_LAYER	
+//#ifdef ACK_LAYER	
 #if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
 	components AsyncCC2420TransceiverC as AM;
 #else
 	components ActiveMessageC as AM;
 #endif
 	ImplP.Acks -> AM;
-#endif
+//#endif
 	ImplP.SubAMPacket -> AM;
 		
 	components UtilC;
 	ImplP.Util -> UtilC;
 	components UartLogC;
 	ImplP.UartLog -> UartLogC;
+	
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+ 	components TimeSyncMicroC as TimeSyncC;
+ 	MainC.SoftwareInit -> TimeSyncC;
+ 	TimeSyncC.Boot -> MainC;
+ 	ImplP.GlobalTime -> TimeSyncC;	
+#endif
+ 	components LocalTimeMilliC;
+	ImplP.LocalTime -> LocalTimeMilliC;
 }

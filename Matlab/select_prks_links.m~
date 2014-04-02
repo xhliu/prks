@@ -6,7 +6,9 @@
 %   Updated: 7/23/13 select reliable link based on link SNR and PDR w/o interference
 %                and then construct min hop tree after pruning unreliable links
 %% each iteration
-jobs = [19235 19236 19237 19238 19239 19248 19251 19258 19260];
+%jobs = [19235 19236 19237 19238 19239 19248 19251 19258 19260];
+jobs = [21890:2:21898 21900 21903 21904 21907:21910 21915 21916 21918 21919 21921 21926 21928 21937];
+
 for job_id = 1 : length(jobs)
     job = jobs(job_id);
     fprintf('processing job %d\n', job);
@@ -16,7 +18,7 @@ for job_id = 1 : length(jobs)
 load txrxs;
 SRC_IDX = 3;
 RSSI_IDX = 10;
-% RSSI_OFFSET = 45;
+RSSI_OFFSET = 45;
 
 nodes = unique(txs(:, 2));
 len = size(nodes, 1);
@@ -43,8 +45,10 @@ for i = 1 : len
        if i == 1 && j == 1
            fprintf('change according to raw RSSI log\n');
        end
-       %rssi = rx(rx(:, 2) == dst, RSSI_IDX) - 2 ^ 32 - RSSI_OFFSET;
-       rssi = rx(rx(:, 2) == dst, RSSI_IDX) - 256;
+       % indriya
+       rssi = rx(rx(:, 2) == dst, RSSI_IDX) - 2 ^ 32 - RSSI_OFFSET;
+       % neteye
+       %rssi = rx(rx(:, 2) == dst, RSSI_IDX) - 256;
        if isempty(rssi)
            continue;
        end
@@ -63,7 +67,7 @@ end
 %% 1) 
 % constraints: implicit, one node at most one outgoing link
 MAX_ACTIVE_LINK_SIZE = inf; %100;
-MAX_INCIDENT_LINK_SIZE = inf; %2;
+MAX_INCIDENT_LINK_SIZE = 2;
 % job 19976 generates exactly 100 links
 MIN_PDR = 0.99;
 
@@ -128,18 +132,24 @@ for i = 1 : len
 end
 
 %%
-save('links_olama.mat', 'links');
+save('links_indriya_iorder.mat', 'links');
 %% format
 clc;
 % links = node_parent;
 % to select a smaller topology, for debug purpose
-MAX_NODE_ID = 130; % 150
+MAX_NODE_ID = 130;  % for control signalling TDMA to work
 for i = 1 : size(links, 1)
     if links(i, 1) < MAX_NODE_ID && links(i, 2) < MAX_NODE_ID
         fprintf('{%d, %d}, ', links(i, 1), links(i, 2));
     end
 end
-
+disp('\n');
+% 5 * 5
+% for i = 1 : size(links, 1)
+%     if mod(links(i, 1), 15) > 10 && links(i, 2) > 10
+%         fprintf('{%d, %d}, ', links(i, 1), links(i, 2));
+%     end
+% end
 
 %% %% construct collection tree based on SNR threshold w/o interference
 %% node noise
@@ -161,9 +171,11 @@ save('node_noise.mat', 'node_noise');
 
 
 %% link SNR
-% in job 18654/19012/19936
+% neteye: in job 18654/19012/19936
+% indriya: 46644
 load node_noise.mat;
-%% in job 18651/19011/19935 of tx power 0 dBm
+%% neteye: in job 18651/19011/19935 of tx power 0 dBm
+% indriya: 46654
 load link_pdr_rssi.mat;
 TX_POWER_OFFSET = 0; % - (-25);
 % power level 31
@@ -219,61 +231,65 @@ bar(sum(connectivity));
 save('connectivity.mat', 'nodes', 'connectivity');
 
 %% prune the connectivity graph to reduce degree
-MAX_DEGREE = 6;
+MAX_DEGREE = 2;
+MIN_LI
 for k = 1 : 1000
-load long_term_connectivity;
-% remove prob.
-p = 0.3;
-for i = 1 : size(connectivity, 1)
-    if rand() < p
-        % remove
-        connectivity(i, :) = 0;
-        connectivity(:, i) = 0;
-    end
-end
-
-% min hop tree
-% tmp = [];
-%for j = 1 : length(nodes)
-BASESTATION = 15; % nodes(j);
-% convert connectivity matric into link cost matrix
-link_cost = ones(size(connectivity));
-% no existent link
-link_cost(~connectivity) = inf;
-% parent is index, not necessarily equal to node id
-[hopcount, parent] = dijkstra(link_cost, BASESTATION, size(link_cost, 1));
-
-% final tree
-node_parent = [];
-for i = 1 : length(nodes)
-    node = nodes(i);
-    
-    if node == BASESTATION
-        ;%node_parent = [node_parent; node node];
-    else
-        if ~isnan(parent(i))
-            node_parent = [node_parent; node nodes(parent(i))];
+    load long_term_connectivity;
+    % remove prob.
+    p = 0.5;
+    for i = 1 : size(connectivity, 1)
+        if rand() < p
+            % remove
+            connectivity(i, :) = 0;
+            connectivity(:, i) = 0;
         end
     end
-end
-%save('node_parent.mat', 'node_parent');
 
-if isempty(node_parent)
-    continue;
-end
-% node degree
-links = node_parent;
-node = [links(:, 1); links(:, 2)];
-[cnt x] = hist(node, unique(node));
-xcnt = [x cnt'];
-if max(cnt) <= MAX_DEGREE
-    save('long_term_tree.mat', 'node_parent');
-    break;
-end
-% hist(cnt);
-% tmp = [tmp; nodes(j) max(cnt)];
-end
+    % min hop tree
+    % tmp = [];
+    %for j = 1 : length(nodes)
+    BASESTATION = 15; % nodes(j);
+    % convert connectivity matric into link cost matrix
+    link_cost = ones(size(connectivity));
+    % no existent link
+    link_cost(~connectivity) = inf;
+    % parent is index, not necessarily equal to node id
+    [hopcount, parent] = dijkstra(link_cost, BASESTATION, size(link_cost, 1));
 
+    % final tree
+    node_parent = [];
+    for i = 1 : length(nodes)
+        node = nodes(i);
+
+        if node == BASESTATION
+            ;%node_parent = [node_parent; node node];
+        else
+            if ~isnan(parent(i))
+                node_parent = [node_parent; node nodes(parent(i))];
+            end
+        end
+    end
+    save('node_parent.mat', 'node_parent');
+
+    if isempty(node_parent)
+        continue;
+    end
+    % node degree
+    links = node_parent;
+    node = [links(:, 1); links(:, 2)];
+    [cnt x] = hist(node, unique(node));
+    xcnt = [x cnt'];
+    if max(cnt) <= MAX_DEGREE
+        save('long_term_tree.mat', 'node_parent');
+        fprintf('tree found\n');
+        break;
+    end
+    % hist(cnt);
+    % tmp = [tmp; nodes(j) max(cnt)];
+end
+if 1000 == k
+    fprintf('tree not found\n');
+end
 
 
 
@@ -336,12 +352,14 @@ end
 
 %% %% select long-term reliable links
 % this works even nodes change over jobs
-PDR_THRESHOLD = 0.99;
+PDR_THRESHOLD = 0.97;
 NODE_NUM = 130;
 connectivity = ones(NODE_NUM, NODE_NUM);
 
 % jobs = [19235 19236 19237 19238 19239 19248 19251 19258 19260];
-jobs = [21811 21814 21832 21833 21836 21838];
+% jobs = [21811 21814 21832 21833 21836 21838];
+jobs = [21890:2:21898 21900 21903 21904 21907:21910 21915 21916 21918 21919 21921 21926 21928 21937];
+
 for k = 1 : length(jobs)
     job = jobs(k);
     fprintf('processing job %d\n', job);
@@ -384,3 +402,53 @@ end
 nodes = 1 : NODE_NUM;
 save('long_term_connectivity.mat', 'connectivity', 'nodes');
 %% format
+links = [];
+t = connectivity;
+len = size(t, 1);
+for i = 1 : len
+   fprintf('processing node %d \n', i);
+    for j = 1 : len
+       if j == i
+           continue;
+       end
+       if t(i, j)
+           links = [links; i j];
+           % at most one outgoing link
+           break;
+       end
+   end
+end
+
+%%
+% constraints: implicit, one node at most one outgoing link
+MAX_ACTIVE_LINK_SIZE = inf; %100;
+MAX_INCIDENT_LINK_SIZE = 3;
+% job 19976 generates exactly 100 links
+MIN_PDR = 0.99;
+
+t = connectivity;
+len = size(t, 1);
+links = [];
+
+for i = 1 : len
+   for j = 1 : len
+       if j == i
+           continue;
+       end
+       if t(i, j)
+           % node i does not have to be i-th node
+           links = [links; i j];
+           s = [links(:, 1); links(:, 2)];
+           [cnt element] = hist(s, unique(s));
+           %
+           if max(cnt) <= MAX_INCIDENT_LINK_SIZE
+               break;
+           else
+               links(end, :) = [];
+           end
+       end
+   end
+   if size(links, 1) >= MAX_ACTIVE_LINK_SIZE
+       break;
+   end
+end

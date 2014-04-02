@@ -2,8 +2,8 @@ if 0
 %% always keep first
 load debugs;
 t = debugs;
-% type = DBG_TDMA_FLAG;
-% line = 550;
+% type = DBG_LOSS_FLAG;
+% line = 186;
 type = DBG_CONTROLLER_FLAG;
 line = 1024;
 t = t(t(:, 3) == type, :);
@@ -22,8 +22,10 @@ t = t(t(:, 4) == line, :);
 % ret, current_slot)
 % (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, i, hi_bit, lo_bit,
 % getConflictHigherPrioActiveSetSize, getConflictHigherPrioSetSize, prio_slot)
-s = t;
-s = s(s(:, 2) == 117, :);
+s = node_parent;
+s = [s(:, 1); s(:, 2)];
+% s = s(:, 6);
+% s = s(s(:, 2) == 255, end);
 % s = mod(s, 128);
 % sum(s > 0) / length(s)
 % s = s(:, [2 10]);
@@ -32,14 +34,14 @@ s = s(s(:, 2) == 117, :);
 % cdfplot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
-% cdfplot(x);
+% cdfplot(s);
 % 16384 slots to wrap around
 % s = s(s(:, 9) == 775 + 16 * 9, :);
 % s = s(2 : end) - s(1 : end - 1);
 % ix = find(s > 1);
 % s(ix - 10 : ix + 10)
 % hold on;
-% s = unique(s)
+s = unique(s);
 % length(s)
 
 end
@@ -49,7 +51,7 @@ end
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
 % fprintf('warning: varying link pdr\n');
-pdr_req = 90;
+pdr_req = 70;
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
 %     fprintf('warning: fixed link id\n');
@@ -1008,7 +1010,9 @@ load concurrency.mat;
 fprintf('concurrency median %f, mean %f\n', median(concurrency), mean(concurrency));
 
 %%
-
+load txrxs.mat;
+t = tx_successes;
+length(unique(t(:, 2)))
 
 %% DBG constants
 DBG_LOSS_FLAG = 0;

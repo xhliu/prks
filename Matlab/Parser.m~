@@ -1,7 +1,7 @@
 clear
 clc
 
-jobs = [2103];
+jobs = [2189221900 21903 21904 21907:21910 21915 21916 21918:21920 21926 21928 21937];
 % initial pkts for link estimation; excluded from analysis
 % applies to iMAC only
 CONVERGE_STEP = 60;
@@ -23,7 +23,6 @@ for job = 1 : length(jobs)
         continue;
     end
 fprintf('processing job %d: \n', job_id);
-
 DirDelimiter='/';
 
 srcDir = '~/Projects/tOR/RawData';

@@ -4,12 +4,12 @@
 %   Function: display concurrency vs pdr req for various protocols
 %%
 idx = 0;
-if is_neteye
+% if is_neteye
     data = cell(PDR_REQ_CNT, 3);
-else
-    % no iOrder
-    data = cell(PDR_REQ_CNT, 2);
-end
+% else
+%     no iOrder
+%     data = cell(PDR_REQ_CNT, 2);
+% end
 
 %% PRKS NAMA
 fprintf('processing PRKS NAMA\n');
@@ -54,12 +54,12 @@ idx = idx + 1;
 data(:, idx) = tmp;
 
 
-if is_neteye
+% if is_neteye
 %% iOrder
 idx = idx + 1;
 % iorder is from testiOrder
 data(:, idx) = iorder;
-end
+% end
 %% process data for display
 ALPHA = 0.05;
 M = size(data, 1);
@@ -76,11 +76,11 @@ end
 
 %% display
 bw_ylabel = 'Concurrency (packets per slot)';
-if is_neteye
+% if is_neteye
     bw_legend = {'PRKS-NAMA', 'PRKS-ONAMA', 'iOrder'};
-else
-    bw_legend = {'PRKS-NAMA', 'PRKS-ONAMA'};
-end
+% else
+%     bw_legend = {'PRKS-NAMA', 'PRKS-ONAMA'};
+% end
 % bw: short for barweb
 %barweb(barvalues, errors, width, groupnames, bw_title, bw_xlabel,
 %bw_ylabel, bw_colormap, gridstatus, bw_legend, error_sides, legend_type)
@@ -97,12 +97,13 @@ grid on;
 maximize;
 set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
-% cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
+%% cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 
 if is_neteye
     str = 'prks_onama_vs_nama_vs_iorder_concurrency';
 else
-    str = 'prks_onama_vs_nama_concurrency_indriya';
+    %str = 'prks_onama_vs_nama_concurrency_indriya';
+    str = 'prks_onama_vs_nama_vs_iorder_concurrency_indriya';
 end
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');

@@ -6,12 +6,12 @@
 %% 
 
 % select testbed: NetEye or Indriya
-% is_neteye = false;
-is_neteye = true;
+is_neteye = false;
+% is_neteye = true;
 
 % directory of raw job data
-MAIN_DIR = '~/Projects/tOR/RawData/';
-% MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
+% MAIN_DIR = '~/Projects/tOR/RawData/';
+MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
 % MAIN_DIR = '~/Downloads/Indriya/';
 %% MAIN_DIR = '~/Downloads/';
 

@@ -15,18 +15,31 @@ module TestiMACP {
 	uses {
 		interface Boot;
 	
-	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+	#ifndef MULTIHOP
 		interface AsyncAMSend as AMSend;
+	#else
+		interface AsyncSend as AMSend;
+	#endif
 		interface AsyncReceive as Receive;
 		interface AsyncPacket as Packet;
 		interface AsyncAMPacket as AMPacket;
 		
 		interface AsyncSplitControl as ForwarderSwitch;
 		interface AsyncStdControl as ControllerSwitch;
-	#else
+#else
+	#ifndef MULTIHOP
 		interface AMSend;
+	#else
+		interface Send as AMSend;
+	#endif
 		interface Receive;
 		interface Packet;
+#endif
+	
+	#ifdef MULTIHOP	
+		interface AsyncIntercept as Intercept;
+		interface RootControl;
 	#endif
 		interface SplitControl as AMControl;		
 		interface Timer<TMilli> as MilliTimer;
@@ -63,14 +76,31 @@ am_addr_t my_receiver;
 
 //#include "TestiMACPUtils.nc"
 inline uint32_t getGlobalTime() {
-#if defined(TEST_FTSP)
-	uint32_t global_now;
-	return (call GlobalTime.getGlobalTime(&global_now) == SUCCESS) ? global_now : 0;
-#else
+#if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 #warning local time
 	return call LocalTime.get();
+#else
+	uint32_t global_now;
+	return (call GlobalTime.getGlobalTime(&global_now) == SUCCESS) ? global_now : 0;
 #endif
 }
+
+#ifdef MULTIHOP
+//#warning source
+//am_addr_t sources[] = {104, 106, 107, 113, 116, 119, 122, 123, 125, 127};
+//am_addr_t sources[] = {106, 107, 113, 116, 119, 125, 127};
+am_addr_t sources[] = {22, 28};
+bool isSource() {
+	return (call Util.getReceiver() != INVALID_ADDR);
+//	uint8_t i;
+//	
+//	for (i = 0; i < sizeof(sources) / sizeof(sources[0]); i++) {
+//		if (sources[i] == TOS_NODE_ID)
+//			return TRUE;
+//	}
+//	return FALSE;
+}
+#endif
 
 event void Boot.booted() {
 	call AMControl.start();
@@ -79,6 +109,10 @@ event void Boot.booted() {
 	atomic counter = 0;
 	activeLinks = call Util.getActiveLinks(&active_link_size);
 	atomic my_receiver = call Util.getReceiver();
+#ifdef MULTIHOP
+	if (ROOT_NODE_ID == TOS_NODE_ID)
+		call RootControl.setRoot();
+#endif
 }
 
 event void AMControl.startDone(error_t err) {
@@ -100,12 +134,17 @@ void task sendTask() {
 	radio_count_msg_t* hdr = (radio_count_msg_t*)call Packet.getPayload(&packet, sizeof(radio_count_msg_t));
 	hdr->src = TOS_NODE_ID;
 	atomic hdr->seqno = counter++;
+#ifndef MULTIHOP
 	ret = call AMSend.send(my_receiver, &packet, sizeof(radio_count_msg_t));
+#else
+	ret = call AMSend.send(&packet, sizeof(radio_count_msg_t));
+#endif
 	if (SUCCESS == ret) {
 		dbg("TestiMAC", "%s: sending pkt %hu.\n", __FUNCTION__, counter);
 		atomic locked = TRUE;
-		//#warning avoid log overload
+	#ifndef MULTIHOP
 		call UartLog.logEntry(TX_SUCCESS_FLAG, my_receiver, hdr->seqno, getGlobalTime());
+	#endif
 	} else {
 		dbg("TestiMAC", "%s: sending pkt %hu failed.\n", __FUNCTION__, counter);
 		//#warning avoid log overload
@@ -138,7 +177,12 @@ event void MilliTimer.fired() {
 		return;
 	}
 #endif
+#ifndef MULTIHOP
 	if (my_receiver == INVALID_ADDR)
+#else
+	// source only
+	if (!isSource())
+#endif
 		return;
 
 	if (counter_ < MAX_PKT_CNT) {
@@ -194,9 +238,9 @@ event void AMSend.sendDone(message_t* msg, error_t error) {
 	dbg("TestiMAC", "%s: Packet %hu sendDone w/ %hhu.\n", __FUNCTION__, hdr->seqno, error);
 	if (SUCCESS == error) {
 		// CMAC block transfer
-	//#if !defined(CMAC)
+	#ifndef MULTIHOP
 		call UartLog.logEntry(TX_DONE_FLAG, my_receiver, hdr->seqno, getGlobalTime());
-	//#endif
+	#endif
 	} else {
 		call UartLog.logEntry(TX_DONE_FAIL_FLAG, error, hdr->seqno, getGlobalTime());
 	}
@@ -213,13 +257,30 @@ async event message_t* Receive.receive(message_t* msg, void* payload, uint8_t le
 event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
 #endif
 	// CMAC block transfer
-//#if !defined(CMAC)
+#ifndef MULTIHOP
 	radio_count_msg_t* hdr = (radio_count_msg_t*)call Packet.getPayload(msg, sizeof(radio_count_msg_t));
 	dbg("TestiMAC", "%s: Receive packet %hu.\n", __FUNCTION__, hdr->seqno);
 	call UartLog.logEntry(RX_FLAG, hdr->src, hdr->seqno, getGlobalTime());
-//#endif
+#endif
 	return msg;
 }
+
+#ifdef MULTIHOP
+#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+	async
+#endif
+event bool Intercept.forward(bool is_incoming, message_t* msg, void* payload, uint8_t len) {
+#warning intercept disabled
+//	radio_count_msg_t* hdr = (radio_count_msg_t*)call Packet.getPayload(msg, sizeof(radio_count_msg_t));
+//	dbg("TestiMAC", "%s: Receive packet %hu.\n", __FUNCTION__, hdr->seqno);
+//	if (is_incoming) {
+//		call UartLog.logEntry(RX_FLAG, hdr->src, hdr->seqno, call LocalTime.get());
+//	} else {
+//		call UartLog.logEntry(TX_DONE_FLAG, hdr->src, hdr->seqno, call LocalTime.get()); 
+//	}
+	return TRUE;
+}
+#endif
 
 
 #if defined(TEST_FTSP)

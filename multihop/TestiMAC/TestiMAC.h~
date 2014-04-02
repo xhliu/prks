@@ -11,7 +11,7 @@
 
 
 // basic CSMA
-//#define DEFAULT_MAC
+#define DEFAULT_MAC
 //#define RTSCTS
 //#define CMAC
 

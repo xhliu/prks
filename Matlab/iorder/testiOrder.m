@@ -4,8 +4,8 @@
 %   Function: schedule using iOrder
 %% 
 snr_threshold_concurrency_median_mean = [];
-% snr_thresholds = [5 7 9 10];
-snr_thresholds = 1 : 10;
+snr_thresholds = [6.6 7.6 9 10.3];
+% snr_thresholds = 1 : 10;
 % for snr_threshold = 1 : 10 %
 len = length(snr_thresholds);
 iorder = cell(len, 1);

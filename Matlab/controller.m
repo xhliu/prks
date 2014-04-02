@@ -6,7 +6,7 @@
 load debugs;
 t = debugs;
 type = DBG_CONTROLLER_FLAG;
-line = 1051;
+line = 1024; % 1051;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -27,10 +27,25 @@ t = unwrap(t, SLOT_WRAP_LEN);
 % convert into slots
 t(:, TIMESTAMP_IDX) = floor(t(:, TIMESTAMP_IDX) / (SLOT_LEN * 1024));
 
-%% %% controller
+%% %% controller status at adaptation
+% #line  1024
+% (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, -le->rx_nI.abs /
+% 128, le->rx_er_border_idx + 1, delta_i_dB, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME)
+POI_IDX = 9;
+
+% convert signed integer
+x = t(:, POI_IDX);
+ix = (x >= 2 ^ 15);
+x(ix) = x(ix) - 2 ^ 16;
+x = x / 128;
+
+scatter(t(:, 10), x, 'x');
+
+
+%% %% controller status at fixed intervals
+% #line 1051
 % (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, le->nb, link_pdr, -le->rx_nI.abs
-% / 128, le->rx_er_border_idx + 1, link_pdr_version, (SUCCESS == call
-% GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME)
+% / 128, le->rx_er_border_idx + 1, link_pdr_version, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME)
 POI_IDX = 8;
 
 %% 1) status

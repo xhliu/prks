@@ -8,6 +8,10 @@ UTILDIR = $(HOME)/Dropbox/Programming/TinyOS
 
 CFLAGS += -DTOSH_DATA_LENGTH=114
 
+PFLAGS +=	-I$(MAINDIR)/../multihop/router \
+			-I$(MAINDIR)/../multihop/router/async \
+			-I$(TOSDIR)/lib/net
+
 # -----------------------------------------------------------------------------
 # basic CSMA
 # -----------------------------------------------------------------------------
@@ -33,6 +37,7 @@ CFLAGS += -DTOSH_DATA_LENGTH=114
 #			-I$(PROTOCOLDIR)/cc2420 \
 #			-I$(MAINDIR) \
 #			-I$(MAINDIR)/util \
+#			-I$(TOSDIR)/lib/net
 #			
 #CFLAGS += -DCC2420_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
 #CFLAGS += -DCC2420_DEF_CHANNEL=26

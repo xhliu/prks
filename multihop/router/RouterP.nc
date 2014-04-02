@@ -33,26 +33,41 @@ module RouterP {
 		interface Packet as SubPacket;
 		interface AMPacket as SubAMPacket;
 	#endif
-		interface AsyncQueue<fe_queue_entry_t*> as SendQueue;
-		interface AsyncPool<fe_queue_entry_t> as QEntryPool;
-		interface AsyncPool<message_t> as MessagePool;
+//		interface AsyncQueue<fe_queue_entry_t*> as SendQueue;
+//		interface AsyncPool<fe_queue_entry_t> as QEntryPool;
+//		interface AsyncPool<message_t> as MessagePool;
+		interface AsyncQueue<fe_queue_entry_t> as SendQueue;
 		interface AsyncCache<message_t*> as SentCache;
-	#ifdef ACK_LAYER
+//	#ifdef ACK_LAYER
 		interface PacketAcknowledgements as Acks;
-	#endif
+//	#endif
 		interface Util;
 		interface UartLog;
+	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+		interface GlobalTime<TMicro>;
+	#endif
+		interface LocalTime<TMilli>;
   	}
 }
 implementation {
 
 bool sending;
 bool is_root;
-uint8_t seqno;
+uint16_t seqno;
 
-fe_queue_entry_t q_buf;
-fe_queue_entry_t* q_buf_p;
+message_t m_buf;
+message_t *m_buf_p;
+router_header_t *m_buf_hdr;
 
+inline uint32_t getGlobalTime() {
+#if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
+#warning local time
+	return call LocalTime.get();
+#else
+	uint32_t global_now;
+	return (call GlobalTime.getGlobalTime(&global_now) == SUCCESS) ? global_now : 0;
+#endif
+}
 
 //-------------------------------------------------------------------------------------------------
 // forward declaration
@@ -69,7 +84,8 @@ command error_t Init.init() {
 	seqno = 0;
 	sending = FALSE;
 	is_root = FALSE;
-	q_buf_p = &q_buf;
+	m_buf_p = &m_buf;
+	m_buf_hdr = getHeader(m_buf_p);
 	return SUCCESS;
 }
 
@@ -95,24 +111,19 @@ command error_t RootControl.unsetRoot() {
 async 
 #endif
 command error_t Send.send(message_t* msg, uint8_t len) {
-    router_header_t *hdr;
-	fe_queue_entry_t *qe;
+	fe_queue_entry_t qe;
 	
-	if (len > call Send.maxPayloadLength()) {	return ESIZE;	}
-	atomic if (NULL == q_buf_p)				{	return EBUSY;	}
+	if (len > call Send.maxPayloadLength()) {
+		return ESIZE;
+	}
 	
-    call Packet.setPayloadLength(msg, len);
-    hdr = getHeader(msg);
-    hdr->origin = TOS_NODE_ID;
-    atomic hdr->originSeqNo = seqno++;
-	
-	atomic qe = q_buf_p;
-	qe->msg = msg;
-	qe->retries = MAX_RETRIES;
+	qe.origin = TOS_NODE_ID;
+	atomic qe.originSeqNo = seqno++;
+	qe.retries = MAX_RETRIES;
+	call Packet.setPayloadLength(m_buf_p, len);
 	
 	if (call SendQueue.enqueue(qe) == SUCCESS) {
 		post sendTask();
-		atomic q_buf_p = NULL;
 		return SUCCESS;
 	} else {
 		return FAIL;
@@ -130,17 +141,17 @@ task void sendTask() {
 		return;
 	} else {
 		error_t ret;
-		fe_queue_entry_t* qe = call SendQueue.head();
-		//router_header_t *hdr = getHeader(qe->msg);
-		uint8_t payloadLen = call SubPacket.payloadLength(qe->msg);
-		// must be a source in the tree if reaching here
+		// must be a node in the tree if reaching here
 		am_addr_t parent = call Util.getReceiver();
-	#ifdef ACK_LAYER	
-		call Acks.requestAck(qe->msg);
-	#endif
-		ret = call SubSend.send(parent, qe->msg, payloadLen);
+		fe_queue_entry_t qe = call SendQueue.head();
+
+		m_buf_hdr->origin = qe.origin;
+		m_buf_hdr->originSeqNo = qe.originSeqNo;
+		call Acks.requestAck(m_buf_p);
+		ret = call SubSend.send(parent, m_buf_p, call SubPacket.payloadLength(m_buf_p));
 		if (SUCCESS == ret) {
 			atomic sending = TRUE;
+			call UartLog.logTxRx(TX_SUCCESS_FLAG, call Util.getReceiver(), qe.originSeqNo, qe.origin, call SubPacket.payloadLength(m_buf_p), 0, 0, 0, getGlobalTime());
 //			if (getHeader(qe->msg)->origin == 22)
 //				call UartLog.logTxRx(DBG_FLAG, DBG_TX_FLAG, __LINE__, 0, 0, 0, 0, getHeader(qe->msg)->origin, getHeader(qe->msg)->originSeqNo);
 		} else {
@@ -151,23 +162,17 @@ task void sendTask() {
 }
 
 void dequeue(bool is_acked) {
-	fe_queue_entry_t *qe = call SendQueue.head();
-	router_header_t *hdr = getHeader(qe->msg);
+	fe_queue_entry_t qe = call SendQueue.head();
 	
-	if (hdr->origin == TOS_NODE_ID) {
-		atomic q_buf_p = qe;
+	if (qe.origin == TOS_NODE_ID) {
 		// local: even drop means sendDone SUCCESS
-		signal Send.sendDone(qe->msg, SUCCESS);
+		signal Send.sendDone(m_buf_p, SUCCESS);
     } else {
 		// a forwarded packet
-		signal Intercept.forward(FALSE, qe->msg, call Packet.getPayload(qe->msg, call Packet.payloadLength(qe->msg)), call Packet.payloadLength(qe->msg));
+		signal Intercept.forward(FALSE, m_buf_p, call Packet.getPayload(m_buf_p, call Packet.payloadLength(m_buf_p)), call Packet.payloadLength(m_buf_p));
 		
 		if (is_acked)
-			call SentCache.insert(qe->msg);
-		if (call MessagePool.put(qe->msg) != SUCCESS)
-			assert(0);
-		if (call QEntryPool.put(qe) != SUCCESS)
-			assert(0);
+			call SentCache.insert(m_buf_p);
     }
 	call SendQueue.dequeue();
 	// next
@@ -178,10 +183,10 @@ void dequeue(bool is_acked) {
 async 
 #endif
 event void SubSend.sendDone(message_t* msg, error_t error) {
-	fe_queue_entry_t *qe = call SendQueue.head();
+	fe_queue_entry_t qe = call SendQueue.head();
 
 	atomic sending = FALSE;
-    if (NULL == qe || qe->msg != msg) {
+    if (m_buf_p != msg) {
 		assert(0);      // Not our packet, something is very wrong...
 		return;
     } else if (error != SUCCESS) {
@@ -191,13 +196,10 @@ event void SubSend.sendDone(message_t* msg, error_t error) {
     }
 	
 	// sent
-//	call UartLog.logTxRx(DBG_FLAG, DBG_TX_FLAG, __LINE__, 0, 0, 0, call Acks.wasAcked(msg), getHeader(msg)->origin, getHeader(msg)->originSeqNo);
-#ifdef ACK_LAYER
+	call UartLog.logTxRx(TX_DONE_FLAG, call Util.getReceiver(), qe.originSeqNo, qe.origin, call SendQueue.size(), call Acks.wasAcked(msg), 0, 0, getGlobalTime());
+//	call UartLog.logTxRx(DBG_FLAG, DBG_TX_FLAG, __LINE__, 0, 0, call SendQueue.size(), call Acks.wasAcked(msg), getHeader(msg)->origin, getHeader(msg)->originSeqNo);
 	if (!call Acks.wasAcked(msg)) {
-#else
-	if (TRUE) {
-#endif
-		if (--qe->retries) {
+		if (--qe.retries) {
 			post sendTask();
 		} else {
 			//max retries, dropping packets
@@ -235,49 +237,19 @@ command void* Send.getPayload(message_t* msg, uint8_t len) {
 // Interface Receive
 //-------------------------------------------------------------------------------------------------
 message_t* forward(message_t *m) {
-	if (call MessagePool.empty()) {
-		call UartLog.logTxRx(DBG_FLAG, DBG_LOSS_FLAG, __LINE__, 0, 0, 0, 0, getHeader(m)->origin, getHeader(m)->originSeqNo);
-	} else if (call QEntryPool.empty()) {
-		call UartLog.logTxRx(DBG_FLAG, DBG_LOSS_FLAG, __LINE__, 0, 0, 0, 0, getHeader(m)->origin, getHeader(m)->originSeqNo);
+	fe_queue_entry_t qe;
+	router_header_t *hdr = getHeader(m);
+	
+	qe.origin = hdr->origin;
+	qe.originSeqNo = hdr->originSeqNo;
+	qe.retries = MAX_RETRIES;
+	
+	if (call SendQueue.enqueue(qe) == SUCCESS) {
+		post sendTask();
 	} else {
-		message_t* newMsg;
-		fe_queue_entry_t *qe;
-
-		qe = call QEntryPool.get();
-		if (NULL == qe) {
-			return m;
-		}
-
-		newMsg = call MessagePool.get();
-		if (NULL == newMsg) {
-			// TODO: call QEntryPool.put(qe);
-			return m;
-		}
-
-		memset(newMsg, 0, sizeof(message_t));
-		memset(m->metadata, 0, sizeof(message_metadata_t));
-
-		qe->msg = m;
-		qe->retries = MAX_RETRIES;
-
-		if (call SendQueue.enqueue(qe) == SUCCESS) {
-			post sendTask();
-			return newMsg;
-		} else {
-			call UartLog.logTxRx(DBG_FLAG, DBG_LOSS_FLAG, __LINE__, 0, 0, 0, 0, getHeader(m)->origin, getHeader(m)->originSeqNo);
-			// There was a problem enqueuing to the send queue.
-			if (call MessagePool.put(newMsg) != SUCCESS)
-				assert(0);
-			if (call QEntryPool.put(qe) != SUCCESS)
-				assert(0);
-		}
+		call UartLog.logTxRx(DBG_FLAG, DBG_LOSS_FLAG, __LINE__, 0, 0, 0, 0, getHeader(m)->origin, getHeader(m)->originSeqNo);
 	}
 	return m;
-}
- 
-inline bool matchInstance(message_t *m1, message_t* m2) {
-	return (getHeader(m1)->origin == getHeader(m2)->origin &&
-			getHeader(m1)->originSeqNo == getHeader(m2)->originSeqNo);
 }
 
 
@@ -286,16 +258,18 @@ async
 #endif
 event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) {
     uint8_t i;
-    fe_queue_entry_t* qe;
+    fe_queue_entry_t qe;
+    router_header_t *hdr = getHeader(msg);
     bool duplicate = FALSE;
     bool is_root_;
 
 	//call UartLog.logTxRx(DBG_FLAG, DBG_TX_FLAG, __LINE__, len, call SubSend.maxPayloadLength(), call SubAMPacket.destination(msg), call SubAMPacket.source(msg), getHeader(msg)->origin, getHeader(msg)->originSeqNo);
-	
     if (len > call SubSend.maxPayloadLength()) {
 		return msg;
     }
-    
+	
+    call UartLog.logTxRx(RX_FLAG, getHeader(msg)->origin, getHeader(msg)->originSeqNo, call SubAMPacket.source(msg), 0, 0, 0, 0, getGlobalTime());
+
     //See if we remember having seen this packet
     //We look in the sent cache ...
     if (call SentCache.lookup(msg)) {
@@ -304,7 +278,7 @@ event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) 
     //... and in the queue for duplicates
     for (i = call SendQueue.size(); i > 0; i--) {
 		qe = call SendQueue.element(i - 1);
-		if (matchInstance(qe->msg, msg)) {
+		if (qe.origin == hdr->origin && qe.originSeqNo == hdr->originSeqNo) {
 			duplicate = TRUE;
 			break;
 		}
@@ -312,7 +286,9 @@ event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) 
     if (duplicate) {
         return msg;
     }
-
+	
+	call SubPacket.setPayloadLength(m_buf_p, len);
+	
     // If I'm the root, signal receive. 
     atomic is_root_ = is_root;
    	if (is_root_) {

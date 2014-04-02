@@ -10,7 +10,7 @@
 clear
 clc
 
-jobs = [46644];
+jobs = [46930 46941 46949 46950];
 
 for job = 1 : length(jobs)
     job_id = jobs(job);
@@ -22,12 +22,10 @@ srcDir = '~/Projects/tOR/RawData/Indriya/';
 dest = [srcDir num2str(job_id)];
 cd(dest);
 output = fopen('output.txt', 'w');
-load 7857.dat;
-t = X7857;
-% load 24865.dat;
-% t = X24865;
-% load 24915.dat;
-% t = X24915;
+% load 7857.dat;
+% t = X7857;
+load 24915.dat;
+t = X24915;
 %% parse
 ENTRY_PER_ROW = 5;
 ENTRY_LEN = 11;

@@ -7,7 +7,7 @@
 #ifndef TEST_IMAC_H
 #define TEST_IMAC_H
 
-// basic CSMA
+//#warning basic CSMA
 //#define DEFAULT_MAC
 //#define RTSCTS
 //#define CMAC
@@ -20,6 +20,10 @@
 //#define RIDB
 
 // by default, PRKS is used w/ initialized ER as in RIDB
+
+// multihop? ; prior to IMAC.h, which uses it
+#define MULTIHOP
+#warning MULTIHOP
 
 #include "IMAC.h"
 
@@ -36,8 +40,8 @@
 #else
 // PRKS specific
 	// run basic LAMA only: PRKS or RIDB
-	#define OLAMA_DISABLED
-	#warning OLAMA_DISABLED
+//	#define OLAMA_DISABLED
+//	#warning OLAMA_DISABLED
 	
 	// PRKS-L: do not use refined a(t) and use SINR-vs-PDR gradient directly even it's away from target
 //	#define PRKSL
@@ -93,18 +97,25 @@ enum {
 #if defined(DEFAULT_MAC)
 //#warning
 	// not using 110 to be safe
-	PLACE_HOLDER_LEN = 106,
+	PLACE_HOLDER_LEN = 106
 #elif defined(RTSCTS)
 	// maxPayloadLength 99, to accomodate linkestimator footer
-	PLACE_HOLDER_LEN = 91,
+	PLACE_HOLDER_LEN = 91
 #elif defined(CMAC)
 	// 4 bytes less than RTS-CTS
-	PLACE_HOLDER_LEN = 86,
+	PLACE_HOLDER_LEN = 86
 #elif defined(SCREAM)
-	PLACE_HOLDER_LEN = 94, //22 + sizeof(link_er_footer_t) * MAX_ITEM_CNT
+	//22 + sizeof(link_er_footer_t) * MAX_ITEM_CNT
+	PLACE_HOLDER_LEN = 94
 #else
-	PLACE_HOLDER_LEN = 22,	// 86
+	// 86
+	PLACE_HOLDER_LEN = 22
 #endif
+#ifdef MULTIHOP
+	// - 4 to account for network_header_t
+	- 4
+#endif
+,
 	TX_FAIL_FLAG = 0,
 	TX_SUCCESS_FLAG = 1,
 	TX_DONE_FLAG = 2,
@@ -133,6 +144,7 @@ enum {
 	DBG_SPI_FLAG = DBG_TDMA_FLAG + 1,
 	DBG_DRIVER_FLAG = DBG_SPI_FLAG + 1,
 	DBG_ERR_FLAG = DBG_DRIVER_FLAG + 1,			//20
+	DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1,
 
 	/**
 		initial stage:
@@ -156,10 +168,12 @@ enum {
 	START_DATA_TIME = INITIAL_ER_TIME,
 #endif
 //	#warning period not 20
-	PERIOD_MILLI = 20UL, //20U,
+	PERIOD_MILLI = 30000UL, //20U,
 	MAX_PKT_CNT = 45000U,
 	
 	TYPE_SYNC = 12,
+//#warning	
+	ROOT_NODE_ID = 15,
 };
 
 typedef nx_struct radio_count_msg {

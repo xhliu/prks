@@ -14,14 +14,14 @@ enum {
 	// 128
 	SCALE_L_SHIFT_BIT = 7,
 	
-//#warning pdr req; SINR_THRESHOLD MUST be consistent w/ pdr req
+#warning pdr req; SINR_THRESHOLD MUST be consistent w/ pdr req
 	// PDR requirement
-	REFERENCE_DATA_PDR = 70,
+	REFERENCE_DATA_PDR = 95,
 	// SINR threshold to initialize ER based on pairwise interference model
 	//scaled: <30%, 1.6 = 205>, <40%, 1.8 = 231>, <50%, 2.2 = 282>, <60%, 2.4 = 308>, <70%, 2.8 * 128 = 359> <80%, 3.2 * 128 = 410> <90%, 4 * 128 = 512>, <95%, 4.5 * 128 = 576>, <99%, 16 * 128 = 2048>
 #ifndef CMAC
 	// in $CMAC/forwarder/IMACForwarder.h
-	SINR_THRESHOLD = 359,
+	SINR_THRESHOLD = 576,
 #endif
 	// RTSCTS needs this
 	REFERENCE_ACK_PDR = 90,
@@ -31,20 +31,26 @@ enum {
 //	CC2420_DEF_RFPOWER_DBM_SCALED = (CC2420_DEF_RFPOWER_DBM << SCALE_L_SHIFT_BIT),
 	CONTROL_POWER_LEVEL = 31,
 	
+#ifndef MULTIHOP
 	// SM_SIZE = 128 is insufficient for Kansei; many outbound gains unknown
 	// size is int16_t to accommodate network consisting of more than 256 nodes
 	SM_SIZE = 128,
 	//SM_SIZE_MODULAR = 0x7F, //0x7F,	// x % SM_SIZE == x & SM_SIZE_MODULAR
 
-#ifndef LINK_SET_PDR_99
+	#ifndef LINK_SET_PDR_99
 	// can be less than max # of active links in the ntw; keep LINK_ER_TABLE_SIZE of them
 	MAX_ACTIVE_LINK_SIZE = 100,
 //#warning MAX_INCIDENT_LINK_SIZE
 	// max # of links a node can be incident w/
 	MAX_INCIDENT_LINK_SIZE = 2, //2, //4,
-#else
+	#else
 	MAX_ACTIVE_LINK_SIZE = 63,
 	MAX_INCIDENT_LINK_SIZE = 3,
+	#endif
+#else
+	SM_SIZE = 46,
+	MAX_ACTIVE_LINK_SIZE = 45,
+	MAX_INCIDENT_LINK_SIZE = 4,
 #endif
 	NB_SIGNAL_MAP_SIZE = MAX_INCIDENT_LINK_SIZE,
 	LOCAL_LINK_ER_TABLE_SIZE = MAX_INCIDENT_LINK_SIZE,
@@ -59,7 +65,7 @@ enum {
 	INVALID_ADDR = 0xFFFF,
 	
 #warning SLOT_MASK
-#ifndef LINK_SET_PDR_99
+#if !defined(LINK_SET_PDR_99) && !defined(MULTIHOP)
 	// change if link set changes, least SLOT_MASK = (2^n - 1), such that 2^n > active_link_size (not >= to accomodate dedicated ftsp slots)
 	// not anymore in OLAMA: 2^n >= active_link_size equal is enough since no dedicated ftsp slot
 	SLOT_MASK = 0x7F, //0x7F,
