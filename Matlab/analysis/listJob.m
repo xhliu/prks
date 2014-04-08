@@ -11,8 +11,8 @@ is_neteye = false;
 
 % directory of raw job data
 % MAIN_DIR = '~/Projects/tOR/RawData/';
-MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
-% MAIN_DIR = '~/Downloads/Indriya/';
+% MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
+MAIN_DIR = '~/Downloads/Indriya/';
 %% MAIN_DIR = '~/Downloads/';
 
 % directory to store figures

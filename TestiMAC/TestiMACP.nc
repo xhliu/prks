@@ -38,7 +38,7 @@ module TestiMACP {
 #endif
 	
 	#ifdef MULTIHOP	
-		interface AsyncIntercept as Intercept;
+//		interface AsyncIntercept as Intercept;
 		interface RootControl;
 	#endif
 		interface SplitControl as AMControl;		
@@ -147,8 +147,9 @@ void task sendTask() {
 	#endif
 	} else {
 		dbg("TestiMAC", "%s: sending pkt %hu failed.\n", __FUNCTION__, counter);
-		//#warning avoid log overload
+	#ifndef MULTIHOP
 		call UartLog.logEntry(TX_FAIL_FLAG, ret, hdr->seqno, getGlobalTime());
+	#endif
 //	#if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 //		#warning repost when tx fails
 //		post sendTask();
@@ -265,12 +266,12 @@ event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
 	return msg;
 }
 
-#ifdef MULTIHOP
-#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
-	async
-#endif
-event bool Intercept.forward(bool is_incoming, message_t* msg, void* payload, uint8_t len) {
-#warning intercept disabled
+//#ifdef MULTIHOP
+//#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
+//	async
+//#endif
+//event bool Intercept.forward(bool is_incoming, message_t* msg, void* payload, uint8_t len) {
+//#warning intercept disabled
 //	radio_count_msg_t* hdr = (radio_count_msg_t*)call Packet.getPayload(msg, sizeof(radio_count_msg_t));
 //	dbg("TestiMAC", "%s: Receive packet %hu.\n", __FUNCTION__, hdr->seqno);
 //	if (is_incoming) {
@@ -278,9 +279,9 @@ event bool Intercept.forward(bool is_incoming, message_t* msg, void* payload, ui
 //	} else {
 //		call UartLog.logEntry(TX_DONE_FLAG, hdr->src, hdr->seqno, call LocalTime.get()); 
 //	}
-	return TRUE;
-}
-#endif
+//	return TRUE;
+//}
+//#endif
 
 
 #if defined(TEST_FTSP)

@@ -98,8 +98,8 @@ enum {
 	// cannot exceed 64 ms bcoz IMACForwarderP$SlotTime is uint16_t
 #ifndef SCREAM
 	SM_BEACON_PERIOD_MILLI = 50UL,
-#warning sm_beacon_cnt
-	SM_BEACON_CNT = 5000UL,	// 5000 seems insufficient for 130 nodes, takes about 10 mins
+#warning sm_beacon_cnt 2000
+	SM_BEACON_CNT = 2000UL, //5000UL,	// 5000 seems insufficient for 130 nodes, takes about 10 mins
 
 #else
 	SM_BEACON_PERIOD_MILLI = 32UL,

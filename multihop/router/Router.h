@@ -7,13 +7,14 @@
 #define ROUTER_H
 
 enum {
-//	#warning MAX_RETRIES 1
-	MAX_RETRIES = 8, // 30
+//#warning MAX_RETRIES 1
+	MAX_RETRIES = 8,
 	
 //	CLIENT_SIZE = 1,
 //#warning POOL_SIZE 1
 //	POOL_SIZE = 3, // 14,
 //	QUEUE_SIZE = POOL_SIZE + CLIENT_SIZE,
+//#warning QUEUE_SIZE 2
 	QUEUE_SIZE = 255,
 	CACHE_SIZE = 4,
 };

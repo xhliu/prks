@@ -16,12 +16,12 @@ enum {
 	
 #warning pdr req; SINR_THRESHOLD MUST be consistent w/ pdr req
 	// PDR requirement
-	REFERENCE_DATA_PDR = 95,
+	REFERENCE_DATA_PDR = 70,
 	// SINR threshold to initialize ER based on pairwise interference model
 	//scaled: <30%, 1.6 = 205>, <40%, 1.8 = 231>, <50%, 2.2 = 282>, <60%, 2.4 = 308>, <70%, 2.8 * 128 = 359> <80%, 3.2 * 128 = 410> <90%, 4 * 128 = 512>, <95%, 4.5 * 128 = 576>, <99%, 16 * 128 = 2048>
 #ifndef CMAC
 	// in $CMAC/forwarder/IMACForwarder.h
-	SINR_THRESHOLD = 576,
+	SINR_THRESHOLD = 359,
 #endif
 	// RTSCTS needs this
 	REFERENCE_ACK_PDR = 90,
@@ -98,8 +98,8 @@ enum {
 	// cannot exceed 64 ms bcoz IMACForwarderP$SlotTime is uint16_t
 #ifndef SCREAM
 	SM_BEACON_PERIOD_MILLI = 50UL,
-#warning sm_beacon_cnt
-	SM_BEACON_CNT = 5000UL,	// 5000 seems insufficient for 130 nodes, takes about 10 mins
+#warning sm_beacon_cnt 2000
+	SM_BEACON_CNT = 2000UL, //5000UL,	// 5000 seems insufficient for 130 nodes, takes about 10 mins
 
 #else
 	SM_BEACON_PERIOD_MILLI = 32UL,

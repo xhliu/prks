@@ -167,8 +167,8 @@ enum {
 #else
 	START_DATA_TIME = INITIAL_ER_TIME,
 #endif
-//	#warning period not 20
-	PERIOD_MILLI = 30000UL, //20U,
+	#warning period not 20
+	PERIOD_MILLI = 420000UL, //20U,
 	MAX_PKT_CNT = 45000U,
 	
 	TYPE_SYNC = 12,

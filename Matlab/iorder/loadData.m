@@ -11,14 +11,16 @@ link = links;
 %% signal map: neteye   job 19935/20768;    indriya     job
 %% 46280/46281/46654(iOrder)
 % load ~/Projects/tOR/RawData/20768/link_snr_gain;
-load ~/Projects/tOR/RawData/Indriya/46654/link_snr_gain;
+% load ~/Projects/tOR/RawData/Indriya/46654/link_snr_gain;
+load ~/Downloads/Indriya/46654/link_snr_gain;
 t = signal_map;
 cnt = sum(sum(isnan(t))) - size(t, 1);
 fprintf('nan ratio %f\n', cnt / (size(t, 1) * size(t, 2)));
 %% noise floor: neteye job 18654/19012/19936/20769;     indriya     job
 %% 46279/46282/46644(iOrder)
 % load ~/Projects/tOR/RawData/20769/node_noise;
-load ~/Projects/tOR/RawData/Indriya/46644/node_noise;
+% load ~/Projects/tOR/RawData/Indriya/46644/node_noise;
+load ~/Downloads/Indriya/46644/node_noise;
 %% power level 3
 TX_POWER = -25;
 

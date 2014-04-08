@@ -8,15 +8,16 @@ ROOT_NODE_ID = 15;
 %% e2e pdr
 load txrxs;
 % (RX_FLAG, getHeader(msg)->origin, getHeader(msg)->originSeqNo, call
-% SubAMPacket.source(msg), 0, 0, 0, 0, getGlobalTime())
+% SubAMPacket.source(msg), len, __LINE__, len > call SubSend.maxPayloadLength(), is_root_, getGlobalTime())
 rxs = rxs(rxs(:, 2) == ROOT_NODE_ID, :);
-[a ix] = unique(rxs(:, [3 4]), 'rows');
+% last occurrence by default
+[a ix] = unique(rxs(:, [3 4]), 'rows', 'first');
 rxs = rxs(ix, :);
 % (TX_DONE_FLAG, call Util.getReceiver(), qe.originSeqNo, qe.origin, call
 % SendQueue.size(), call Acks.wasAcked(msg), 0, 0, getGlobalTime())
 txs = txs(txs(:, 2) == txs(:, 5), :);
 % filter retx
-[a ix] = unique(txs(:, [5 4]), 'rows');
+[a ix] = unique(txs(:, [5 4]), 'rows', 'first');
 txs = txs(ix, :);
 miss_cnt = size(txs, 1) - size(rxs, 1);
 fprintf('%d out of %d are missing: %f\n', miss_cnt, size(txs, 1), miss_cnt / size(txs, 1));

@@ -11,7 +11,7 @@
 enum {
 	// scaled by 100
 	DELTA_Y = 0,
-#warning E0 2%
+//#warning E0 2%
 	// 0.04 by Chuan: scaled by 100
 	E0 = 4,
 	// 7 dB
@@ -31,8 +31,9 @@ enum {
 	INIT_MAX_ITEM_CNT = 0,
 	// to make at least 1 sm_footer_t is admitted
 	// reduce from 9 before OLAMA to 4 to accommodate active_bitmap in header; seqno also removed for this purpose
-	// TODO: enough?
-	MAX_ITEM_CNT = 8, ////9,
+//#warning MAX_ITEM_CNT 6	
+	// 8 = 10 - 2;		MULTIHOP: 6 = 10 - 4;	
+	MAX_ITEM_CNT = 10 - MAX_INCIDENT_LINK_SIZE, // 6, //8, ////9,
 	
 	// initial prio of other links' ER items: sort of "THL"
 	LOCAL_INIT_PRIO = 0,

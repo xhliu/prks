@@ -1,7 +1,7 @@
 clear
 clc
 
-jobs = [22033];
+jobs = [22092];
 % initial pkts for link estimation; excluded from analysis
 % applies to iMAC only
 CONVERGE_STEP = 60;
@@ -370,10 +370,10 @@ DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1;
 load debugs;
 t = debugs;
 t = t(t(:, 3) == DBG_ERR_FLAG, :);
-fprintf('assertion: ');
+% fprintf('assertion:\n');
 s = unique(t(:, 4));
 for i = 1 : length(s)
-    fprintf('%d, ', s(i));
+    fprintf('assertion %d: %d\n', s(i), sum(t(:, 4) == s(i)));
 end
 fprintf('\n');
 

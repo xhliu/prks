@@ -41,7 +41,7 @@ implementation {
 	#endif
 #else
 		components RouterC;
-		App.Send -> RouterC;
+		App.AMSend -> RouterC;
 		App.Receive -> RouterC;
 	 	App.Intercept -> RouterC;
 		App.Packet -> RouterC;

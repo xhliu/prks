@@ -23,7 +23,7 @@ generic module AsyncCacheP(uint8_t size) {
 implementation {
 typedef struct {
 	am_addr_t origin;
-	uint8_t seqno;
+	uint16_t seqno;
 } network_packet_sig_t;
 
 router_header_t* getHeader(message_t* m) {

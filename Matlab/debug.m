@@ -22,16 +22,17 @@ t = t(t(:, 4) == line, :);
 % ret, current_slot)
 % (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, i, hi_bit, lo_bit,
 % getConflictHigherPrioActiveSetSize, getConflictHigherPrioSetSize, prio_slot)
-s = node_parent;
-s = [s(:, 1); s(:, 2)];
-% s = s(:, 6);
+% s = node_parent;
+% s = [s(:, 1); s(:, 2)];
+s = t(:, 4);
 % s = s(s(:, 2) == 255, end);
 % s = mod(s, 128);
-% sum(s > 0) / length(s)
+cnt = sum(s == 178);
+length(s) - cnt - cnt
 % s = s(:, [2 10]);
 % [x ix] = sort(s(:, 1));
 % s = s(ix, :);
-% cdfplot(s);
+cdfplot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % cdfplot(s);
@@ -43,6 +44,13 @@ s = [s(:, 1); s(:, 2)];
 % hold on;
 s = unique(s);
 % length(s)
+
+%%
+load txrxs;
+t = txs;
+[x ia] = unique(t(:, 2));
+% s = t(ia, :);
+sum(t(ia, 6))
 
 end
 
@@ -1011,8 +1019,11 @@ fprintf('concurrency median %f, mean %f\n', median(concurrency), mean(concurrenc
 
 %%
 load txrxs.mat;
-t = tx_successes;
-length(unique(t(:, 2)))
+t = rxs;
+% t = t(t(:, 2) == 15, :);
+cdfplot(t(:, 7));
+% length(unique(t(:, [3 4]), 'rows'))
+% length(unique(t(:, [4 5]), 'rows'))
 
 %% DBG constants
 DBG_LOSS_FLAG = 0;

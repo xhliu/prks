@@ -13,7 +13,8 @@ is_neteye = false;
 if is_neteye
     MAIN_DIR = '~/Projects/tOR/RawData/';
 else
-    MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
+    %MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
+    MAIN_DIR = '~/Downloads/Indriya/';
 end
 
 % directory to store figures
@@ -21,7 +22,7 @@ FIGURE_DIR = '~/Dropbox/Projects/onama/figure/';
 fprintf('Warning: please change the directory to prevent overwriting\n');
 
 % # of protocols to compare
-PROTOCOL_CNT = 2;
+PROTOCOL_CNT = 3;
 % # of pdr requirements
 pdr_reqs = [70 80 90 95];
 PDR_REQ_CNT = length(pdr_reqs);
@@ -111,25 +112,44 @@ else
 %% PRKS NAMA
 job = cell(0);
 
+% mobihoc & globecom
+% % pdr req 70
+% job{1} = [45329 60;
+%           45376 60;
+%           45395 60;
+%           ];
+% % 80
+% job{2} = [45328 60;
+%           45377 60;
+%           45396 60;
+%           ];
+% % 90
+% job{3} = [45312 60;
+%           45381 60;
+%           45424 60;
+%           ];
+% % 95
+% job{4} = [45313 60;
+%           45382 60;
+%           45425 60;
+%           ];
+
+% specifically to compare concurrency w/ iOrder
 % pdr req 70
-job{1} = [45329 60;
-          45376 60;
-          45395 60;
+job{1} = [47152 60;
+          47157 60;
           ];
 % 80
-job{2} = [45328 60;
-          45377 60;
-          45396 60;
+job{2} = [47232 60;
+          47235 60;
           ];
 % 90
-job{3} = [45312 60;
-          45381 60;
-          45424 60;
+job{3} = [47151 60;
+          47239 60;
           ];
 % 95
-job{4} = [45313 60;
-          45382 60;
-          45425 60;
+job{4} = [47155 60;
+          47240 60;
           ];
 prks_nama_job = job;
 

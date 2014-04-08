@@ -5,8 +5,8 @@
 %% 
 jobs = [];
 % 1) SCREAM or RIDB without OLAMA
-SLOT_LEN = 512;
-jobs = [46930 46941 46949 46950];
+SLOT_LEN = 32; % 512;
+jobs = [47232];
 % jobs = [jobs; scream_job(:, 1)];
 % 2) PRKS or RIDB with OLAMA
 % SLOT_LEN = 512;

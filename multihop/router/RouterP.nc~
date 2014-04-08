@@ -43,7 +43,9 @@ module RouterP {
 //	#endif
 		interface Util;
 		interface UartLog;
+	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
 		interface GlobalTime<TMicro>;
+	#endif
 		interface LocalTime<TMilli>;
   	}
 }
@@ -122,6 +124,7 @@ command error_t Send.send(message_t* msg, uint8_t len) {
 	
 	if (call SendQueue.enqueue(qe) == SUCCESS) {
 		post sendTask();
+		call UartLog.logTxRx(DBG_FLAG, DBG_OVERFLOW_FLAG, __LINE__, qe.origin, qe.originSeqNo, 0, 0, 0, 0);
 		return SUCCESS;
 	} else {
 		return FAIL;
@@ -149,12 +152,11 @@ task void sendTask() {
 		ret = call SubSend.send(parent, m_buf_p, call SubPacket.payloadLength(m_buf_p));
 		if (SUCCESS == ret) {
 			atomic sending = TRUE;
-			call UartLog.logTxRx(TX_SUCCESS_FLAG, call Util.getReceiver(), qe.originSeqNo, qe.origin, call SubPacket.payloadLength(m_buf_p), 0, 0, 0, getGlobalTime());
-//			if (getHeader(qe->msg)->origin == 22)
-//				call UartLog.logTxRx(DBG_FLAG, DBG_TX_FLAG, __LINE__, 0, 0, 0, 0, getHeader(qe->msg)->origin, getHeader(qe->msg)->originSeqNo);
+			call UartLog.logTxRx(TX_SUCCESS_FLAG, qe.origin, qe.originSeqNo, call Util.getReceiver(), call SubPacket.payloadLength(m_buf_p), 0, 0, 0, getGlobalTime());
 		} else {
 			// retry
 			post sendTask();
+			call UartLog.logEntry(TX_FAIL_FLAG, qe.origin, qe.originSeqNo, ret);
 		}
 	}
 }
@@ -173,6 +175,7 @@ void dequeue(bool is_acked) {
 			call SentCache.insert(m_buf_p);
     }
 	call SendQueue.dequeue();
+	call UartLog.logTxRx(DBG_FLAG, DBG_OVERFLOW_FLAG, __LINE__, qe.origin, qe.originSeqNo, 0, 0, 0, 0);
 	// next
 	post sendTask();
 }
@@ -244,6 +247,7 @@ message_t* forward(message_t *m) {
 	
 	if (call SendQueue.enqueue(qe) == SUCCESS) {
 		post sendTask();
+		call UartLog.logTxRx(DBG_FLAG, DBG_OVERFLOW_FLAG, __LINE__, qe.origin, qe.originSeqNo, 0, 0, 0, 0);
 	} else {
 		call UartLog.logTxRx(DBG_FLAG, DBG_LOSS_FLAG, __LINE__, 0, 0, 0, 0, getHeader(m)->origin, getHeader(m)->originSeqNo);
 	}
@@ -261,13 +265,12 @@ event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) 
     bool duplicate = FALSE;
     bool is_root_;
 
-	//call UartLog.logTxRx(DBG_FLAG, DBG_TX_FLAG, __LINE__, len, call SubSend.maxPayloadLength(), call SubAMPacket.destination(msg), call SubAMPacket.source(msg), getHeader(msg)->origin, getHeader(msg)->originSeqNo);
+    atomic is_root_ = is_root;
+    call UartLog.logTxRx(RX_FLAG, getHeader(msg)->origin, getHeader(msg)->originSeqNo, call SubAMPacket.source(msg), len, __LINE__, len > call SubSend.maxPayloadLength(), is_root_, getGlobalTime());
     if (len > call SubSend.maxPayloadLength()) {
 		return msg;
     }
 	
-    call UartLog.logTxRx(RX_FLAG, getHeader(msg)->origin, getHeader(msg)->originSeqNo, call SubAMPacket.source(msg), 0, 0, 0, 0, getGlobalTime());
-
     //See if we remember having seen this packet
     //We look in the sent cache ...
     if (call SentCache.lookup(msg)) {
@@ -287,8 +290,8 @@ event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) 
 	
 	call SubPacket.setPayloadLength(m_buf_p, len);
 	
+//    call UartLog.logTxRx(RX_FLAG, getHeader(msg)->origin, getHeader(msg)->originSeqNo, call SubAMPacket.source(msg), len, __LINE__, len > call SubSend.maxPayloadLength(), is_root_, getGlobalTime());
     // If I'm the root, signal receive. 
-    atomic is_root_ = is_root;
    	if (is_root_) {
     	// once packet reception only once
     	// otherwise dup detection does not work for root since its queue and cache are empty
@@ -304,7 +307,9 @@ event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) 
 }
 
 
-
+default async event bool Intercept.forward(bool is_incoming, message_t* msg, void* payload, uint8_t len) {
+	return TRUE;
+}
 //-------------------------------------------------------------------------------------------------
 // Interface Packet
 //-------------------------------------------------------------------------------------------------

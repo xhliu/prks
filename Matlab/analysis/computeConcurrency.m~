@@ -5,8 +5,8 @@
 %% 
 jobs = [];
 % 1) SCREAM or RIDB without OLAMA
-SLOT_LEN = 512;
-jobs = [433];
+SLOT_LEN = 32; % 512;
+jobs = [[47151 47152 47155 47157 47235 47239]47240];
 % jobs = [jobs; scream_job(:, 1)];
 % 2) PRKS or RIDB with OLAMA
 % SLOT_LEN = 512;
@@ -38,7 +38,7 @@ for job_id = 1 : length(jobs)
 load debugs;
 t = debugs;
 type = DBG_TDMA_FLAG;
-line = 550; %642; %539; %543; %568; %534; 
+line = 551; %543; %642; %539; %543; %568; %534; 
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 

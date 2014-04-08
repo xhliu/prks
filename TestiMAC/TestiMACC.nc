@@ -43,7 +43,7 @@ implementation {
 		components RouterC;
 		App.AMSend -> RouterC;
 		App.Receive -> RouterC;
-	 	App.Intercept -> RouterC;
+//	 	App.Intercept -> RouterC;
 		App.Packet -> RouterC;
 	#if defined(DEFAULT_MAC)
 	 	components ActiveMessageC as AM;
