@@ -147,9 +147,9 @@ void task sendTask() {
 	#endif
 	} else {
 		dbg("TestiMAC", "%s: sending pkt %hu failed.\n", __FUNCTION__, counter);
-	#ifndef MULTIHOP
+//	#ifndef MULTIHOP
 		call UartLog.logEntry(TX_FAIL_FLAG, ret, hdr->seqno, getGlobalTime());
-	#endif
+//	#endif
 //	#if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 //		#warning repost when tx fails
 //		post sendTask();

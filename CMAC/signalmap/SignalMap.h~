@@ -37,7 +37,7 @@ enum {
 // size is int16_t to accommodate network consisting of more than 256 nodes
 #ifndef SM_SIZE
 #warning SM_SIZE not 130
-#define SM_SIZE 46		// accommodate some illegitimate nodes of corrupted node id
+#define SM_SIZE 10		// accommodate some illegitimate nodes of corrupted node id
 #endif
 
 //signal map header

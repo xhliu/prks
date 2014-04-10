@@ -82,7 +82,7 @@ enum {
 		
 #ifdef SCREAM
 #warning ACTIVE_LINK_SIZE should be equal to activeLinks size
-	ACTIVE_LINK_SIZE = 49, //100,
+	ACTIVE_LINK_SIZE = 45, //100,
 //#warning INTERFERENCE_DIAMETER
 	// w/ highest power level
 	// based on false postive/negative analysis

@@ -10,7 +10,7 @@ enum {
 	BEACON_PERIOD_SHORT = 30,	//5000
 	//BEACON_PERIOD_LONG = 600000,
 	#warning SM beacon parameters here
-	BEACON_PERIOD_SHORT_CNT = 1000,	//4000
+	BEACON_PERIOD_SHORT_CNT = 5000UL,	// 5000
 	// use max to build signal map for the largest ER possible
 	BEACON_SM_POWER_LEVEL = 31,
 };

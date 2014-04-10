@@ -1019,9 +1019,9 @@ fprintf('concurrency median %f, mean %f\n', median(concurrency), mean(concurrenc
 
 %%
 load txrxs.mat;
-t = rxs;
-% t = t(t(:, 2) == 15, :);
-cdfplot(t(:, 7));
+t = tx_fails;
+t = t(t(:, 2) == 18, :);
+% cdfplot(t(:, 7));
 % length(unique(t(:, [3 4]), 'rows'))
 % length(unique(t(:, [4 5]), 'rows'))
 

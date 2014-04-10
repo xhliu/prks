@@ -4,26 +4,28 @@
 %   Function: compute convergence time, both for link and network
 %%
 ROOT_NODE_ID = 15;
+SRC_IDX = 4;
+SEQ_IDX = 5;
+% DST_IDX = 3;
 
 %% e2e pdr
+% fprintf('to change log idx here\n');
 load txrxs;
 % (RX_FLAG, getHeader(msg)->origin, getHeader(msg)->originSeqNo, call
 % SubAMPacket.source(msg), len, __LINE__, len > call SubSend.maxPayloadLength(), is_root_, getGlobalTime())
 rxs = rxs(rxs(:, 2) == ROOT_NODE_ID, :);
 % last occurrence by default
-[a ix] = unique(rxs(:, [3 4]), 'rows', 'first');
+[a ix] = unique(rxs(:, [SRC_IDX SEQ_IDX]), 'rows', 'first');
 rxs = rxs(ix, :);
 % (TX_DONE_FLAG, call Util.getReceiver(), qe.originSeqNo, qe.origin, call
 % SendQueue.size(), call Acks.wasAcked(msg), 0, 0, getGlobalTime())
-txs = txs(txs(:, 2) == txs(:, 5), :);
+txs = txs(txs(:, 2) == txs(:, SRC_IDX), :);
 % filter retx
-[a ix] = unique(txs(:, [5 4]), 'rows', 'first');
+[a ix] = unique(txs(:, [SRC_IDX SEQ_IDX]), 'rows', 'first');
 txs = txs(ix, :);
 miss_cnt = size(txs, 1) - size(rxs, 1);
 fprintf('%d out of %d are missing: %f\n', miss_cnt, size(txs, 1), miss_cnt / size(txs, 1));
 
-SRC_IDX = 3;
-% DST_IDX = 3;
 link_pdrs = [];
 srcs = unique(txs(:, 2));
 
@@ -55,7 +57,7 @@ if ~isempty(t)
     cdfplot(s);
     % unique(s)
 end
-
+size(unique(t(:, 9:10), 'rows'), 1)
 %% queue level
 load txrxs.mat;
 cdfplot(txs(:, 6));

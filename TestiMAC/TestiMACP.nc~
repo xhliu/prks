@@ -38,7 +38,7 @@ module TestiMACP {
 #endif
 	
 	#ifdef MULTIHOP	
-		interface AsyncIntercept as Intercept;
+//		interface AsyncIntercept as Intercept;
 		interface RootControl;
 	#endif
 		interface SplitControl as AMControl;		
@@ -147,8 +147,9 @@ void task sendTask() {
 	#endif
 	} else {
 		dbg("TestiMAC", "%s: sending pkt %hu failed.\n", __FUNCTION__, counter);
-		//#warning avoid log overload
+	#ifndef MULTIHOP
 		call UartLog.logEntry(TX_FAIL_FLAG, ret, hdr->seqno, getGlobalTime());
+	#endif
 //	#if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 //		#warning repost when tx fails
 //		post sendTask();

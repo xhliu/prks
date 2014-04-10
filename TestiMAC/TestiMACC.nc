@@ -14,7 +14,6 @@ implementation {
 
 #ifndef MULTIHOP
 	#if defined(DEFAULT_MAC)
-	#warning IMAC disabled
 	 	components ActiveMessageC as AM;
 	 	App.AMSend -> AM.AMSend[AM_IMAC_LE];
 	 	App.Receive -> AM.Receive[AM_IMAC_LE];
@@ -45,16 +44,8 @@ implementation {
 		App.Receive -> RouterC;
 //	 	App.Intercept -> RouterC;
 		App.Packet -> RouterC;
-	#if defined(DEFAULT_MAC)
+	#if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 	 	components ActiveMessageC as AM;
-		App.AMControl -> AM;
-		//App.AMPacket -> AM;
-	#elif defined(RTSCTS) || defined(CMAC)
-	 	components RouterC;
-	 	components ActiveMessageC as AM;
-	 	App.AMSend -> RouterC;
-	 	App.Receive -> RouterC;
-	 	App.Packet -> RouterC;
 		App.AMControl -> AM;
 	#else
 		components AsyncCC2420TransceiverC as AM;

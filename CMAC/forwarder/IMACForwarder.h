@@ -24,7 +24,7 @@ enum {
 	// 3.5 * 128 = 448
 	SINR_THRESHOLD_MARGIN = 0, //448,
 	//scaled: <30%, 1.6 = 205>, <40%, 1.8 = 231>, <50%, 2.2 = 282>, <60%, 2.4 = 308>, <70%, 2.8 * 128 = 359> <80%, 3.2 * 128 = 410> <90%, 4 * 128 = 512>, <95%, 4.5 * 128 = 576>, <99%, 16 * 128 = 2048>
-	SINR_THRESHOLD = 2048 + SINR_THRESHOLD_MARGIN,
+	SINR_THRESHOLD = 359 + SINR_THRESHOLD_MARGIN,
 	LINK_TABLE_SIZE = 120,
 	
 	// based on CMAC paper

@@ -9,7 +9,9 @@
 
 //#warning basic CSMA
 //#define DEFAULT_MAC
-//#define RTSCTS
+#warning RTSCTS
+#define RTSCTS
+//#warning CMAC
 //#define CMAC
 
 // TDMA
@@ -167,8 +169,9 @@ enum {
 #else
 	START_DATA_TIME = INITIAL_ER_TIME,
 #endif
-	#warning period not 20
-	PERIOD_MILLI = 420000UL, //20U,
+#warning period not 20
+	// CSMA/RTSCTS/CMAC: 1800UL, 	RIDB&SCREAM 22500UL, 	PRKS: 360000UL,
+	PERIOD_MILLI = 1800UL,	// 20
 	MAX_PKT_CNT = 45000U,
 	
 	TYPE_SYNC = 12,
