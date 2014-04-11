@@ -10,7 +10,6 @@ interface ForwarderInfo {
 	
 	
 	async command bool isForwarderEnabled();
-	async command uint8_t getDataTxSlotRatio();
 	//async command bool isDataPending();
 	//async command uint32_t getNextTxSlot();
 }

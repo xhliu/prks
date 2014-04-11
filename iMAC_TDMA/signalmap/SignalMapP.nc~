@@ -25,7 +25,7 @@ module SignalMapP {
 	};
 	
 	uses {
-		interface AsyncSend as SubSend;
+		interface AsyncAMSend as SubSend;
 		interface AsyncReceive as SubReceive;
 		interface AsyncPacket as SubPacket;
 		interface AsyncAMPacket as SubAMPacket;
@@ -39,6 +39,7 @@ module SignalMapP {
 		interface Util;
 		interface UartLog;
 		interface LocalTime<TMicro>;
+		interface ForwarderInfo;
 	};
 }
 
@@ -212,6 +213,7 @@ uint8_t addLinkEstHeaderAndFooter(message_t *msg, uint8_t len) {
 	hdr->power_level = CONTROL_POWER_LEVEL;
 	hdr->footer_entry_cnts = j;
 	//hdr->seqno = seqno++;
+	hdr->data_tx_slot_ratio = call ForwarderInfo.getDataTxSlotRatio();
 	newlen = sizeof(sm_header_t) + len + j * sizeof(sm_footer_t);
 	return newlen;
 }

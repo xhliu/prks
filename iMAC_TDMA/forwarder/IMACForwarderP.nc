@@ -133,6 +133,16 @@ uint32_t next_tx_slot;
 uint8_t beacon_cnt;
 uint8_t elapsed_slot_since_last_win;
 
+// to estimate tx probability
+uint32_t data_tx_slot_cnt;
+uint32_t slot_cnt;
+// scale 100x
+// TODO: wraparound
+async command uint8_t ForwarderInfo.getDataTxSlotRatio() {
+	call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, 0, 0, 0, 0, data_tx_slot_cnt, slot_cnt);
+	return (slot_cnt ? (100 * data_tx_slot_cnt / slot_cnt) : 100);
+}
+
 // tx ftsp beacon instead of ctrl pkt 1 out of const_ctrl_slot_ftsp_chance when ctrl channel available
 // initially be small for quick convergence of ftsp
 //uint16_t const_ctrl_slot_ftsp_chance_mask;
@@ -290,6 +300,8 @@ command error_t Init.init() {
 			my_outgoing_link_idx = i;
 	}
 #endif
+	data_tx_slot_cnt = 0;
+	slot_cnt = 0;
 	return SUCCESS;
 }
 
@@ -453,6 +465,7 @@ void scheduleSlot(uint32_t g_slot_time) {
 	uint16_t backoff;
 #endif
 	
+	slot_cnt++;
 	if (elapsed_slot_since_last_win < 255)
 		elapsed_slot_since_last_win++;
 	//	call UartLog.logEntry(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, g_slot_time);
@@ -527,6 +540,7 @@ void scheduleSlot(uint32_t g_slot_time) {
 	// in OLAMA both isTxSlot() and isRxSlot() can be TRUE bcoz of conservatively staying in DATA channel, tx instead of rx
 	// this cannot occur in LAMA
 	if (call Controller.isTxSlot(current_slot)) {
+		data_tx_slot_cnt++;
 		//status = 0;
 		
 		// ensure receiver has switched to DATA channel

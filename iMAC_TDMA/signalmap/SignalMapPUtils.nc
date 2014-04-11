@@ -8,7 +8,7 @@ uint16_t calcInboundGain(int16_t pre_rss, int16_t post_rss, uint8_t tx_power_lev
 void initSignalMap();
 int16_t findIdx(am_addr_t nb);
 int16_t findEmptyIdx();
-void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain);
+void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain, uint8_t data_tx_slot_ratio);
 void sortSignalMap(int16_t idx);
 
 // neighbor signal map
@@ -154,15 +154,17 @@ async command void SignalMap.getSignalMapSizeDbg(int16_t *num, int16_t *in_num, 
 }
 
 
-void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain) {
+void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain, uint8_t data_tx_slot_ratio) {
 	int16_t idx;
 	sm_entry_t *se;
-
+	bool freezed_;
+	
 	// freeze SM
-	atomic {
-		if (freezed)
-			return;
-	}
+	atomic freezed_ = freezed;
+//	atomic {
+//		if (freezed)
+//			return;
+//	}
 	/*
 	 * update signal map: keep the closest SM_SIZE neighbors, in terms of inbound gain
 		 if found
@@ -179,6 +181,9 @@ void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain) {
 	idx = findIdx(nb);
 	if (idx < SM_SIZE) {
 		se = &signalMap[idx];
+		se->data_tx_slot_ratio = data_tx_slot_ratio;
+		if (freezed_)
+			return;
 		// a new inbound gain sample; sample on if it is valid
 		if (in_gain != INVALID_GAIN) {
 			if (se->inbound_gain != INVALID_GAIN) {
@@ -204,6 +209,10 @@ void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain) {
 				// initialize
 				se->nb = nb;
 				se->valid = TRUE;
+				se->data_tx_slot_ratio = data_tx_slot_ratio;
+				if (freezed_)
+					return;
+
 				// no need for validity check for 1st time
 				se->inbound_gain = in_gain;
 				se->outbound_gain = out_gain;
@@ -219,6 +228,10 @@ void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain) {
 					// replace
 					se->nb = nb;
 					se->valid = TRUE;
+					se->data_tx_slot_ratio = data_tx_slot_ratio;
+					if (freezed_)
+						return;
+
 					// no need for validity check for 1st time
 					se->inbound_gain = in_gain;
 					se->outbound_gain = out_gain;

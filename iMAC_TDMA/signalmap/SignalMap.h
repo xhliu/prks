@@ -27,6 +27,8 @@ typedef nx_struct {
 	nx_uint8_t footer_entry_cnts;
 	// TODO: remove after debug
 	//nx_uint16_t seqno;
+	// tx prob.
+	nx_uint8_t data_tx_slot_ratio;
 } sm_header_t;
 
 //signal map footer containing neighbor and inbound gain, used to compute outbound gain
@@ -41,6 +43,7 @@ typedef nx_struct {
 typedef struct {
 	am_addr_t nb;
 	bool valid;
+	uint8_t data_tx_slot_ratio;
 	// scaled
 	// to compute ER
 	int16_t inbound_gain;

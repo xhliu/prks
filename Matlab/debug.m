@@ -2,10 +2,10 @@ if 0
 %% always keep first
 load debugs;
 t = debugs;
-% type = DBG_LOSS_FLAG;
-% line = 186;
-type = DBG_CONTROLLER_FLAG;
-line = 1024;
+type = DBG_TDMA_FLAG;
+line = 142;
+% type = DBG_CONTROLLER_FLAG;
+% line = 1143; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -24,15 +24,16 @@ t = t(t(:, 4) == line, :);
 % getConflictHigherPrioActiveSetSize, getConflictHigherPrioSetSize, prio_slot)
 % s = node_parent;
 % s = [s(:, 1); s(:, 2)];
-s = t(:, 4);
-% s = s(s(:, 2) == 255, end);
+s = t;
+sum(s(:, 9) > s(:, 10))
+s = s(s(:, 2) == 12, [9 10]);
 % s = mod(s, 128);
-cnt = sum(s == 178);
-length(s) - cnt - cnt
+% cnt = sum(s == 178);
+% length(s) - cnt - cnt
 % s = s(:, [2 10]);
 % [x ix] = sort(s(:, 1));
 % s = s(ix, :);
-cdfplot(s);
+plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % cdfplot(s);
@@ -42,7 +43,7 @@ cdfplot(s);
 % ix = find(s > 1);
 % s(ix - 10 : ix + 10)
 % hold on;
-s = unique(s);
+% s = unique(s);
 % length(s)
 
 %%
@@ -1025,6 +1026,15 @@ t = t(t(:, 2) == 18, :);
 % length(unique(t(:, [3 4]), 'rows'))
 % length(unique(t(:, [4 5]), 'rows'))
 
+%%
+clc;
+x = 0.01 : 0.01 : 1;
+y = 1280 * log10(x);
+scatter(x, y);
+for x = 0.01 : 0.01 : 1
+    fprintf('%.0f, ', -1280 * log10(x));
+end
+fprintf('\n');
 %% DBG constants
 DBG_LOSS_FLAG = 0;
 DBG_TX_FLAG = DBG_LOSS_FLAG + 1;

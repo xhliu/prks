@@ -24,7 +24,7 @@ module IMACControllerP {
 	};
 	
 	uses {
-		interface AsyncSend as SubSend;
+		interface AsyncAMSend as SubSend;
 		interface AsyncReceive as SubReceive;
 		interface AsyncPacket as SubPacket;
 		interface AsyncAMPacket as SubAMPacket;
@@ -1091,9 +1091,9 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 	sm_entry_t *se;
 	// scaled; otherwise dBm addition, substraction may cause great precision loss
 	int32_t total_i, current_i, next_i;
+	int16_t tx_power;
 #ifdef HETER_TX_POWER
 	uint8_t tx_power_level;
-	int16_t tx_power;
 #endif
 	
 	// runtime check
@@ -1136,10 +1136,22 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 		#ifdef HETER_TX_POWER
 			tx_power_level = call Util.getNodeTxPowerLevel(se->nb);
 			tx_power = (call SignalMap.level2Power(tx_power_level) << SCALE_L_SHIFT_BIT);
-			total_i = dbmSumU(total_i, tx_power - se->inbound_gain);
 		#else
-			total_i = dbmSumU(total_i, CC2420_DEF_RFPOWER_DBM_SCALED - se->inbound_gain);
+			tx_power = CC2420_DEF_RFPOWER_DBM_SCALED;
 		#endif
+			// tx prob.; only when increasing ER
+			call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, 0, 0, se->data_tx_slot_ratio);
+			if (0 == se->data_tx_slot_ratio) {
+				// do not tx; skip
+				continue;
+			}
+			if (se->data_tx_slot_ratio < sizeof(percent2DbTable) / sizeof(percent2DbTable[0])) {
+				tx_power -= percent2DbTable[se->data_tx_slot_ratio];
+			} else {
+				assert(se->data_tx_slot_ratio);
+				continue;
+			}
+			total_i = dbmSumU(total_i, tx_power - se->inbound_gain);
 			// maximally enlarge the ER but still total_i >= |delta_i|
 			//if (total_i >= delta_i)
 			// band_i >= (current_i - next_i) -> total_i = next_i + band_i >= current_i

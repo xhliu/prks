@@ -2,10 +2,10 @@ if 0
 %% always keep first
 load debugs;
 t = debugs;
-% type = DBG_TDMA_FLAG;
-% line = 550;
-type = DBG_CONTROLLER_FLAG;
-line = 1022;
+type = DBG_TDMA_FLAG;
+line = 142;
+% type = DBG_CONTROLLER_FLAG;
+% line = 1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -22,25 +22,35 @@ t = t(t(:, 4) == line, :);
 % ret, current_slot)
 % (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, i, hi_bit, lo_bit,
 % getConflictHigherPrioActiveSetSize, getConflictHigherPrioSetSize, prio_slot)
-s = t;
-% s = s(s(:, 4) == 177 | s(:, 4) == 159, :);
+% s = node_parent;
+% s = [s(:, 1); s(:, 2)];
+s = t(:, 4);
+s = s(s(:, 2) == 255, 10);
 % s = mod(s, 128);
-% sum(s > 0) / length(s)
-s = s(:, [2 10]);
-[x ix] = sort(s(:, 1));
-s = s(ix, :);
-% cdfplot(s);
+% cnt = sum(s == 178);
+% length(s) - cnt - cnt
+% s = s(:, [2 10]);
+% [x ix] = sort(s(:, 1));
+% s = s(ix, :);
+plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
-% cdfplot(x);
+% cdfplot(s);
 % 16384 slots to wrap around
 % s = s(s(:, 9) == 775 + 16 * 9, :);
 % s = s(2 : end) - s(1 : end - 1);
 % ix = find(s > 1);
 % s(ix - 10 : ix + 10)
 % hold on;
-% s = unique(s)
+% s = unique(s);
 % length(s)
+
+%%
+load txrxs;
+t = txs;
+[x ia] = unique(t(:, 2));
+% s = t(ia, :);
+sum(t(ia, 6))
 
 end
 
@@ -49,7 +59,7 @@ end
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
 % fprintf('warning: varying link pdr\n');
-pdr_req = 99;
+pdr_req = 70;
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
 %     fprintf('warning: fixed link id\n');
@@ -1000,12 +1010,30 @@ load ~/Dropbox/iMAC/Xiaohui/links_pdr99.mat;
 % sum(sum(t))
 t = link_rssi;
 s = t(~isnan(t));
-sum(s < -10^9) / leng
+sum(s < -10^9) / length(s)
 s = s(s > -10^9);
 cdfplot(s);
 %%
 load concurrency.mat;
 fprintf('concurrency median %f, mean %f\n', median(concurrency), mean(concurrency));
+
+%%
+load txrxs.mat;
+t = tx_fails;
+t = t(t(:, 2) == 18, :);
+% cdfplot(t(:, 7));
+% length(unique(t(:, [3 4]), 'rows'))
+% length(unique(t(:, [4 5]), 'rows'))
+
+%%
+clc;
+x = 0.01 : 0.01 : 1;
+y = 1280 * log10(x);
+scatter(x, y);
+for x = 0.01 : 0.01 : 1
+    fprintf('%.0f, ', -1280 * log10(x));
+end
+fprintf('\n');
 %% DBG constants
 DBG_LOSS_FLAG = 0;
 DBG_TX_FLAG = DBG_LOSS_FLAG + 1;

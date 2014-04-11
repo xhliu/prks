@@ -25,44 +25,44 @@ PFLAGS +=	-I$(MAINDIR)/../router \
 # -----------------------------------------------------------------------------
 # RTS-CTS & C-MAC: based on CC2420
 # -----------------------------------------------------------------------------
-#PROTOCOLDIR = ../CMAC
-PROTOCOLDIR = ../RTSCTS
-PFLAGS +=	-I$(UTILDIR)/Utils \
-			-I$(PROTOCOLDIR) \
-			-I$(PROTOCOLDIR)/beaconing \
-			-I$(PROTOCOLDIR)/controller \
-			-I$(PROTOCOLDIR)/forwarder \
-			-I$(PROTOCOLDIR)/linkestimator \
-			-I$(PROTOCOLDIR)/signalmap \
-			-I$(PROTOCOLDIR)/cc2420 \
-			-I$(MAINDIR) \
-			-I$(MAINDIR)/util \
-			
-CFLAGS += -DCC2420_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
-CFLAGS += -DCC2420_DEF_CHANNEL=26
-#enable snooping
-CFLAGS+=-DCC2420_NO_ADDRESS_RECOGNITION
+##PROTOCOLDIR = ../CMAC
+#PROTOCOLDIR = ../RTSCTS
+#PFLAGS +=	-I$(UTILDIR)/Utils \
+#			-I$(PROTOCOLDIR) \
+#			-I$(PROTOCOLDIR)/beaconing \
+#			-I$(PROTOCOLDIR)/controller \
+#			-I$(PROTOCOLDIR)/forwarder \
+#			-I$(PROTOCOLDIR)/linkestimator \
+#			-I$(PROTOCOLDIR)/signalmap \
+#			-I$(PROTOCOLDIR)/cc2420 \
+#			-I$(MAINDIR) \
+#			-I$(MAINDIR)/util \
+#			
+#CFLAGS += -DCC2420_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
+#CFLAGS += -DCC2420_DEF_CHANNEL=26
+##enable snooping
+#CFLAGS+=-DCC2420_NO_ADDRESS_RECOGNITION
 
 # -----------------------------------------------------------------------------
 # PRKS based on CC2420X
 # -----------------------------------------------------------------------------
-#PFLAGS +=	-I$(UTILDIR)/Utils \
-#			-I$(MAINDIR) \
-#			-I$(MAINDIR)/util \
-#			-I$(MAINDIR)/async \
-#			-I$(MAINDIR)/cc2420x \
-#			-I$(MAINDIR)/ftsp \
-#			-I$(MAINDIR)/cc2420x/ftsp \
-#			-I$(MAINDIR)/signalmap \
-#			-I$(MAINDIR)/forwarder \
-#			-I$(MAINDIR)/controller \
-#			-I$(MAINDIR)/linkestimator \
+PFLAGS +=	-I$(UTILDIR)/Utils \
+			-I$(MAINDIR) \
+			-I$(MAINDIR)/util \
+			-I$(MAINDIR)/async \
+			-I$(MAINDIR)/cc2420x \
+			-I$(MAINDIR)/ftsp \
+			-I$(MAINDIR)/cc2420x/ftsp \
+			-I$(MAINDIR)/signalmap \
+			-I$(MAINDIR)/forwarder \
+			-I$(MAINDIR)/controller \
+			-I$(MAINDIR)/linkestimator \
 
-##CC2420X defaults
-#CFLAGS += -DCC2420X_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
-#CFLAGS += -DCC2420X_DEF_CHANNEL=26
-## has to be here, if defined in FastCC2420TransceiverP, default 800 takes over
-#CFLAGS += -DSOFTWAREACK_TIMEOUT=8000
+#CC2420X defaults
+CFLAGS += -DCC2420X_DEF_RFPOWER=3        #neteye 3, motelab 23, Indriya 11
+CFLAGS += -DCC2420X_DEF_CHANNEL=26
+# has to be here, if defined in FastCC2420TransceiverP, default 800 takes over
+CFLAGS += -DSOFTWAREACK_TIMEOUT=8000
 
 
 # -----------------------------------------------------------------------------

@@ -39,6 +39,7 @@ module SignalMapP {
 		interface Util;
 		interface UartLog;
 		interface LocalTime<TMicro>;
+		interface ForwarderInfo;
 	};
 }
 
@@ -212,6 +213,7 @@ uint8_t addLinkEstHeaderAndFooter(message_t *msg, uint8_t len) {
 	hdr->power_level = CONTROL_POWER_LEVEL;
 	hdr->footer_entry_cnts = j;
 	//hdr->seqno = seqno++;
+	hdr->data_tx_slot_ratio = call ForwarderInfo.getDataTxSlotRatio();
 	newlen = sizeof(sm_header_t) + len + j * sizeof(sm_footer_t);
 	return newlen;
 }
@@ -287,7 +289,7 @@ void processReceivedMessage(message_t *msg, void *payload, uint8_t len) {
 		}
 	}
 	// update signal map
-	updateSignalMap(nb, in_gain, out_gain);
+	updateSignalMap(nb, in_gain, out_gain, hdr->data_tx_slot_ratio);
 	updateNbSignalMap(nb, footer, footer_entry_cnts);
 	//call UartLog.logTxRx(DBG_FLAG, DBG_SM_FLAG, __LINE__, 0, 0, nb, pre_rss, post_rss, in_gain);
 }

@@ -33,7 +33,7 @@ implementation {
 //	SM.SubPacket -> AMSenderC;
 //	SM.SubAMPacket -> AMSenderC;
 	components AsyncCC2420TransceiverC as AM;
-	SM.SubSend -> AM.Send[AM_IMAC_SM];
+	SM.SubSend -> AM.AMSend[AM_IMAC_SM];
 	SM.SubReceive -> AM.Receive[AM_IMAC_SM];
 	SM.SubPacket -> AM;
 	SM.SubAMPacket -> AM;

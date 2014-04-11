@@ -15,9 +15,9 @@ enum {
 	OFFSET = 1,
 	EWMA_R_SHIFT_BIT = 4,	// right shift to scale down
 
-#ifdef RIDB
+//#ifdef RIDB
 	MAX_NOISE = -90,
-#endif
+//#endif
 };
 
 //signal map header
@@ -26,7 +26,9 @@ typedef nx_struct {
 	// number of entries in the footer
 	nx_uint8_t footer_entry_cnts;
 	// TODO: remove after debug
-	nx_uint16_t seqno;
+	//nx_uint16_t seqno;
+	// tx prob.
+	nx_uint8_t data_tx_slot_ratio;
 } sm_header_t;
 
 //signal map footer containing neighbor and inbound gain, used to compute outbound gain

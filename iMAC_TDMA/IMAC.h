@@ -14,9 +14,9 @@ enum {
 	// 128
 	SCALE_L_SHIFT_BIT = 7,
 	
-#warning pdr req; SINR_THRESHOLD MUST be consistent w/ pdr req
+//#warning pdr req; SINR_THRESHOLD MUST be consistent w/ pdr req
 	// PDR requirement
-	REFERENCE_DATA_PDR = 70,
+	REFERENCE_DATA_PDR = 90,
 	// SINR threshold to initialize ER based on pairwise interference model
 	//scaled: <30%, 1.6 = 205>, <40%, 1.8 = 231>, <50%, 2.2 = 282>, <60%, 2.4 = 308>, <70%, 2.8 * 128 = 359> <80%, 3.2 * 128 = 410> <90%, 4 * 128 = 512>, <95%, 4.5 * 128 = 576>, <99%, 16 * 128 = 2048>
 #ifndef CMAC
@@ -64,11 +64,11 @@ enum {
 	INVALID_SLOT = INVALID_TIME,
 	INVALID_ADDR = 0xFFFF,
 	
-#warning SLOT_MASK
+#warning SLOT_MASK 0xF
 #if !defined(LINK_SET_PDR_99) && !defined(MULTIHOP)
 	// change if link set changes, least SLOT_MASK = (2^n - 1), such that 2^n > active_link_size (not >= to accomodate dedicated ftsp slots)
 	// not anymore in OLAMA: 2^n >= active_link_size equal is enough since no dedicated ftsp slot
-	SLOT_MASK = 0x7F, //0x7F,
+	SLOT_MASK = 0xF, //0x7F,
 #else
 	SLOT_MASK = 0x3F,
 #endif

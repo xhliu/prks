@@ -55,4 +55,7 @@ implementation {
 	
 	components LocalTimeMicroC;
 	SM.LocalTime -> LocalTimeMicroC;
+	
+	components IMACForwarderC;
+	SM.ForwarderInfo -> IMACForwarderC;
 }

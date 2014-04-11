@@ -42,7 +42,7 @@ error_t adjustER(int16_t idx, bool is_tx, int32_t delta_i_dB);
 error_t execController(am_addr_t nb, bool is_sender);
 
 
-static long isqrt(long num);
+//static long isqrt(long num);
 // power arithmic
 inline int32_t dbmSumU(int32_t x, int32_t y);
 dbm_t dbmSumS(dbm_t x, dbm_t y);
@@ -1278,6 +1278,9 @@ inline uint8_t getConflictSetSize(uint8_t round_offset) {
 // power arithmic based on dBm
 // functions ending in U means only dealing w/ positive power, S w/ negative power as well
 // -----------------------------------------------------------------------------------------
+// -1280 * log10(0 : 0.01 : 1);	special case: 0x7FFF for 0	for tx probability
+int16_t percent2DbTable[] = {0x7FFF, 2560, 2175, 1949, 1789, 1665, 1564, 1478, 1404, 1339, 1280, 1227, 1179, 1134, 1093, 1055, 1019, 985, 953, 923, 895, 868, 842, 817, 793, 771, 749, 728, 708, 688, 669, 651, 633, 616, 600, 584, 568, 553, 538, 523, 509, 496, 482, 469, 456, 444, 432, 420, 408, 397, 385, 374, 364, 353, 343, 332, 322, 312, 303, 293, 284, 275, 266, 257, 248, 239, 231, 223, 214, 206, 198, 190, 183, 175, 167, 160, 153, 145, 138, 131, 124, 117, 110, 104, 97, 90, 84, 77, 71, 65, 59, 52, 46, 40, 34, 29, 23, 17, 11, 6, 0};
+
 // pre-computed offset table; scaled; start from 1
 int16_t diffDeltaTable[] = {879, 554, 387, 282, 211, 161, 124, 96, 75, 59, 46, 36, 29, 23, 18, 14, 11, 9, 7, 6, 4, 4, 3, 2, 2, 1, 1, 1, 1, 1};
 // z = x - y; all scaled in dBm
@@ -1376,30 +1379,30 @@ dbm_t dbmWeightedSumS(dbm_t x, dbm_t y) {
 
 
 
-static long isqrt(long num) {
-    long op = num;
-    long res = 0;
-    long one = 1L<<30; // The second-to-top bit is set: 1 << 14 for short
-    //uint32_t start_time = call LocalTimeMilli.get();
-    
-    // "one" starts at the highest power of four <= the argument.
-    while (one > op) {
-        dbg("LoopDetection", "%s \n", __FUNCTION__);
-        one >>= 2;
-    }
+//static long isqrt(long num) {
+//    long op = num;
+//    long res = 0;
+//    long one = 1L<<30; // The second-to-top bit is set: 1 << 14 for short
+//    //uint32_t start_time = call LocalTimeMilli.get();
+//    
+//    // "one" starts at the highest power of four <= the argument.
+//    while (one > op) {
+//        dbg("LoopDetection", "%s \n", __FUNCTION__);
+//        one >>= 2;
+//    }
 
-    while (one != 0) {
-        dbg("LoopDetection", "%s \n", __FUNCTION__);
-        if (op >= res + one) {
-            op -= res + one;
-            res = (res >> 1) + one;
-        }
-        else
-          res >>= 1;
-        one >>= 2;
-    }
-    return res;
-}
+//    while (one != 0) {
+//        dbg("LoopDetection", "%s \n", __FUNCTION__);
+//        if (op >= res + one) {
+//            op -= res + one;
+//            res = (res >> 1) + one;
+//        }
+//        else
+//          res >>= 1;
+//        one >>= 2;
+//    }
+//    return res;
+//}
 
 // word operation
 //void updateOLAMA(uint32_t current_slot) {
