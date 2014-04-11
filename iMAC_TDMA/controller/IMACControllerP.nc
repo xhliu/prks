@@ -1140,7 +1140,7 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 			tx_power = CC2420_DEF_RFPOWER_DBM_SCALED;
 		#endif
 			// tx prob.; only when increasing ER
-			call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, 0, 0, se->data_tx_slot_ratio);
+			//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, 0, 0, se->data_tx_slot_ratio);
 			if (0 == se->data_tx_slot_ratio) {
 				// do not tx; skip
 				continue;

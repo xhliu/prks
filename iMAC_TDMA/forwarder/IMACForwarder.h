@@ -29,6 +29,8 @@ enum {
 	//INIT_CTRL_SLOT_FTSP_CHANCE_MASK = 0x1,
 	// tunable
 	//CTRL_SLOT_FTSP_CHANCE_MASK = 0, //0x1,
+	// sample tx probability every TX_PROB_SAMPLE_WINDOW slots
+	TX_PROB_SAMPLE_WINDOW = 100,
 	
 // subslot related:	DATA || CTRL/FTSP || COMPUTATION
 //#warning DATA_SUBSLOT_LEN_MILLI

@@ -2,10 +2,10 @@ if 0
 %% always keep first
 load debugs;
 t = debugs;
-type = DBG_TDMA_FLAG;
-line = 142;
-% type = DBG_CONTROLLER_FLAG;
-% line = 1143; %1024;
+% type = DBG_TDMA_FLAG;
+% line = 142;
+type = DBG_CONTROLLER_FLAG;
+line = 1143; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 

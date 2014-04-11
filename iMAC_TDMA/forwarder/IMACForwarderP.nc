@@ -137,10 +137,12 @@ uint8_t elapsed_slot_since_last_win;
 uint32_t data_tx_slot_cnt;
 uint32_t slot_cnt;
 // scale 100x
+uint8_t data_tx_slot_ratio;
 // TODO: wraparound
 async command uint8_t ForwarderInfo.getDataTxSlotRatio() {
-	call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, 0, 0, 0, 0, data_tx_slot_cnt, slot_cnt);
-	return (slot_cnt ? (100 * data_tx_slot_cnt / slot_cnt) : 100);
+	return data_tx_slot_ratio;
+//	call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, 0, 0, 0, 0, data_tx_slot_cnt, slot_cnt);
+//	return (slot_cnt ? (100 * data_tx_slot_cnt / slot_cnt) : 100);
 }
 
 // tx ftsp beacon instead of ctrl pkt 1 out of const_ctrl_slot_ftsp_chance when ctrl channel available
@@ -302,6 +304,7 @@ command error_t Init.init() {
 #endif
 	data_tx_slot_cnt = 0;
 	slot_cnt = 0;
+	data_tx_slot_ratio = 100;
 	return SUCCESS;
 }
 
@@ -464,6 +467,13 @@ void scheduleSlot(uint32_t g_slot_time) {
 #elif defined(OLAMA_DISABLED)
 	uint16_t backoff;
 #endif
+	if (slot_cnt >= TX_PROB_SAMPLE_WINDOW) {
+		// EWMA
+		data_tx_slot_ratio = data_tx_slot_ratio - (data_tx_slot_ratio >> 3) + (uint8_t)((100 * data_tx_slot_cnt / slot_cnt) >> 3);
+		// reset
+		slot_cnt = 0;
+		data_tx_slot_cnt = 0;
+	}
 	
 	slot_cnt++;
 	if (elapsed_slot_since_last_win < 255)
