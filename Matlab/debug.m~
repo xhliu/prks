@@ -2,16 +2,16 @@ if 0
 %% always keep first
 load debugs;
 t = debugs;
-type = DBG_TDMA_FLAG;
-line = 142;
-% type = DBG_CONTROLLER_FLAG;
-% line = 1024;
+% type = DBG_TDMA_FLAG;
+% line = 575;
+type = DBG_CONTROLLER_FLAG;
+line = 1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
 %% line # if changed
 % s = t;
-% s = s(:, 4);
+% s = s(:, 9);
 % cdfplot(s);
 % unique(s)
 
@@ -24,15 +24,18 @@ t = t(t(:, 4) == line, :);
 % getConflictHigherPrioActiveSetSize, getConflictHigherPrioSetSize, prio_slot)
 % s = node_parent;
 % s = [s(:, 1); s(:, 2)];
-s = t(:, 4);
-s = s(s(:, 2) == 255, 10);
+s = t;
+% sum(s(:, 9) > s(:, 10))
+% s = s(s(:, 2) == 27, :);
+% s = s(:, 9);
+s = s(s(:, 6) == s(:, 7) - 1, :);
 % s = mod(s, 128);
 % cnt = sum(s == 178);
 % length(s) - cnt - cnt
 % s = s(:, [2 10]);
 % [x ix] = sort(s(:, 1));
 % s = s(ix, :);
-plot(s);
+% plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % cdfplot(s);
@@ -42,7 +45,7 @@ plot(s);
 % ix = find(s > 1);
 % s(ix - 10 : ix + 10)
 % hold on;
-% s = unique(s);
+% unique(s);
 % length(s)
 
 %%
@@ -59,11 +62,11 @@ end
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
 % fprintf('warning: varying link pdr\n');
-pdr_req = 70;
+pdr_req = 90;
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
 %     fprintf('warning: fixed link id\n');
-%     link_id = 75;
+%     link_id = 5;
     
     s = t;
     % receiver
@@ -97,7 +100,8 @@ for link_id = 1 : size(link_pdrs, 1)
 %     if s(1, 9) < 95
 %         continue;
 %     end
-    
+    ix = find(s(:, LINK_PDR_IDX) >= pdr_req, 1);            
+                link_settling_time = [link_settling_time; ix];
 %     plot(s(:, [6 8 9]));
     plot([s(:, [6 8]) repmat(pdr_req, size(s, 1), 1)]);
 %     plot([s(:, [6 7 8 9 10]) ewma repmat(pdr_req, size(s, 1), 1) repmat(0, size(s, 1), 1)]);
@@ -1016,7 +1020,8 @@ cdfplot(s);
 %%
 load concurrency.mat;
 fprintf('concurrency median %f, mean %f\n', median(concurrency), mean(concurrency));
-
+% figure;
+plot(concurrency);
 %%
 load txrxs.mat;
 t = tx_fails;
@@ -1034,6 +1039,11 @@ for x = 0.01 : 0.01 : 1
     fprintf('%.0f, ', -1280 * log10(x));
 end
 fprintf('\n');
+
+%% 
+cd('/home/xiaohui/Projects/tOR/RawData/21101');
+load schedule_unique_concurrent_set;
+% fprintf('min uart reliability: %f\n', min(uart_relis(:, end)));
 %% DBG constants
 DBG_LOSS_FLAG = 0;
 DBG_TX_FLAG = DBG_LOSS_FLAG + 1;

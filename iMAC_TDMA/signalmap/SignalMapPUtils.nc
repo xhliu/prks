@@ -159,8 +159,17 @@ void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain, uint8_t da
 	sm_entry_t *se;
 	bool freezed_;
 	
-	// freeze SM
 	atomic freezed_ = freezed;
+	
+	idx = findIdx(nb);
+	if (freezed_) {
+		if (idx < SM_SIZE) {
+			se = &signalMap[idx];
+			se->data_tx_slot_ratio = data_tx_slot_ratio;
+		}
+		return;
+	}
+//	// freeze SM
 //	atomic {
 //		if (freezed)
 //			return;
@@ -178,12 +187,10 @@ void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain, uint8_t da
 				else
 					drop
 	 */
-	idx = findIdx(nb);
+//	idx = findIdx(nb);
 	if (idx < SM_SIZE) {
 		se = &signalMap[idx];
 		se->data_tx_slot_ratio = data_tx_slot_ratio;
-		if (freezed_)
-			return;
 		// a new inbound gain sample; sample on if it is valid
 		if (in_gain != INVALID_GAIN) {
 			if (se->inbound_gain != INVALID_GAIN) {
@@ -210,8 +217,6 @@ void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain, uint8_t da
 				se->nb = nb;
 				se->valid = TRUE;
 				se->data_tx_slot_ratio = data_tx_slot_ratio;
-				if (freezed_)
-					return;
 
 				// no need for validity check for 1st time
 				se->inbound_gain = in_gain;
@@ -229,8 +234,6 @@ void updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain, uint8_t da
 					se->nb = nb;
 					se->valid = TRUE;
 					se->data_tx_slot_ratio = data_tx_slot_ratio;
-					if (freezed_)
-						return;
 
 					// no need for validity check for 1st time
 					se->inbound_gain = in_gain;

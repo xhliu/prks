@@ -3,8 +3,8 @@
 %   Date:   10/30/2013
 %   Function: compute concurrency in pkts / s; only for sync protocols
 %% 
-% MAIN_DIR = '~/Projects/tOR/RawData/';
-jobs = [];
+MAIN_DIR = '~/Projects/tOR/RawData/';
+jobs = [21101];
 
 % SLOT_LEN = 32;
 % for i = 1 : length(prks_nama_job)
@@ -12,9 +12,9 @@ jobs = [];
 % end
 
 SLOT_LEN = 512;
-for i = 1 : length(prks_onama_job)
-    jobs = [jobs; prks_onama_job{i}(:, 1)];
-end
+% for i = 1 : length(prks_onama_job)
+%     jobs = [jobs; prks_onama_job{i}(:, 1)];
+% end
 
 
 fprintf('slot length %d\n', SLOT_LEN);

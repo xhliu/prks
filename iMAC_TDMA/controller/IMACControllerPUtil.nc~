@@ -719,7 +719,7 @@ bool isContend(uint8_t i, uint8_t j) {
 	// r1 interfered by s2?
 	ret = is_sender ? call SignalMap.getGain(r1, s2, &in_gain, &out_gain) : call SignalMap.getLocalGain(s2, &in_gain, &out_gain);
 	if (ret != SUCCESS)	{
-		//call UartLog.logTxRx(DBG_FLAG, DBG_ERR_FLAG, __LINE__, s1, r1, s2, r2, is_sender, 0);
+		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, s1, r1, s2, r2, is_sender, 0);
 		return FALSE;	// return TRUE;
 	}
 	if (inER(in_gain, me->rx_interference_threshold))		return TRUE;
@@ -727,7 +727,7 @@ bool isContend(uint8_t i, uint8_t j) {
 	// r2 interfered by s1?
 	ret = is_sender ? call SignalMap.getLocalGain(r2, &in_gain, &out_gain) : call SignalMap.getGain(s1, r2, &in_gain, &out_gain);
 	if (ret != SUCCESS)	{
-		//call UartLog.logTxRx(DBG_FLAG, DBG_ERR_FLAG, __LINE__, s1, r1, s2, r2, is_sender, 0);
+		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, s1, r1, s2, r2, is_sender, 0);
 		return FALSE;
 	}
 	if (inER(out_gain, le->rx_interference_threshold))		return TRUE;
@@ -897,8 +897,12 @@ async command void Controller.runOLAMA() {
 	my_link_idx = call Controller.findLinkERTableIdx(my_ll_addr, call Util.getReceiver());
 	if (my_link_idx >= LINK_ER_TABLE_SIZE)
 		return;
+//#warning ER at sender side
+//	le = &linkERTable[my_link_idx];
+//	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, le->sender, le->receiver, le->rx_er_version, -le->rx_interference_threshold, 0, 0);
+	
 	//updateOLAMA(current_slot);
-	call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, olama_task_round_idx);
+	//call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, olama_task_round_idx);
 	olama_task_round_idx = 0;
 	// use global time slot to index thus transient_2bitmap_head & bitmap_head are sync across nodes
 	// if increment every slot, bcoz slots may start at different slots (by a few slots) and can be skipped rarely, thus drift apart gradually
@@ -1084,13 +1088,13 @@ async command uint32_t Controller.nextTxSlot(uint32_t current_slot, bool is_init
 			return slot;
 		}
 	}
-	// can reach here bcoz initially all MAX_SLOT_FORWARD slots are UNDECIDED, equivalent to INACTIVE
-	if (!is_initial) {
-		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, t, bitmap_head, i, idx, olama_bitmap[x] & (0x1 << y), current_slot);
-		// should not reach here after found valid next slot for the first time
-		// should only occur when slot w/ highest priority SLOT_MASK not processed by LAMA for consecutive OLAMA_CONVERGENCE_TIME slots, negligible
-		assert(current_slot);
-	}
+	// caution: can reach here bcoz initially all MAX_SLOT_FORWARD slots are UNDECIDED, equivalent to INACTIVE
+//	if (!is_initial) {
+//		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, t, bitmap_head, i, idx, olama_bitmap[x] & (0x1 << y), current_slot);
+//		// should not reach here after found valid next slot for the first time
+//		// should only occur when slot w/ highest priority SLOT_MASK not processed by LAMA for consecutive OLAMA_CONVERGENCE_TIME slots, negligible
+//		assert(current_slot);
+//	}
 	se->next_slot_by_tx = INVALID_SLOT;
 	return INVALID_SLOT;
 }
@@ -1278,7 +1282,7 @@ inline uint8_t getConflictSetSize(uint8_t round_offset) {
 // power arithmic based on dBm
 // functions ending in U means only dealing w/ positive power, S w/ negative power as well
 // -----------------------------------------------------------------------------------------
-// -1280 * log10(0 : 0.01 : 1);	special case: 0x7FFF for 0	for tx probability
+// -1280 * log10(0 : 0.01 : 1);	special case: 0x7FFF for 0;	for tx probability
 int16_t percent2DbTable[] = {0x7FFF, 2560, 2175, 1949, 1789, 1665, 1564, 1478, 1404, 1339, 1280, 1227, 1179, 1134, 1093, 1055, 1019, 985, 953, 923, 895, 868, 842, 817, 793, 771, 749, 728, 708, 688, 669, 651, 633, 616, 600, 584, 568, 553, 538, 523, 509, 496, 482, 469, 456, 444, 432, 420, 408, 397, 385, 374, 364, 353, 343, 332, 322, 312, 303, 293, 284, 275, 266, 257, 248, 239, 231, 223, 214, 206, 198, 190, 183, 175, 167, 160, 153, 145, 138, 131, 124, 117, 110, 104, 97, 90, 84, 77, 71, 65, 59, 52, 46, 40, 34, 29, 23, 17, 11, 6, 0};
 
 // pre-computed offset table; scaled; start from 1

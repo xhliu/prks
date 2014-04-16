@@ -10,20 +10,20 @@
 clear
 clc
 
-jobs = [46654];
+jobs = [47548];
 
 for job = 1 : length(jobs)
     job_id = jobs(job);
     
 fprintf('processing job %d: ', job_id);
 
-srcDir = '~/Downloads/Indriya/';
-% srcDir = '~/Projects/tOR/RawData/Indriya/';
+% srcDir = '~/Downloads/Indriya/';
+srcDir = '~/Projects/tOR/RawData/Indriya/';
 dest = [srcDir num2str(job_id)];
 cd(dest);
 output = fopen('output.txt', 'w');
-load 24865.dat;
-t = X24865;
+load 7857.dat;
+t = X7857;
 % load 24915.dat;
 % t = X24915;
 %% parse

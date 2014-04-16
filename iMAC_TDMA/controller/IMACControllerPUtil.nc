@@ -719,7 +719,7 @@ bool isContend(uint8_t i, uint8_t j) {
 	// r1 interfered by s2?
 	ret = is_sender ? call SignalMap.getGain(r1, s2, &in_gain, &out_gain) : call SignalMap.getLocalGain(s2, &in_gain, &out_gain);
 	if (ret != SUCCESS)	{
-		//call UartLog.logTxRx(DBG_FLAG, DBG_ERR_FLAG, __LINE__, s1, r1, s2, r2, is_sender, 0);
+		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, s1, r1, s2, r2, is_sender, 0);
 		return FALSE;	// return TRUE;
 	}
 	if (inER(in_gain, me->rx_interference_threshold))		return TRUE;
@@ -727,7 +727,7 @@ bool isContend(uint8_t i, uint8_t j) {
 	// r2 interfered by s1?
 	ret = is_sender ? call SignalMap.getLocalGain(r2, &in_gain, &out_gain) : call SignalMap.getGain(s1, r2, &in_gain, &out_gain);
 	if (ret != SUCCESS)	{
-		//call UartLog.logTxRx(DBG_FLAG, DBG_ERR_FLAG, __LINE__, s1, r1, s2, r2, is_sender, 0);
+		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, s1, r1, s2, r2, is_sender, 0);
 		return FALSE;
 	}
 	if (inER(out_gain, le->rx_interference_threshold))		return TRUE;
@@ -897,8 +897,12 @@ async command void Controller.runOLAMA() {
 	my_link_idx = call Controller.findLinkERTableIdx(my_ll_addr, call Util.getReceiver());
 	if (my_link_idx >= LINK_ER_TABLE_SIZE)
 		return;
+//#warning ER at sender side
+//	le = &linkERTable[my_link_idx];
+//	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, le->sender, le->receiver, le->rx_er_version, -le->rx_interference_threshold, 0, 0);
+	
 	//updateOLAMA(current_slot);
-	call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, olama_task_round_idx);
+	//call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, olama_task_round_idx);
 	olama_task_round_idx = 0;
 	// use global time slot to index thus transient_2bitmap_head & bitmap_head are sync across nodes
 	// if increment every slot, bcoz slots may start at different slots (by a few slots) and can be skipped rarely, thus drift apart gradually
@@ -1084,13 +1088,13 @@ async command uint32_t Controller.nextTxSlot(uint32_t current_slot, bool is_init
 			return slot;
 		}
 	}
-	// can reach here bcoz initially all MAX_SLOT_FORWARD slots are UNDECIDED, equivalent to INACTIVE
-	if (!is_initial) {
-		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, t, bitmap_head, i, idx, olama_bitmap[x] & (0x1 << y), current_slot);
-		// should not reach here after found valid next slot for the first time
-		// should only occur when slot w/ highest priority SLOT_MASK not processed by LAMA for consecutive OLAMA_CONVERGENCE_TIME slots, negligible
-		assert(current_slot);
-	}
+	// caution: can reach here bcoz initially all MAX_SLOT_FORWARD slots are UNDECIDED, equivalent to INACTIVE
+//	if (!is_initial) {
+//		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, t, bitmap_head, i, idx, olama_bitmap[x] & (0x1 << y), current_slot);
+//		// should not reach here after found valid next slot for the first time
+//		// should only occur when slot w/ highest priority SLOT_MASK not processed by LAMA for consecutive OLAMA_CONVERGENCE_TIME slots, negligible
+//		assert(current_slot);
+//	}
 	se->next_slot_by_tx = INVALID_SLOT;
 	return INVALID_SLOT;
 }

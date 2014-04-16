@@ -54,6 +54,9 @@ uint16_t pdr_slope_table[] = {8405, 193, 114, 85, 70, 61, 54, 49, 45, 42, 40, 38
 uint16_t pdr_inv_table[] = {0, 36, 51, 61, 69, 75, 81, 86, 91, 95, 99, 103, 107, 111, 114, 117, 121, 124, 127, 130, 133, 136, 138, 141, 144, 147, 149, 152, 155, 157, 160, 162, 165, 167, 170, 173, 175, 178, 180, 183, 185, 188, 190, 193, 196, 198, 201, 203, 206, 209, 211, 214, 217, 220, 223, 225, 228, 231, 234, 237, 240, 243, 246, 250, 253, 256, 260, 263, 267, 270, 274, 278, 282, 286, 290, 294, 299, 303, 308, 313, 318, 324, 329, 335, 342, 348, 355, 363, 371, 380, 389, 400, 412, 425, 440, 458, 479, 507, 753, 1609, 2871};
 
 uint8_t pdr_req;
+// enabled only before rising up to the pdr_req
+// disabled after rising or pdr req decreases
+bool is_tx_prob_enabled;
 
 int16_t CC2420_DEF_RFPOWER_DBM, CC2420_DEF_RFPOWER_DBM_SCALED;
 
@@ -133,6 +136,7 @@ command error_t Init.init() {
 	CC2420_DEF_RFPOWER_DBM_SCALED = (CC2420_DEF_RFPOWER_DBM << SCALE_L_SHIFT_BIT),
 	
 	pdr_req = REFERENCE_DATA_PDR;
+	is_tx_prob_enabled = TRUE;
 	initLinkERTable();
 	initLocalLinkERTable();
 	
@@ -202,7 +206,7 @@ async command error_t AMSend.send(am_addr_t addr, message_t* msg, uint8_t len) {
 	} else {
 		// careful not to exceed max payload length
 		assert(newlen);
-		return FAIL;
+		return ESIZE;
 	}
 }
 
@@ -971,6 +975,9 @@ async command uint8_t Controller.getLinkPdrReq() {
 	return pdr_req;
 }
 async command void Controller.setLinkPdrReq(uint8_t new_req) {
+	if (new_req > pdr_req) {
+		is_tx_prob_enabled = TRUE;
+	}
 	pdr_req = new_req;
 }
 
@@ -983,9 +990,11 @@ error_t execController(am_addr_t nb, bool is_sender) {
 	uint8_t link_pdr, link_pdr_sample, reference_pdr, link_pdr_version;
 	// scaled
 	int32_t delta_i_dB;
-	uint32_t g_now;
+//	uint32_t g_now;
 //	int16_t in_gain, out_gain, er_border_gain;
+	bool is_tx_prob_enabled_;
 	
+	atomic is_tx_prob_enabled_ = is_tx_prob_enabled;
 	idx = findLocalLinkERTableIdx(nb, is_sender);
 	if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
 		return FAIL;
@@ -1008,6 +1017,15 @@ error_t execController(am_addr_t nb, bool is_sender) {
 	
 	// THEOREM 1
 	delta_i_dB = pdr2DeltaIdB(le, link_pdr, link_pdr_sample, reference_pdr);
+	
+//atomic {	
+//	if (is_tx_prob_enabled) {
+		// 1st rise to pdr req
+		if (link_pdr >= reference_pdr) {
+			atomic is_tx_prob_enabled = FALSE;
+		}
+//	}
+//}
 	// next_i =  current_i + delta_i + mean_delta_i_u (i.e., 0 by assumption)
 //	next_I.sign = 1;
 //	next_I.abs = next_i;
@@ -1021,7 +1039,7 @@ error_t execController(am_addr_t nb, bool is_sender) {
 //#warning reference_pdr in log
 //	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample, le->rx_er_border_idx + 1, in_gain / 128, er_border_gain / 128);
 //	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample, le->rx_er_border_idx + 1, reference_pdr, delta_i_dB); // ;-le->rx_nI.abs / 128
-	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, -le->rx_nI.abs / 128, le->rx_er_border_idx + 1, delta_i_dB, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME);
+	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, le->rx_er_version, le->rx_er_border_idx + 1, -le->rx_interference_threshold, is_tx_prob_enabled_); // (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME);
 	
 	ret = adjustER(idx, is_sender, delta_i_dB);
 	if (ret != SUCCESS)
@@ -1095,7 +1113,9 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 #ifdef HETER_TX_POWER
 	uint8_t tx_power_level;
 #endif
+	bool is_tx_prob_enabled_;
 	
+	atomic is_tx_prob_enabled_ = is_tx_prob_enabled;
 	// runtime check
 	if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
 		assert(0);
@@ -1140,16 +1160,18 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 			tx_power = CC2420_DEF_RFPOWER_DBM_SCALED;
 		#endif
 			// tx prob.; only when increasing ER
-			//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, 0, 0, se->data_tx_slot_ratio);
-			if (0 == se->data_tx_slot_ratio) {
-				// do not tx; skip
-				continue;
-			}
-			if (se->data_tx_slot_ratio < sizeof(percent2DbTable) / sizeof(percent2DbTable[0])) {
-				tx_power -= percent2DbTable[se->data_tx_slot_ratio];
-			} else {
-				assert(se->data_tx_slot_ratio);
-				continue;
+			//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, 0, se->nb, se->data_tx_slot_ratio);
+			if (is_tx_prob_enabled_) {
+				if (0 == se->data_tx_slot_ratio) {
+					// do not tx; skip
+					continue;
+				}
+				if (se->data_tx_slot_ratio < sizeof(percent2DbTable) / sizeof(percent2DbTable[0])) {
+					tx_power -= percent2DbTable[se->data_tx_slot_ratio];
+				} else {
+					assert(se->data_tx_slot_ratio);
+					continue;
+				}
 			}
 			total_i = dbmSumU(total_i, tx_power - se->inbound_gain);
 			// maximally enlarge the ER but still total_i >= |delta_i|
@@ -1161,13 +1183,13 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 //		// to make PDR not above requirement
 //		if (total_i > delta_i)
 //			i--;
-		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, er_border_idx, i, sm_size, se->inbound_gain, total_i, delta_i);
 		// even the entire SM is not sufficient for the exclusion region; try the largest
 		if (i >= sm_size)
 			i--;
 		// update boundary
 		updateBorder(is_sender, le, i);
 		se = &signalMap[i];
+		//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, er_border_idx + 1, i, sm_size, se->nb, se->inbound_gain, 0);
 		return udpateER(is_sender, le, se->inbound_gain, 0);
 	} else if (delta_i_dB > 0) {
 	// shrink exclusion region to increase interference

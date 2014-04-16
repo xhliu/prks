@@ -165,7 +165,13 @@ async command error_t AMSend.send(am_addr_t addr, message_t* msg, uint8_t len) {
 	newlen = addLinkEstHeaderAndFooter(msg, len);
    	//call UartLog.logEntry(DBG_FLAG, DBG_DELAY_FLAG, __LINE__, call LocalTime.get() - start_time);
 	dbg("LI", "%s packet of length %hhu became %hhu\n", __FUNCTION__, len, newlen);
-	return (call SubSend.send(addr, msg, newlen));
+	if (newlen <= call SubPacket.maxPayloadLength()) {
+		return call SubSend.send(addr, msg, newlen);
+	} else {
+		// careful not to exceed max payload length
+		assert(newlen);
+		return ESIZE;
+	}
 }
 
 // add the header footer in the packet. Call iust before sending the packet

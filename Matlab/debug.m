@@ -3,15 +3,15 @@ if 0
 load debugs;
 t = debugs;
 % type = DBG_TDMA_FLAG;
-% line = 142;
+% line = 575;
 type = DBG_CONTROLLER_FLAG;
-line = 1143; %1024;
+line = 1042; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
 %% line # if changed
 % s = t;
-% s = s(:, 4);
+% s = s(:, 9);
 % cdfplot(s);
 % unique(s)
 
@@ -25,8 +25,10 @@ t = t(t(:, 4) == line, :);
 % s = node_parent;
 % s = [s(:, 1); s(:, 2)];
 s = t;
-sum(s(:, 9) > s(:, 10))
-s = s(s(:, 2) == 12, [9 10]);
+% sum(s(:, 9) > s(:, 10))
+s = s(s(:, 2) == 3, :);
+s = s(:, 10);
+% s = s(s(:, 6) == s(:, 7) - 1, :);
 % s = mod(s, 128);
 % cnt = sum(s == 178);
 % length(s) - cnt - cnt
@@ -43,7 +45,7 @@ plot(s);
 % ix = find(s > 1);
 % s(ix - 10 : ix + 10)
 % hold on;
-% s = unique(s);
+% unique(s);
 % length(s)
 
 %%
@@ -60,11 +62,13 @@ end
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
 % fprintf('warning: varying link pdr\n');
-pdr_req = 70;
+pdr_req = 90;
+LINK_PDR_IDX = 6;
+link_settling_time = [];
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
 %     fprintf('warning: fixed link id\n');
-%     link_id = 75;
+%     link_id = 5;
     
     s = t;
     % receiver
@@ -98,6 +102,10 @@ for link_id = 1 : size(link_pdrs, 1)
 %     if s(1, 9) < 95
 %         continue;
 %     end
+    % rising time; approximate settling time since pdr rarely drops after
+    % rises to requirement
+    ix = find(s(:, LINK_PDR_IDX) >= pdr_req, 1);            
+    link_settling_time = [link_settling_time; ix];
     
 %     plot(s(:, [6 8 9]));
     plot([s(:, [6 8]) repmat(pdr_req, size(s, 1), 1)]);
@@ -108,7 +116,8 @@ for link_id = 1 : size(link_pdrs, 1)
     legend({'pdr', 'ER size'}, 'Location', 'Best');
 %     legend({'pdr', 'pdr sample', 'ER size', 'pdr req', 'deltaI', 'ewma'});
 end
-
+cdfplot(link_settling_time);
+save('link_settling_time.mat', 'link_settling_time');
 %%
 % [slot, # of concurrent links, signal, noise+interference, snr]
 load ~/Projects/tOR/RawData/21103/link_pdrs;
@@ -1017,7 +1026,8 @@ cdfplot(s);
 %%
 load concurrency.mat;
 fprintf('concurrency median %f, mean %f\n', median(concurrency), mean(concurrency));
-
+% figure;
+plot(concurrency);
 %%
 load txrxs.mat;
 t = tx_fails;
@@ -1035,6 +1045,19 @@ for x = 0.01 : 0.01 : 1
     fprintf('%.0f, ', -1280 * log10(x));
 end
 fprintf('\n');
+
+%% 20849 21103
+cd('/home/xiaohui/Projects/tOR/RawData/21103');
+% load link_pdrs;
+% link_pdrs(50, :) = [];
+% t = link_pdrs;
+load schedule_unique_concurrent_set;
+% load rx_concurrency.mat;
+t = ucs_freq;
+t = t(t < 50);
+cdfplot(t);
+% cdfplot(t(:, end) - link_pdrs(:, end));
+% fprintf('%f %f\n', mean(t), median(t));
 %% DBG constants
 DBG_LOSS_FLAG = 0;
 DBG_TX_FLAG = DBG_LOSS_FLAG + 1;

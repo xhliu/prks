@@ -802,12 +802,12 @@ enum __nesc_unnamed4253 {
 
 
 
-  REFERENCE_DATA_PDR = 90, 
+  REFERENCE_DATA_PDR = 95, 
 
 
 
 
-  SINR_THRESHOLD = 359, 
+  SINR_THRESHOLD = 576, 
 
 
   REFERENCE_ACK_PDR = 90, 
@@ -1580,7 +1580,7 @@ enum __nesc_unnamed4274 {
 
 
 
-  UART_QUEUE_LEN = 7, 
+  UART_QUEUE_LEN = 5, 
 
 
   AGGR_COUNTS = 114 / sizeof(logMsg )
@@ -5156,25 +5156,25 @@ static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessag
 # 53 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 static error_t /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__send(
 # 46 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x4162dee8, 
+am_id_t arg_0x4162bee8, 
 # 53 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 am_addr_t addr, message_t *msg, uint8_t len, /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__size_type event_time);
 #line 103
 static void */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__getPayload(
 # 46 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x4162dee8, 
+am_id_t arg_0x4162bee8, 
 # 103 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 message_t *msg, uint8_t len);
 #line 82
 static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__default__sendDone(
 # 46 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x4162dee8, 
+am_id_t arg_0x4162bee8, 
 # 82 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 message_t *msg, error_t error);
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
 static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__default__receive(
 # 41 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x4162d568, 
+am_id_t arg_0x4162b568, 
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
 message_t *msg, void *payload, uint8_t len);
 # 35 "../iMAC_TDMA/async/AsyncTimeSyncPacket.nc"
@@ -10720,8 +10720,11 @@ uint16_t IMACControllerP__pdr_inv_table[101] = { 0, 36, 51, 61, 69, 75, 81, 86, 
 
 uint8_t IMACControllerP__pdr_req;
 
+
+bool IMACControllerP__is_tx_prob_enabled;
+
 int16_t IMACControllerP__CC2420_DEF_RFPOWER_DBM;
-#line 58
+#line 61
 int16_t IMACControllerP__CC2420_DEF_RFPOWER_DBM_SCALED;
 
 am_addr_t IMACControllerP__my_ll_addr;
@@ -10877,11 +10880,11 @@ static inline void IMACControllerP__Controller__initOLAMA(void );
 
 
 static inline void IMACControllerP__Controller__runOLAMA(void );
-#line 915
+#line 919
 static inline void IMACControllerP__updateOLAMATask__runTask(void );
-#line 1039
+#line 1043
 static uint32_t IMACControllerP__Controller__nextTxSlot(uint32_t current_slot, bool is_initial);
-#line 1282
+#line 1286
 int16_t IMACControllerP__percent2DbTable[101] = { 0x7FFF, 2560, 2175, 1949, 1789, 1665, 1564, 1478, 1404, 1339, 1280, 1227, 1179, 1134, 1093, 1055, 1019, 985, 953, 923, 895, 868, 842, 817, 793, 771, 749, 728, 708, 688, 669, 651, 633, 616, 600, 584, 568, 553, 538, 523, 509, 496, 482, 469, 456, 444, 432, 420, 408, 397, 385, 374, 364, 353, 343, 332, 322, 312, 303, 293, 284, 275, 266, 257, 248, 239, 231, 223, 214, 206, 198, 190, 183, 175, 167, 160, 153, 145, 138, 131, 124, 117, 110, 104, 97, 90, 84, 77, 71, 65, 59, 52, 46, 40, 34, 29, 23, 17, 11, 6, 0 };
 
 
@@ -10890,15 +10893,15 @@ int16_t IMACControllerP__diffDeltaTable[30] = { 879, 554, 387, 282, 211, 161, 12
 
 
 static int32_t IMACControllerP__Controller__dbmDiffU(int32_t x, int32_t y);
-#line 1306
+#line 1310
 int16_t IMACControllerP__sumDeltaTable[30] = { 385, 325, 272, 226, 186, 153, 125, 101, 82, 66, 53, 42, 34, 27, 22, 17, 14, 11, 9, 7, 6, 4, 3, 3, 2, 2, 1, 1, 1, 1 };
 
 static __inline int32_t IMACControllerP__dbmSumU(int32_t x, int32_t y);
-#line 1332
+#line 1336
 static inline dbm_t IMACControllerP__dbmSumS(dbm_t x, dbm_t y);
-#line 1370
+#line 1374
 static inline dbm_t IMACControllerP__dbmWeightedSumS(dbm_t x, dbm_t y);
-# 112 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 115 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline imac_control_header_t *IMACControllerP__getHeader(message_t *m);
 
 
@@ -10909,43 +10912,43 @@ static inline void *IMACControllerP__getFooter(message_t *m, uint8_t len);
 
 
 static inline error_t IMACControllerP__Init__init(void );
-#line 154
+#line 158
 static inline error_t IMACControllerP__StdControl__start(void );
-#line 192
+#line 196
 static inline uint8_t IMACControllerP__addLinkEstHeaderAndFooter(message_t *msg, uint8_t len);
 
 static error_t IMACControllerP__AMSend__send(am_addr_t addr, message_t *msg, uint8_t len);
-#line 211
+#line 215
 static uint8_t IMACControllerP__Controller__loadLinkER(link_er_footer_t *er_footer);
-#line 249
+#line 253
 static inline uint8_t IMACControllerP__addLinkEstHeaderAndFooter(message_t *msg, uint8_t len);
-#line 311
+#line 315
 static inline void IMACControllerP__SubSend__sendDone(message_t *msg, error_t error);
-#line 334
+#line 338
 static inline void IMACControllerP__processReceivedMessage(message_t *msg, void *payload, uint8_t len);
 static inline void IMACControllerP__updateLinkOLAMA(am_addr_t from, uint32_t from_current_slot, nx_uint8_t *active_2bitmap);
 
 static inline message_t *IMACControllerP__SubReceive__receive(message_t *msg, void *payload, uint8_t len);
-#line 352
+#line 356
 static inline void IMACControllerP__processReceivedMessage(message_t *msg, void *payload, uint8_t len);
-#line 375
+#line 379
 static inline void IMACControllerP__updateLinkOLAMA(am_addr_t from, uint32_t from_current_slot, nx_uint8_t *active_2bitmap);
-#line 534
+#line 538
 static __inline void IMACControllerP__Controller__updateNextSlot(am_addr_t from, bool is_from_sender, uint32_t next_slot);
-#line 554
+#line 558
 static inline void IMACControllerP__updateLinkPdr(am_addr_t from, local_link_pdr_footer_t *footer, uint8_t size);
-#line 578
+#line 582
 static void IMACControllerP__Controller__updateLinkERTable(link_er_footer_t *footer, uint8_t size, am_addr_t from);
-#line 602
+#line 606
 static uint8_t IMACControllerP__Packet__payloadLength(message_t *msg);
-#line 615
+#line 619
 static inline uint8_t IMACControllerP__Packet__maxPayloadLength(void );
 
 
 
 
 static void *IMACControllerP__Packet__getPayload(message_t *msg, uint8_t len);
-#line 632
+#line 636
 static inline local_link_er_table_entry_t *IMACControllerP__Controller__getLocalLinkERTable(void );
 
 
@@ -10957,9 +10960,9 @@ static inline link_er_table_entry_t *IMACControllerP__Controller__getLinkERTable
 
 
 static __inline bool IMACControllerP__Controller__isTxSlot(uint32_t current_slot);
-#line 678
+#line 682
 static __inline bool IMACControllerP__Controller__isRxSlot(uint32_t current_slot);
-#line 785
+#line 789
 static inline uint8_t IMACControllerP__Controller__findMyLinkLocalIdx(void );
 
 
@@ -10968,19 +10971,19 @@ static inline uint8_t IMACControllerP__Controller__findMyLinkLocalIdx(void );
 
 
 static __inline void IMACControllerP__Controller__clearDataPending(am_addr_t from);
-#line 807
+#line 811
 static __inline uint8_t IMACControllerP__Controller__getNbERVer(am_addr_t nb, bool is_sender);
-#line 837
+#line 841
 static inline error_t IMACControllerP__Controller__sampleNI(message_t *msg);
-#line 912
+#line 916
 static inline int32_t IMACControllerP__pdr2DeltaIdB(local_link_er_table_entry_t *le, uint8_t link_pdr, uint8_t link_pdr_sample, uint8_t reference_pdr);
-#line 959
+#line 963
 static inline error_t IMACControllerP__LinkEstimator__inLinkPdrUpdated(am_addr_t nb, bool is_sender);
-#line 978
+#line 985
 static inline error_t IMACControllerP__execController(am_addr_t nb, bool is_sender);
-#line 1057
-static error_t IMACControllerP__udpateER(bool is_sender, local_link_er_table_entry_t *se, int16_t gain, int16_t delta);
 #line 1075
+static error_t IMACControllerP__udpateER(bool is_sender, local_link_er_table_entry_t *se, int16_t gain, int16_t delta);
+#line 1093
 static __inline void IMACControllerP__updateBorder(bool is_sender, local_link_er_table_entry_t *se, int16_t i);
 
 
@@ -10993,7 +10996,7 @@ static __inline void IMACControllerP__updateBorder(bool is_sender, local_link_er
 
 
 static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB);
-#line 1238
+#line 1260
 static inline message_t *IMACControllerP__Receive__default__receive(message_t *msg, void *payload, uint8_t len);
 # 11 "../iMAC_TDMA/../router/async/AsyncAMSend.nc"
 static error_t SignalMapP__SubSend__send(am_addr_t dest, message_t *msg, uint8_t len);
@@ -11034,6 +11037,8 @@ static am_addr_t SignalMapP__SubAMPacket__address(void );
 static message_t *SignalMapP__Receive__receive(message_t *msg, void *payload, uint8_t len);
 # 28 "../iMAC_TDMA/controller/IMACController.nc"
 static int32_t SignalMapP__Controller__dbmDiffU(int32_t x, int32_t y);
+# 6 "/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLog.nc"
+static error_t SignalMapP__UartLog__logEntry(__nesc_nxbase_nx_uint8_t type, __nesc_nxbase_nx_uint8_t sourceId, __nesc_nxbase_nx_uint16_t seq, __nesc_nxbase_nx_uint32_t timestamp);
 # 13 "../iMAC_TDMA/util/Util.nc"
 static bool SignalMapP__Util__isActiveLink(am_addr_t sender, am_addr_t receiver);
 # 47 "../iMAC_TDMA/signalmap/SignalMapP.nc"
@@ -11114,19 +11119,19 @@ static inline int16_t SignalMapP__findEmptyIdx(void );
 static int16_t SignalMapP__SignalMap__getSignalMapSize(void );
 #line 157
 static inline void SignalMapP__updateSignalMap(am_addr_t nb, int16_t in_gain, int16_t out_gain, uint8_t data_tx_slot_ratio);
-#line 248
+#line 251
 static void SignalMapP__sortSignalMap(int16_t idx);
-#line 368
+#line 371
 static inline void SignalMapP__initNbSignalMap(void );
-#line 383
+#line 386
 static uint8_t SignalMapP__findNbSignalMapIdx(am_addr_t nb);
-#line 396
+#line 399
 static inline uint8_t SignalMapP__findEmptyNbSignalMapIdx(void );
-#line 409
+#line 412
 static void SignalMapP__mergeNbSignalMap(signal_map_entry_t *signal_map, sm_footer_t *footer, uint8_t size);
-#line 449
+#line 452
 static inline void SignalMapP__updateNbSignalMap(am_addr_t nb, sm_footer_t *footer, uint8_t size);
-#line 482
+#line 485
 static error_t SignalMapP__SignalMap__getGain(am_addr_t nb, am_addr_t node, int16_t *inbound_gain, int16_t *outbound_gain);
 # 66 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static inline sm_header_t *SignalMapP__getHeader(message_t *m);
@@ -11161,19 +11166,11 @@ static inline void SignalMapP__SignalMap__freeze(void );
 static inline uint8_t SignalMapP__addLinkEstHeaderAndFooter(message_t *msg, uint8_t len);
 
 static inline error_t SignalMapP__AMSend__send(am_addr_t addr, message_t *msg, uint8_t len);
-
-
-
-
-
-
-
-
-
+#line 178
 static inline uint8_t SignalMapP__addLinkEstHeaderAndFooter(message_t *msg, uint8_t len);
-#line 223
+#line 229
 static inline void SignalMapP__SubSend__sendDone(message_t *msg, error_t error);
-#line 248
+#line 254
 static inline void SignalMapP__processReceivedMessage(message_t *msg, void *payload, uint8_t len);
 
 static inline message_t *SignalMapP__SubReceive__receive(message_t *msg, void *payload, uint8_t len);
@@ -11187,7 +11184,7 @@ static inline message_t *SignalMapP__SubReceive__receive(message_t *msg, void *p
 
 
 static inline void SignalMapP__processReceivedMessage(message_t *msg, void *payload, uint8_t len);
-#line 296
+#line 302
 static inline void SignalMapP__RadioState__done(void );
 
 
@@ -11214,7 +11211,7 @@ static inline uint8_t SignalMapP__Packet__maxPayloadLength(void );
 
 
 static void *SignalMapP__Packet__getPayload(message_t *msg, uint8_t len);
-#line 335
+#line 341
 static inline error_t SignalMapP__LinkEstimator__inLinkPdrUpdated(am_addr_t nb, bool is_ack);
 # 29 "../iMAC_TDMA/util/UtilC.nc"
 link_t UtilC__activeLinks[100] = { { 1, 2 }, { 2, 1 }, { 3, 5 }, { 4, 7 }, { 5, 3 }, { 6, 7 }, { 8, 9 }, { 9, 8 }, { 10, 27 }, { 11, 10 }, { 13, 11 }, { 14, 13 }, { 15, 14 }, { 16, 17 }, { 17, 6 }, { 18, 16 }, { 19, 18 }, { 20, 19 }, { 21, 4 }, { 22, 20 }, { 23, 22 }, { 26, 23 }, { 27, 40 }, { 28, 26 }, { 29, 28 }, { 30, 15 }, { 31, 32 }, { 32, 31 }, { 33, 34 }, { 34, 21 }, { 35, 49 }, { 38, 39 }, { 39, 38 }, { 40, 41 }, { 41, 29 }, { 42, 43 }, { 43, 30 }, { 44, 45 }, { 45, 44 }, { 46, 47 }, { 47, 33 }, { 48, 46 }, { 49, 35 }, { 50, 66 }, { 51, 50 }, { 52, 51 }, { 53, 48 }, { 54, 53 }, { 55, 54 }, { 56, 60 }, { 57, 42 }, { 58, 57 }, { 60, 58 }, { 61, 62 }, { 62, 52 }, { 63, 77 }, { 65, 66 }, { 67, 65 }, { 68, 67 }, { 69, 55 }, { 70, 69 }, { 71, 56 }, { 72, 71 }, { 73, 72 }, { 75, 73 }, { 76, 61 }, { 77, 63 }, { 78, 79 }, { 79, 78 }, { 80, 81 }, { 81, 80 }, { 83, 68 }, { 91, 93 }, { 92, 76 }, { 93, 92 }, { 94, 95 }, { 95, 96 }, { 96, 97 }, { 99, 97 }, { 100, 99 }, { 101, 86 }, { 103, 88 }, { 104, 88 }, { 105, 85 }, { 108, 91 }, { 110, 117 }, { 111, 116 }, { 113, 107 }, { 114, 108 }, { 115, 117 }, { 116, 110 }, { 118, 119 }, { 119, 118 }, { 122, 103 }, { 123, 84 }, { 124, 70 }, { 125, 124 }, { 126, 127 }, { 127, 84 }, { 129, 126 } };
@@ -11434,13 +11431,13 @@ message_t * msg);
 # 82 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__sendDone(
 # 46 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x4162dee8, 
+am_id_t arg_0x4162bee8, 
 # 82 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 message_t *msg, error_t error);
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
 static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__receive(
 # 41 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x4162d568, 
+am_id_t arg_0x4162b568, 
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
 message_t *msg, void *payload, uint8_t len);
 # 63 "/home/xiaohui/Dropbox/tinyos-2.1.2/tos/interfaces/PacketTimeStamp.nc"
@@ -12950,14 +12947,14 @@ inline static error_t IMACForwarderP__splitControlStartDoneTask__postTask(void )
 #line 67
 }
 #line 67
-# 785 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 789 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline uint8_t IMACControllerP__Controller__findMyLinkLocalIdx(void )
-#line 785
+#line 789
 {
   uint8_t my_local_link_idx_;
 
   /* atomic removed: atomic calls only */
-#line 787
+#line 791
   my_local_link_idx_ = IMACControllerP__my_local_link_idx;
   return my_local_link_idx_;
 }
@@ -13080,9 +13077,9 @@ inline static error_t IMACForwarderP__GlobalTime__getGlobalTime(uint32_t *time){
 #line 38
 }
 #line 38
-# 678 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 682 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static __inline bool IMACControllerP__Controller__isRxSlot(uint32_t current_slot)
-#line 678
+#line 682
 {
   uint8_t i;
   bool is_any_rx_pending;
@@ -13238,9 +13235,9 @@ inline static error_t IMACControllerP__UartLog__logEntry(__nesc_nxbase_nx_uint8_
 #line 6
 }
 #line 6
-# 807 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 811 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static __inline uint8_t IMACControllerP__Controller__getNbERVer(am_addr_t nb, bool is_sender)
-#line 807
+#line 811
 {
   uint8_t idx;
   link_er_table_entry_t *le;
@@ -13258,12 +13255,12 @@ static __inline uint8_t IMACControllerP__Controller__getNbERVer(am_addr_t nb, bo
       return le->rx_er_version;
     }
   else 
-#line 822
+#line 826
     {
 
       idx = IMACControllerP__findLocalLinkERTableIdx(nb, FALSE);
       if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
-          IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 826, 0);
+          IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 830, 0);
           return 0;
         }
       se = &IMACControllerP__localLinkERTable[idx];
@@ -13543,14 +13540,14 @@ inline static uint32_t IMACForwarderP__Controller__nextTxSlot(uint32_t current_s
 #line 41
 }
 #line 41
-# 642 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 646 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static __inline bool IMACControllerP__Controller__isTxSlot(uint32_t current_slot)
-#line 642
+#line 646
 {
 
   local_link_er_table_entry_t *se;
 
-#line 659
+#line 663
   if (IMACControllerP__my_local_link_idx >= LOCAL_LINK_ER_TABLE_SIZE) {
     return FALSE;
     }
@@ -16074,9 +16071,9 @@ static __inline  int32_t __nesc_hton_int32(void * target, int32_t value)
   return value;
 }
 
-# 117 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 120 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline void *IMACControllerP__getFooter(message_t *m, uint8_t len)
-#line 117
+#line 120
 {
   return (void *)(len + (uint8_t *)IMACControllerP__Packet__getPayload(m, len + sizeof(local_link_pdr_footer_t )));
 }
@@ -16111,32 +16108,32 @@ inline static void * IMACControllerP__SubPacket__getPayload(message_t * msg, uin
 #line 115
 }
 #line 115
-# 112 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 115 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline imac_control_header_t *IMACControllerP__getHeader(message_t *m)
-#line 112
+#line 115
 {
   return (imac_control_header_t *)IMACControllerP__SubPacket__getPayload(m, sizeof(imac_control_header_t ));
 }
 
-#line 249
+#line 253
 static inline uint8_t IMACControllerP__addLinkEstHeaderAndFooter(message_t *msg, uint8_t len)
-#line 249
+#line 253
 {
   int16_t i;
-#line 250
+#line 254
   int16_t j;
-#line 250
+#line 254
   int16_t k;
   uint8_t newlen;
   uint8_t link_pdr;
-#line 252
+#line 256
   uint8_t link_pdr_sample;
   uint8_t link_pdr_version = 0;
   uint32_t g_now;
 
   imac_control_header_t *hdr;
   local_link_pdr_footer_t *pdr_footer;
-#line 257
+#line 261
   local_link_pdr_footer_t *pdr_footer_p;
   link_er_footer_t *er_footer;
 
@@ -16154,7 +16151,7 @@ static inline uint8_t IMACControllerP__addLinkEstHeaderAndFooter(message_t *msg,
       if (! se->valid) {
         break;
         }
-#line 273
+#line 277
       pdr_footer_p = &pdr_footer[j++];
 
       if (se->is_sender) {
@@ -16163,7 +16160,7 @@ static inline uint8_t IMACControllerP__addLinkEstHeaderAndFooter(message_t *msg,
           __nesc_hton_uint32(pdr_footer_p->next_slot.nxdata, se->next_slot_by_tx);
         }
       else 
-#line 279
+#line 283
         {
           IMACControllerP__LinkEstimator__getInDataPdr(se->nb, &link_pdr, &link_pdr_sample, &link_pdr_version);
 
@@ -16195,6 +16192,21 @@ static inline uint8_t IMACControllerP__addLinkEstHeaderAndFooter(message_t *msg,
   return newlen;
 }
 
+# 6 "/home/xiaohui/Dropbox/Programming/TinyOS/Utils/UartLog.nc"
+inline static error_t SignalMapP__UartLog__logEntry(__nesc_nxbase_nx_uint8_t type, __nesc_nxbase_nx_uint8_t sourceId, __nesc_nxbase_nx_uint16_t seq, __nesc_nxbase_nx_uint32_t timestamp){
+#line 6
+  unsigned char __nesc_result;
+#line 6
+
+#line 6
+  __nesc_result = UartLogP__UartLog__logEntry(type, sourceId, seq, timestamp);
+#line 6
+
+#line 6
+  return __nesc_result;
+#line 6
+}
+#line 6
 # 11 "../iMAC_TDMA/../router/async/AsyncAMSend.nc"
 inline static error_t SignalMapP__SubSend__send(am_addr_t dest, message_t *msg, uint8_t len){
 #line 11
@@ -16210,6 +16222,21 @@ inline static error_t SignalMapP__SubSend__send(am_addr_t dest, message_t *msg, 
 #line 11
 }
 #line 11
+# 95 "../iMAC_TDMA/async/AsyncPacket.nc"
+inline static uint8_t SignalMapP__SubPacket__maxPayloadLength(void ){
+#line 95
+  unsigned char __nesc_result;
+#line 95
+
+#line 95
+  __nesc_result = AsyncCC2420TransceiverP__Packet__maxPayloadLength();
+#line 95
+
+#line 95
+  return __nesc_result;
+#line 95
+}
+#line 95
 # 334 "/usr/lib/ncc/nesc_nx.h"
 static __inline  int16_t __nesc_hton_int16(void * target, int16_t value)
 #line 334
@@ -16242,21 +16269,6 @@ inline static uint8_t SignalMapP__ForwarderInfo__getDataTxSlotRatio(void ){
 #line 13
 }
 #line 13
-# 95 "../iMAC_TDMA/async/AsyncPacket.nc"
-inline static uint8_t SignalMapP__SubPacket__maxPayloadLength(void ){
-#line 95
-  unsigned char __nesc_result;
-#line 95
-
-#line 95
-  __nesc_result = AsyncCC2420TransceiverP__Packet__maxPayloadLength();
-#line 95
-
-#line 95
-  return __nesc_result;
-#line 95
-}
-#line 95
 # 72 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static inline sm_footer_t *SignalMapP__getFooter(message_t *m, uint8_t len)
 #line 72
@@ -16287,17 +16299,17 @@ static inline sm_header_t *SignalMapP__getHeader(message_t *m)
   return (sm_header_t *)SignalMapP__SubPacket__getPayload(m, sizeof(sm_header_t ));
 }
 
-#line 172
+#line 178
 static inline uint8_t SignalMapP__addLinkEstHeaderAndFooter(message_t *msg, uint8_t len)
-#line 172
+#line 178
 {
   int16_t i;
-#line 173
+#line 179
   int16_t j;
-#line 173
+#line 179
   int16_t k;
   uint8_t maxEntries;
-#line 174
+#line 180
   uint8_t newPrevSentIdx;
   uint8_t newlen;
   sm_header_t *hdr;
@@ -16354,7 +16366,16 @@ static inline error_t SignalMapP__AMSend__send(am_addr_t addr, message_t *msg, u
   newlen = SignalMapP__addLinkEstHeaderAndFooter(msg, len);
 
   ;
-  return SignalMapP__SubSend__send(addr, msg, newlen);
+  if (newlen <= SignalMapP__SubPacket__maxPayloadLength()) {
+      return SignalMapP__SubSend__send(addr, msg, newlen);
+    }
+  else 
+#line 170
+    {
+
+      SignalMapP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 172, newlen);
+      return ESIZE;
+    }
 }
 
 # 11 "../iMAC_TDMA/../router/async/AsyncAMSend.nc"
@@ -16910,9 +16931,9 @@ static inline void AsyncCC2420TransceiverP__RadioState__done(void )
     __nesc_atomic_end(__nesc_atomic); }
 }
 
-# 296 "../iMAC_TDMA/signalmap/SignalMapP.nc"
+# 302 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static inline void SignalMapP__RadioState__done(void )
-#line 296
+#line 302
 {
 }
 
@@ -17545,9 +17566,9 @@ inline static message_t *IMACForwarderP__Receive__receive(message_t *msg, void *
 #line 11
 }
 #line 11
-# 792 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 796 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static __inline void IMACControllerP__Controller__clearDataPending(am_addr_t from)
-#line 792
+#line 796
 {
   uint8_t idx;
   local_link_er_table_entry_t *se;
@@ -17559,7 +17580,7 @@ static __inline void IMACControllerP__Controller__clearDataPending(am_addr_t fro
   if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
     return;
     }
-#line 802
+#line 806
   se = &IMACControllerP__localLinkERTable[idx];
   se->is_rx_pending = FALSE;
 }
@@ -17571,9 +17592,9 @@ inline static void IMACForwarderP__Controller__clearDataPending(am_addr_t from){
 #line 23
 }
 #line 23
-# 534 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 538 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static __inline void IMACControllerP__Controller__updateNextSlot(am_addr_t from, bool is_from_sender, uint32_t next_slot)
-#line 534
+#line 538
 {
   uint8_t idx;
   local_link_er_table_entry_t *se;
@@ -17583,7 +17604,7 @@ static __inline void IMACControllerP__Controller__updateNextSlot(am_addr_t from,
   if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
     return;
     }
-#line 542
+#line 546
   se = &IMACControllerP__localLinkERTable[idx];
   if (is_from_sender) {
 
@@ -17761,9 +17782,9 @@ static inline message_t *LinkEstimatorP__SubReceive__receive(message_t *msg, voi
   return LinkEstimatorP__Receive__receive(msg, LinkEstimatorP__Packet__getPayload(msg, LinkEstimatorP__Packet__payloadLength(msg)), LinkEstimatorP__Packet__payloadLength(msg));
 }
 
-# 1238 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 1260 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline message_t *IMACControllerP__Receive__default__receive(message_t *msg, void *payload, uint8_t len)
-#line 1238
+#line 1260
 {
   return msg;
 }
@@ -17844,47 +17865,47 @@ inline static bool IMACControllerP__ForwarderInfo__isForwarderEnabled(void ){
 #line 12
 }
 #line 12
-# 375 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 379 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline void IMACControllerP__updateLinkOLAMA(am_addr_t from, uint32_t from_current_slot, nx_uint8_t *active_2bitmap)
-#line 375
+#line 379
 {
   uint8_t i;
-#line 376
+#line 380
   uint8_t link_idx;
-#line 376
+#line 380
   uint8_t my_link_idx;
-#line 376
+#line 380
   uint8_t idx;
-#line 376
+#line 380
   uint8_t t;
-#line 376
+#line 380
   uint8_t x;
-#line 376
+#line 380
   uint8_t y;
-#line 376
+#line 380
   uint8_t x2;
-#line 376
+#line 380
   uint8_t y2;
   bool lo_bit;
-#line 377
+#line 381
   bool hi_bit;
   uint32_t prio_slot;
-#line 378
+#line 382
   uint32_t current_slot;
-#line 378
+#line 382
   uint32_t slot_since_tdma_start;
-#line 378
+#line 382
   uint32_t g_now;
   uint8_t transient_2bitmap_head;
   uint8_t my_prio;
-#line 380
+#line 384
   uint8_t prio;
   uint32_t group_idx;
   uint8_t round_offset;
 
   link_er_table_entry_t *le;
   bool is_inactive;
-#line 385
+#line 389
   bool is_next_state_initialized_;
   error_t ret;
 
@@ -17899,7 +17920,7 @@ static inline void IMACControllerP__updateLinkOLAMA(am_addr_t from, uint32_t fro
     }
   ret = IMACControllerP__GlobalTime__getGlobalTime(&g_now);
   if (ret != SUCCESS) {
-      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 399, 0);
+      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 403, 0);
       return;
     }
 
@@ -17913,14 +17934,14 @@ static inline void IMACControllerP__updateLinkOLAMA(am_addr_t from, uint32_t fro
   if (link_idx >= LINK_ER_TABLE_SIZE) {
     return;
     }
-#line 412
+#line 416
   le = &IMACControllerP__linkERTable[link_idx];
 
 
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 415
+#line 419
     is_next_state_initialized_ = IMACControllerP__is_next_state_initialized;
-#line 415
+#line 419
     __nesc_atomic_end(__nesc_atomic); }
 
 
@@ -17935,7 +17956,7 @@ static inline void IMACControllerP__updateLinkOLAMA(am_addr_t from, uint32_t fro
       hi_bit = __nesc_ntoh_uint8(active_2bitmap[x2].nxdata) & (0x1 << (y2 + 1));
 
       if (!hi_bit && lo_bit) {
-        IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 429, i);
+        IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 433, i);
         }
       x = i >> 3;
       y = i & 0x7;
@@ -17987,21 +18008,21 @@ static inline void IMACControllerP__updateLinkOLAMA(am_addr_t from, uint32_t fro
       hi_bit = __nesc_ntoh_uint8(active_2bitmap[x2].nxdata) & (0x1 << (y2 + 1));
 
       if (!hi_bit && lo_bit) {
-        IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 481, i);
+        IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 485, i);
         }
       if (!(hi_bit && lo_bit)) {
         continue;
         }
       { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 486
+#line 490
         {
           lo_bit = IMACControllerP__transient_2bitmap[x2] & (0x1 << y2);
           hi_bit = IMACControllerP__transient_2bitmap[x2] & (0x1 << (y2 + 1));
         }
-#line 489
+#line 493
         __nesc_atomic_end(__nesc_atomic); }
       if (!hi_bit && lo_bit) {
-        IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 491, i);
+        IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 495, i);
         }
       if (!(!hi_bit && !lo_bit)) {
         continue;
@@ -18034,12 +18055,12 @@ static inline void IMACControllerP__updateLinkOLAMA(am_addr_t from, uint32_t fro
       if (is_inactive) {
 
           { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 523
+#line 527
             {
               IMACControllerP__transient_2bitmap[x2] &= ~(0x1 << y2);
               IMACControllerP__transient_2bitmap[x2] |= 0x1 << (y2 + 1);
             }
-#line 526
+#line 530
             __nesc_atomic_end(__nesc_atomic); }
         }
     }
@@ -18064,9 +18085,9 @@ inline static void IMACControllerP__LinkEstimator__updateNeighborOutQuality(am_a
 #line 19
 }
 #line 19
-# 554 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 558 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline void IMACControllerP__updateLinkPdr(am_addr_t from, local_link_pdr_footer_t *footer, uint8_t size)
-#line 554
+#line 558
 {
   uint8_t i;
   bool is_from_sender;
@@ -18082,7 +18103,7 @@ static inline void IMACControllerP__updateLinkPdr(am_addr_t from, local_link_pdr
           if (!is_from_sender) {
             IMACControllerP__LinkEstimator__updateNeighborOutQuality(from, __nesc_ntoh_uint8(lp->inquality.nxdata), __nesc_ntoh_uint8(lp->inquality_version.nxdata));
             }
-#line 568
+#line 572
           IMACControllerP__Controller__updateNextSlot(from, is_from_sender, __nesc_ntoh_uint32(lp->next_slot.nxdata));
         }
     }
@@ -18103,9 +18124,9 @@ inline static am_addr_t IMACControllerP__SubAMPacket__source(message_t * amsg){
 #line 77
 }
 #line 77
-# 352 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 356 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline void IMACControllerP__processReceivedMessage(message_t *msg, void *payload, uint8_t len)
-#line 352
+#line 356
 {
   am_addr_t from = IMACControllerP__SubAMPacket__source(msg);
   imac_control_header_t *hdr = IMACControllerP__getHeader(msg);
@@ -18128,9 +18149,9 @@ static inline void IMACControllerP__processReceivedMessage(message_t *msg, void 
   IMACControllerP__updateLinkOLAMA(from, __nesc_ntoh_uint32(hdr->current_slot.nxdata), hdr->active_2bitmap);
 }
 
-# 316 "../iMAC_TDMA/signalmap/SignalMapP.nc"
+# 322 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static inline uint8_t SignalMapP__Packet__maxPayloadLength(void )
-#line 316
+#line 322
 {
   return SignalMapP__SubPacket__maxPayloadLength() - sizeof(sm_header_t );
 }
@@ -18150,16 +18171,16 @@ inline static uint8_t IMACControllerP__SubPacket__maxPayloadLength(void ){
 #line 95
 }
 #line 95
-# 615 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 619 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline uint8_t IMACControllerP__Packet__maxPayloadLength(void )
-#line 615
+#line 619
 {
   return IMACControllerP__SubPacket__maxPayloadLength() - sizeof(imac_control_header_t );
 }
 
-#line 337
+#line 341
 static inline message_t *IMACControllerP__SubReceive__receive(message_t *msg, void *payload, uint8_t len)
-#line 337
+#line 341
 {
 
   if (IMACControllerP__Packet__payloadLength(msg) > IMACControllerP__Packet__maxPayloadLength()) {
@@ -18196,9 +18217,9 @@ static __inline  int16_t __nesc_ntoh_int16(const void * source)
   return __nesc_ntoh_uint16(source);
 }
 
-# 396 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
+# 399 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
 static inline uint8_t SignalMapP__findEmptyNbSignalMapIdx(void )
-#line 396
+#line 399
 {
   uint8_t i;
   nb_signal_map_entry_t *ne;
@@ -18209,7 +18230,7 @@ static inline uint8_t SignalMapP__findEmptyNbSignalMapIdx(void )
         return i;
         }
     }
-#line 405
+#line 408
   return i;
 }
 
@@ -18228,9 +18249,9 @@ inline static bool SignalMapP__Util__isActiveLink(am_addr_t sender, am_addr_t re
 #line 13
 }
 #line 13
-# 449 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
+# 452 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
 static inline void SignalMapP__updateNbSignalMap(am_addr_t nb, sm_footer_t *footer, uint8_t size)
-#line 449
+#line 452
 {
   uint8_t idx;
   nb_signal_map_entry_t *ne;
@@ -18253,7 +18274,7 @@ static inline void SignalMapP__updateNbSignalMap(am_addr_t nb, sm_footer_t *foot
       SignalMapP__mergeNbSignalMap(ne->signal_map, footer, size);
     }
   else 
-#line 469
+#line 472
     {
       idx = SignalMapP__findEmptyNbSignalMapIdx();
       if (idx < NB_SIGNAL_MAP_SIZE) {
@@ -18290,26 +18311,31 @@ static inline void SignalMapP__updateSignalMap(am_addr_t nb, int16_t in_gain, in
   sm_entry_t *se;
   bool freezed_;
 
-
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 163
+#line 162
     freezed_ = SignalMapP__freezed;
-#line 163
+#line 162
     __nesc_atomic_end(__nesc_atomic); }
-#line 181
+
   idx = SignalMapP__findIdx(nb);
+  if (freezed_) {
+      if (idx < SM_SIZE) {
+          se = &SignalMapP__signalMap[idx];
+          se->data_tx_slot_ratio = data_tx_slot_ratio;
+        }
+      return;
+    }
+#line 191
   if (idx < SM_SIZE) {
       se = &SignalMapP__signalMap[idx];
       se->data_tx_slot_ratio = data_tx_slot_ratio;
-      if (freezed_) {
-        return;
-        }
+
       if (in_gain != INVALID_GAIN) {
           if (se->inbound_gain != INVALID_GAIN) {
               se->inbound_gain = se->inbound_gain - (se->inbound_gain >> EWMA_R_SHIFT_BIT) + (in_gain >> EWMA_R_SHIFT_BIT);
             }
           else 
-#line 191
+#line 198
             {
               se->inbound_gain = in_gain;
             }
@@ -18322,7 +18348,7 @@ static inline void SignalMapP__updateSignalMap(am_addr_t nb, int16_t in_gain, in
       SignalMapP__sortSignalMap(idx);
     }
   else 
-#line 201
+#line 208
     {
 
 
@@ -18335,9 +18361,7 @@ static inline void SignalMapP__updateSignalMap(am_addr_t nb, int16_t in_gain, in
               se->nb = nb;
               se->valid = TRUE;
               se->data_tx_slot_ratio = data_tx_slot_ratio;
-              if (freezed_) {
-                return;
-                }
+
 
               se->inbound_gain = in_gain;
               se->outbound_gain = out_gain;
@@ -18345,7 +18369,7 @@ static inline void SignalMapP__updateSignalMap(am_addr_t nb, int16_t in_gain, in
               SignalMapP__sortSignalMap(idx);
             }
           else 
-#line 221
+#line 226
             {
 
               idx = SM_SIZE - 1;
@@ -18357,9 +18381,7 @@ static inline void SignalMapP__updateSignalMap(am_addr_t nb, int16_t in_gain, in
                   se->nb = nb;
                   se->valid = TRUE;
                   se->data_tx_slot_ratio = data_tx_slot_ratio;
-                  if (freezed_) {
-                    return;
-                    }
+
 
                   se->inbound_gain = in_gain;
                   se->outbound_gain = out_gain;
@@ -18509,15 +18531,15 @@ inline static am_addr_t SignalMapP__SubAMPacket__source(message_t * amsg){
 #line 77
 }
 #line 77
-# 260 "../iMAC_TDMA/signalmap/SignalMapP.nc"
+# 266 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static inline void SignalMapP__processReceivedMessage(message_t *msg, void *payload, uint8_t len)
-#line 260
+#line 266
 {
   int16_t i;
   uint8_t tx_power_level;
 
   int16_t pre_rss;
-#line 264
+#line 270
   int16_t post_rss;
   int16_t in_gain = INVALID_GAIN;
   int16_t out_gain = INVALID_GAIN;
@@ -18550,9 +18572,9 @@ static inline void SignalMapP__processReceivedMessage(message_t *msg, void *payl
   SignalMapP__updateNbSignalMap(nb, footer, footer_entry_cnts);
 }
 
-#line 250
+#line 256
 static inline message_t *SignalMapP__SubReceive__receive(message_t *msg, void *payload, uint8_t len)
-#line 250
+#line 256
 {
 
   ;
@@ -18767,13 +18789,13 @@ static inline message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyn
 }
 
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
-inline static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__receive(am_id_t arg_0x4162d568, message_t *msg, void *payload, uint8_t len){
+inline static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__receive(am_id_t arg_0x4162b568, message_t *msg, void *payload, uint8_t len){
 #line 11
   nx_struct message_t *__nesc_result;
 #line 11
 
 #line 11
-  switch (arg_0x4162d568) {
+  switch (arg_0x4162b568) {
 #line 11
     case TIMESYNC_AM_FTSP:
 #line 11
@@ -18783,7 +18805,7 @@ inline static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyn
 #line 11
     default:
 #line 11
-      __nesc_result = /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__default__receive(arg_0x4162d568, msg, payload, len);
+      __nesc_result = /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__default__receive(arg_0x4162b568, msg, payload, len);
 #line 11
       break;
 #line 11
@@ -20322,9 +20344,9 @@ inline static void IMACControllerP__AMSend__sendDone(message_t *msg, error_t err
 #line 13
 }
 #line 13
-# 311 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 315 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline void IMACControllerP__SubSend__sendDone(message_t *msg, error_t error)
-#line 311
+#line 315
 {
 
 
@@ -20338,9 +20360,9 @@ inline static void SignalMapP__AMSend__sendDone(message_t *msg, error_t error){
 #line 13
 }
 #line 13
-# 223 "../iMAC_TDMA/signalmap/SignalMapP.nc"
+# 229 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static inline void SignalMapP__SubSend__sendDone(message_t *msg, error_t error)
-#line 223
+#line 229
 {
 
 
@@ -20418,9 +20440,9 @@ static inline void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessa
 }
 
 # 82 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
-inline static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__sendDone(am_id_t arg_0x4162dee8, message_t *msg, error_t error){
+inline static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__sendDone(am_id_t arg_0x4162bee8, message_t *msg, error_t error){
 #line 82
-  switch (arg_0x4162dee8) {
+  switch (arg_0x4162bee8) {
 #line 82
     case TIMESYNC_AM_FTSP:
 #line 82
@@ -20430,7 +20452,7 @@ inline static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessa
 #line 82
     default:
 #line 82
-      /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__default__sendDone(arg_0x4162dee8, msg, error);
+      /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__default__sendDone(arg_0x4162bee8, msg, error);
 #line 82
       break;
 #line 82
@@ -21076,9 +21098,9 @@ static inline error_t IMACForwarderP__LinkEstimator__inLinkPdrUpdated(am_addr_t 
   return SUCCESS;
 }
 
-# 1075 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 1093 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static __inline void IMACControllerP__updateBorder(bool is_sender, local_link_er_table_entry_t *se, int16_t i)
-#line 1075
+#line 1093
 {
   if (is_sender) {
     }
@@ -21089,14 +21111,14 @@ static __inline void IMACControllerP__updateBorder(bool is_sender, local_link_er
     }
 }
 
-# 1308 "../iMAC_TDMA/controller/IMACControllerPUtil.nc"
+# 1312 "../iMAC_TDMA/controller/IMACControllerPUtil.nc"
 static __inline int32_t IMACControllerP__dbmSumU(int32_t x, int32_t y)
-#line 1308
+#line 1312
 {
   int32_t n;
-#line 1309
+#line 1313
   int32_t delta;
-#line 1309
+#line 1313
   int32_t tmp;
 
 
@@ -21114,40 +21136,46 @@ static __inline int32_t IMACControllerP__dbmSumU(int32_t x, int32_t y)
       delta = IMACControllerP__sumDeltaTable[n];
     }
   else 
-#line 1324
+#line 1328
     {
       delta = 0;
     }
   return x + delta;
 }
 
-# 1086 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 1104 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB)
-#line 1086
+#line 1104
 {
 
   int16_t i;
-#line 1088
+#line 1106
   int16_t sm_size;
-#line 1088
+#line 1106
   int16_t er_border_idx;
 
   local_link_er_table_entry_t *le;
   sm_entry_t *se;
 
   int32_t total_i;
-#line 1093
+#line 1111
   int32_t current_i;
-#line 1093
+#line 1111
   int32_t next_i;
   int16_t tx_power;
 
 
 
+  bool is_tx_prob_enabled_;
 
+  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+#line 1118
+    is_tx_prob_enabled_ = IMACControllerP__is_tx_prob_enabled;
+#line 1118
+    __nesc_atomic_end(__nesc_atomic); }
 
   if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
-      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1101, 0);
+      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1121, 0);
       return FAIL;
     }
   le = &IMACControllerP__localLinkERTable[idx];
@@ -21190,18 +21218,20 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
 
 
 
-          if (0 == se->data_tx_slot_ratio) {
+          if (is_tx_prob_enabled_) {
+              if (0 == se->data_tx_slot_ratio) {
 
-              continue;
-            }
-          if (se->data_tx_slot_ratio < sizeof IMACControllerP__percent2DbTable / sizeof IMACControllerP__percent2DbTable[0]) {
-              tx_power -= IMACControllerP__percent2DbTable[se->data_tx_slot_ratio];
-            }
-          else 
-#line 1150
-            {
-              IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1151, se->data_tx_slot_ratio);
-              continue;
+                  continue;
+                }
+              if (se->data_tx_slot_ratio < sizeof IMACControllerP__percent2DbTable / sizeof IMACControllerP__percent2DbTable[0]) {
+                  tx_power -= IMACControllerP__percent2DbTable[se->data_tx_slot_ratio];
+                }
+              else 
+#line 1171
+                {
+                  IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1172, se->data_tx_slot_ratio);
+                  continue;
+                }
             }
           total_i = IMACControllerP__dbmSumU(total_i, tx_power - se->inbound_gain);
 
@@ -21214,16 +21244,16 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
 
 
 
-
       if (i >= sm_size) {
         i--;
         }
       IMACControllerP__updateBorder(is_sender, le, i);
       se = &IMACControllerP__signalMap[i];
+
       return IMACControllerP__udpateER(is_sender, le, se->inbound_gain, 0);
     }
   else {
-#line 1172
+#line 1194
     if (delta_i_dB > 0) {
 
 
@@ -21273,7 +21303,7 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
             return IMACControllerP__udpateER(is_sender, le, se->inbound_gain, 0);
           }
         else 
-#line 1219
+#line 1241
           {
 
             se = &IMACControllerP__signalMap[0];
@@ -21281,7 +21311,7 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
           }
       }
     else 
-#line 1224
+#line 1246
       {
 
         if (er_border_idx > EMPTY_ER_IDX) {
@@ -21289,7 +21319,7 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
             return IMACControllerP__udpateER(is_sender, le, se->inbound_gain, 0);
           }
         else 
-#line 1229
+#line 1251
           {
 
             se = &IMACControllerP__signalMap[0];
@@ -21314,14 +21344,14 @@ inline static error_t IMACControllerP__UartLog__logTxRx(__nesc_nxbase_nx_uint8_t
 #line 5
 }
 #line 5
-# 912 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 916 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline int32_t IMACControllerP__pdr2DeltaIdB(local_link_er_table_entry_t *le, uint8_t link_pdr, uint8_t link_pdr_sample, uint8_t reference_pdr)
-#line 912
+#line 916
 {
   uint8_t table_size;
 
   int64_t slope;
-#line 915
+#line 919
   int64_t deltaI_dB;
 
 
@@ -21343,7 +21373,7 @@ static inline int32_t IMACControllerP__pdr2DeltaIdB(local_link_er_table_entry_t 
   if (reference_pdr > link_pdr && reference_pdr - link_pdr > E0) {
       slope = (int32_t )SLOPE_SCALE * (IMACControllerP__pdr_inv_table[reference_pdr] - IMACControllerP__pdr_inv_table[link_pdr]) / (reference_pdr - link_pdr);
     }
-#line 947
+#line 951
   deltaI_dB = (((slope * ALPHA * link_pdr + slope * (10 - ALPHA) * link_pdr_sample) / 10 - slope * (reference_pdr - DELTA_Y)) << SCALE_L_SHIFT_BIT) * 10 / (10 - ALPHA) / SLOPE_SCALE / 100;
 
 
@@ -21351,30 +21381,36 @@ static inline int32_t IMACControllerP__pdr2DeltaIdB(local_link_er_table_entry_t 
   if (deltaI_dB > DELTA_I_UPPER_BOUND) {
     deltaI_dB = DELTA_I_UPPER_BOUND;
     }
-#line 953
+#line 957
   return deltaI_dB;
 }
 
-#line 978
+#line 985
 static inline error_t IMACControllerP__execController(am_addr_t nb, bool is_sender)
-#line 978
+#line 985
 {
   int16_t idx;
   error_t ret;
   local_link_er_table_entry_t *le;
 
   uint8_t link_pdr;
-#line 983
+#line 990
   uint8_t link_pdr_sample;
-#line 983
+#line 990
   uint8_t reference_pdr;
-#line 983
+#line 990
   uint8_t link_pdr_version;
 
   int32_t delta_i_dB;
-  uint32_t g_now;
 
 
+  bool is_tx_prob_enabled_;
+
+  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+#line 997
+    is_tx_prob_enabled_ = IMACControllerP__is_tx_prob_enabled;
+#line 997
+    __nesc_atomic_end(__nesc_atomic); }
   idx = IMACControllerP__findLocalLinkERTableIdx(nb, is_sender);
   if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
       return FAIL;
@@ -21386,16 +21422,16 @@ static inline error_t IMACControllerP__execController(am_addr_t nb, bool is_send
       return FAIL;
     }
   else 
-#line 998
+#line 1007
     {
       ret = IMACControllerP__LinkEstimator__getInDataPdr(nb, &link_pdr, &link_pdr_sample, &link_pdr_version);
       if (ret != SUCCESS) {
         return ret;
         }
       { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1003
+#line 1012
         reference_pdr = IMACControllerP__pdr_req;
-#line 1003
+#line 1012
         __nesc_atomic_end(__nesc_atomic); }
     }
 
@@ -21404,34 +21440,45 @@ static inline error_t IMACControllerP__execController(am_addr_t nb, bool is_send
 
 
   delta_i_dB = IMACControllerP__pdr2DeltaIdB(le, link_pdr, link_pdr_sample, reference_pdr);
-#line 1024
-  IMACControllerP__UartLog__logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, 1024, nb, link_pdr, - le->rx_nI.abs / 128, le->rx_er_border_idx + 1, delta_i_dB, SUCCESS == IMACControllerP__GlobalTime__getGlobalTime(&g_now) ? g_now : INVALID_TIME);
+
+
+
+
+  if (link_pdr >= reference_pdr) {
+      { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+#line 1025
+        IMACControllerP__is_tx_prob_enabled = FALSE;
+#line 1025
+        __nesc_atomic_end(__nesc_atomic); }
+    }
+#line 1042
+  IMACControllerP__UartLog__logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, 1042, nb, link_pdr, le->rx_er_version, le->rx_er_border_idx + 1, - le->rx_interference_threshold, is_tx_prob_enabled_);
 
   ret = IMACControllerP__adjustER(idx, is_sender, delta_i_dB);
   if (ret != SUCCESS) {
-    IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1028, ret);
+    IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1046, ret);
     }
-#line 1029
+#line 1047
   return ret;
 }
 
-#line 959
+#line 963
 static inline error_t IMACControllerP__LinkEstimator__inLinkPdrUpdated(am_addr_t nb, bool is_sender)
-#line 959
+#line 963
 {
 
 
   error_t ret = IMACControllerP__execController(nb, is_sender);
 
-#line 963
+#line 967
   return ret;
 }
 
-# 335 "../iMAC_TDMA/signalmap/SignalMapP.nc"
+# 341 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static inline error_t SignalMapP__LinkEstimator__inLinkPdrUpdated(am_addr_t nb, bool is_ack)
-#line 335
+#line 341
 {
-#line 335
+#line 341
   return SUCCESS;
 }
 
@@ -21537,9 +21584,9 @@ static inline void LinkEstimatorP__updateNeighborEntryIdx(uint8_t idx, uint8_t s
     }
 }
 
-# 1332 "../iMAC_TDMA/controller/IMACControllerPUtil.nc"
+# 1336 "../iMAC_TDMA/controller/IMACControllerPUtil.nc"
 static inline dbm_t IMACControllerP__dbmSumS(dbm_t x, dbm_t y)
-#line 1332
+#line 1336
 {
   dbm_t z;
 
@@ -21547,7 +21594,7 @@ static inline dbm_t IMACControllerP__dbmSumS(dbm_t x, dbm_t y)
   if (0 == x.sign) {
     return y;
     }
-#line 1338
+#line 1342
   if (0 == y.sign) {
     return x;
     }
@@ -21556,20 +21603,20 @@ static inline dbm_t IMACControllerP__dbmSumS(dbm_t x, dbm_t y)
       z.abs = IMACControllerP__dbmSumU(x.abs, y.abs);
     }
   else 
-#line 1344
+#line 1348
     {
       if (x.abs >= y.abs + (0x1 << SCALE_L_SHIFT_BIT)) {
           z.sign = x.sign;
           z.abs = IMACControllerP__Controller__dbmDiffU(x.abs, y.abs);
         }
       else {
-#line 1348
+#line 1352
         if (y.abs >= x.abs + (0x1 << SCALE_L_SHIFT_BIT)) {
             z.sign = y.sign;
             z.abs = IMACControllerP__Controller__dbmDiffU(y.abs, x.abs);
           }
         else 
-#line 1351
+#line 1355
           {
 
             z.sign = 0;
@@ -21577,7 +21624,7 @@ static inline dbm_t IMACControllerP__dbmSumS(dbm_t x, dbm_t y)
           }
         }
     }
-#line 1357
+#line 1361
   return z;
 }
 
@@ -21592,10 +21639,10 @@ static inline dbm_t IMACControllerP__dbmSumS(dbm_t x, dbm_t y)
 
 
 static inline dbm_t IMACControllerP__dbmWeightedSumS(dbm_t x, dbm_t y)
-#line 1370
+#line 1374
 {
   dbm_t x_;
-#line 1371
+#line 1375
   dbm_t y_;
 
   x_.sign = x.sign;
@@ -21620,15 +21667,15 @@ inline static int16_t IMACControllerP__CC2420Packet__getRssiIdle(message_t *msg)
 #line 49
 }
 #line 49
-# 837 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 841 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline error_t IMACControllerP__Controller__sampleNI(message_t *msg)
-#line 837
+#line 841
 {
-#line 867
+#line 871
   uint8_t idx;
 
   int16_t total_rss;
-#line 869
+#line 873
   int16_t ni;
   am_addr_t nb;
   dbm_t nI;
@@ -21654,7 +21701,7 @@ static inline error_t IMACControllerP__Controller__sampleNI(message_t *msg)
       se->rx_nI = IMACControllerP__dbmWeightedSumS(se->rx_nI, nI);
     }
   else 
-#line 892
+#line 896
     {
       se->rx_nI = nI;
     }
@@ -22284,7 +22331,11 @@ static inline void IMACControllerP__Controller__runOLAMA(void )
   if (my_link_idx >= LINK_ER_TABLE_SIZE) {
     return;
     }
-  IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, 901, IMACControllerP__olama_task_round_idx);
+
+
+
+
+
   IMACControllerP__olama_task_round_idx = 0;
 
 
@@ -23617,35 +23668,35 @@ static __inline bool IMACControllerP__LAMA(uint8_t my_prio, uint8_t t, uint8_t x
   return TRUE;
 }
 
-#line 915
+#line 919
 static inline void IMACControllerP__updateOLAMATask__runTask(void )
-#line 915
+#line 919
 {
   uint8_t i;
-#line 916
+#line 920
   uint8_t idx;
-#line 916
+#line 920
   uint8_t t;
-#line 916
+#line 920
   uint8_t x;
-#line 916
+#line 920
   uint8_t y;
-#line 916
+#line 920
   uint8_t x2;
-#line 916
+#line 920
   uint8_t y2;
-#line 916
+#line 920
   uint8_t x_;
-#line 916
+#line 920
   uint8_t y_;
   bool lo_bit;
-#line 917
+#line 921
   bool hi_bit;
   uint32_t prio_slot;
-#line 918
+#line 922
   uint32_t current_slot;
   uint8_t transient_2bitmap_head;
-#line 919
+#line 923
   uint8_t bitmap_head;
   uint8_t my_prio;
   uint32_t group_idx;
@@ -23653,16 +23704,16 @@ static inline void IMACControllerP__updateOLAMATask__runTask(void )
 
 
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 925
+#line 929
     {
       i = IMACControllerP__olama_task_round_idx++;
       current_slot = IMACControllerP__current_slot_;
       bitmap_head = IMACControllerP__bitmap_head_;
       transient_2bitmap_head = IMACControllerP__transient_2bitmap_head_;
     }
-#line 930
+#line 934
     __nesc_atomic_end(__nesc_atomic); }
-#line 945
+#line 949
   if (i >= OLAMA_CONVERGENCE_TIME) {
 
       return;
@@ -23681,16 +23732,16 @@ static inline void IMACControllerP__updateOLAMATask__runTask(void )
   y2 = (idx << 1) & 0x7;
 
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 962
+#line 966
     {
       lo_bit = IMACControllerP__transient_2bitmap[x2] & (0x1 << y2);
       hi_bit = IMACControllerP__transient_2bitmap[x2] & (0x1 << (y2 + 1));
     }
-#line 965
+#line 969
     __nesc_atomic_end(__nesc_atomic); }
 
   if (!hi_bit && lo_bit) {
-    IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 968, i);
+    IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 972, i);
     }
 
 
@@ -23717,12 +23768,12 @@ static inline void IMACControllerP__updateOLAMATask__runTask(void )
       if (IMACControllerP__LAMA(my_prio, t, x, y, round_offset)) {
 
           { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 994
+#line 998
             {
               IMACControllerP__transient_2bitmap[x2] |= 0x1 << y2;
               IMACControllerP__transient_2bitmap[x2] |= 0x1 << (y2 + 1);
             }
-#line 997
+#line 1001
             __nesc_atomic_end(__nesc_atomic); }
         }
     }
@@ -23734,12 +23785,12 @@ static inline void IMACControllerP__updateOLAMATask__runTask(void )
       y_ = bitmap_head & 0x7;
 
       { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1007
+#line 1011
         {
           lo_bit = IMACControllerP__transient_2bitmap[x2] & (0x1 << y2);
           hi_bit = IMACControllerP__transient_2bitmap[x2] & (0x1 << (y2 + 1));
         }
-#line 1010
+#line 1014
         __nesc_atomic_end(__nesc_atomic); }
 
 
@@ -23747,18 +23798,18 @@ static inline void IMACControllerP__updateOLAMATask__runTask(void )
       if (hi_bit && lo_bit) {
 
           { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1016
+#line 1020
             IMACControllerP__olama_bitmap[x_] |= 0x1 << y_;
-#line 1016
+#line 1020
             __nesc_atomic_end(__nesc_atomic); }
         }
       else 
-#line 1017
+#line 1021
         {
           { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1018
+#line 1022
             IMACControllerP__olama_bitmap[x_] &= ~(0x1 << y_);
-#line 1018
+#line 1022
             __nesc_atomic_end(__nesc_atomic); }
         }
 
@@ -23766,18 +23817,18 @@ static inline void IMACControllerP__updateOLAMATask__runTask(void )
 
 
       { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1024
+#line 1028
         {
           IMACControllerP__transient_2bitmap[x2] &= ~(0x1 << y2);
           IMACControllerP__transient_2bitmap[x2] &= ~(0x1 << (y2 + 1));
         }
-#line 1027
+#line 1031
         __nesc_atomic_end(__nesc_atomic); }
       IMACControllerP__initNextBitState(x, y);
       { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1029
+#line 1033
         IMACControllerP__is_next_state_initialized = TRUE;
-#line 1029
+#line 1033
         __nesc_atomic_end(__nesc_atomic); }
     }
 
@@ -24342,16 +24393,16 @@ static inline void IMACControllerP__setLocalLinkERTable(void )
     }
 }
 
-# 154 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 158 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline error_t IMACControllerP__StdControl__start(void )
-#line 154
+#line 158
 {
-#line 178
+#line 182
   IMACControllerP__setLocalLinkERTable();
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 179
+#line 183
     IMACControllerP__const_max_item_cnt = MAX_ITEM_CNT;
-#line 179
+#line 183
     __nesc_atomic_end(__nesc_atomic); }
   return SUCCESS;
 }
@@ -27351,9 +27402,9 @@ static inline error_t /*IMACForwarderC.SlotTimer32khz.AlarmC.Msp430Alarm*/Msp430
   return SUCCESS;
 }
 
-# 636 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 640 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline link_er_table_entry_t *IMACControllerP__Controller__getLinkERTable(void )
-#line 636
+#line 640
 {
   return IMACControllerP__linkERTable;
 }
@@ -27373,9 +27424,9 @@ inline static link_er_table_entry_t *IMACForwarderP__Controller__getLinkERTable(
 #line 12
 }
 #line 12
-# 632 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 636 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline local_link_er_table_entry_t *IMACControllerP__Controller__getLocalLinkERTable(void )
-#line 632
+#line 636
 {
   return IMACControllerP__localLinkERTable;
 }
@@ -28443,9 +28494,9 @@ inline static link_t *IMACControllerP__Util__getActiveLinks(uint8_t *size){
 #line 10
 }
 #line 10
-# 121 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 124 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline error_t IMACControllerP__Init__init(void )
-#line 121
+#line 124
 {
   IMACControllerP__activeLinks = IMACControllerP__Util__getActiveLinks(&IMACControllerP__active_link_size);
   IMACControllerP__signalMap = IMACControllerP__SignalMap__getSignalMap();
@@ -28461,6 +28512,7 @@ static inline error_t IMACControllerP__Init__init(void )
   IMACControllerP__CC2420_DEF_RFPOWER_DBM_SCALED = IMACControllerP__CC2420_DEF_RFPOWER_DBM << SCALE_L_SHIFT_BIT, 
 
   IMACControllerP__pdr_req = REFERENCE_DATA_PDR;
+  IMACControllerP__is_tx_prob_enabled = TRUE;
   IMACControllerP__initLinkERTable();
   IMACControllerP__initLocalLinkERTable();
 
@@ -28490,12 +28542,12 @@ inline static am_addr_t SignalMapP__SubAMPacket__address(void ){
 #line 57
 }
 #line 57
-# 368 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
+# 371 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
 static inline void SignalMapP__initNbSignalMap(void )
-#line 368
+#line 371
 {
   uint8_t i;
-#line 369
+#line 372
   uint8_t j;
   nb_signal_map_entry_t *ne;
 
@@ -30852,21 +30904,21 @@ static void /*IMACForwarderC.ComputationSubSlotTimerMicro.Transform32*/Transform
   (/*IMACForwarderC.ComputationSubSlotTimerMicro.Transform32*/TransformAlarmC__3__from_size_type )remaining << 0);
 }
 
-# 1039 "../iMAC_TDMA/controller/IMACControllerPUtil.nc"
+# 1043 "../iMAC_TDMA/controller/IMACControllerPUtil.nc"
 static uint32_t IMACControllerP__Controller__nextTxSlot(uint32_t current_slot, bool is_initial)
-#line 1039
+#line 1043
 {
   uint8_t i;
-#line 1040
+#line 1044
   uint8_t idx;
-#line 1040
+#line 1044
   uint8_t x;
-#line 1040
+#line 1044
   uint8_t y;
-#line 1040
+#line 1044
   uint8_t my_link_idx;
   uint32_t slot;
-#line 1041
+#line 1045
   uint32_t slot_since_tdma_start;
   uint8_t bitmap_head;
   local_link_er_table_entry_t *se;
@@ -30881,9 +30933,9 @@ static uint32_t IMACControllerP__Controller__nextTxSlot(uint32_t current_slot, b
 
 
   if (IMACControllerP__my_local_link_idx >= LOCAL_LINK_ER_TABLE_SIZE) {
-    IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1055, IMACControllerP__my_local_link_idx);
+    IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1059, IMACControllerP__my_local_link_idx);
     }
-#line 1056
+#line 1060
   se = &IMACControllerP__localLinkERTable[IMACControllerP__my_local_link_idx];
 
   slot_since_tdma_start = current_slot - GLOBAL_TDMA_START_TIME / SLOT_LEN;
@@ -30891,7 +30943,7 @@ static uint32_t IMACControllerP__Controller__nextTxSlot(uint32_t current_slot, b
 
   for (i = 0; i < MAX_SLOT_FORWARD; i++) {
       slot = current_slot + 1 + i;
-#line 1075
+#line 1079
       idx = bitmap_head + i;
       if (idx >= MAX_SLOT_FORWARD) {
         idx -= MAX_SLOT_FORWARD;
@@ -30905,12 +30957,12 @@ static uint32_t IMACControllerP__Controller__nextTxSlot(uint32_t current_slot, b
         }
     }
 
-  if (!is_initial) {
 
 
 
-      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1092, current_slot);
-    }
+
+
+
   se->next_slot_by_tx = INVALID_SLOT;
   return INVALID_SLOT;
 }
@@ -31097,12 +31149,12 @@ static uint8_t AsyncCC2420TransceiverP__RadioPacket__maxPayloadLength(void )
   return AsyncCC2420TransceiverP__SubPacket__maxPayloadLength() - sizeof(activemessage_header_t ) - sizeof(network_header_t ) - sizeof(ieee154_simple_header_t );
 }
 
-# 211 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 215 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static uint8_t IMACControllerP__Controller__loadLinkER(link_er_footer_t *er_footer)
-#line 211
+#line 215
 {
   uint8_t i;
-#line 212
+#line 216
   uint8_t k;
   link_er_table_entry_t *le;
   link_er_footer_t *er_footer_p;
@@ -31734,9 +31786,9 @@ static uint32_t RandomMlcgC__Random__rand32(void )
   return mlcg;
 }
 
-# 194 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 198 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static error_t IMACControllerP__AMSend__send(am_addr_t addr, message_t *msg, uint8_t len)
-#line 194
+#line 198
 {
   uint8_t newlen;
 
@@ -31747,34 +31799,34 @@ static error_t IMACControllerP__AMSend__send(am_addr_t addr, message_t *msg, uin
       return IMACControllerP__SubSend__send(addr, msg, newlen);
     }
   else 
-#line 202
+#line 206
     {
 
-      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 204, newlen);
-      return FAIL;
+      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 208, newlen);
+      return ESIZE;
     }
 }
 
-# 321 "../iMAC_TDMA/signalmap/SignalMapP.nc"
+# 327 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static void *SignalMapP__Packet__getPayload(message_t *msg, uint8_t len)
-#line 321
+#line 327
 {
   void *payload = SignalMapP__SubPacket__getPayload(msg, len + sizeof(sm_header_t ));
 
-#line 323
+#line 329
   if (payload != (void *)0) {
       payload += sizeof(sm_header_t );
     }
   return payload;
 }
 
-# 620 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 624 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static void *IMACControllerP__Packet__getPayload(message_t *msg, uint8_t len)
-#line 620
+#line 624
 {
   void *payload = IMACControllerP__SubPacket__getPayload(msg, len + sizeof(imac_control_header_t ));
 
-#line 622
+#line 626
   if (payload != (void *)0) {
       payload += sizeof(imac_control_header_t );
     }
@@ -32132,13 +32184,13 @@ static bool /*AsyncCC2420TransceiverC.Ieee154PacketLayerC.Ieee154PacketLayerP*/I
   return (__nesc_ntoh_leuint16(/*AsyncCC2420TransceiverC.Ieee154PacketLayerC.Ieee154PacketLayerP*/Ieee154PacketLayerP__0__getHeader(msg)->fcf.nxdata) & /*AsyncCC2420TransceiverC.Ieee154PacketLayerC.Ieee154PacketLayerP*/Ieee154PacketLayerP__0__IEEE154_ACK_FRAME_MASK) == /*AsyncCC2420TransceiverC.Ieee154PacketLayerC.Ieee154PacketLayerP*/Ieee154PacketLayerP__0__IEEE154_ACK_FRAME_VALUE;
 }
 
-# 305 "../iMAC_TDMA/signalmap/SignalMapP.nc"
+# 311 "../iMAC_TDMA/signalmap/SignalMapP.nc"
 static uint8_t SignalMapP__Packet__payloadLength(message_t *msg)
-#line 305
+#line 311
 {
   sm_header_t *hdr = SignalMapP__getHeader(msg);
 
-#line 307
+#line 313
   return SignalMapP__SubPacket__payloadLength(msg) - sizeof(sm_header_t ) - sizeof(sm_footer_t ) * __nesc_ntoh_uint8(hdr->footer_entry_cnts.nxdata);
 }
 
@@ -32152,12 +32204,12 @@ static int16_t AsyncCC2420TransceiverP__CC2420Packet__getRssiIdle(message_t *msg
   return (int8_t )(rssi & 0x00FF) - (int16_t )RSSI_OFFSET;
 }
 
-# 1289 "../iMAC_TDMA/controller/IMACControllerPUtil.nc"
+# 1293 "../iMAC_TDMA/controller/IMACControllerPUtil.nc"
 static int32_t IMACControllerP__Controller__dbmDiffU(int32_t x, int32_t y)
-#line 1289
+#line 1293
 {
   int32_t n;
-#line 1290
+#line 1294
   int32_t delta;
 
 
@@ -32166,12 +32218,12 @@ static int32_t IMACControllerP__Controller__dbmDiffU(int32_t x, int32_t y)
 
     return MIN_DBM;
     }
-#line 1297
+#line 1301
   if (n < sizeof IMACControllerP__diffDeltaTable / sizeof IMACControllerP__diffDeltaTable[0]) {
       delta = IMACControllerP__diffDeltaTable[n];
     }
   else 
-#line 1299
+#line 1303
     {
       delta = 0;
     }
@@ -32194,12 +32246,12 @@ static int16_t SignalMapP__findIdx(am_addr_t nb)
   return i;
 }
 
-#line 248
+#line 251
 static void SignalMapP__sortSignalMap(int16_t idx)
-#line 248
+#line 251
 {
   int16_t i;
-#line 249
+#line 252
   int16_t sm_size;
   int16_t new_in_gain;
 
@@ -32242,7 +32294,7 @@ static void SignalMapP__sortSignalMap(int16_t idx)
                   localSignalMap[i] = localSignalMap[i - 1];
                 }
               else 
-#line 289
+#line 292
                 {
                   break;
                 }
@@ -32275,7 +32327,7 @@ static void SignalMapP__sortSignalMap(int16_t idx)
                   localSignalMap[i] = localSignalMap[i + 1];
                 }
               else 
-#line 319
+#line 322
                 {
                   break;
                 }
@@ -32323,9 +32375,9 @@ static bool UtilC__Util__isActiveLink(am_addr_t sender, am_addr_t receiver)
   return FALSE;
 }
 
-# 383 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
+# 386 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
 static uint8_t SignalMapP__findNbSignalMapIdx(am_addr_t nb)
-#line 383
+#line 386
 {
   uint8_t i;
   nb_signal_map_entry_t *ne;
@@ -32336,16 +32388,16 @@ static uint8_t SignalMapP__findNbSignalMapIdx(am_addr_t nb)
         break;
         }
     }
-#line 392
+#line 395
   return i;
 }
 
-#line 409
+#line 412
 static void SignalMapP__mergeNbSignalMap(signal_map_entry_t *signal_map, sm_footer_t *footer, uint8_t size)
-#line 409
+#line 412
 {
   uint8_t i;
-#line 410
+#line 413
   uint8_t j;
   bool found;
   sm_footer_t *footer_p;
@@ -32371,7 +32423,7 @@ static void SignalMapP__mergeNbSignalMap(signal_map_entry_t *signal_map, sm_foot
           if (INVALID_ADDR == se->nb) {
             break;
             }
-#line 434
+#line 437
           if (se->nb == __nesc_ntoh_uint16(footer_p->nb.nxdata)) {
               found = TRUE;
               se->inbound_gain = __nesc_ntoh_int16(footer_p->inbound_gain.nxdata);
@@ -32387,9 +32439,9 @@ static void SignalMapP__mergeNbSignalMap(signal_map_entry_t *signal_map, sm_foot
     }
 }
 
-# 602 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 606 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static uint8_t IMACControllerP__Packet__payloadLength(message_t *msg)
-#line 602
+#line 606
 {
   imac_control_header_t *hdr = IMACControllerP__getHeader(msg);
 
@@ -32414,9 +32466,9 @@ static void LinkEstimatorP__updateNeighborOutQuality(uint8_t nidx, uint8_t outqu
     }
 }
 
-# 578 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 582 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static void IMACControllerP__Controller__updateLinkERTable(link_er_footer_t *footer, uint8_t size, am_addr_t from)
-#line 578
+#line 582
 {
   uint8_t i;
   link_er_footer_t *lp;
@@ -32656,15 +32708,15 @@ static bool IMACControllerP__isContend(uint8_t i, uint8_t j)
   return FALSE;
 }
 
-# 482 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
+# 485 "../iMAC_TDMA/signalmap/SignalMapPUtils.nc"
 static error_t SignalMapP__SignalMap__getGain(am_addr_t nb, am_addr_t node, int16_t *inbound_gain, int16_t *outbound_gain)
-#line 482
+#line 485
 {
   uint8_t i;
-#line 483
+#line 486
   uint8_t idx;
   signal_map_entry_t *signal_map;
-#line 484
+#line 487
   signal_map_entry_t *se;
 
   idx = SignalMapP__findNbSignalMapIdx(nb);
@@ -32677,7 +32729,7 @@ static error_t SignalMapP__SignalMap__getGain(am_addr_t nb, am_addr_t node, int1
       if (INVALID_ADDR == se->nb) {
         break;
         }
-#line 495
+#line 498
       if (se->nb == node) {
           *inbound_gain = se->inbound_gain;
           *outbound_gain = se->outbound_gain;
@@ -32734,21 +32786,21 @@ static void LinkEstimatorP__updateNeighborInOutQuality(message_t *msg, uint8_t n
     }
 }
 
-# 1057 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 1075 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static error_t IMACControllerP__udpateER(bool is_sender, local_link_er_table_entry_t *se, int16_t gain, int16_t delta)
-#line 1057
+#line 1075
 {
   if (INVALID_GAIN == gain) {
       return FAIL;
     }
   else 
-#line 1060
+#line 1078
     {
       if (is_sender) {
           return FAIL;
         }
       else 
-#line 1063
+#line 1081
         {
           se->rx_interference_threshold = IMACControllerP__CC2420_DEF_RFPOWER_DBM - (gain >> SCALE_L_SHIFT_BIT) + delta;
           se->rx_er_version++;
