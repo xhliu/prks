@@ -1047,15 +1047,20 @@ end
 fprintf('\n');
 
 %% 20849 21103
-cd('/home/xiaohui/Projects/tOR/RawData/21103');
-% load link_pdrs;
+% cd('/home/xiaohui/Projects/tOR/RawData/22313');
+load link_pdrs;
+% load txrxs;
+% s = unique(tx_successes(:, 2));
+% t = unique(txs(:, 2));
+% setdiff(s, t)
+% length(unique(tx_successes(:, 2)))
 % link_pdrs(50, :) = [];
 % t = link_pdrs;
-load schedule_unique_concurrent_set;
+% load schedule_unique_concurrent_set;
 % load rx_concurrency.mat;
-t = ucs_freq;
-t = t(t < 50);
-cdfplot(t);
+% t = ucs_freq;
+% t = t(t < 50);
+% cdfplot(t);
 % cdfplot(t(:, end) - link_pdrs(:, end));
 % fprintf('%f %f\n', mean(t), median(t));
 %% DBG constants

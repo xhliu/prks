@@ -24,8 +24,8 @@
 // by default, PRKS is used w/ initialized ER as in RIDB
 
 // multihop? ; prior to IMAC.h, which uses it
-//#define MULTIHOP
-//#warning MULTIHOP
+#define MULTIHOP
+#warning MULTIHOP
 
 #include "IMAC.h"
 
@@ -42,8 +42,8 @@
 #else
 // PRKS specific
 	// run basic LAMA only: PRKS or RIDB
-	#define OLAMA_DISABLED
-	#warning OLAMA_DISABLED
+//	#define OLAMA_DISABLED
+//	#warning OLAMA_DISABLED
 	
 	// PRKS-L: do not use refined a(t) and use SINR-vs-PDR gradient directly even it's away from target
 //	#define PRKSL

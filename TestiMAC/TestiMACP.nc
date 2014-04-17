@@ -235,16 +235,16 @@ async event void AMSend.sendDone(message_t* msg, error_t error) {
 #else
 event void AMSend.sendDone(message_t* msg, error_t error) {
 #endif
+#ifndef MULTIHOP
 	radio_count_msg_t* hdr = (radio_count_msg_t*)call Packet.getPayload(msg, sizeof(radio_count_msg_t));
 	dbg("TestiMAC", "%s: Packet %hu sendDone w/ %hhu.\n", __FUNCTION__, hdr->seqno, error);
 	if (SUCCESS == error) {
 		// CMAC block transfer
-	#ifndef MULTIHOP
 		call UartLog.logEntry(TX_DONE_FLAG, my_receiver, hdr->seqno, getGlobalTime());
-	#endif
 	} else {
 		call UartLog.logEntry(TX_DONE_FAIL_FLAG, error, hdr->seqno, getGlobalTime());
 	}
+#endif
 	atomic locked = FALSE;
 //#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
 //	#warning saturate

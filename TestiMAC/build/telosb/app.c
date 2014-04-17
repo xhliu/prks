@@ -10981,9 +10981,9 @@ static inline int32_t IMACControllerP__pdr2DeltaIdB(local_link_er_table_entry_t 
 static inline error_t IMACControllerP__LinkEstimator__inLinkPdrUpdated(am_addr_t nb, bool is_sender);
 #line 985
 static inline error_t IMACControllerP__execController(am_addr_t nb, bool is_sender);
-#line 1075
+#line 1073
 static error_t IMACControllerP__udpateER(bool is_sender, local_link_er_table_entry_t *se, int16_t gain, int16_t delta);
-#line 1093
+#line 1091
 static __inline void IMACControllerP__updateBorder(bool is_sender, local_link_er_table_entry_t *se, int16_t i);
 
 
@@ -10996,7 +10996,7 @@ static __inline void IMACControllerP__updateBorder(bool is_sender, local_link_er
 
 
 static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB);
-#line 1260
+#line 1258
 static inline message_t *IMACControllerP__Receive__default__receive(message_t *msg, void *payload, uint8_t len);
 # 11 "../iMAC_TDMA/../router/async/AsyncAMSend.nc"
 static error_t SignalMapP__SubSend__send(am_addr_t dest, message_t *msg, uint8_t len);
@@ -17782,9 +17782,9 @@ static inline message_t *LinkEstimatorP__SubReceive__receive(message_t *msg, voi
   return LinkEstimatorP__Receive__receive(msg, LinkEstimatorP__Packet__getPayload(msg, LinkEstimatorP__Packet__payloadLength(msg)), LinkEstimatorP__Packet__payloadLength(msg));
 }
 
-# 1260 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 1258 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline message_t *IMACControllerP__Receive__default__receive(message_t *msg, void *payload, uint8_t len)
-#line 1260
+#line 1258
 {
   return msg;
 }
@@ -20192,18 +20192,21 @@ static inline void TestiMACP__AMSend__sendDone(message_t *msg, error_t error)
 
 
 
+
   radio_count_msg_t *hdr = (radio_count_msg_t *)TestiMACP__Packet__getPayload(msg, sizeof(radio_count_msg_t ));
 
-#line 239
+#line 240
   ;
   if (SUCCESS == error) {
 
-
       TestiMACP__UartLog__logEntry(TX_DONE_FLAG, TestiMACP__my_receiver, __nesc_ntoh_uint16(hdr->seqno.nxdata), TestiMACP__getGlobalTime());
     }
-  else {
+  else 
+#line 244
+    {
       TestiMACP__UartLog__logEntry(TX_DONE_FAIL_FLAG, error, __nesc_ntoh_uint16(hdr->seqno.nxdata), TestiMACP__getGlobalTime());
     }
+
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
 #line 248
     TestiMACP__locked = FALSE;
@@ -21098,9 +21101,9 @@ static inline error_t IMACForwarderP__LinkEstimator__inLinkPdrUpdated(am_addr_t 
   return SUCCESS;
 }
 
-# 1093 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 1091 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static __inline void IMACControllerP__updateBorder(bool is_sender, local_link_er_table_entry_t *se, int16_t i)
-#line 1093
+#line 1091
 {
   if (is_sender) {
     }
@@ -21143,24 +21146,24 @@ static __inline int32_t IMACControllerP__dbmSumU(int32_t x, int32_t y)
   return x + delta;
 }
 
-# 1104 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 1102 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB)
-#line 1104
+#line 1102
 {
 
   int16_t i;
-#line 1106
+#line 1104
   int16_t sm_size;
-#line 1106
+#line 1104
   int16_t er_border_idx;
 
   local_link_er_table_entry_t *le;
   sm_entry_t *se;
 
   int32_t total_i;
-#line 1111
+#line 1109
   int32_t current_i;
-#line 1111
+#line 1109
   int32_t next_i;
   int16_t tx_power;
 
@@ -21168,14 +21171,16 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
 
   bool is_tx_prob_enabled_;
 
+#line 1115
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1118
+#line 1115
     is_tx_prob_enabled_ = IMACControllerP__is_tx_prob_enabled;
-#line 1118
+#line 1115
     __nesc_atomic_end(__nesc_atomic); }
 
+
   if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
-      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1121, 0);
+      IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1119, 0);
       return FAIL;
     }
   le = &IMACControllerP__localLinkERTable[idx];
@@ -21227,9 +21232,9 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
                   tx_power -= IMACControllerP__percent2DbTable[se->data_tx_slot_ratio];
                 }
               else 
-#line 1171
+#line 1169
                 {
-                  IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1172, se->data_tx_slot_ratio);
+                  IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1170, se->data_tx_slot_ratio);
                   continue;
                 }
             }
@@ -21253,7 +21258,7 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
       return IMACControllerP__udpateER(is_sender, le, se->inbound_gain, 0);
     }
   else {
-#line 1194
+#line 1192
     if (delta_i_dB > 0) {
 
 
@@ -21303,7 +21308,7 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
             return IMACControllerP__udpateER(is_sender, le, se->inbound_gain, 0);
           }
         else 
-#line 1241
+#line 1239
           {
 
             se = &IMACControllerP__signalMap[0];
@@ -21311,7 +21316,7 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
           }
       }
     else 
-#line 1246
+#line 1244
       {
 
         if (er_border_idx > EMPTY_ER_IDX) {
@@ -21319,7 +21324,7 @@ static inline error_t IMACControllerP__adjustER(int16_t idx, bool is_sender, int
             return IMACControllerP__udpateER(is_sender, le, se->inbound_gain, 0);
           }
         else 
-#line 1251
+#line 1249
           {
 
             se = &IMACControllerP__signalMap[0];
@@ -21402,15 +21407,9 @@ static inline error_t IMACControllerP__execController(am_addr_t nb, bool is_send
   uint8_t link_pdr_version;
 
   int32_t delta_i_dB;
+  uint32_t g_now;
 
 
-  bool is_tx_prob_enabled_;
-
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 997
-    is_tx_prob_enabled_ = IMACControllerP__is_tx_prob_enabled;
-#line 997
-    __nesc_atomic_end(__nesc_atomic); }
   idx = IMACControllerP__findLocalLinkERTableIdx(nb, is_sender);
   if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
       return FAIL;
@@ -21422,16 +21421,16 @@ static inline error_t IMACControllerP__execController(am_addr_t nb, bool is_send
       return FAIL;
     }
   else 
-#line 1007
+#line 1005
     {
       ret = IMACControllerP__LinkEstimator__getInDataPdr(nb, &link_pdr, &link_pdr_sample, &link_pdr_version);
       if (ret != SUCCESS) {
         return ret;
         }
       { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1012
+#line 1010
         reference_pdr = IMACControllerP__pdr_req;
-#line 1012
+#line 1010
         __nesc_atomic_end(__nesc_atomic); }
     }
 
@@ -21446,19 +21445,19 @@ static inline error_t IMACControllerP__execController(am_addr_t nb, bool is_send
 
   if (link_pdr >= reference_pdr) {
       { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 1025
+#line 1023
         IMACControllerP__is_tx_prob_enabled = FALSE;
-#line 1025
+#line 1023
         __nesc_atomic_end(__nesc_atomic); }
     }
-#line 1042
-  IMACControllerP__UartLog__logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, 1042, nb, link_pdr, le->rx_er_version, le->rx_er_border_idx + 1, - le->rx_interference_threshold, is_tx_prob_enabled_);
+#line 1040
+  IMACControllerP__UartLog__logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, 1040, nb, link_pdr, le->rx_er_version, le->rx_er_border_idx + 1, - le->rx_interference_threshold, SUCCESS == IMACControllerP__GlobalTime__getGlobalTime(&g_now) ? g_now : INVALID_TIME);
 
   ret = IMACControllerP__adjustER(idx, is_sender, delta_i_dB);
   if (ret != SUCCESS) {
-    IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1046, ret);
+    IMACControllerP__UartLog__logEntry(DBG_FLAG, DBG_ERR_FLAG, 1044, ret);
     }
-#line 1047
+#line 1045
   return ret;
 }
 
@@ -32786,21 +32785,21 @@ static void LinkEstimatorP__updateNeighborInOutQuality(message_t *msg, uint8_t n
     }
 }
 
-# 1075 "../iMAC_TDMA/controller/IMACControllerP.nc"
+# 1073 "../iMAC_TDMA/controller/IMACControllerP.nc"
 static error_t IMACControllerP__udpateER(bool is_sender, local_link_er_table_entry_t *se, int16_t gain, int16_t delta)
-#line 1075
+#line 1073
 {
   if (INVALID_GAIN == gain) {
       return FAIL;
     }
   else 
-#line 1078
+#line 1076
     {
       if (is_sender) {
           return FAIL;
         }
       else 
-#line 1081
+#line 1079
         {
           se->rx_interference_threshold = IMACControllerP__CC2420_DEF_RFPOWER_DBM - (gain >> SCALE_L_SHIFT_BIT) + delta;
           se->rx_er_version++;

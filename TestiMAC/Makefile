@@ -25,8 +25,8 @@ PFLAGS +=	-I$(MAINDIR)/../router \
 # -----------------------------------------------------------------------------
 # RTS-CTS & C-MAC: based on CC2420
 # -----------------------------------------------------------------------------
-##PROTOCOLDIR = ../CMAC
-#PROTOCOLDIR = ../RTSCTS
+#PROTOCOLDIR = ../CMAC
+##PROTOCOLDIR = ../RTSCTS
 #PFLAGS +=	-I$(UTILDIR)/Utils \
 #			-I$(PROTOCOLDIR) \
 #			-I$(PROTOCOLDIR)/beaconing \

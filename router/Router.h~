@@ -14,8 +14,8 @@ enum {
 //#warning POOL_SIZE 1
 //	POOL_SIZE = 3, // 14,
 //	QUEUE_SIZE = POOL_SIZE + CLIENT_SIZE,
-//#warning QUEUE_SIZE 2
-	QUEUE_SIZE = 1, //255,
+#warning QUEUE_SIZE < 255
+	QUEUE_SIZE = 174,
 	CACHE_SIZE = 4,
 };
 

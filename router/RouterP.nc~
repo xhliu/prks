@@ -155,7 +155,7 @@ task void sendTask() {
 			// CMAC buffers message, no need to cleared;
 			atomic sending = TRUE;
 		#endif
-			call UartLog.logTxRx(TX_SUCCESS_FLAG, call Util.getReceiver(), qe.origin, qe.originSeqNo, call SubPacket.payloadLength(m_buf_p), 0, 0, 0, getGlobalTime());
+			call UartLog.logTxRx(TX_SUCCESS_FLAG, call Util.getReceiver(), qe.originSeqNo, qe.origin, call SubPacket.payloadLength(m_buf_p), 0, 0, 0, getGlobalTime());
 		} else {
 			// retry
 			post sendTask();
@@ -199,12 +199,13 @@ event void SubSend.sendDone(message_t* msg, error_t error) {
 #endif
     if (error != SUCCESS) {
 		// Immediate retransmission is the worst thing to do.
+		call UartLog.logTxRx(TX_DONE_FAIL_FLAG, call Util.getReceiver(), qe.originSeqNo, qe.origin, call SendQueue.size(), call Acks.wasAcked(msg), qe.retries, error, getGlobalTime());
 		post sendTask();
 		return;
     }
 	
 	// sent
-	call UartLog.logTxRx(TX_DONE_FLAG, call Util.getReceiver(), qe.origin, qe.originSeqNo, call SendQueue.size(), call Acks.wasAcked(msg), qe.retries, 0, getGlobalTime());
+	call UartLog.logTxRx(TX_DONE_FLAG, call Util.getReceiver(), qe.originSeqNo, qe.origin, call SendQueue.size(), call Acks.wasAcked(msg), qe.retries, 0, getGlobalTime());
 //	call UartLog.logTxRx(DBG_FLAG, DBG_TX_FLAG, __LINE__, 0, 0, call SendQueue.size(), call Acks.wasAcked(msg), getHeader(msg)->origin, getHeader(msg)->originSeqNo);
 	if (!call Acks.wasAcked(msg)) {
 		if (--qe.retries) {
@@ -273,7 +274,7 @@ event message_t* SubReceive.receive(message_t* msg, void* payload, uint8_t len) 
     bool is_root_;
 
     atomic is_root_ = is_root;
-    call UartLog.logTxRx(RX_FLAG, call SubAMPacket.source(msg), getHeader(msg)->origin, getHeader(msg)->originSeqNo, len, __LINE__, len > call SubSend.maxPayloadLength(), is_root_, getGlobalTime());
+    call UartLog.logTxRx(RX_FLAG, call SubAMPacket.source(msg), getHeader(msg)->originSeqNo, getHeader(msg)->origin, len, __LINE__, len > call SubSend.maxPayloadLength(), is_root_, getGlobalTime());
     if (len > call SubSend.maxPayloadLength()) {
 		return msg;
     }

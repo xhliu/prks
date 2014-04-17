@@ -5,7 +5,7 @@ t = debugs;
 % type = DBG_TDMA_FLAG;
 % line = 575;
 type = DBG_CONTROLLER_FLAG;
-line = 1024;
+line = 1042; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -26,16 +26,16 @@ t = t(t(:, 4) == line, :);
 % s = [s(:, 1); s(:, 2)];
 s = t;
 % sum(s(:, 9) > s(:, 10))
-% s = s(s(:, 2) == 27, :);
-% s = s(:, 9);
-s = s(s(:, 6) == s(:, 7) - 1, :);
+s = s(s(:, 2) == 3, :);
+s = s(:, 10);
+% s = s(s(:, 6) == s(:, 7) - 1, :);
 % s = mod(s, 128);
 % cnt = sum(s == 178);
 % length(s) - cnt - cnt
 % s = s(:, [2 10]);
 % [x ix] = sort(s(:, 1));
 % s = s(ix, :);
-% plot(s);
+plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % cdfplot(s);
@@ -63,6 +63,8 @@ end
 load link_pdrs;
 % fprintf('warning: varying link pdr\n');
 pdr_req = 90;
+LINK_PDR_IDX = 6;
+link_settling_time = [];
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
 %     fprintf('warning: fixed link id\n');
@@ -100,8 +102,11 @@ for link_id = 1 : size(link_pdrs, 1)
 %     if s(1, 9) < 95
 %         continue;
 %     end
+    % rising time; approximate settling time since pdr rarely drops after
+    % rises to requirement
     ix = find(s(:, LINK_PDR_IDX) >= pdr_req, 1);            
-                link_settling_time = [link_settling_time; ix];
+    link_settling_time = [link_settling_time; ix];
+    
 %     plot(s(:, [6 8 9]));
     plot([s(:, [6 8]) repmat(pdr_req, size(s, 1), 1)]);
 %     plot([s(:, [6 7 8 9 10]) ewma repmat(pdr_req, size(s, 1), 1) repmat(0, size(s, 1), 1)]);
@@ -111,7 +116,8 @@ for link_id = 1 : size(link_pdrs, 1)
     legend({'pdr', 'ER size'}, 'Location', 'Best');
 %     legend({'pdr', 'pdr sample', 'ER size', 'pdr req', 'deltaI', 'ewma'});
 end
-
+cdfplot(link_settling_time);
+save('link_settling_time.mat', 'link_settling_time');
 %%
 % [slot, # of concurrent links, signal, noise+interference, snr]
 load ~/Projects/tOR/RawData/21103/link_pdrs;
@@ -1040,10 +1046,20 @@ for x = 0.01 : 0.01 : 1
 end
 fprintf('\n');
 
-%% 
-cd('/home/xiaohui/Projects/tOR/RawData/21101');
-load schedule_unique_concurrent_set;
-% fprintf('min uart reliability: %f\n', min(uart_relis(:, end)));
+%% 20849 21103
+% cd('/home/xiaohui/Projects/tOR/RawData/22313');
+load txrxs;
+s =
+length(unique(tx_successes(:, 2)))
+% link_pdrs(50, :) = [];
+% t = link_pdrs;
+% load schedule_unique_concurrent_set;
+% load rx_concurrency.mat;
+% t = ucs_freq;
+% t = t(t < 50);
+% cdfplot(t);
+% cdfplot(t(:, end) - link_pdrs(:, end));
+% fprintf('%f %f\n', mean(t), median(t));
 %% DBG constants
 DBG_LOSS_FLAG = 0;
 DBG_TX_FLAG = DBG_LOSS_FLAG + 1;

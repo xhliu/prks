@@ -4,8 +4,9 @@
 %   Function: compute convergence time, both for link and network
 %%
 ROOT_NODE_ID = 15;
-SRC_IDX = 4;
-SEQ_IDX = 5;
+fprintf('swap the 2 indices below\n')
+SRC_IDX = 5;
+SEQ_IDX = 4;
 % DST_IDX = 3;
 
 %% e2e pdr
@@ -49,7 +50,7 @@ type = DBG_LOSS_FLAG;
 % line = 186;
 t = t(t(:, 3) == type, :);
 % t = t(t(:, 4) == line, :);
-fprintf('%d are missing from log\n', size(t, 1));
+fprintf('%d are missing from log: some can still in queue\n', size(t, 1));
 if ~isempty(t)
     % #line around 250  means queue overflow
     s = t;
@@ -57,7 +58,7 @@ if ~isempty(t)
     cdfplot(s);
     % unique(s)
 end
-size(unique(t(:, 9:10), 'rows'), 1)
+% size(unique(t(:, 9:10), 'rows'), 1)
 %% queue level
 load txrxs.mat;
 cdfplot(txs(:, 6));
