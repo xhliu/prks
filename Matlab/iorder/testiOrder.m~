@@ -2,50 +2,28 @@
 %   Author: Xiaohui Liu (whulxh@gmail.com)
 %   Date:   11/6/2013
 %   Function: schedule using iOrder
-if 0
-%%
-load ~/Dropbox/iMAC/Xiaohui/links_olama; % link100.mat;
-link = links;
-%% job 19935/20768
-load ~/Projects/tOR/RawData/20768/link_snr_gain;
-%% in job 18654/19012/19936/20769
-load ~/Projects/tOR/RawData/20769/node_noise;
-
-end
-snr_threshold_concurrency_median_mean = [];
-for snr_threshold = [6.6 7.6 9 10.3]
-%% 2.8 3.2 4 4.5
-% 6.6 7.6 9 10.3
-SNR_THRESHOLD = snr_threshold;
-% power level 3
-TX_POWER = -25;
-QUEUE_LEN = 200;
 %% 
-len = size(link, 1);
-link_set = zeros(len, 2);
-idx = 1;
-% convert node's id to be based on 'nodes'
-for i = 1 : len
-    sender_idx = find(nodes == link(i, 1));
-    receiver_idx = find(nodes == link(i, 2));
-    if isempty(sender_idx) || isempty(receiver_idx)
-        continue;
-    end
-    link_set(idx, 1) = sender_idx;
-    link_set(idx, 2) = receiver_idx;
-    idx = idx + 1;
-end
-link_set(idx : end, :) = [];
-link_queue_len = ones(size(link_set, 1), 1) * QUEUE_LEN;
-%%
-noises = [];
-t = node_noise;
-for i = 1 : size(nodes, 1)
-    noises(i) = t(t(:, 1) == nodes(i), 2);
-end
+snr_threshold_concurrency_median_mean = [];
+snr_thresholds = [6.6 7.6 9 10.3];
+% snr_thresholds = 1 : 10;
+% for snr_threshold = 1 : 10 %
+len = length(snr_thresholds);
+iorder = cell(len, 1);
+for j = 1 : len
+%% 
+% measurement: 2.8 3.2 4 4.5
+% simulation: 6.6 7.6 9 10.3
+% fit for neteye: 5 7 9 10
+SNR_THRESHOLD = snr_thresholds(j);
+% for evacuation
+% QUEUE_LEN = 200;
+%% 
+
+% link_queue_len = ones(size(link_set, 1), 1) * QUEUE_LEN;
 %% compute schedule
 % schedule = iOrder(link_set, link_queue_len, signal_map, noises, SNR_THRESHOLD, TX_POWER);
-schedule = iOrderOneSlot(link_set, signal_map, noises, SNR_THRESHOLD, TX_POWER);
+% schedule = iOrderOneSlot(link_set, signal_map, noises, SNR_THRESHOLD, TX_POWER);
+[schedule thruput] = scream(true, link_set, signal_map, noises, SNR_THRESHOLD, TX_POWER, PACKET_LEN);
 %% statistics
 concurrency = size(length(schedule), 1);
 scheduled_link = zeros(1000000, 1);
@@ -60,19 +38,22 @@ end
 scheduled_link(idx : end) = [];
 % hist(scheduled_link, size(link_set, 1));
 % figure;
-hold on;
-cdfplot(concurrency);
-fprintf('concurrency %f, %f\n', median(concurrency), mean(concurrency));
-snr_threshold_concurrency_median_mean = [snr_threshold_concurrency_median_mean; snr_threshold median(concurrency), mean(concurrency)];
+% hold on;
+% cdfplot(concurrency);
+% empty concurrent set since the link of interest is unknown
+concurrency(concurrency == 0) = [];
+% iorder{j} = concurrency;
+fprintf('concurrency %f, %f, thruput %f\n', median(concurrency), mean(concurrency));
+% snr_threshold_concurrency_median_mean = [snr_threshold_concurrency_median_mean; snr_threshold median(concurrency), mean(concurrency)];
 end
 %%
 % iorder_concurrency = concurrency;
 % save('iorder_concurrency.mat', 'iorder_concurrency');
 % save('one_slot_schedule.mat', 'schedule');
 % legend({'70', '80', '90', '95'});
-legend({'70', '80', '90', '95'});
+% legend({'70 iOrder', '80 iOrder', '90 iOrder', '95 iOrder', '70 ns3', '80 ns3', '90 ns3', '95 ns3'});
 
 %% simulation
-concurrency = concurrency95;
-cdfplot(concurrency);
-fprintf('concurrency %f, %f\n', median(concurrency), mean(concurrency));
+% concurrency = concurrency95;
+% cdfplot(concurrency);
+% fprintf('concurrency %f, %f\n', median(concurrency), mean(concurrency));

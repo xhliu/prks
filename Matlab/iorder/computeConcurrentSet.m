@@ -1,29 +1,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Author: Xiaohui Liu (whulxh@gmail.com)
-%   Date:   4/13/2013
+%   Date:   4/13/2014
 %   Function: compute concurrency based on unique concurrent sets, not simply in pkts / slot
 %% 
-jobs = [];
 SLOT_LEN = 512; %32; %512;
-jobs = [21103];
+jobs = [22658]; %20849 %21103
 
 fprintf('slot length %d\n', SLOT_LEN);
-MAIN_DIR = '~/Projects/tOR/RawData/';
+% MAIN_DIR = '~/Projects/tOR/RawData/';
+MAIN_DIR = '~/Downloads/Jobs/';
 
 for job_id = 1 : length(jobs)
     job_dir = [MAIN_DIR num2str(jobs(job_id))];
     cd(job_dir);
-    if false %exist('schedule_unique_concurrent_set.mat', 'file')
+    if exist('schedule_unique_concurrent_set.mat', 'file')
         fprintf('skip processed %d-th job %d\n', job_id, jobs(job_id));
         continue;
     else
         fprintf('processing %d-th job job %d\n', job_id, jobs(job_id));
     end
+% if 0
 %%
 load debugs;
 t = debugs;
 type = DBG_TDMA_FLAG;
-line = 543; %642 %543;
+line = 575; %686; %642 %543;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -56,11 +57,10 @@ for i = 1 : len
     schedule{i} = sort(cs);
 end
 
+% end
 %% unique over schedule
-% unique concurrent set
-ucs = cell(len, 1);
-% frequency of a ucs
-ucs_freq = zeros(len, 1);
+% [unique_concurrent_set ucs_slots ucs_slots_size]
+ucs = cell(len, 3);
 idx = 1;
 for i = 1 : len
     duplicate = false;
@@ -70,7 +70,7 @@ for i = 1 : len
     % compare w/ each existing cs
     if idx > 1
         for j = 1 : (idx - 1)
-            cs_ = ucs{j};
+            cs_ = ucs{j, 1};
 
             if length(cs) ~= length(cs_)
                 continue;
@@ -78,7 +78,8 @@ for i = 1 : len
             % existing ucs found
             if sum(cs ~= cs_) == 0
                 duplicate = true;
-                ucs_freq(j) = ucs_freq(j) + 1;
+                ucs{j, 2} = [ucs{j, 2}; slots(i)];
+                ucs{j, 3} = ucs{j, 3} + 1;
                 break;
             end
         end
@@ -86,38 +87,44 @@ for i = 1 : len
     
     % new ucs found
     if ~duplicate
-        ucs{idx} = cs;
-        ucs_freq(idx) = 1;
+        ucs{idx, 1} = cs;
+        ucs{idx, 2} = [ucs{idx, 2}; slots(i)];
+        ucs{idx, 3} = 1;
         idx = idx + 1;
     end
 end
-ucs(idx : end) = [];
-ucs_freq(idx : end) = [];
-save('schedule_unique_concurrent_set.mat', 'schedule', 'ucs', 'ucs_freq');
+ucs(idx : end, :) = [];
+save('schedule_unique_concurrent_set.mat', 'schedule', 'ucs');
 %% figure;
-load schedule_unique_concurrent_set;
-t = ucs;
-len = size(t, 1);
-concurrency = zeros(len, 1);
-% each slot
+load txrxs;
+% time in us
+TIME_WRAP_LEN = 2 ^ 32;
+TIMESTAMP_IDX = 10;
+
+% time wrap around
+t = unwrap(rxs, TIME_WRAP_LEN);
+t = floor(t(:, TIMESTAMP_IDX) / (SLOT_LEN * 1024));
+
+fprintf('filter incomplete ucs in SCREAM below!\n');
+% ucs = ucs(1 : 100, :);
+
+len = size(ucs, 1);
+% rx thruput based on ucs
+rx_concurrency_ucs = zeros(len, 1);
+% each ucs
 for i = 1 : len
     fprintf('ucs %d\n', i);
-    concurrency(i) = length(ucs{i});
+    ucs_slots = ucs{i, 2};
+    ucs_rx_cnt = [];
+    for j = 1 : length(ucs_slots)
+        rx_cnt = sum(t == ucs_slots(j));
+        ucs_rx_cnt = [ucs_rx_cnt; rx_cnt];
+    end
+    rx_concurrency_ucs(i) = mean(ucs_rx_cnt);
 end
-t = concurrency;
-% concurrency(concurrency == 0) = [];
-% concurrency = ce(:, end);
-% load link_pdrs;
-% % sanity check concurrency
-% fprintf('total concurrency %d, total packets sent %d, ratio: %f\n', sum(concurrency), sum(link_pdrs(:, 3)), sum(concurrency) / sum(link_pdrs(:, 3)));
 %% save('concurrency.mat', 'concurrency');
+t = rx_concurrency_ucs;
 cdfplot(t);
 fprintf('concurrency median %f, mean %f\n', median(t), mean(t));
-%%
-t = concurrency .* ucs_freq;
-sum(ucs_freq)
-sum(t) / sum(ucs_freq)
-
-%%
-corrcoef(concurrency, ucs_freq)
+% corrcoef(concurrency, ucs_freq)
 end

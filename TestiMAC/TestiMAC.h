@@ -62,8 +62,8 @@
 //	#define HETER_TX_POWER
 //	#warning HETER_TX_POWER
 	// set pdr requirement by link
-	//#define SET_PDR_REQ_BY_LINK
-	//#warning SET_PDR_REQ_BY_LINK
+	#define SET_PDR_REQ_BY_LINK
+	#warning SET_PDR_REQ_BY_LINK
 	
 	// disable SPI resource arbitration
 	#define DUMMY_SPI
@@ -169,7 +169,7 @@ enum {
 #else
 	START_DATA_TIME = INITIAL_ER_TIME,
 #endif
-#warning period not 20
+//#warning period not 20
 	// CSMA/RTSCTS/CMAC: 1800UL, 	RIDB&SCREAM 22500UL, 	PRKS: 360000UL,
 	PERIOD_MILLI = 20UL,	// 20
 	MAX_PKT_CNT = 45000U,

@@ -7,12 +7,14 @@
 %                and then construct min hop tree after pruning unreliable links
 %% each iteration
 %jobs = [19235 19236 19237 19238 19239 19248 19251 19258 19260];
-jobs = [21890:2:21898 21900 21903 21904 21907:21910 21915 21916 21918 21919 21921 21926 21928 21937];
-
+%jobs = [21890:2:21898 21900 21903 21904 21907:21910 21915 21916 21918 21919 21921 21926 21928 21937];
+jobs = [22537 : 2 : 22543 22546 22559];
+MAIN_DIR = '~/Downloads/Jobs/';
+% MAIN_DIR = '~/Projects/tOR/RawData/';
 for job_id = 1 : length(jobs)
     job = jobs(job_id);
     fprintf('processing job %d\n', job);
-    dest = ['~/Projects/tOR/RawData/' num2str(job)];
+    dest = [MAIN_DIR num2str(job)];
     cd(dest);
 %% groundtruth pdr & snr
 load txrxs;
@@ -362,12 +364,14 @@ connectivity = ones(NODE_NUM, NODE_NUM);
 
 % jobs = [19235 19236 19237 19238 19239 19248 19251 19258 19260];
 % jobs = [21811 21814 21832 21833 21836 21838];
-jobs = [21890:2:21898 21900 21903 21904 21907:21910 21915 21916 21918 21919 21921 21926 21928 21937];
+% jobs = [21890:2:21898 21900 21903 21904 21907:21910 21915 21916 21918 21919 21921 21926 21928 21937];
+% compare PRKS against SCREAM
+jobs = [22537 : 2 : 22543 22546 22559];
 
 for k = 1 : length(jobs)
     job = jobs(k);
     fprintf('processing job %d\n', job);
-    dest = ['~/Projects/tOR/RawData/' num2str(job)];
+    dest = [MAIN_DIR num2str(job)];
     cd(dest);
 
 %% check each job
@@ -425,8 +429,8 @@ end
 
 %%
 % constraints: implicit, one node at most one outgoing link
-MAX_ACTIVE_LINK_SIZE = inf; %100;
-MAX_INCIDENT_LINK_SIZE = 3;
+MAX_ACTIVE_LINK_SIZE = 100;
+MAX_INCIDENT_LINK_SIZE = 2;
 % job 19976 generates exactly 100 links
 MIN_PDR = 0.99;
 

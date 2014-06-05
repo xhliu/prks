@@ -462,11 +462,11 @@ void scheduleSlot(uint32_t g_slot_time) {
 //	uint8_t status;
 	uint8_t newlen;
 #ifdef SCREAM
-	//error_t ret;
 	uint32_t t, frame_offset;
 #elif defined(OLAMA_DISABLED)
 	uint16_t backoff;
 #endif
+	error_t ret = ECANCEL;
 	if (slot_cnt >= TX_PROB_SAMPLE_WINDOW) {
 		// EWMA
 		data_tx_slot_ratio = data_tx_slot_ratio - (data_tx_slot_ratio >> 3) + (uint8_t)((100 * data_tx_slot_cnt / slot_cnt) >> 3);
@@ -566,13 +566,13 @@ void scheduleSlot(uint32_t g_slot_time) {
 			call PacketTransmitPower.set(m_data_p, call Util.getNodeTxPowerLevel(my_ll_addr));
 		#endif
 			start_time = call LocalTime.get();
-			call SubSend.send(m_data_addr, m_data_p, newlen);
+			ret = call SubSend.send(m_data_addr, m_data_p, newlen);
 		} else {
 			// this can happen if AMSend.send() is called within task; not serious
 			//assert(tdma_cnt);
 		}
 		// log here to account for tx slots w/o data		
-		call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, is_data_pending, call Controller.isRxSlot(current_slot), g_slot_time, getConflictSetSize(), next_tx_slot - current_slot, current_slot);
+		call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, is_data_pending, call Controller.isRxSlot(current_slot), ret, getConflictSetSize(), next_tx_slot - current_slot, current_slot);
 	} else if (call Controller.isRxSlot(current_slot)) {
 		//status = 1;
 	} else {
@@ -645,8 +645,8 @@ void scheduleSlot(uint32_t g_slot_time) {
 						call SubSend.send(AM_BROADCAST_ADDR, m_control_p, call SubSend.maxPayloadLength());
 					} else {
 						is_any_tx_fail = listen();
-						if (is_any_tx_fail)
-							call UartLog.logEntry(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, slot_since_tdma_start);
+//						if (is_any_tx_fail)
+//							call UartLog.logEntry(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, slot_since_tdma_start);
 					}
 				} else {
 				// make decision & ftsp
@@ -654,8 +654,8 @@ void scheduleSlot(uint32_t g_slot_time) {
 					// for active link
 					if (my_outgoing_link_idx == active_link_idx) {
 						isAllocatedSlot[control_link_idx] = !is_any_tx_fail;
-						if (is_any_tx_fail)
-							call UartLog.logEntry(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, slot_since_tdma_start); // round_offset);
+//						if (is_any_tx_fail)
+//							call UartLog.logEntry(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, slot_since_tdma_start); // round_offset);
 					}
 					// a controlling link is always concurrent w/ itself
 					if (my_outgoing_link_idx == control_link_idx) {
@@ -681,9 +681,9 @@ void scheduleSlot(uint32_t g_slot_time) {
 					//#warning ack
 					//call Acks.requestAck(m_data_p);
 					newlen = addLinkEstHeaderAndFooter(m_data_p, m_data_len, next_tx_slot);
-					call SubSend.send(m_data_addr, m_data_p, newlen);
+					ret = call SubSend.send(m_data_addr, m_data_p, newlen);
 				}
-				call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, is_data_pending, g_slot_time >> 16, g_slot_time, isScheduled, t, current_slot);
+				call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, is_data_pending, g_slot_time >> 16, ret, isScheduled, t, current_slot);
 			}
 		} else {
 			txrxCtrl();

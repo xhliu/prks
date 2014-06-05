@@ -22,7 +22,8 @@ SNR_THRESHOLD = snr_thresholds(j);
 % link_queue_len = ones(size(link_set, 1), 1) * QUEUE_LEN;
 %% compute schedule
 % schedule = iOrder(link_set, link_queue_len, signal_map, noises, SNR_THRESHOLD, TX_POWER);
-schedule = iOrderOneSlot(link_set, signal_map, noises, SNR_THRESHOLD, TX_POWER);
+% [schedule thruput] = iOrderOneSlot(link_set, signal_map, noises, SNR_THRESHOLD, TX_POWER, PACKET_LEN);
+[schedule thruput] = scream(false, link_set, signal_map, noises, SNR_THRESHOLD, TX_POWER, PACKET_LEN);
 %% statistics
 concurrency = size(length(schedule), 1);
 scheduled_link = zeros(1000000, 1);
@@ -41,8 +42,8 @@ scheduled_link(idx : end) = [];
 % cdfplot(concurrency);
 % empty concurrent set since the link of interest is unknown
 concurrency(concurrency == 0) = [];
-iorder{j} = concurrency;
-fprintf('concurrency %f, %f\n', median(concurrency), mean(concurrency));
+% iorder{j} = concurrency;
+fprintf('concurrency %f, %f, thruput <%f, %f>\n', median(concurrency), mean(concurrency), median(thruput), mean(thruput));
 % snr_threshold_concurrency_median_mean = [snr_threshold_concurrency_median_mean; snr_threshold median(concurrency), mean(concurrency)];
 end
 %%

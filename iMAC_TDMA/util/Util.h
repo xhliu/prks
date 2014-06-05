@@ -13,7 +13,7 @@ typedef struct {
 enum {
 	// for fair comparison
 #warning PRKS_PDR_OVERSHOOT 10	
-	PRKS_PDR_OVERSHOOT = 10, // 5,
+	PRKS_PDR_OVERSHOOT = 0, // 5,
 };
 #endif
 #endif

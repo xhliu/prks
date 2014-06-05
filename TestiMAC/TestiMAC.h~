@@ -24,8 +24,8 @@
 // by default, PRKS is used w/ initialized ER as in RIDB
 
 // multihop? ; prior to IMAC.h, which uses it
-#define MULTIHOP
-#warning MULTIHOP
+//#define MULTIHOP
+//#warning MULTIHOP
 
 #include "IMAC.h"
 
@@ -169,7 +169,7 @@ enum {
 #else
 	START_DATA_TIME = INITIAL_ER_TIME,
 #endif
-#warning period not 20
+//#warning period not 20
 	// CSMA/RTSCTS/CMAC: 1800UL, 	RIDB&SCREAM 22500UL, 	PRKS: 360000UL,
 	PERIOD_MILLI = 20UL,	// 20
 	MAX_PKT_CNT = 45000U,

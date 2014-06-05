@@ -2,10 +2,10 @@ if 0
 %% always keep first
 load debugs;
 t = debugs;
-% type = DBG_TDMA_FLAG;
-% line = 575;
-type = DBG_CONTROLLER_FLAG;
-line = 1042; %1024;
+type = DBG_TDMA_FLAG;
+line = 686; %575;
+% type = DBG_CONTROLLER_FLAG;
+% line = 1039; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -26,8 +26,8 @@ t = t(t(:, 4) == line, :);
 % s = [s(:, 1); s(:, 2)];
 s = t;
 % sum(s(:, 9) > s(:, 10))
-s = s(s(:, 2) == 3, :);
-s = s(:, 10);
+% s = s(s(:, 2) == 3, :);
+s = s(:, 7);
 % s = s(s(:, 6) == s(:, 7) - 1, :);
 % s = mod(s, 128);
 % cnt = sum(s == 178);
@@ -35,10 +35,10 @@ s = s(:, 10);
 % s = s(:, [2 10]);
 % [x ix] = sort(s(:, 1));
 % s = s(ix, :);
-plot(s);
+% plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
-% cdfplot(s);
+cdfplot(s);
 % 16384 slots to wrap around
 % s = s(s(:, 9) == 775 + 16 * 9, :);
 % s = s(2 : end) - s(1 : end - 1);
@@ -108,12 +108,12 @@ for link_id = 1 : size(link_pdrs, 1)
     link_settling_time = [link_settling_time; ix];
     
 %     plot(s(:, [6 8 9]));
-    plot([s(:, [6 8]) repmat(pdr_req, size(s, 1), 1)]);
+    plot(s(:, [6 9 8]));
 %     plot([s(:, [6 7 8 9 10]) ewma repmat(pdr_req, size(s, 1), 1) repmat(0, size(s, 1), 1)]);
 %     plot([s(:, [6 7 8]) sinr repmat(pdr_req, size(s, 1), 1)]);
 %     title(['link ' num2str(link_id) ' , pdr req ' num2str(pdr_req)]);
     title(['link ' num2str(link_id)]);
-    legend({'pdr', 'ER size'}, 'Location', 'Best');
+    legend({'pdr', 'pdr req', 'ER size'}, 'Location', 'Best');
 %     legend({'pdr', 'pdr sample', 'ER size', 'pdr req', 'deltaI', 'ewma'});
 end
 cdfplot(link_settling_time);
@@ -880,6 +880,8 @@ xn = [x' n'];
 
 %% set PRKS link pdr using other protocols', e.g., SCREAM
 clc;
+DEFAULT_PDR = 10;
+MIN_PDR = 10;
 load link_pdrs;
 t = link_pdrs;
 cdfplot(t(:, end));
@@ -898,10 +900,10 @@ for i = 1 : MAX_NODE_ID
     pdr_req = round(pdr_req * 100);
     
     if isempty(pdr_req)
-        pdr_req = 10;
+        pdr_req = DEFAULT_PDR;
     else
-        if pdr_req < 10
-            pdr_req = 10;
+        if pdr_req < MIN_PDR
+            pdr_req = MIN_PDR;
         end
     end
 	fprintf('%d, ', pdr_req);
@@ -909,8 +911,7 @@ for i = 1 : MAX_NODE_ID
 end
 fprintf('\n');
 %%
-y = [98, 97, 54, 26, 84, 56, 10, 98, 99, 77, 92, 10, 74, 99, 98, 94, 26, 78, 97, 94, 10, 98, 58, 10, 10, 54, 74, 24, 100, 99, 98, 97, 46, 98, 10, 10, 10, 72, 86, 78, 57, 86, 98, 92, 99, 92, 69, 70, 69, 98, 98, 92, 75, 99, 62, 10, 71, 89, 10, 10, 77, 16, 97, 10, 100, 10, 99, 81, 92, 10, 65, 97, 10, 10, 38, 91, 98, 29, 89, 98, 99, 10, 97, 10, 10, 10, 10, 10, 10, 10, 81, 82, 96, 92, 98, 74, 10, 10, 59, 94, 70, 10, 99, 65, 35, 10, 10, 80, 10, 87, 96, 10, 90, 95, 45, 79, 10, 100, 98, 10, 10, 85, 69, 33, 99, 98, 47, 10, 89, 10, 
-];
+y = [98, 97, 54, 26, 84, 56, 10, 98, 99, 77, 92, 10, 74, 99, 98, 94, 26, 78, 97, 94, 10, 98, 58, 10, 10, 54, 74, 24, 100, 99, 98, 97, 46, 98, 10, 10, 10, 72, 86, 78, 57, 86, 98, 92, 99, 92, 69, 70, 69, 98, 98, 92, 75, 99, 62, 10, 71, 89, 10, 10, 77, 16, 97, 10, 100, 10, 99, 81, 92, 10, 65, 97, 10, 10, 38, 91, 98, 29, 89, 98, 99, 10, 97, 10, 10, 10, 10, 10, 10, 10, 81, 82, 96, 92, 98, 74, 10, 10, 59, 94, 70, 10, 99, 65, 35, 10, 10, 80, 10, 87, 96, 10, 90, 95, 45, 79, 10, 100, 98, 10, 10, 85, 69, 33, 99, 98, 47, 10, 89, 10];
 %%
 pdr = [];
 for snr = -10 : 10
@@ -1048,12 +1049,14 @@ fprintf('\n');
 
 %% 20849 21103
 % cd('/home/xiaohui/Projects/tOR/RawData/22313');
-load link_pdrs;
-% load txrxs;
-% s = unique(tx_successes(:, 2));
-% t = unique(txs(:, 2));
-% setdiff(s, t)
-% length(unique(tx_successes(:, 2)))
+% load link_pdrs;
+load txrxs;
+s = unique(tx_successes(:, 2));
+t = unique(txs(:, 2));
+setdiff(s, t)
+t = tx_done_fails;
+% cdfplot(t(t(:, 2) == 82, 9));
+sum(t(:, 2) == 82)
 % link_pdrs(50, :) = [];
 % t = link_pdrs;
 % load schedule_unique_concurrent_set;
@@ -1063,6 +1066,74 @@ load link_pdrs;
 % cdfplot(t);
 % cdfplot(t(:, end) - link_pdrs(:, end));
 % fprintf('%f %f\n', mean(t), median(t));
+
+%%
+load e2e_link_pdrs;
+load link_seq_tx_cnt_retx_latency;
+load link_seq_latency;
+% t = link_seq_latency;
+t = link_seq_tx_cnt_retx_latency * 5 / 512 / 1000;
+% t = e2e_link_pdrs;
+t = t(:, end);
+% hold on;
+cdfplot(t);
+%%
+clc;
+hold off;
+M = 3;
+N = 6;
+x = rand(M, N);
+lo = rand(M, N) * 0.5;
+hi = rand(M, N) * 0.5;
+bar(1:M, x);
+% hold on;
+% errorbar(repmat((1:M)', 1, N), x, lo, hi, 'rx');
+% barerrorbar({1:M, x}, {repmat((1:M)', 1, N), x, lo, hi, 'rx'});
+
+%%
+% barerrorbar({1:6, barvalue'}, {1:6, barvalue', lo_err', hi_err', 'rx'});
+% legend(bw_legend);
+hold on;
+errorbar(1:6, barvalue, lo_err, hi_err, 'rx');
+%%
+data = 1:10;
+ eH = rand(10,1);
+ eL = rand(10,1);
+
+ figure;
+ hold all;
+ bar(1:10, data)
+ errorbar(1:10, data, eL, eH, '.')
+
+%%
+load rx_concurrency;
+t = rx_concurrency;
+% t = t(end - 10000 : end);
+plot(t);
+mean(t)
+
+%%
+load schedule_unique_concurrent_set;
+t = ucs(1:end, 1);
+s = [];
+for i = 1 : size(t, 1)
+    s = [s; length(t{i})];
+end
+max(s)
+
+%%
+load link_pdrs;
+% cdfplot(link_pdrs(:, end));
+%
+JOB_DURATION_MINS = 240;
+BOOTSTRAP_SECONDS = 500;
+SCALE = 1024 / 512;
+thruput = sum(link_pdrs(:, 4)) / ((JOB_DURATION_MINS * 60 - BOOTSTRAP_SECONDS) * SCALE);
+fprintf('throughput %f\n', thruput);
+
+%% 
+pdr_vs_snr = [snr' pdr'];
+save('pdr_vs_snr_theory.mat', 'pdr_vs_snr');
 %% DBG constants
 DBG_LOSS_FLAG = 0;
 DBG_TX_FLAG = DBG_LOSS_FLAG + 1;

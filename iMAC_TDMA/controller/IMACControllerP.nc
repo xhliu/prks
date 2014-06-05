@@ -990,7 +990,7 @@ error_t execController(am_addr_t nb, bool is_sender) {
 	uint8_t link_pdr, link_pdr_sample, reference_pdr, link_pdr_version;
 	// scaled
 	int32_t delta_i_dB;
-	uint32_t g_now;
+//	uint32_t g_now;
 //	int16_t in_gain, out_gain, er_border_gain;
 	
 	idx = findLocalLinkERTableIdx(nb, is_sender);
@@ -1034,10 +1034,10 @@ error_t execController(am_addr_t nb, bool is_sender) {
 //	er_border_gain = (le->rx_er_border_idx != EMPTY_ER_IDX) ? signalMap[le->rx_er_border_idx].inbound_gain : 0; //INVALID_GAIN;
 //	if (call SignalMap.getLocalGain(nb, &in_gain, &out_gain) != SUCCESS)
 //		in_gain = INVALID_GAIN;
-//#warning reference_pdr in log
+#warning reference_pdr in log
 //	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample, le->rx_er_border_idx + 1, in_gain / 128, er_border_gain / 128);
-//	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample, le->rx_er_border_idx + 1, reference_pdr, delta_i_dB); // ;-le->rx_nI.abs / 128
-	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, le->rx_er_version, le->rx_er_border_idx + 1, -le->rx_interference_threshold, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME);
+	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample, le->rx_er_border_idx + 1, reference_pdr, delta_i_dB); // ;-le->rx_nI.abs / 128
+//	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, le->rx_er_version, le->rx_er_border_idx + 1, -le->rx_interference_threshold, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME);
 	
 	ret = adjustER(idx, is_sender, delta_i_dB);
 	if (ret != SUCCESS)
@@ -1111,8 +1111,8 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 #ifdef HETER_TX_POWER
 	uint8_t tx_power_level;
 #endif
-	bool is_tx_prob_enabled_;
-	atomic is_tx_prob_enabled_ = is_tx_prob_enabled;
+	//bool is_tx_prob_enabled_;
+	//atomic is_tx_prob_enabled_ = is_tx_prob_enabled;
 	
 	// runtime check
 	if (idx >= LOCAL_LINK_ER_TABLE_SIZE) {
@@ -1157,8 +1157,8 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 		#else
 			tx_power = CC2420_DEF_RFPOWER_DBM_SCALED;
 		#endif
-			//#warning disabled tx prob.; only when increasing ER
-			//call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, 0, se->nb, se->data_tx_slot_ratio);
+			#warning disabled tx prob.
+			/* // only when increasing ER
 			if (is_tx_prob_enabled_) {
 				if (0 == se->data_tx_slot_ratio) {
 					// do not tx; skip
@@ -1170,7 +1170,7 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 					assert(se->data_tx_slot_ratio);
 					continue;
 				}
-			}
+			} */
 			total_i = dbmSumU(total_i, tx_power - se->inbound_gain);
 			// maximally enlarge the ER but still total_i >= |delta_i|
 			//if (total_i >= delta_i)

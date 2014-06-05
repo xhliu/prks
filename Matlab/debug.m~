@@ -5,7 +5,7 @@ t = debugs;
 % type = DBG_TDMA_FLAG;
 % line = 575;
 type = DBG_CONTROLLER_FLAG;
-line = 1042; %1024;
+line = 1040; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -1048,9 +1048,14 @@ fprintf('\n');
 
 %% 20849 21103
 % cd('/home/xiaohui/Projects/tOR/RawData/22313');
+% load link_pdrs;
 load txrxs;
-s =
-length(unique(tx_successes(:, 2)))
+s = unique(tx_successes(:, 2));
+t = unique(txs(:, 2));
+setdiff(s, t)
+t = tx_done_fails;
+% cdfplot(t(t(:, 2) == 82, 9));
+sum(t(:, 2) == 82)
 % link_pdrs(50, :) = [];
 % t = link_pdrs;
 % load schedule_unique_concurrent_set;
@@ -1060,6 +1065,33 @@ length(unique(tx_successes(:, 2)))
 % cdfplot(t);
 % cdfplot(t(:, end) - link_pdrs(:, end));
 % fprintf('%f %f\n', mean(t), median(t));
+
+%%
+load e2e_link_pdrs;
+load link_seq_tx_cnt_retx_latency;
+load link_seq_latency;
+% t = link_seq_latency;
+t = link_seq_tx_cnt_retx_latency * 5 / 512 / 1000;
+% t = e2e_link_pdrs;
+t = t(:, end);
+% hold on;
+cdfplot(t);
+%%
+clc;
+hold off;
+M = 2;
+N = 6;
+x = rand(M, N);
+lo = rand(M, N) * 0.5;
+hi = rand(M, N) * 0.5;
+% bar(1:length(x), x);
+% hold on;
+errorbar(1, x, lo, hi, 'rx');
+% barerrorbar({1:length(x), x}, {repmat((1:M)', 1, N), x, lo, hi, 'rx'});
+
+%%
+barerrorbar({1:6, barvalue'}, {1:6, barvalue', lo_err', hi_err', 'rx'});
+legend(bw_legend);
 %% DBG constants
 DBG_LOSS_FLAG = 0;
 DBG_TX_FLAG = DBG_LOSS_FLAG + 1;

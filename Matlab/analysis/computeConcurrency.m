@@ -5,8 +5,8 @@
 %% 
 jobs = [];
 % 1) SCREAM or RIDB without OLAMA
-SLOT_LEN = 512;
-jobs = [22299];
+SLOT_LEN = 512; %32; %512;
+jobs = [22659];
 % jobs = [jobs; scream_job(:, 1)];
 % 2) PRKS or RIDB with OLAMA
 % SLOT_LEN = 512;
@@ -22,8 +22,8 @@ jobs = [22299];
 % for i = 1 : length(ridbolama_job)
 %     jobs = [jobs; ridbolama_job{i}(:, 1)];
 % end
-% MAIN_DIR = '~/Downloads/Jobs/';
-MAIN_DIR = '~/Projects/tOR/RawData/';
+MAIN_DIR = '~/Downloads/Jobs/';
+% MAIN_DIR = '~/Projects/tOR/RawData/';
 fprintf('slot length %d\n', SLOT_LEN);
 
 for job_id = 1 : length(jobs)
@@ -39,7 +39,7 @@ for job_id = 1 : length(jobs)
 load debugs;
 t = debugs;
 type = DBG_TDMA_FLAG;
-line = 575; %543; %642; %539; %543; %568; %534; 
+line = 575; %686;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 

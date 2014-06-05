@@ -21,7 +21,7 @@ function slot_concurrent_set = maxConcurrentSet(start_link, candidate_set, link,
         slot_concurrent_set = [];
         return;
     end
-            
+    
     scheduled_link(1) = start_link;
     idx = 2;
 
