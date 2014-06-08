@@ -5,7 +5,14 @@
 %   w/ fading
 %%
 function pdr = snr2Pdr(snr_db, packet_cnt)
+    % limitation
+    if packet_cnt ~= 128
+        fprintf('only handle packet length of 128 bytes\n');
+        exit;
+    end
+    
     % [snr pdr]
+    fprintf('change the reference pdr_vs_snr curve here\n');
     load ~/Dropbox/Projects/PRK/Matlab/matdata/pdr_vs_snr; % pdr_vs_snr_theory
     t = pdr_vs_snr;
     

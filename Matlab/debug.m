@@ -3,42 +3,36 @@ if 0
 load debugs;
 t = debugs;
 type = DBG_TDMA_FLAG;
-line = 686; %575;
-% type = DBG_CONTROLLER_FLAG;
-% line = 1039; %1024;
+line = 713; %686; %575;
+% type = DBG_HEARTBEAT_FLAG;
+% line = 625; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
 %% line # if changed
-% s = t;
-% s = s(:, 9);
-% cdfplot(s);
-% unique(s)
+s = t;
+s = s(:, 4);
+cdfplot(s);
+unique(s)
 
 %%
-% (DBG_FLAG, DBG_TDMA_FLAG, __LINE__, current_slot & SLOT_MASK, call
-% RadioState.getChannel(), status, m_data_addr, current_slot, next_tx_slot - current_slot)
-% (DBG_FLAG, DBG_TDMA_FLAG, __LINE__, 0, 0, my_link_set_idx, beacon_cnt,
-% ret, current_slot)
-% (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, i, hi_bit, lo_bit,
-% getConflictHigherPrioActiveSetSize, getConflictHigherPrioSetSize, prio_slot)
-% s = node_parent;
-% s = [s(:, 1); s(:, 2)];
 s = t;
 % sum(s(:, 9) > s(:, 10))
-% s = s(s(:, 2) == 3, :);
-s = s(:, 7);
+% s = s(s(:, 2) == 15, :);
+% s = s(:, 10);
+% s = mod(s, 2 ^ 17);
 % s = s(s(:, 6) == s(:, 7) - 1, :);
 % s = mod(s, 128);
 % cnt = sum(s == 178);
 % length(s) - cnt - cnt
 % s = s(:, [2 10]);
-% [x ix] = sort(s(:, 1));
-% s = s(ix, :);
+[x ix] = sort(s(:, 10));
+s = s(ix, :);
+s(:, 10) = s(:, 10) - min(s(:, 10));
 % plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
-cdfplot(s);
+% plot(s);
 % 16384 slots to wrap around
 % s = s(s(:, 9) == 775 + 16 * 9, :);
 % s = s(2 : end) - s(1 : end - 1);
@@ -47,7 +41,13 @@ cdfplot(s);
 % hold on;
 % unique(s);
 % length(s)
-
+%%
+cdfplot(link_pdrs(:, end));
+%%
+load ~/Dropbox/Projects/PRK/Matlab/matdata/rx_concurrency.mat
+t = rx_concurrency;
+median(t)
+mean(t)
 %%
 load txrxs;
 t = txs;

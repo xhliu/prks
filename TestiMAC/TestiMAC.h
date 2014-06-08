@@ -15,8 +15,8 @@
 //#define CMAC
 
 // TDMA
-//#warning SCREAM enabled
-//#define SCREAM
+#warning SCREAM enabled
+#define SCREAM
 // basically PRKS but differ w/ const initial ER, no adaptation
 //#warning RIDB enabled
 //#define RIDB
@@ -62,8 +62,8 @@
 //	#define HETER_TX_POWER
 //	#warning HETER_TX_POWER
 	// set pdr requirement by link
-	#define SET_PDR_REQ_BY_LINK
-	#warning SET_PDR_REQ_BY_LINK
+//	#define SET_PDR_REQ_BY_LINK
+//	#warning SET_PDR_REQ_BY_LINK
 	
 	// disable SPI resource arbitration
 	#define DUMMY_SPI

@@ -162,23 +162,42 @@ data(:, idx) = tmp;
 
 %% SCREAM
 fprintf('processing SCREAM\n');
-pdr_job = scream_job;
+% pdr_job = scream_job;
+% 
+% len = length(job);
+% tmp = [];
+% % each job
+% for j = 1 : size(pdr_job, 1)
+%     fprintf('processing job %d\n', pdr_job(j, 1));
+%     job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+%     cd(job_dir);
+%     load link_pdrs;
+%     s = link_pdrs(:, end) * 100;
+%     tmp = [tmp; s];
+% end
+% idx = idx + 1;
+% for i = 1 : PDR_REQ_CNT
+%     data{i, idx} = tmp;
+% end
+job = scream_job;
 
 len = length(job);
-tmp = [];
-% each job
-for j = 1 : size(pdr_job, 1)
-    fprintf('processing job %d\n', pdr_job(j, 1));
-    job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
-    cd(job_dir);
-    load link_pdrs;
-    s = link_pdrs(:, end) * 100;
-    tmp = [tmp; s];
+tmp = cell(len, 1);
+% each pdr req
+for i = 1 : len
+    pdr_job = job{i};
+    % each job
+    for j = 1 : size(pdr_job, 1)
+        fprintf('processing job %d\n', pdr_job(j, 1));
+        job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+        cd(job_dir);
+        load link_pdrs;
+        s = link_pdrs(:, end) * 100;
+        tmp{i} = [tmp{i}; s];
+    end
 end
 idx = idx + 1;
-for i = 1 : PDR_REQ_CNT
-    data{i, idx} = tmp;
-end
+data(:, idx) = tmp;
 
 %% PDR bargraph for diff. prococols
 %% process data for display
@@ -400,11 +419,12 @@ maximize;
 set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 %
-if is_neteye
 str = ['pdr_cdf_' num2str(pdr_req(i))];
-else
-str = ['indriya_pdr_cdf_' num2str(pdr_req(i))];
+
+if ~is_neteye
+    str = [str '_indriya'];
 end
+
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');
 saveas(gcf, [str '.fig']);

@@ -12,7 +12,7 @@ is_neteye = true;
 % directory of raw job data
 % MAIN_DIR = '~/Projects/tOR/RawData/';
 % MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
-% MAIN_DIR = '~/Downloads/Indriya/';
+MAIN_DIR = '~/Downloads/Indriya/';
 %% MAIN_DIR = '~/Downloads/';
 
 % directory to store figures
@@ -169,12 +169,32 @@ cmac_job = job;
 
 %% SCREAM
 SCREAM_SLOT_LEN = 32;
-scream_job = [20849 90;
-              20850 90;
-              20851 90;
-              20852 90;
-              20853 90;
-              20881 90];
+% scream_job = [20849 90;
+%               20850 90;
+%               20851 90;
+%               20852 90;
+%               20853 90;
+%               20881 90];
+job = cell(0);
+% pdr req 70
+job{1} = [20291 30;
+          20326 30;
+          ];
+% 80
+job{2} = [20290 30;
+          20323 30;
+          ];
+% 90
+job{3} = [20286 30;
+          20320 30;
+          20292 30;
+          ];
+% 95
+job{4} = [20289 30;
+          20322 30;
+          20321 30;
+          ];
+cmac_job = job;
 
 else
 %% PRKS

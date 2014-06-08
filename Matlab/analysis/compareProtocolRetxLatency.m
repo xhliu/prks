@@ -3,7 +3,7 @@
 %   Date:   1/22/14
 %   Function: display retx latency vs pdr req for various protocols
 %% use mean or median
-is_median = true;
+is_median = false;
 
 %% 
 idx = 0;
@@ -243,13 +243,43 @@ data(:, idx) = tmp;
 SCALE = 5 / SCREAM_SLOT_LEN / 1000;
 
 fprintf('processing SCREAM\n');
-pdr_job = scream_job;
+% pdr_job = scream_job;
+
+% len = PDR_REQ_CNT; %length(job);
+% tmp = cell(len, 1);
+% % each pdr req
+% for i = 1 : len
+%     %pdr_job = job{i};
+%     % each job
+%     for j = 1 : size(pdr_job, 1)
+%         fprintf('processing job %d\n', pdr_job(j, 1));
+%         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+%         cd(job_dir);
+%         load link_seq_tx_cnt_latency_2;
+%         t = link_seq_tx_cnt_latency_2;
+%         t = t(t(:, end) > 0, :);
+%         % each link, i.e., each sender
+%         senders = unique(t(:, 1));
+%         for k = 1 : length(senders)
+%             sender = senders(k);
+%             s = t(t(:, 1) == sender, :);
+% 
+%             max_tx_cnt = quantile(s(:, 4), pdr_reqs(i) / 100);
+%             s = s(s(:, 4) <= max_tx_cnt, end);
+%             tmp{i} = [tmp{i}; s * SCALE];
+%         end
+%     end
+% end
+% idx = idx + 1;
+% data(:, idx) = tmp;
+
+job = scream_job;
 
 len = PDR_REQ_CNT; %length(job);
 tmp = cell(len, 1);
 % each pdr req
 for i = 1 : len
-    %pdr_job = job{i};
+    pdr_job = job{i};
     % each job
     for j = 1 : size(pdr_job, 1)
         fprintf('processing job %d\n', pdr_job(j, 1));
@@ -272,7 +302,6 @@ for i = 1 : len
 end
 idx = idx + 1;
 data(:, idx) = tmp;
-
 
 %% process data for display
 ALPHA = 0.05;
@@ -324,7 +353,7 @@ end
 h.legend = legend(bw_legend, 'orientation', 'horizontal');
 %
 set(gca, 'FontSize', 30);
-% set(gca, 'yscale', 'log');
+set(gca, 'yscale', 'log');
 ylabel(bw_ylabel);
 xlabel(bw_xlabel);
 set(gca, 'xticklabel', groupnames);

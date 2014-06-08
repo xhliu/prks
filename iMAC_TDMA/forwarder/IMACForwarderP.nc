@@ -116,9 +116,13 @@ bool isAllocatedSlot[ACTIVE_LINK_SIZE];
 bool isScheduled = FALSE;
 // is any tx in the concurrent set failed
 bool is_any_tx_fail;
+// # of tx success in a window
+uint16_t success_cnt;
 // link index in activeLinks
 uint8_t control_link_idx, active_link_idx, my_outgoing_link_idx, round_offset;
 uint32_t slot_since_tdma_start;
+uint8_t wraparound_cnt;
+bool is_wraparound;
 #endif
 
 local_link_er_table_entry_t *localLinkERTable;
@@ -301,6 +305,8 @@ command error_t Init.init() {
 		if (activeLinks[i].sender == my_ll_addr)
 			my_outgoing_link_idx = i;
 	}
+	wraparound_cnt = 0;
+	is_wraparound = FALSE;
 #endif
 	data_tx_slot_cnt = 0;
 	slot_cnt = 0;
@@ -478,7 +484,6 @@ void scheduleSlot(uint32_t g_slot_time) {
 	slot_cnt++;
 	if (elapsed_slot_since_last_win < 255)
 		elapsed_slot_since_last_win++;
-	//	call UartLog.logEntry(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, g_slot_time);
 	/*
 	 * DATA: unicast, regular power, channel CC2420_DEF_CHANNEL
 	 * CONTROL: broadcast, highest power, channel CC2420_CONTROL_CHANNEL
@@ -600,7 +605,25 @@ void scheduleSlot(uint32_t g_slot_time) {
 	//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, current_slot & SLOT_MASK, call RadioState.getChannel(), status, m_data_addr, current_slot, next_tx_slot - current_slot);
 
 #else		//SCREAM start here
-	slot_since_tdma_start = (g_slot_time - GLOBAL_TDMA_START_TIME) / SLOT_LEN;
+	// time wraparound every 2 ^ 32 us; scale 100 times to avoid skipped slots
+	if (g_slot_time < ((uint32_t)SLOT_LEN * 100)) {
+		if (!is_wraparound) {
+			// wraparound just occurred
+			is_wraparound = TRUE;
+			wraparound_cnt++;
+		}
+	} else {
+		is_wraparound = FALSE;
+	}	
+	// overflow when wraparound
+	//slot_since_tdma_start = (g_slot_time - GLOBAL_TDMA_START_TIME) / SLOT_LEN;
+	slot_since_tdma_start = g_slot_time / SLOT_LEN;
+	// 1 wraparound is (2^32 / SLOT_LEN) slots; not use 2^32 bcoz of overflow
+	slot_since_tdma_start +=  (((uint32_t)1 << 31) / SLOT_LEN) * 2 * wraparound_cnt;
+	slot_since_tdma_start -= GLOBAL_TDMA_START_TIME / SLOT_LEN;
+#warning log
+	if (0 == (slot_since_tdma_start & 0xF))
+		call UartLog.logTxRx(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, active_link_size, is_wraparound, wraparound_cnt, g_slot_time, (g_slot_time >> 16), slot_since_tdma_start);	
 	frame_offset = slot_since_tdma_start % FRAME_LEN;
 	// compute schedule
 	if (!isScheduled) {
@@ -611,9 +634,13 @@ void scheduleSlot(uint32_t g_slot_time) {
 			round_offset = frame_offset % ROUND_LEN;
 			
 			// DATA slot
-			if (0 == round_offset) {
-				// by default, all nodes relay SCREAM
-				is_any_tx_fail = FALSE;
+			if (round_offset < WINDOW_SIZE) {
+				// initialize
+				if (0 == round_offset) {
+					// by default, all nodes relay SCREAM
+					is_any_tx_fail = FALSE;
+					success_cnt = 0;	
+				}
 				
 				// active link; round_idx
 				active_link_idx = frame_offset / ROUND_LEN;
@@ -654,8 +681,8 @@ void scheduleSlot(uint32_t g_slot_time) {
 					// for active link
 					if (my_outgoing_link_idx == active_link_idx) {
 						isAllocatedSlot[control_link_idx] = !is_any_tx_fail;
-//						if (is_any_tx_fail)
-//							call UartLog.logEntry(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, slot_since_tdma_start); // round_offset);
+						if (is_any_tx_fail)
+							call UartLog.logEntry(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, slot_since_tdma_start); // round_offset);
 					}
 					// a controlling link is always concurrent w/ itself
 					if (my_outgoing_link_idx == control_link_idx) {
@@ -806,8 +833,15 @@ async event void SubSend.sendDone(message_t* msg, error_t error) {
 		if (!isScheduled_) {
 			atomic {
 				// only for data slot in a round
-				if (0 == round_offset) {
-					is_any_tx_fail = !call Acks.wasAcked(msg);
+				if (round_offset < WINDOW_SIZE) {
+					if (call Acks.wasAcked(msg)) {
+						success_cnt++;
+					}
+				}
+				// only for last data slot in a round
+				if ((WINDOW_SIZE - 1) == round_offset) {
+					is_any_tx_fail = (success_cnt * 100 / WINDOW_SIZE < REFERENCE_DATA_PDR);
+//					is_any_tx_fail = !call Acks.wasAcked(msg);
 					if (is_any_tx_fail)
 						call UartLog.logEntry(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, slot_since_tdma_start);
 				}

@@ -7,7 +7,7 @@
 % CSMA, RTS-CTS, CMAC: async
 % is_sync_protocol = false;
 % jobs = async_jobs;
-% 
+
 % % PRKS, SCREAM, and RIDB (w/ or w/o OLAMA): sync
 % % is_sync_protocol = true;
 % % jobs = sync_jobs;

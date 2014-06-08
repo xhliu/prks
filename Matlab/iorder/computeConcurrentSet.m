@@ -3,8 +3,8 @@
 %   Date:   4/13/2014
 %   Function: compute concurrency based on unique concurrent sets, not simply in pkts / slot
 %% 
-SLOT_LEN = 512; %32; %512;
-jobs = [22658]; %20849 %21103
+SLOT_LEN = 32; %32; %512;
+jobs = [23048]; %20849 %21103
 
 fprintf('slot length %d\n', SLOT_LEN);
 % MAIN_DIR = '~/Projects/tOR/RawData/';
@@ -24,7 +24,7 @@ for job_id = 1 : length(jobs)
 load debugs;
 t = debugs;
 type = DBG_TDMA_FLAG;
-line = 575; %686; %642 %543;
+line = 709; %575; %686; %642 %543;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 

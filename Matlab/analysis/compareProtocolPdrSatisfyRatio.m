@@ -150,12 +150,32 @@ data(:, idx) = tmp;
 
 %% SCREAM
 fprintf('processing SCREAM\n');
-pdr_job = scream_job;
+% pdr_job = scream_job;
+% 
+% len = length(pdr_req);
+% tmp = cell(len, 1);
+% % each pdr req
+% for i = 1 : len
+%     % each job
+%     for j = 1 : size(pdr_job, 1)
+%         fprintf('processing job %d\n', pdr_job(j, 1));
+%         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+%         cd(job_dir);
+%         load link_pdrs;
+%         s = link_pdrs(:, end) * 100;
+%         tmp{i} = [tmp{i};  100 * sum(s >= pdr_req(i)) / length(s)];
+%     end
+% end
+% idx = idx + 1;
+% data(:, idx) = tmp;
+
+job = scream_job;
 
 len = length(pdr_req);
 tmp = cell(len, 1);
 % each pdr req
 for i = 1 : len
+    pdr_job = job{i};
     % each job
     for j = 1 : size(pdr_job, 1)
         fprintf('processing job %d\n', pdr_job(j, 1));
@@ -217,11 +237,12 @@ set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %
-if is_neteye
 str = ['peer_pdr_satisfaction_ratio_bar'];
-else
-str = ['indriya_peer_pdr_satisfaction_ratio_bar'];
+
+if ~is_neteye
+    str = [str '_indriya'];
 end
+
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');
 saveas(gcf, [str '.fig']);

@@ -10,7 +10,7 @@
 clear
 clc
 
-jobs = [47548];
+jobs = [49065 : 49067 49086];
 
 for job = 1 : length(jobs)
     job_id = jobs(job);

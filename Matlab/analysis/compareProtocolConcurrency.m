@@ -149,22 +149,41 @@ data(:, idx) = tmp;
 
 %% SCREAM
 fprintf('processing SCREAM\n');
-pdr_job = scream_job;
+% pdr_job = scream_job;
 
-%len = length(job);
-tmp = [];
-% each job
-for j = 1 : size(pdr_job, 1)
-    fprintf('processing job %d\n', pdr_job(j, 1));
-    job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
-    cd(job_dir);
-    load concurrency;
-    tmp = [tmp; concurrency];
+% %len = length(job);
+% tmp = [];
+% % each job
+% for j = 1 : size(pdr_job, 1)
+%     fprintf('processing job %d\n', pdr_job(j, 1));
+%     job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+%     cd(job_dir);
+%     load concurrency;
+%     tmp = [tmp; concurrency];
+% end
+% idx = idx + 1;
+% for i = 1 : PDR_REQ_CNT
+%     data{i, idx} = tmp;
+% end
+
+job = scream_job;
+
+len = length(job);
+tmp = cell(len, 1);
+% each pdr req
+for i = 1 : len
+    pdr_job = job{i};
+    % each job
+    for j = 1 : size(pdr_job, 1)
+        fprintf('processing job %d\n', pdr_job(j, 1));
+        job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+        cd(job_dir);
+        load concurrency;
+        tmp{i} = [tmp{i}; concurrency];
+    end
 end
 idx = idx + 1;
-for i = 1 : PDR_REQ_CNT
-    data{i, idx} = tmp;
-end
+data(:, idx) = tmp;
 
 %% process data for display
 ALPHA = 0.05;
@@ -198,11 +217,12 @@ set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %
-if NetEye
 str = ['peer_concurrency_bar'];
-else
-str = ['indriya_peer_concurrency_bar'];
+
+if ~is_neteye
+    str = [str '_indriya'];
 end
+
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');
 saveas(gcf, [str '.fig']);

@@ -84,16 +84,18 @@ enum {
 		
 #ifdef SCREAM
 #warning ACTIVE_LINK_SIZE should be equal to activeLinks size
-	ACTIVE_LINK_SIZE = 100, //45, //100,
+	ACTIVE_LINK_SIZE = 59, //100,
 //#warning INTERFERENCE_DIAMETER
 	// w/ highest power level
 	// based on false postive/negative analysis
 	INTERFERENCE_DIAMETER = 3, //8, //3, 
-	// plus 1st slot data transaction and last slot concurrency decision making and ftsp
-	ROUND_LEN = 1 + INTERFERENCE_DIAMETER + 1,
+	// estimation window size, i.e., # of data packets to send for concurrency test
+	WINDOW_SIZE = 20,
+	// plus WINDOW_SIZE slot data transaction and last slot concurrency decision making and ftsp
+	ROUND_LEN = WINDOW_SIZE + INTERFERENCE_DIAMETER + 1,
 	FRAME_LEN = ROUND_LEN * ACTIVE_LINK_SIZE,
 	
-//#warning FTSP_SLOT_RATIO_BASE
+//#warning FTSP_SLOT_RATIO_BASE not 28
 	// control ftsp slot frequency; 3 insufficient
 	FTSP_SLOT_RATIO_BASE = 28, //28,
 	

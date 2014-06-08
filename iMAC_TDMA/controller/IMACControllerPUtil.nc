@@ -971,7 +971,7 @@ task void updateOLAMATask() {
 	if (!hi_bit && lo_bit)
 		assert(i);
 
-#warning change pos	
+//#warning change pos	
 	// time wraparound implicit since 2^32 is a multiple of SLOT_LEN
 	prio_slot = current_slot + MAX_SLOT_FORWARD + 1 + i;
 	t = prio_slot & SLOT_MASK;

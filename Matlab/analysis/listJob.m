@@ -6,14 +6,14 @@
 %% 
 
 % select testbed: NetEye or Indriya
-% is_neteye = false;
-is_neteye = true;
+is_neteye = false;
+% is_neteye = true;
 
 % directory of raw job data
 % MAIN_DIR = '~/Projects/tOR/RawData/';
-% MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
-MAIN_DIR = '~/Downloads/Indriya/';
-%% MAIN_DIR = '~/Downloads/';
+MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
+% MAIN_DIR = '~/Downloads/Indriya/';
+% MAIN_DIR = '~/Downloads/';
 
 % directory to store figures
 FIGURE_DIR = '~/Dropbox/iMAC/Xiaohui/figure/';
@@ -169,12 +169,27 @@ cmac_job = job;
 
 %% SCREAM
 SCREAM_SLOT_LEN = 32;
-scream_job = [20849 90;
-              20850 90;
-              20851 90;
-              20852 90;
-              20853 90;
-              20881 90];
+% scream_job = [20849 90;
+%               20850 90;
+%               20851 90;
+%               20852 90;
+%               20853 90;
+%               20881 90];
+job = cell(0);
+% pdr req 70
+job{1} = [23054 180;
+          23057 140;
+          ];
+% 80
+job{2} = [23055 240;
+          ];
+% 90
+job{3} = [23053 240;
+          ];
+% 95
+job{4} = [23056 240;
+          ];
+scream_job = job;
 
 else
 %% PRKS
@@ -286,15 +301,30 @@ cmac_job = job;
 
 %% SCREAM
 SCREAM_SLOT_LEN = 32;
-scream_job = [43336 30;
-              43337 60;
-              43347 60;
-              ];
+% scream_job = [43336 30;
+%               43337 60;
+%               43347 60;
+%               ];
+job = cell(0);
+% pdr req 70
+job{1} = [49065 120;
+          ];
+% 80
+job{2} = [49066 120;
+          ];
+% 90
+job{3} = [49067 120;
+          ];
+% 95
+job{4} = [49086 120;
+          ];
+scream_job = job;
+
 end
           
 %% sync protocols
 jobs = [];
-jobs = [jobs; scream_job(:, 1)];
+% jobs = [jobs; scream_job(:, 1)];
 
 for i = 1 : length(prks_job)
     jobs = [jobs; prks_job{i}(:, 1)];
@@ -302,6 +332,10 @@ end
 
 for i = 1 : length(ridb_job)
     jobs = [jobs; ridb_job{i}(:, 1)];
+end
+
+for i = 1 : length(scream_job)
+    jobs = [jobs; scream_job{i}(:, 1)];
 end
 %{
 for i = 1 : length(ridbolama_job)
