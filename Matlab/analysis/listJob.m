@@ -6,14 +6,14 @@
 %% 
 
 % select testbed: NetEye or Indriya
-is_neteye = false;
-% is_neteye = true;
+% is_neteye = false;
+is_neteye = true;
 
 % directory of raw job data
-% MAIN_DIR = '~/Projects/tOR/RawData/';
-MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
+MAIN_DIR = '~/Projects/tOR/RawData/';
+% MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
 % MAIN_DIR = '~/Downloads/Indriya/';
-% MAIN_DIR = '~/Downloads/';
+% MAIN_DIR = '~/Downloads/Jobs/';
 
 % directory to store figures
 FIGURE_DIR = '~/Dropbox/iMAC/Xiaohui/figure/';
@@ -178,17 +178,28 @@ SCREAM_SLOT_LEN = 32;
 job = cell(0);
 % pdr req 70
 job{1} = [23054 180;
-          23057 140;
+          23057 240;
+          23061 240;
+          23068 240;
           ];
 % 80
 job{2} = [23055 240;
+          23060 240;
+          23062 240;
+          23069 240;
           ];
 % 90
 job{3} = [23053 240;
+          23058 240;
+          23063 240;
+          23070 240;
           ];
 % 95
 job{4} = [23056 240;
-          ];
+          23059 240;
+          23064 240;
+          23071 240;
+];
 scream_job = job;
 
 else

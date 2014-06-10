@@ -3,8 +3,7 @@ if 0
 load debugs;
 t = debugs;
 type = DBG_TDMA_FLAG;
-line = 713; exit
-%686; %575;
+line = 713; %686; %575;
 % type = DBG_HEARTBEAT_FLAG;
 % line = 625; %1024;
 t = t(t(:, 3) == type, :);
@@ -131,6 +130,24 @@ t = link_pdrs;
 %     fprintf('nan ratio %f\n', sum(isnan(s)) / length(s));
 % end
 corrcoef(t(:, 3), t(:, 5))
+
+%%
+t = link_pdrs;
+len = size(t, 1);
+ix = t(:, end) <= 0;
+nodes = t(ix, 1);
+
+last_delete_cnt = length(nodes);
+while delete_cnt ~= last_delete_cnt
+    s = nodes;
+    for i = 1 : len
+        % parent
+        if sum(s == t(i, 2)) > 0
+            nodes = [nodes; t(i, 1)];
+            
+    end
+end
+
 %% compute PRK model paramter K
 % variable t stores every log
 INVALID_GAIN = 255;

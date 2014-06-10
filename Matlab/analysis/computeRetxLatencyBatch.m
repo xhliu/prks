@@ -19,8 +19,12 @@
 
 
 is_sync_protocol = true;
-jobs = sync_jobs;
-% jobs = [prks_job{1}; prks_job{2}; prks_job{3}; prks_job{4}];
+% jobs = sync_jobs;
+% jobs = [23061];
+jobs = [];
+for i = 1 : length(scream_job)
+    jobs = [jobs; scream_job{i}(:, 1)];
+end
 
 for job_id = 1 : length(jobs)
     job_dir = [MAIN_DIR num2str(jobs(job_id))];

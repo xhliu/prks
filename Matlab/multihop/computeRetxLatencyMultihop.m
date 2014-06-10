@@ -5,6 +5,7 @@
 %%
 clc;
 MAIN_DIR = '~/Projects/tOR/RawData/';
+fprintf('processing multihop\n');
 %% whether sync protocol or not
 % CSMA, RTS-CTS, CMAC: async
 % PRKS, SCREAM, and RIDB (w/ or w/o OLAMA): sync

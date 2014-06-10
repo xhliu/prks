@@ -5,14 +5,14 @@
 %% 
 % MAIN_DIR = '~/Projects/tOR/RawData/';
 % MAIN_DIR = '~/Downloads/Jobs/';
-jobs = [49065 : 49067 49086];
+jobs = [];
 
-% SLOT_LEN = 32;
-% for i = 1 : length(prks_nama_job)
-%     jobs = [jobs; prks_nama_job{i}(:, 1)];
-% end
+SLOT_LEN = 32;
+for i = 1 : length(scream_job)
+    jobs = [jobs; scream_job{i}(:, 1)];
+end
 
-SLOT_LEN = 32; %32; %512;
+% SLOT_LEN = 512; %32; %512;
 % for i = 1 : length(prks_onama_job)
 %     jobs = [jobs; prks_onama_job{i}(:, 1)];
 % end

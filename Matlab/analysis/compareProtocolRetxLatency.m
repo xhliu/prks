@@ -3,14 +3,14 @@
 %   Date:   1/22/14
 %   Function: display retx latency vs pdr req for various protocols
 %% use mean or median
-is_median = false;
+is_median = true;
 
 %% 
 idx = 0;
 data = cell(PDR_REQ_CNT, PROTOCOL_CNT);
 
 %% PRKS
-CONVERGE_TIME_IN_HOUR = 1;
+CONVERGE_TIME_IN_HOUR = 0;
 BOOTSTRAP_TIME = CONVERGE_TIME_IN_HOUR * 3600 * 2 ^ 20;
 fprintf('retx delay of PRKS after %f hours\n', CONVERGE_TIME_IN_HOUR);
 

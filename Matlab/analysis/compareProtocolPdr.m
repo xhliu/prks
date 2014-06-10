@@ -233,15 +233,15 @@ set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %
-if is_neteye
 str = ['peer_pdr_bar'];
-else
-str = ['indriya_peer_pdr_bar'];
+if ~is_neteye
+    str = [str '_indriya'];
 end
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');
 saveas(gcf, [str '.fig']);
 
+if 0
 %% CDF of PDR for all protocols in a single figure
 % legend_str = {'PRKS70', 'PRKS80', 'PRKS90', 'PRKS95', ...
 %              'CSMA',   'RTS-CTS', ...
@@ -429,5 +429,7 @@ export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');
 saveas(gcf, [str '.fig']);
 
+
+end
 
 end

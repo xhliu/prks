@@ -845,7 +845,7 @@ enum __nesc_unnamed4253 {
 
   COMM_SUBSLOT_LEN = (uint32_t )COMM_SUBSLOT_LEN_MILLI << 10, 
 #line 87
-  ACTIVE_LINK_SIZE = 59, 
+  ACTIVE_LINK_SIZE = 100, 
 
 
 
@@ -896,12 +896,12 @@ enum __nesc_unnamed4255 {
 
 
 
-  REFERENCE_DATA_PDR = 95, 
+  REFERENCE_DATA_PDR = 99, 
 
 
 
 
-  SINR_THRESHOLD = 576, 
+  SINR_THRESHOLD = 2048, 
 
 
   REFERENCE_ACK_PDR = 90, 
@@ -1029,6 +1029,9 @@ enum __nesc_unnamed4256 {
 
 
 
+
+
+
   PERIOD_MILLI = 20UL, 
   MAX_PKT_CNT = 45000U, 
 
@@ -1042,15 +1045,15 @@ enum __nesc_unnamed4256 {
 
 
 
-#line 182
+#line 185
 typedef nx_struct radio_count_msg {
   nx_uint16_t src;
   nx_uint16_t seqno;
 
   nx_uint8_t place_holder[PLACE_HOLDER_LEN];
 } __attribute__((packed)) radio_count_msg_t;
+#line 204
 #line 201
-#line 198
 typedef nx_struct __nesc_unnamed4257 {
   nx_uint16_t seqno;
   nx_uint32_t globalTime;
@@ -3607,13 +3610,13 @@ static void AsyncCC2420TransceiverP__Resource__granted(void );
 # 55 "/Users/xiaohui/Dropbox/tinyos-2.1.2/tos/lib/rfxlink/util/PacketFlag.nc"
 static void AsyncCC2420TransceiverP__PacketFlag__clear(
 # 48 "../iMAC_TDMA/cc2420x/AsyncCC2420TransceiverP.nc"
-uint8_t arg_0x10197bca8, 
+uint8_t arg_0x10197bc40, 
 # 55 "/Users/xiaohui/Dropbox/tinyos-2.1.2/tos/lib/rfxlink/util/PacketFlag.nc"
 message_t *msg);
 #line 40
 static bool AsyncCC2420TransceiverP__PacketFlag__get(
 # 48 "../iMAC_TDMA/cc2420x/AsyncCC2420TransceiverP.nc"
-uint8_t arg_0x10197bca8, 
+uint8_t arg_0x10197bc40, 
 # 40 "/Users/xiaohui/Dropbox/tinyos-2.1.2/tos/lib/rfxlink/util/PacketFlag.nc"
 message_t *msg);
 
@@ -3627,7 +3630,7 @@ message_t *msg);
 
 static void AsyncCC2420TransceiverP__PacketFlag__set(
 # 48 "../iMAC_TDMA/cc2420x/AsyncCC2420TransceiverP.nc"
-uint8_t arg_0x10197bca8, 
+uint8_t arg_0x10197bc40, 
 # 50 "/Users/xiaohui/Dropbox/tinyos-2.1.2/tos/lib/rfxlink/util/PacketFlag.nc"
 message_t *msg);
 # 77 "../iMAC_TDMA/async/AsyncAMPacket.nc"
@@ -5186,25 +5189,25 @@ static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessag
 # 53 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 static error_t /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__send(
 # 46 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x102f75870, 
+am_id_t arg_0x102f764c8, 
 # 53 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 am_addr_t addr, message_t *msg, uint8_t len, /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__size_type event_time);
 #line 103
 static void */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__getPayload(
 # 46 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x102f75870, 
+am_id_t arg_0x102f764c8, 
 # 103 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 message_t *msg, uint8_t len);
 #line 82
 static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__default__sendDone(
 # 46 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x102f75870, 
+am_id_t arg_0x102f764c8, 
 # 82 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 message_t *msg, error_t error);
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
 static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__default__receive(
 # 41 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x102f76870, 
+am_id_t arg_0x102f78510, 
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
 message_t *msg, void *payload, uint8_t len);
 # 35 "../iMAC_TDMA/async/AsyncTimeSyncPacket.nc"
@@ -11279,9 +11282,9 @@ static inline uint8_t SignalMapP__Packet__maxPayloadLength(void );
 static void *SignalMapP__Packet__getPayload(message_t *msg, uint8_t len);
 #line 341
 static inline error_t SignalMapP__LinkEstimator__inLinkPdrUpdated(am_addr_t nb, bool is_ack);
-# 40 "../iMAC_TDMA/util/UtilC.nc"
-link_t UtilC__activeLinks[59] = { { 1, 3 }, { 2, 10 }, { 3, 1 }, { 4, 8 }, { 5, 15 }, { 6, 11 }, { 7, 26 }, { 8, 4 }, { 10, 2 }, { 11, 6 }, { 12, 18 }, { 13, 37 }, { 14, 19 }, { 15, 5 }, { 16, 17 }, { 17, 16 }, { 19, 14 }, { 20, 7 }, { 25, 28 }, { 27, 31 }, { 28, 25 }, { 31, 24 }, { 32, 34 }, { 34, 32 }, { 36, 38 }, { 38, 36 }, { 40, 27 }, { 41, 40 }, { 42, 41 }, { 43, 45 }, { 45, 42 }, { 48, 43 }, { 50, 54 }, { 52, 54 }, { 53, 58 }, { 55, 48 }, { 56, 50 }, { 58, 53 }, { 59, 56 }, { 63, 64 }, { 64, 63 }, { 65, 66 }, { 66, 65 }, { 72, 78 }, { 73, 75 }, { 74, 81 }, { 75, 73 }, { 76, 78 }, { 81, 74 }, { 82, 72 }, { 83, 85 }, { 85, 83 }, { 115, 116 }, { 116, 115 }, { 117, 118 }, { 118, 117 }, { 119, 121 }, { 120, 122 }, { 122, 120 } };
-#line 93
+# 56 "../iMAC_TDMA/util/UtilC.nc"
+link_t UtilC__activeLinks[49] = { { 7, 23 }, { 8, 23 }, { 9, 39 }, { 11, 13 }, { 13, 14 }, { 17, 33 }, { 20, 35 }, { 21, 7 }, { 26, 42 }, { 27, 42 }, { 34, 35 }, { 40, 39 }, { 41, 9 }, { 44, 28 }, { 45, 44 }, { 47, 63 }, { 50, 51 }, { 53, 52 }, { 54, 53 }, { 56, 43 }, { 57, 43 }, { 62, 63 }, { 64, 33 }, { 65, 52 }, { 71, 72 }, { 76, 114 }, { 80, 81 }, { 84, 85 }, { 85, 70 }, { 86, 70 }, { 88, 103 }, { 89, 88 }, { 90, 104 }, { 91, 92 }, { 93, 78 }, { 94, 92 }, { 95, 96 }, { 99, 100 }, { 101, 103 }, { 104, 89 }, { 108, 114 }, { 115, 91 }, { 118, 121 }, { 119, 121 }, { 122, 124 }, { 124, 125 }, { 126, 127 }, { 127, 99 }, { 128, 105 } };
+#line 91
 static inline link_t *UtilC__Util__getActiveLinks(uint8_t *size);
 
 
@@ -11497,13 +11500,13 @@ message_t * msg);
 # 82 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__sendDone(
 # 46 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x102f75870, 
+am_id_t arg_0x102f764c8, 
 # 82 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
 message_t *msg, error_t error);
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
 static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__receive(
 # 41 "../iMAC_TDMA/cc2420x/ftsp/TimeSyncMessageLayerP.nc"
-am_id_t arg_0x102f76870, 
+am_id_t arg_0x102f78510, 
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
 message_t *msg, void *payload, uint8_t len);
 # 63 "/Users/xiaohui/Dropbox/tinyos-2.1.2/tos/interfaces/PacketTimeStamp.nc"
@@ -18114,13 +18117,13 @@ static inline message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyn
 }
 
 # 11 "../iMAC_TDMA/async/AsyncReceive.nc"
-inline static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__receive(am_id_t arg_0x102f76870, message_t *msg, void *payload, uint8_t len){
+inline static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__receive(am_id_t arg_0x102f78510, message_t *msg, void *payload, uint8_t len){
 #line 11
   nx_struct message_t *__nesc_result;
 #line 11
 
 #line 11
-  switch (arg_0x102f76870) {
+  switch (arg_0x102f78510) {
 #line 11
     case TIMESYNC_AM_FTSP:
 #line 11
@@ -18130,7 +18133,7 @@ inline static message_t */*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyn
 #line 11
     default:
 #line 11
-      __nesc_result = /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__default__receive(arg_0x102f76870, msg, payload, len);
+      __nesc_result = /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__Receive__default__receive(arg_0x102f78510, msg, payload, len);
 #line 11
       break;
 #line 11
@@ -19838,9 +19841,9 @@ static inline void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessa
 }
 
 # 82 "../iMAC_TDMA/../router/async/AsyncTimeSyncAMSend.nc"
-inline static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__sendDone(am_id_t arg_0x102f75870, message_t *msg, error_t error){
+inline static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__sendDone(am_id_t arg_0x102f764c8, message_t *msg, error_t error){
 #line 82
-  switch (arg_0x102f75870) {
+  switch (arg_0x102f764c8) {
 #line 82
     case TIMESYNC_AM_FTSP:
 #line 82
@@ -19850,7 +19853,7 @@ inline static void /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessa
 #line 82
     default:
 #line 82
-      /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__default__sendDone(arg_0x102f75870, msg, error);
+      /*CC2420XTimeSyncMessageC.TimeSyncMessageLayerC.TimeSyncMessageLayerP*/TimeSyncMessageLayerP__0__TimeSyncAMSendRadio__default__sendDone(arg_0x102f764c8, msg, error);
 #line 82
       break;
 #line 82
@@ -27557,9 +27560,9 @@ inline static local_link_er_table_entry_t *IMACForwarderP__Controller__getLocalL
 #line 11
 }
 #line 11
-# 93 "../iMAC_TDMA/util/UtilC.nc"
+# 91 "../iMAC_TDMA/util/UtilC.nc"
 static inline link_t *UtilC__Util__getActiveLinks(uint8_t *size)
-#line 93
+#line 91
 {
   *size = sizeof UtilC__activeLinks / sizeof UtilC__activeLinks[0];
   return UtilC__activeLinks;
@@ -31607,9 +31610,9 @@ static timestamp_metadata_t *AsyncCC2420TransceiverP__getMetaTimestamp(message_t
   return (void *)msg + sizeof(message_t ) - AsyncCC2420TransceiverP__SubPacket__metadataLength(msg) - sizeof(flags_metadata_t ) - sizeof(timestamp_metadata_t );
 }
 
-# 120 "../iMAC_TDMA/util/UtilC.nc"
+# 118 "../iMAC_TDMA/util/UtilC.nc"
 static am_addr_t UtilC__Util__getReceiver(void )
-#line 120
+#line 118
 {
   uint8_t i;
 
@@ -31618,7 +31621,7 @@ static am_addr_t UtilC__Util__getReceiver(void )
         return UtilC__activeLinks[i].receiver;
         }
     }
-#line 127
+#line 125
   return INVALID_ADDR;
 }
 
@@ -32171,9 +32174,9 @@ static int16_t SignalMapP__SignalMap__getSignalMapSize(void )
   return total;
 }
 
-# 99 "../iMAC_TDMA/util/UtilC.nc"
+# 97 "../iMAC_TDMA/util/UtilC.nc"
 static bool UtilC__Util__isActiveLink(am_addr_t sender, am_addr_t receiver)
-#line 99
+#line 97
 {
   uint8_t i;
 
@@ -32182,7 +32185,7 @@ static bool UtilC__Util__isActiveLink(am_addr_t sender, am_addr_t receiver)
         return TRUE;
         }
     }
-#line 106
+#line 104
   return FALSE;
 }
 
@@ -32473,9 +32476,9 @@ static void IMACControllerP__sortLinkERTableIdx(uint8_t idx)
     }
 }
 
-# 109 "../iMAC_TDMA/util/UtilC.nc"
+# 107 "../iMAC_TDMA/util/UtilC.nc"
 static uint8_t UtilC__Util__findLinkIdx(am_addr_t sender, am_addr_t receiver)
-#line 109
+#line 107
 {
   uint8_t i;
 
@@ -32484,7 +32487,7 @@ static uint8_t UtilC__Util__findLinkIdx(am_addr_t sender, am_addr_t receiver)
         return i;
         }
     }
-#line 116
+#line 114
   return i;
 }
 

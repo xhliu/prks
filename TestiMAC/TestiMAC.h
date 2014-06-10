@@ -34,8 +34,8 @@
 #endif
 
 // links w/ pdr >= 99%
-//#define LINK_SET_PDR_99
-//#warning LINK_SET_PDR_99
+#define LINK_SET_PDR_99
+#warning LINK_SET_PDR_99
 
 #if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 	#warning change Makefile & make telosb !!!
@@ -169,7 +169,10 @@ enum {
 #else
 	START_DATA_TIME = INITIAL_ER_TIME,
 #endif
-//#warning period not 20
+#ifdef MULTIHOP
+#warning change period
+#endif
+#warning period not 20
 	// CSMA/RTSCTS/CMAC: 1800UL, 	RIDB&SCREAM 22500UL, 	PRKS: 360000UL,
 	PERIOD_MILLI = 20UL,	// 20
 	MAX_PKT_CNT = 45000U,

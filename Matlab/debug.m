@@ -55,7 +55,7 @@ t = txs;
 % s = t(ia, :);
 sum(t(ia, 6))
 
-end
+
 
 %% controller
 % (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample,
@@ -130,6 +130,28 @@ t = link_pdrs;
 %     fprintf('nan ratio %f\n', sum(isnan(s)) / length(s));
 % end
 corrcoef(t(:, 3), t(:, 5))
+
+end
+%%
+t = link_pdrs;
+len = size(t, 1);
+ix = t(:, end) <= 0;
+nodes = t(ix, 1);
+
+s = [];
+while length(s) < length(nodes)
+    s = nodes;
+    for i = 1 : len
+        % parent
+        if sum(s == t(i, 2)) > 0
+            nodes = [nodes; t(i, 1)];
+        end
+    end
+    nodes = unique(nodes);
+end
+[x ix] = setdiff(t(:, 1), nodes);
+s = t(ix, :);
+
 %% compute PRK model paramter K
 % variable t stores every log
 INVALID_GAIN = 255;
