@@ -1,40 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Author: Xiaohui Liu (whulxh@gmail.com)
-%   Date:   1/15/14
-%   Function: display concurrency vs pdr req for various protocols
+%   Date:   1/20/14
+%   Function: display per slot throughput vs pdr req for various protocols
 %%
 idx = 0;
-% if is_neteye
-    data = cell(PDR_REQ_CNT, PROTOCOL_CNT);
-% else
-%     % no iOrder
-%     data = cell(PDR_REQ_CNT, 2);
-% end
+data = cell(PDR_REQ_CNT, PROTOCOL_CNT);
 
 %% PRKS
 fprintf('processing PRKS\n');
 job = prks_job;
 
-len = length(job);
-tmp = cell(len, 1);
-% each pdr req
-for i = 1 : len
-    pdr_job = job{i};
-    % each job
-    for j = 1 : size(pdr_job, 1)
-        fprintf('processing job %d\n', pdr_job(j, 1));
-        job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
-        cd(job_dir);
-        load concurrency;
-        tmp{i} = [tmp{i}; concurrency];
-    end
-end
-idx = idx + 1;
-data(:, idx) = tmp;
-
-%% PRKS-R
-fprintf('processing PRKS-R\n');
-job = prksr_job;
+SCALE = 1024 / 5;
+SCALE = SCALE * 2691.6 / 1171.5;
 
 len = length(job);
 tmp = cell(len, 1);
@@ -46,41 +23,49 @@ for i = 1 : len
         fprintf('processing job %d\n', pdr_job(j, 1));
         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
         cd(job_dir);
-        load concurrency;
-        tmp{i} = [tmp{i}; concurrency];
+        load rx_concurrency;
+        tmp{i} = [tmp{i}; rx_concurrency * SCALE];
     end
 end
 idx = idx + 1;
 data(:, idx) = tmp;
 
-% %% PRKS-L
-% fprintf('processing PRKS-L\n');
-% job = prksl_job;
-% 
-% len = length(job);
-% tmp = cell(len, 1);
-% % each pdr req
-% for i = 1 : len
-%     pdr_job = job{i};
-%     % each job
-%     for j = 1 : size(pdr_job, 1)
-%         fprintf('processing job %d\n', pdr_job(j, 1));
-%         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
-%         cd(job_dir);
-%         load concurrency;
-%         tmp{i} = [tmp{i}; concurrency];
-%     end
-% end
-% idx = idx + 1;
-% data(:, idx) = tmp;
 
 
-% if is_neteye
-% %% iOrder
-% idx = idx + 1;
-% % iorder is from testiOrder
-% data(:, idx) = iorder;
-% end
+%% RIDB
+fprintf('processing RIDB\n');
+job = ridb_job;
+
+SCALE = 1024 / 5;
+% dedicated ftsp slot
+if is_neteye
+    SCALE = SCALE * 128 / 100;
+else
+    SCALE = SCALE * 128 / 59;
+end
+
+% to be consistent w/ peer_slot_throughput_bar_indriya
+SCALE = SCALE * 2691.6 / 1171.5;
+
+len = length(job);
+tmp = cell(len, 1);
+% each pdr req
+for i = 1 : len
+    pdr_job = job{i};
+    % each job
+    for j = 1 : size(pdr_job, 1)
+        fprintf('processing job %d\n', pdr_job(j, 1));
+        job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+        cd(job_dir);
+        load rx_concurrency;
+        tmp{i} = [tmp{i}; rx_concurrency * SCALE];
+    end
+end
+idx = idx + 1;
+data(:, idx) = tmp;
+
+
+
 %% process data for display
 ALPHA = 0.05;
 M = size(data, 1);
@@ -96,33 +81,28 @@ for i = 1 : M
 end
 
 %% display
-bw_ylabel = 'Concurrency (packets per slot)';
-% if is_neteye
-%     bw_legend = {'PRKS-NAMA', 'PRKS-ONAMA', 'iOrder'};
-% else
-%     bw_legend = {'PRKS-NAMA', 'PRKS-ONAMA'};
-% end
+bw_ylabel = 'Throughput (pps)';
 % bw: short for barweb
 %barweb(barvalues, errors, width, groupnames, bw_title, bw_xlabel,
 %bw_ylabel, bw_colormap, gridstatus, bw_legend, error_sides, legend_type)
 h = barweb(barvalue, error, [], groupnames, [], bw_xlabel, bw_ylabel);
-%h.legend = legend(bw_legend, 'orientation', 'horizontal');
-h.legend = legend(bw_legend);
+h.legend = legend(bw_legend, 'orientation', 'horizontal');
 
 %%
-set(gca, 'FontSize', 40);
+set(gca, 'FontSize', 30);
 ylabel(bw_ylabel);
-xlabel(bw_xlabel);
-grid on;
+% xlabel(bw_xlabel);
+xlabel('');
 
 maximize;
 set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
+%
+str = ['prks_vs_ridb_slot_throughput_bar'];
 
-str = 'prks_variant_concurrency';
 if ~is_neteye
-    str = '_indriya';
+    str = [str '_indriya'];
 end
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');

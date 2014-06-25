@@ -90,7 +90,7 @@ for i = 1 : len
                     % after convergence
                     samples = s(ix : end, LINK_PDR_IDX);
                     % deviation
-                    err = abs(samples - pdr_req);
+                    err = (samples - pdr_req);
                     tmp{i} = [tmp{i}; err]; % mean(err)
                     % cov
 %                     tmp{i} = [tmp{i}; std(samples) / mean(samples)];

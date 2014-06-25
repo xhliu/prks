@@ -3,6 +3,8 @@
 %   Date:   1/15/14
 %   Function: record all job parameters; run this before any other .m files
 %   under this directory
+%   Update: 6/12/14
+%           get rid of PRKS-L since it is not statistically different
 %% 
 
 % select testbed: NetEye or Indriya
@@ -17,11 +19,11 @@ else
 end
 
 % directory to store figures
-FIGURE_DIR = '~/Dropbox/iMAC/Xiaohui/figure/variant/';
+FIGURE_DIR = '~/Dropbox/iMAC/Xiaohui/figure/';
 fprintf('Warning: please change the directory to prevent overwriting\n');
 
 % # of protocols to compare
-PROTOCOL_CNT = 3;
+PROTOCOL_CNT = 2; %3
 % # of pdr requirements
 pdr_reqs = [70 80 90 95];
 PDR_REQ_CNT = length(pdr_reqs);
@@ -31,7 +33,7 @@ groupnames = {'70', '80', '90', '95'};
 bw_xlabel = 'PDR requirement (%)';
 fprintf('Warning: protocol orders in compareProtocol*.m must match bw_legend here\n');
 %bw_legend = {'PRKS', 'CSMA', 'RTS-CTS', 'RIDB', 'RIDB-OLAMA', 'CMAC', 'SCREAM'};
-bw_legend = {'PRKS', 'PRKS-R', 'PRKS-L'};
+bw_legend = {'PRKS', 'PRKS-R'}; %, 'PRKS-L'};
 
 %% format: [job_id job_duration_in_mins]
 
@@ -101,27 +103,27 @@ job{4} = [21765 240;
           ];
 prksr_job = job;
 
-%% PRKS-L
-job = cell(0);
-
-% pdr req 70
-job{1} = [21769 240;
-          21774 240;
-          21790 240;
-          ];
-% 80
-job{2} = [21770 240;
-          21789 240;
-          ];
-% 90
-job{3} = [21614 240;
-          21761 240;
-          21791 240;
-          ];
-% 95
-job{4} = [21766 240;
-          ];
-prksl_job = job;
+% %% PRKS-L
+% job = cell(0);
+% 
+% % pdr req 70
+% job{1} = [21769 240;
+%           21774 240;
+%           21790 240;
+%           ];
+% % 80
+% job{2} = [21770 240;
+%           21789 240;
+%           ];
+% % 90
+% job{3} = [21614 240;
+%           21761 240;
+%           21791 240;
+%           ];
+% % 95
+% job{4} = [21766 240;
+%           ];
+% prksl_job = job;
 
 
 else

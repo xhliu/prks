@@ -7,12 +7,12 @@
 % 0.5 for Indriya
 CONVERGE_TIME_IN_HOUR = 1;
 
-job = prks_mixed_txpower_job;
+job = prks_job;
 BOOTSTRAP_TIME = CONVERGE_TIME_IN_HOUR * 3600 * 2 ^ 20;
 fprintf('pdr of PRKS after %f hours\n', CONVERGE_TIME_IN_HOUR);
 
-pdr_req = [70 80 90 95];
-pdr_req_str = {'70', '80', '90', '95'};
+pdr_req = [99];
+% pdr_req_str = {'70', '80', '90', '95'};
 
 TIMESTAMP_IDX = 10;
 SLOT_WRAP_LEN = 2 ^ 32;
@@ -78,36 +78,36 @@ for i = 1 : len
         data{i} = [data{i}; s];
     end
 end
-fprintf('pdr filter enabled\n');
+% fprintf('pdr filter enabled\n');
 
-%%
-group = zeros(0);
-dataDisp = zeros(0);
-for i = 1 : size(data, 1)
-    group = [group ; ones(size(data{i})) + i - 1];
-    dataDisp = [dataDisp ; data{i}];
-end
-% figure;
-boxplot(dataDisp, group, 'notch', 'on');
-%set(gca, 'xticklabel', groupnames);
-set(gca, 'xtick', [1 2 3 4], 'xticklabel', groupnames);
-
-%% display
-bw_ylabel = 'PDR (%)';
-set(gca, 'FontSize', 50);
-% set(gca, 'yscale', 'log');
-ylabel(bw_ylabel);
-xlabel(bw_xlabel);
-
-maximize;
-set(gcf, 'Color', 'white');
-cd(FIGURE_DIR);
-% cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
-%
-str = ['prks_mix_txpower_pdr_vs_pdr_req'];
-if ~is_neteye
-    str = [str '_indriya'];
-end
-export_fig(str, '-eps');
-export_fig(str, '-jpg', '-zbuffer');
-saveas(gcf, [str '.fig']);
+% %%
+% group = zeros(0);
+% dataDisp = zeros(0);
+% for i = 1 : size(data, 1)
+%     group = [group ; ones(size(data{i})) + i - 1];
+%     dataDisp = [dataDisp ; data{i}];
+% end
+% % figure;
+% boxplot(dataDisp, group, 'notch', 'on');
+% %set(gca, 'xticklabel', groupnames);
+% set(gca, 'xtick', [1 2 3 4], 'xticklabel', groupnames);
+% 
+% %% display
+% bw_ylabel = 'PDR (%)';
+% set(gca, 'FontSize', 50);
+% % set(gca, 'yscale', 'log');
+% ylabel(bw_ylabel);
+% xlabel(bw_xlabel);
+% 
+% maximize;
+% set(gcf, 'Color', 'white');
+% cd(FIGURE_DIR);
+% % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
+% %
+% str = ['prks_mix_txpower_pdr_vs_pdr_req'];
+% if ~is_neteye
+%     str = [str '_indriya'];
+% end
+% export_fig(str, '-eps');
+% export_fig(str, '-jpg', '-zbuffer');
+% saveas(gcf, [str '.fig']);

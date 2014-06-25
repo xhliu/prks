@@ -83,6 +83,12 @@ fprintf('processing RIDB\n');
 job = ridb_job;
 
 SCALE = 1024 / 5;
+% dedicated ftsp slot
+if is_neteye
+    SCALE = SCALE * 128 / 100;
+else
+    SCALE = SCALE * 128 / 59;
+end
 
 len = length(job);
 tmp = cell(len, 1);
@@ -157,6 +163,12 @@ data(:, idx) = tmp;
 %% SCREAM
 fprintf('processing SCREAM\n');
 SCALE = 1024 / 5;
+% dedicated ftsp slot
+if is_neteye
+    SCALE = SCALE * (100 + 28) / 100;
+else
+    SCALE = SCALE * (59 + 28) / 59;
+end
 
 % pdr_job = scream_job;
 

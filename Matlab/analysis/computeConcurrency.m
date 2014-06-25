@@ -5,7 +5,8 @@
 %% 
 jobs = [];
 % 1) SCREAM or RIDB without OLAMA
-SLOT_LEN = 32;
+SLOT_LEN = 32; %32; %512;
+
 for i = 1 : length(scream_job)
     jobs = [jobs; scream_job{i}(:, 1)];
 end
@@ -21,11 +22,11 @@ end
 % for i = 1 : length(prksl_job)
 %     jobs = [jobs; prksl_job{i}(:, 1)];
 % end
-% for i = 1 : length(ridbolama_job)
-%     jobs = [jobs; ridbolama_job{i}(:, 1)];
+% for i = 1 : length(ridb_job)
+%     jobs = [jobs; ridb_job{i}(:, 1)];
 % end
 % MAIN_DIR = '~/Downloads/Jobs/';
-% MAIN_DIR = '~/Projects/tOR/RawData/';
+% MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
 fprintf('slot length %d\n', SLOT_LEN);
 
 for job_id = 1 : length(jobs)
@@ -41,7 +42,7 @@ for job_id = 1 : length(jobs)
 load debugs;
 t = debugs;
 type = DBG_TDMA_FLAG;
-line = 713; %575; %686;
+line = 713; %543
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -59,33 +60,36 @@ t = t(t(:, 4) == line, :);
 
 load link_pdrs;
 SLOT_WRAP_LEN = 2 ^ 32 / (SLOT_LEN * 2 ^ 10);
-MIN_GAP = SLOT_WRAP_LEN / 2;
-nodes = unique(t(:, 2));
-tx_slots = [];
-for j = 1 : length(nodes)
-    s = t(t(:, 2) == nodes(j), 10);
-    % sanity check if time is increasing
-%     plot(s);
-    
-    % wrap around points; add MIN_GAP bcoz sometimes a entry is larger than
-    % its next entry somehow
-    %IX = find(s(1:end-1) > s(2:end));
-    IX = find(s(1:end-1) > (s(2:end) + MIN_GAP));
-    len = length(IX);
-    for i = 1 : len
-        if i < len
-            s(IX(i) + 1 : IX(i + 1)) = s(IX(i) + 1 : IX(i + 1)) + i * SLOT_WRAP_LEN;
-        else
-            s(IX(i) + 1 : end) = s(IX(i) + 1 : end) + i * SLOT_WRAP_LEN;
-        end
-    end
-%     plot(s);
-    tx_slots = [tx_slots; s];
-end
-
-s = tx_slots;
+% MIN_GAP = SLOT_WRAP_LEN / 2;
+% nodes = unique(t(:, 2));
+% tx_slots = [];
+% for j = 1 : length(nodes)
+%     s = t(t(:, 2) == nodes(j), 10);
+%     % sanity check if time is increasing
+% %     plot(s);
+%     
+%     % wrap around points; add MIN_GAP bcoz sometimes a entry is larger than
+%     % its next entry somehow
+%     %IX = find(s(1:end-1) > s(2:end));
+%     IX = find(s(1:end-1) > (s(2:end) + MIN_GAP));
+%     len = length(IX);
+%     for i = 1 : len
+%         if i < len
+%             s(IX(i) + 1 : IX(i + 1)) = s(IX(i) + 1 : IX(i + 1)) + i * SLOT_WRAP_LEN;
+%         else
+%             s(IX(i) + 1 : end) = s(IX(i) + 1 : end) + i * SLOT_WRAP_LEN;
+%         end
+%     end
+% %     plot(s);
+%     tx_slots = [tx_slots; s];
+% end
+% s = tx_slots;
+t = unwrap(t, SLOT_WRAP_LEN);
+s = t(:, 10);
 [c e] = hist(s, unique(s));
 ce = [e c'];
+
+% ce(1:20, :)
 %% figure;
 concurrency = ce(:, end);
 % concurrency = concurrency(20000:end);

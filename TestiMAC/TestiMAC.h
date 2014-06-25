@@ -15,9 +15,9 @@
 //#define CMAC
 
 // TDMA
-#warning SCREAM enabled
-#define SCREAM
-// basically PRKS but differ w/ const initial ER, no adaptation
+//#warning SCREAM enabled
+//#define SCREAM
+// basically PRKS but differ w/ const initial ER, no adaptation; OLAMA_DISABLED has to be enabled for original RIDB w/o ONAMA
 //#warning RIDB enabled
 //#define RIDB
 
@@ -34,8 +34,8 @@
 #endif
 
 // links w/ pdr >= 99%
-#define LINK_SET_PDR_99
-#warning LINK_SET_PDR_99
+//#define LINK_SET_PDR_99
+//#warning LINK_SET_PDR_99
 
 #if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 	#warning change Makefile & make telosb !!!
@@ -62,8 +62,9 @@
 //	#define HETER_TX_POWER
 //	#warning HETER_TX_POWER
 	// set pdr requirement by link
-//	#define SET_PDR_REQ_BY_LINK
-//	#warning SET_PDR_REQ_BY_LINK
+	#define SET_PDR_REQ_BY_LINK
+	#warning SET_PDR_REQ_BY_LINK
+
 	
 	// disable SPI resource arbitration
 	#define DUMMY_SPI
@@ -172,7 +173,7 @@ enum {
 #ifdef MULTIHOP
 #warning change period
 #endif
-#warning period not 20
+//#warning period not 20
 	// CSMA/RTSCTS/CMAC: 1800UL, 	RIDB&SCREAM 22500UL, 	PRKS: 360000UL,
 	PERIOD_MILLI = 20UL,	// 20
 	MAX_PKT_CNT = 45000U,

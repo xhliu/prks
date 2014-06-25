@@ -9,8 +9,8 @@
 % jobs = async_jobs;
 
 % % PRKS, SCREAM, and RIDB (w/ or w/o OLAMA): sync
-% % is_sync_protocol = true;
-% % jobs = sync_jobs;
+is_sync_protocol = false;
+jobs = async_jobs;
 % 
 % for job_id = 1 : length(jobs)
 %     job_dir = [MAIN_DIR num2str(jobs(job_id))];
@@ -18,13 +18,13 @@
 % end
 
 
-is_sync_protocol = true;
+% is_sync_protocol = true;
 % jobs = sync_jobs;
-% jobs = [23061];
-jobs = [];
-for i = 1 : length(scream_job)
-    jobs = [jobs; scream_job{i}(:, 1)];
-end
+% jobs = [49229];
+% jobs = [];
+% for i = 1 : length(scream_job)
+%     jobs = [jobs; scream_job{i}(:, 1)];
+% end
 
 for job_id = 1 : length(jobs)
     job_dir = [MAIN_DIR num2str(jobs(job_id))];

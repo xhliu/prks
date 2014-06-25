@@ -6,17 +6,14 @@
 %% 
 
 % select testbed: NetEye or Indriya
-is_neteye = false;
-% is_neteye = true;
+% is_neteye = false;
+is_neteye = true;
 
 % directory of raw job data
-if is_neteye
-    MAIN_DIR = '~/Projects/tOR/RawData/';
-else
-    MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
-end
+MAIN_DIR = '~/Projects/tOR/RawData/';
+% MAIN_DIR = '~/Projects/tOR/RawData/Indriya/';
 % MAIN_DIR = '~/Downloads/Indriya/';
-% MAIN_DIR = '~/Downloads/Jobs/';
+% MAIN_DIR = '~/Downloads/';
 
 % directory to store figures
 FIGURE_DIR = '~/Dropbox/iMAC/Xiaohui/figure/';
@@ -27,12 +24,13 @@ fprintf('Warning: please change the directory to prevent overwriting\n');
 % # of protocols to compare
 PROTOCOL_CNT = 6;
 % # of pdr requirements
-pdr_reqs = [70 80 90 95];
+pdr_reqs = [99];
 PDR_REQ_CNT = length(pdr_reqs);
 
 % display shared variable
-groupnames = {'70', '80', '90', '95'};
-bw_xlabel = 'PDR requirement (%)';
+groupnames = cell(1);
+% bw_xlabel = 'PDR requirement (%)';
+bw_xlabel = '';
 fprintf('Warning: protocol orders in compareProtocol*.m must match bw_legend here\n');
 %bw_legend = {'PRKS', 'CSMA', 'RTS-CTS', 'RIDB', 'RIDB-OLAMA', 'CMAC', 'SCREAM'};
 bw_legend = {'PRKS', 'CSMA', 'RTS-CTS', 'RIDB', 'CMAC', 'SCREAM'};
@@ -61,147 +59,79 @@ job = cell(0);
 % job{3} = [21037 180];
 % job{4} = [21001 240];
 % pdr req 70
-job{1} = [20858 240;
-          20867 240;
-          20894 240;
-          20891 240;
+job{1} = [21840 240;
+          21841 240;
+          21842 240;
+          21843 240;
           ];
-% 80
-job{2} = [20859 240;
-          20866 240;
-          20914 240;
-          20892 240;
-          ];
-% 90
-job{3} = [20857 240;
-          20865 240;
-          20926 240;
-          20913 240;
-          20890 240;
-          ];
-% 95
-job{4} = [20856 240;
-          20860 360;
-          20925 240;
-          20912 240;
-          20893 240;
-          ];
+
 prks_job = job;
 
 %% CSMA
 CSMA_SLOT_LEN = 5;
-csma_job = [20288 20;
-            20313 20;
-            20325 20;
-            20310 20;];
+csma_job = [21853 30;
+            23144 20;
+            23145 20;
+            ];
 
 %% RTSCTS
 RTSCTS_SLOT_LEN = 5;
-rtscts_job = [20287 30;
-              20324 30;
-              20311 30;];
+rtscts_job = [21852 30;
+              23146 30;
+              23147 30;
+              ];
 
 
 %% RIDB
 RIDB_SLOT_LEN = 32;
 job = cell(0);
 % pdr req 70
-job{1} = [20278 30;
-          20327 30;
-          ];
-% 80
-job{2} = [20276 30;
-          20383 60;
-          20319 30;
-          ];
-% 90
-job{3} = [20275 30;
-          20382 60;
-          20317 30;
-          ];
-% 95
-job{4} = [20277 30;
-          20318 30;
-          ];
+job{1} = [21850 90;
+          21856 90;
+          23153 90;
+          23154 90;];
 ridb_job = job;
 
 
 
 %% RIDB_OLAMA
-% RIDBOLAMA_SLOT_LEN = 512;
-% job = cell(0);
-% % pdr req 70
-% job{1} = [20793 60;
-%           ];
-% % 80
-% job{2} = [20794 60;
-%           ];
-% % 90
-% job{3} = [20778 60;
-%           20776 60;
-%           ];
-% % 95
-% job{4} = [20792 60;
-%           ];
-% ridbolama_job = job;
-
+%{
+RIDBOLAMA_SLOT_LEN = 512;
+job = cell(0);
+% pdr req 70
+job{1} = [20793 60;
+          ];
+% 80
+job{2} = [20794 60;
+          ];
+% 90
+job{3} = [20778 60;
+          20776 60;
+          ];
+% 95
+job{4} = [20792 60;
+          ];
+ridbolama_job = job;
+%}
 %% CMAC
 CMAC_SLOT_LEN = 5;
 job = cell(0);
 % pdr req 70
-job{1} = [20291 30;
-          20326 30;
-          ];
-% 80
-job{2} = [20290 30;
-          20323 30;
-          ];
-% 90
-job{3} = [20286 30;
-          20320 30;
-          20292 30;
-          ];
-% 95
-job{4} = [20289 30;
-          20322 30;
-          20321 30;
-          ];
+job{1} = [21851 30;
+          23148 30
+          23149 30];
+
 cmac_job = job;
 
 
 %% SCREAM
 SCREAM_SLOT_LEN = 32;
-% scream_job = [20849 90;
-%               20850 90;
-%               20851 90;
-%               20852 90;
-%               20853 90;
-%               20881 90];
 job = cell(0);
 % pdr req 70
-job{1} = [23054 180;
-          23057 240;
-          23061 240;
-          23068 240;
+job{1} = [23131 240;
+          23141 240;
+          23150 240;
           ];
-% 80
-job{2} = [23055 240;
-          23060 240;
-          23062 240;
-          23069 240;
-          ];
-% 90
-job{3} = [23053 240;
-          23058 240;
-          23063 240;
-          23070 240;
-          ];
-% 95
-job{4} = [23056 240;
-          23059 240;
-          23064 240;
-          23071 240;
-];
 scream_job = job;
 
 else
@@ -251,20 +181,18 @@ RIDB_SLOT_LEN = 32;
 job = cell(0);
 % pdr req 70
 job{1} = [43514 30;
-           
           ];
 % 80
 job{2} = [43513 30;
-          43745 30;
           ];
 % 90
-job{3} = [43512 30;
-          43767 30;
+job{3} = [43353 30;
+          43390 60;
+          43456 60;
+          43512 30;
           ];
 % 95
 job{4} = [43511 30;
-          43743 30;
-          43772 30;
           ];
 ridb_job = job;
 
@@ -316,30 +244,15 @@ cmac_job = job;
 
 %% SCREAM
 SCREAM_SLOT_LEN = 32;
-% scream_job = [43336 30;
-%               43337 60;
-%               43347 60;
-%               ];
-job = cell(0);
-% pdr req 70
-job{1} = [49065 120;
-          ];
-% 80
-job{2} = [49066 120;
-          ];
-% 90
-job{3} = [49067 120;
-          ];
-% 95
-job{4} = [49086 120;
-          ];
-scream_job = job;
-
+scream_job = [43336 30;
+              43337 60;
+              43347 60;
+              ];
 end
           
 %% sync protocols
 jobs = [];
-% jobs = [jobs; scream_job(:, 1)];
+jobs = [jobs; scream_job(:, 1)];
 
 for i = 1 : length(prks_job)
     jobs = [jobs; prks_job{i}(:, 1)];
@@ -347,10 +260,6 @@ end
 
 for i = 1 : length(ridb_job)
     jobs = [jobs; ridb_job{i}(:, 1)];
-end
-
-for i = 1 : length(scream_job)
-    jobs = [jobs; scream_job{i}(:, 1)];
 end
 %{
 for i = 1 : length(ridbolama_job)

@@ -1,13 +1,41 @@
 if 0
+%% DBG constants
+DBG_LOSS_FLAG = 0;
+DBG_TX_FLAG = DBG_LOSS_FLAG + 1;
+DBG_RX_FLAG = DBG_TX_FLAG + 1;
+DBG_BACKOFF_FLAG = DBG_RX_FLAG + 1;
+DBG_ER_FLAG = DBG_BACKOFF_FLAG + 1;
+% 5
+DBG_SM_FLAG = DBG_ER_FLAG + 1;
+DBG_TX_FAIL_FLAG = DBG_SM_FLAG + 1;
+DBG_TIMEOUT_FLAG = DBG_TX_FAIL_FLAG + 1;
+DBG_BI_ER_FLAG = DBG_TIMEOUT_FLAG + 1;
+DBG_EXEC_TIME_FLAG = DBG_BI_ER_FLAG + 1;
+% 10
+DBG_DELAY_FLAG = DBG_EXEC_TIME_FLAG + 1;
+DBG_CANCEL_FLAG = DBG_DELAY_FLAG + 1;
+DBG_CONTROLLER_FLAG = DBG_CANCEL_FLAG + 1;
+DBG_COUNTER_NAV_FLAG = DBG_CONTROLLER_FLAG + 1;
+DBG_CALC_FLAG = DBG_COUNTER_NAV_FLAG + 1;
+% 15
+DBG_HEARTBEAT_FLAG = DBG_CALC_FLAG + 1;
+DBG_FTSP_FLAG = DBG_HEARTBEAT_FLAG + 1;
+DBG_TDMA_FLAG = DBG_FTSP_FLAG + 1;
+DBG_SPI_FLAG = DBG_TDMA_FLAG + 1;
+DBG_DRIVER_FLAG = DBG_SPI_FLAG + 1;
+% 20
+DBG_ERR_FLAG = DBG_DRIVER_FLAG + 1;
+DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1;
+
 %% always keep first
 load debugs;
 t = debugs;
+% type = DBG_CONTROLLER_FLAG;
+% line = 1018; %686; %575;
 type = DBG_TDMA_FLAG;
-line = 713; %686; %575;
-% type = DBG_HEARTBEAT_FLAG;
-% line = 625; %1024;
+line = 543; %543; %1024;
 t = t(t(:, 3) == type, :);
-t = t(t(:, 4) == line, :);
+% t = t(t(:, 4) == line, :);
 
 %% line # if changed
 s = t;
@@ -15,21 +43,24 @@ s = s(:, 4);
 cdfplot(s);
 unique(s)
 
+end
 %%
 s = t;
 % sum(s(:, 9) > s(:, 10))
 % s = s(s(:, 2) == 15, :);
-% s = s(:, 10);
+s = s(:, 10);
+% max(s) / 32
 % s = mod(s, 2 ^ 17);
 % s = s(s(:, 6) == s(:, 7) - 1, :);
-% s = mod(s, 128);
+s = mod(s, 128);
+s = unique(s);
 % cnt = sum(s == 178);
 % length(s) - cnt - cnt
 % s = s(:, [2 10]);
-[x ix] = sort(s(:, 10));
-s = s(ix, :);
-s(:, 10) = s(:, 10) - min(s(:, 10));
-% plot(s);
+% [x ix] = sort(s(:, 10));
+% s = s(ix, :);
+% s(:, 10) = s(:, 10) - min(s(:, 10));
+plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % plot(s);
@@ -39,15 +70,17 @@ s(:, 10) = s(:, 10) - min(s(:, 10));
 % ix = find(s > 1);
 % s(ix - 10 : ix + 10)
 % hold on;
-% unique(s);
 % length(s)
 %%
+load link_pdrs;
 cdfplot(link_pdrs(:, end));
 %%
-load ~/Dropbox/Projects/PRK/Matlab/matdata/rx_concurrency.mat
+% load ~/Dropbox/Projects/PRK/Matlab/matdata/rx_concurrency.mat
+load rx_concurrency;
 t = rx_concurrency;
 median(t)
 mean(t)
+cdfplot(t);
 %%
 load txrxs;
 t = txs;
@@ -68,7 +101,7 @@ link_settling_time = [];
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
 %     fprintf('warning: fixed link id\n');
-%     link_id = 5;
+%     link_id = 12;
     
     s = t;
     % receiver
@@ -108,16 +141,135 @@ for link_id = 1 : size(link_pdrs, 1)
     link_settling_time = [link_settling_time; ix];
     
 %     plot(s(:, [6 8 9]));
-    plot(s(:, [6 9 8]));
+    plot([s(:, 6) repmat(pdr_req, size(s, 1), 1)]);
 %     plot([s(:, [6 7 8 9 10]) ewma repmat(pdr_req, size(s, 1), 1) repmat(0, size(s, 1), 1)]);
 %     plot([s(:, [6 7 8]) sinr repmat(pdr_req, size(s, 1), 1)]);
 %     title(['link ' num2str(link_id) ' , pdr req ' num2str(pdr_req)]);
     title(['link ' num2str(link_id)]);
-    legend({'pdr', 'pdr req', 'ER size'}, 'Location', 'Best');
+    legend({'pdr'}, 'Location', 'Best');
 %     legend({'pdr', 'pdr sample', 'ER size', 'pdr req', 'deltaI', 'ewma'});
 end
 cdfplot(link_settling_time);
 save('link_settling_time.mat', 'link_settling_time');
+%% mix power level
+t = [
+1, 2, 3;
+2, 1, 3;
+3, 5, 4;
+4, 7, 4;
+5, 3, 4;
+6, 7, 3;
+8, 9, 3;
+9, 8, 3;
+10, 27, 3;
+11, 10, 3;
+13, 11, 3;
+14, 13, 3;
+15, 14, 3;
+16, 17, 3;
+17, 6, 4;
+18, 16, 3;
+19, 18, 3;
+20, 19, 4;
+21, 4, 8;
+22, 20, 3;
+23, 22, 4;
+26, 23, 6;
+27, 40, 4;
+28, 26, 4;
+29, 28, 3;
+30, 15, 3;
+31, 32, 3;
+32, 31, 3;
+33, 34, 3;
+34, 21, 3;
+35, 49, 4;
+38, 39, 3;
+39, 38, 3;
+40, 41, 3;
+41, 29, 3;
+42, 43, 3;
+43, 30, 3;
+44, 45, 3;
+45, 44, 3;
+46, 47, 3;
+47, 33, 3;
+48, 46, 3;
+49, 35, 4;
+50, 66, 3;
+51, 50, 3;
+52, 51, 3;
+53, 48, 4;
+54, 53, 3;
+55, 54, 3;
+56, 60, 3;
+57, 42, 3;
+58, 57, 3;
+60, 58, 3;
+61, 62, 3;
+62, 52, 4;
+63, 77, 3;
+65, 66, 3;
+67, 65, 3;
+68, 67, 3;
+69, 55, 3;
+70, 69, 6;
+71, 56, 4;
+72, 71, 3;
+73, 72, 4;
+75, 73, 5;
+76, 61, 3;
+77, 63, 3;
+78, 79, 5;
+79, 78, 4;
+80, 81, 3;
+81, 80, 3;
+83, 68, 3;
+91, 93, 3;
+92, 76, 3;
+93, 92, 3;
+94, 95, 3;
+95, 96, 3;
+96, 97, 3;
+99, 97, 3;
+100, 99, 3;
+101, 86, 3;
+103, 88, 3;
+104, 88, 3;
+105, 85, 3;
+108, 91, 3;
+110, 117, 3;
+111, 116, 3;
+113, 107, 3;
+114, 108, 3;
+115, 117, 4;
+116, 110, 4;
+118, 119, 3;
+119, 118, 3;
+122, 103, 3;
+123, 84, 3;
+124, 70, 4;
+125, 124, 3;
+126, 127, 3;
+127, 84, 3;
+129, 126, 3;
+];
+len = size(t, 1);
+link_tx_power_level = zeros(len, 4);
+for i = 1 : len
+    power_level = t(i, 3);
+    power = level_power_table(power_level + 1);
+    link_tx_power_level(i, :) = [t(i, 1) t(i, 2) power power_level];
+end
+save('~/Dropbox/iMAC/Xiaohui/link_tx_power_level.mat', 'link_tx_power_level');
+
+%%
+load txrxs;
+SLOT_LEN = 32;
+t = tx_successes;
+s = floor(t(:, 10) / (SLOT_LEN * 1024));
+[c e] = hist(s, unique(s));
+ce = [e c'];
 %%
 % [slot, # of concurrent links, signal, noise+interference, snr]
 load ~/Projects/tOR/RawData/21103/link_pdrs;
@@ -131,7 +283,6 @@ t = link_pdrs;
 % end
 corrcoef(t(:, 3), t(:, 5))
 
-end
 %%
 t = link_pdrs;
 len = size(t, 1);
@@ -1156,30 +1307,5 @@ fprintf('throughput %f\n', thruput);
 %% 
 pdr_vs_snr = [snr' pdr'];
 save('pdr_vs_snr_theory.mat', 'pdr_vs_snr');
-%% DBG constants
-DBG_LOSS_FLAG = 0;
-DBG_TX_FLAG = DBG_LOSS_FLAG + 1;
-DBG_RX_FLAG = DBG_TX_FLAG + 1;
-DBG_BACKOFF_FLAG = DBG_RX_FLAG + 1;
-DBG_ER_FLAG = DBG_BACKOFF_FLAG + 1;
-% 5
-DBG_SM_FLAG = DBG_ER_FLAG + 1;
-DBG_TX_FAIL_FLAG = DBG_SM_FLAG + 1;
-DBG_TIMEOUT_FLAG = DBG_TX_FAIL_FLAG + 1;
-DBG_BI_ER_FLAG = DBG_TIMEOUT_FLAG + 1;
-DBG_EXEC_TIME_FLAG = DBG_BI_ER_FLAG + 1;
-% 10
-DBG_DELAY_FLAG = DBG_EXEC_TIME_FLAG + 1;
-DBG_CANCEL_FLAG = DBG_DELAY_FLAG + 1;
-DBG_CONTROLLER_FLAG = DBG_CANCEL_FLAG + 1;
-DBG_COUNTER_NAV_FLAG = DBG_CONTROLLER_FLAG + 1;
-DBG_CALC_FLAG = DBG_COUNTER_NAV_FLAG + 1;
-% 15
-DBG_HEARTBEAT_FLAG = DBG_CALC_FLAG + 1;
-DBG_FTSP_FLAG = DBG_HEARTBEAT_FLAG + 1;
-DBG_TDMA_FLAG = DBG_FTSP_FLAG + 1;
-DBG_SPI_FLAG = DBG_TDMA_FLAG + 1;
-DBG_DRIVER_FLAG = DBG_SPI_FLAG + 1;
-% 20
-DBG_ERR_FLAG = DBG_DRIVER_FLAG + 1;
-DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1;
+
+

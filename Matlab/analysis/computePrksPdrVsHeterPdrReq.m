@@ -101,6 +101,7 @@ pdr = [];
 %
 fprintf('merge job 21616 & 21617 \n')
 data = cell(length(pdr_req), 1);
+
 t = debugs;
 type = DBG_CONTROLLER_FLAG;
 line = 1023;
@@ -142,8 +143,28 @@ for i = 1 : size(data, 1)
 end
 % figure;
 boxplot(dataDisp, group, 'notch', 'on');
-set(gca, 'xticklabel', pdr_req_str);
+%set(gca, 'xticklabel', pdr_req_str);
+set(gca, 'xtick', [1 2 3 4], 'xticklabel', groupnames);
 
+%% display
+bw_ylabel = 'PDR (%)';
+set(gca, 'FontSize', 50);
+% set(gca, 'yscale', 'log');
+ylabel(bw_ylabel);
+xlabel(bw_xlabel);
+
+maximize;
+set(gcf, 'Color', 'white');
+cd(FIGURE_DIR);
+% cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
+%
+str = ['prks_pdr_vs_heter_pdr_req'];
+if ~is_neteye
+    str = [str '_indriya'];
+end
+export_fig(str, '-eps');
+export_fig(str, '-jpg', '-zbuffer');
+saveas(gcf, [str '.fig']);
 %% %% PRKS after convergence
 % load txrxs;
 % 

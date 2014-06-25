@@ -105,8 +105,8 @@ cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %
 str = ['prks_mix_txpower_pdr_vs_pdr_req'];
-if ~is_neteye
-    str = [str '_indriya'];
+if is_neteye
+    str = [str 'prks_mix_txpower_pdr_vs_pdr_req_indriya'];
 end
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');
