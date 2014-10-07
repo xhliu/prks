@@ -68,7 +68,7 @@ enum {
 #if !defined(LINK_SET_PDR_99) && !defined(MULTIHOP)
 	// change if link set changes, least SLOT_MASK = (2^n - 1), such that 2^n > active_link_size (not >= to accomodate dedicated ftsp slots)
 	// not anymore in OLAMA: 2^n >= active_link_size equal is enough since no dedicated ftsp slot
-	SLOT_MASK = 0x3F, //0x7F,
+	SLOT_MASK = 0x7F, //0x7F,
 #else
 	SLOT_MASK = 0x3F,
 #endif
@@ -98,7 +98,7 @@ enum {
 	// cannot exceed 64 ms bcoz IMACForwarderP$SlotTime is uint16_t
 #ifndef SCREAM
 	SM_BEACON_PERIOD_MILLI = 50UL,
-#warning sm_beacon_cnt 2000
+#warning sm_beacon_cnt
 	SM_BEACON_CNT = 5000UL, //5000UL,	// 5000 seems insufficient for 130 nodes, takes about 10 mins
 
 #else

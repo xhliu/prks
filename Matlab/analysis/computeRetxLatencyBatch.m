@@ -9,8 +9,8 @@
 % jobs = async_jobs;
 
 % % PRKS, SCREAM, and RIDB (w/ or w/o OLAMA): sync
-is_sync_protocol = false;
-jobs = async_jobs;
+is_sync_protocol = true;
+jobs = sync_jobs;
 % 
 % for job_id = 1 : length(jobs)
 %     job_dir = [MAIN_DIR num2str(jobs(job_id))];

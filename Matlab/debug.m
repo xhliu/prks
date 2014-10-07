@@ -30,20 +30,18 @@ DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1;
 %% always keep first
 load debugs;
 t = debugs;
-% type = DBG_CONTROLLER_FLAG;
-% line = 1018; %686; %575;
-type = DBG_TDMA_FLAG;
-line = 543; %543; %1024;
+type = DBG_CONTROLLER_FLAG;
+line = 1044; %686; %575;
+% type = DBG_TDMA_FLAG;
+% line = 605; %543; %1024;
 t = t(t(:, 3) == type, :);
-% t = t(t(:, 4) == line, :);
+t = t(t(:, 4) == line, :);
 
 %% line # if changed
 s = t;
 s = s(:, 4);
 cdfplot(s);
 unique(s)
-
-end
 %%
 s = t;
 % sum(s(:, 9) > s(:, 10))
@@ -88,9 +86,10 @@ t = txs;
 % s = t(ia, :);
 sum(t(ia, 6))
 
-
+end
 
 %% controller
+r = [];
 % (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample,
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
@@ -101,7 +100,7 @@ link_settling_time = [];
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
 %     fprintf('warning: fixed link id\n');
-%     link_id = 12;
+%     link_id = 44;
     
     s = t;
     % receiver
@@ -139,6 +138,9 @@ for link_id = 1 : size(link_pdrs, 1)
     % rises to requirement
     ix = find(s(:, LINK_PDR_IDX) >= pdr_req, 1);            
     link_settling_time = [link_settling_time; ix];
+    if ~isempty(ix)
+        r = [r; link_id s(1, LINK_PDR_IDX) ix];
+    end
     
 %     plot(s(:, [6 8 9]));
     plot([s(:, 6) repmat(pdr_req, size(s, 1), 1)]);
@@ -150,7 +152,7 @@ for link_id = 1 : size(link_pdrs, 1)
 %     legend({'pdr', 'pdr sample', 'ER size', 'pdr req', 'deltaI', 'ewma'});
 end
 cdfplot(link_settling_time);
-save('link_settling_time.mat', 'link_settling_time');
+% save('link_settling_time.mat', 'link_settling_time');
 %% mix power level
 t = [
 1, 2, 3;
@@ -1308,4 +1310,23 @@ fprintf('throughput %f\n', thruput);
 pdr_vs_snr = [snr' pdr'];
 save('pdr_vs_snr_theory.mat', 'pdr_vs_snr');
 
+%%
+N = 100;
+s = zeros(N, 1);
+s(1) = 1;
+s(2) = 2;
+s(3) = 2;
+
+for i = 4 : N
+    s(i) = s(i - 2) + s(i - 3);
+end
+plot(s);
+set(gca, 'yscale', 'log');
+
+
+
+%%
+load trimmed_link_pdrs;
+t = trimmed_link_pdrs;
+cdfplot(t(:, end) * 100);
 

@@ -6,6 +6,7 @@
 idx = 0;
 data = cell(PDR_REQ_CNT, PROTOCOL_CNT);
 
+
 %% PRKS
 fprintf('processing PRKS\n');
 job = prks_job;
@@ -226,6 +227,6 @@ set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %
-export_fig(str, '-eps');
-export_fig(str, '-jpg', '-zbuffer');
+export_fig(gcf, str, '-eps');
+export_fig(gcf, str, '-jpg', '-zbuffer');
 saveas(gcf, [str '.fig']);

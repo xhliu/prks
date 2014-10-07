@@ -53,14 +53,15 @@ if is_neteye
 PRKS_SLOT_LEN = 512;
 job = cell(0);
 % 
-% fprintf('Jobs for PRKS K parameters\n');
 % job{1} = [21016 180];
 % job{2} = [21015 180];
 % job{3} = [21037 180];
 % job{4} = [21001 240];
 % pdr req 70
-job{1} = [22329 1440;
-          ];
+job{1} = [22329 1440;];
+fprintf('Only use 22346 for tx cost for an additional sample\n');
+%           22346 720;
+%           ];
 
 prks_job = job;
 
@@ -270,3 +271,30 @@ for i = 1 : length(cmac_job)
 end
 async_jobs = jobs;
 
+%% DBG constants
+DBG_LOSS_FLAG = 0;
+DBG_TX_FLAG = DBG_LOSS_FLAG + 1;
+DBG_RX_FLAG = DBG_TX_FLAG + 1;
+DBG_BACKOFF_FLAG = DBG_RX_FLAG + 1;
+DBG_ER_FLAG = DBG_BACKOFF_FLAG + 1;
+% 5
+DBG_SM_FLAG = DBG_ER_FLAG + 1;
+DBG_TX_FAIL_FLAG = DBG_SM_FLAG + 1;
+DBG_TIMEOUT_FLAG = DBG_TX_FAIL_FLAG + 1;
+DBG_BI_ER_FLAG = DBG_TIMEOUT_FLAG + 1;
+DBG_EXEC_TIME_FLAG = DBG_BI_ER_FLAG + 1;
+% 10
+DBG_DELAY_FLAG = DBG_EXEC_TIME_FLAG + 1;
+DBG_CANCEL_FLAG = DBG_DELAY_FLAG + 1;
+DBG_CONTROLLER_FLAG = DBG_CANCEL_FLAG + 1;
+DBG_COUNTER_NAV_FLAG = DBG_CONTROLLER_FLAG + 1;
+DBG_CALC_FLAG = DBG_COUNTER_NAV_FLAG + 1;
+% 15
+DBG_HEARTBEAT_FLAG = DBG_CALC_FLAG + 1;
+DBG_FTSP_FLAG = DBG_HEARTBEAT_FLAG + 1;
+DBG_TDMA_FLAG = DBG_FTSP_FLAG + 1;
+DBG_SPI_FLAG = DBG_TDMA_FLAG + 1;
+DBG_DRIVER_FLAG = DBG_SPI_FLAG + 1;
+% 20
+DBG_ERR_FLAG = DBG_DRIVER_FLAG + 1;
+DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1;

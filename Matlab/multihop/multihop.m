@@ -12,6 +12,7 @@ SEQ_IDX = 4;
 % time in us
 SLOT_WRAP_LEN = 2 ^ 32;
 
+if 0
 %% e2e pdr
 % fprintf('to change log idx here\n');
 load txrxs;
@@ -71,12 +72,14 @@ fprintf('%d out of %d are missing based on loss log: %f\n', miss_cnt, size(txs, 
 save('e2e_link_pdrs.mat', 'e2e_link_pdrs');
 
 %% tx cost
+job_dir = [MAIN_DIR num2str(22329)];
+cd(job_dir);
 load txrxs;
 rxs = rxs(rxs(:, 2) == ROOT_NODE_ID, :);
-unique_rx_cnt = size(unique(rxs(:, [SRC_IDX SEQ_IDX]), 'rows'), 1)
-tx_cnt = size(txs, 1)
+unique_rx_cnt = size(unique(rxs(:, [SRC_IDX SEQ_IDX]), 'rows'), 1);
+tx_cnt = size(txs, 1);
 tx_cnt / unique_rx_cnt
-
+end
 % %% throughput
 % % for TDMA only
 % SLOT_LEN = 32;

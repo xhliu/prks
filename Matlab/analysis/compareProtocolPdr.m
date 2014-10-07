@@ -237,8 +237,8 @@ str = ['peer_pdr_bar'];
 if ~is_neteye
     str = [str '_indriya'];
 end
-export_fig(str, '-eps');
-export_fig(str, '-jpg', '-zbuffer');
+export_fig(gcf, str, '-eps');
+export_fig(gcf, str, '-jpg', '-zbuffer');
 saveas(gcf, [str '.fig']);
 
 if 0

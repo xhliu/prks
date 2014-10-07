@@ -236,7 +236,7 @@ set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %
-str = ['peer_slot_throughput_bar'];
+str = ['peer_slot_throughput_bar_99'];
 
 if ~is_neteye
     str = [str '_indriya'];

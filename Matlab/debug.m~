@@ -30,10 +30,10 @@ DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1;
 %% always keep first
 load debugs;
 t = debugs;
-% type = DBG_CONTROLLER_FLAG;
-% line = 1018; %686; %575;
-type = DBG_TDMA_FLAG;
-line = 512543; %1024;
+type = DBG_CONTROLLER_FLAG;
+line = 1013; %686; %575;
+% type = DBG_TDMA_FLAG;
+% line = 605; %543; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -42,24 +42,23 @@ s = t;
 s = s(:, 4);
 cdfplot(s);
 unique(s)
-
 %%
 s = t;
 % sum(s(:, 9) > s(:, 10))
 % s = s(s(:, 2) == 15, :);
 s = s(:, 10);
-max(s) / 32
+% max(s) / 32
 % s = mod(s, 2 ^ 17);
 % s = s(s(:, 6) == s(:, 7) - 1, :);
-% s = mod(s, 128);
-% s = unique(s);
+s = mod(s, 128);
+s = unique(s);
 % cnt = sum(s == 178);
 % length(s) - cnt - cnt
 % s = s(:, [2 10]);
 % [x ix] = sort(s(:, 10));
 % s = s(ix, :);
 % s(:, 10) = s(:, 10) - min(s(:, 10));
-% plot(s);
+plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % plot(s);
@@ -71,6 +70,7 @@ max(s) / 32
 % hold on;
 % length(s)
 %%
+load link_pdrs;
 cdfplot(link_pdrs(:, end));
 %%
 % load ~/Dropbox/Projects/PRK/Matlab/matdata/rx_concurrency.mat
@@ -85,10 +85,11 @@ t = txs;
 [x ia] = unique(t(:, 2));
 % s = t(ia, :);
 sum(t(ia, 6))
+
 end
 
-
 %% controller
+r = [];
 % (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample,
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
@@ -98,8 +99,8 @@ LINK_PDR_IDX = 6;
 link_settling_time = [];
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
-%     fprintf('warning: fixed link id\n');
-%     link_id = 12;
+    fprintf('warning: fixed link id\n');
+    link_id = 44;
     
     s = t;
     % receiver
@@ -137,6 +138,9 @@ for link_id = 1 : size(link_pdrs, 1)
     % rises to requirement
     ix = find(s(:, LINK_PDR_IDX) >= pdr_req, 1);            
     link_settling_time = [link_settling_time; ix];
+    if ~isempty(ix)
+        r = [r; link_id s(1, LINK_PDR_IDX) ix];
+    end
     
 %     plot(s(:, [6 8 9]));
     plot([s(:, 6) repmat(pdr_req, size(s, 1), 1)]);
@@ -148,7 +152,7 @@ for link_id = 1 : size(link_pdrs, 1)
 %     legend({'pdr', 'pdr sample', 'ER size', 'pdr req', 'deltaI', 'ewma'});
 end
 cdfplot(link_settling_time);
-save('link_settling_time.mat', 'link_settling_time');
+% save('link_settling_time.mat', 'link_settling_time');
 %% mix power level
 t = [
 1, 2, 3;
@@ -1305,3 +1309,13 @@ fprintf('throughput %f\n', thruput);
 %% 
 pdr_vs_snr = [snr' pdr'];
 save('pdr_vs_snr_theory.mat', 'pdr_vs_snr');
+
+%%
+N = 100;
+s = zeros(N, 1);
+s(1) = 1
+
+
+
+
+

@@ -1,17 +1,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Author: Xiaohui Liu (whulxh@gmail.com)
-%   Date:   1/15/14
-%   Function: display latency vs pdr req for various protocols
-%% 
+%   Date:   1/20/14
+%   Function: display per slot throughput vs pdr req for various protocols
+%%
 idx = 0;
 data = cell(PDR_REQ_CNT, PROTOCOL_CNT);
 
 %% PRKS
-% us
-SCALE = 5 / PRKS_SLOT_LEN / 1000;
-
 fprintf('processing PRKS\n');
 job = prks_job;
+
+SCALE = 1024 / 5;
 
 len = length(job);
 tmp = cell(len, 1);
@@ -23,8 +22,8 @@ for i = 1 : len
         fprintf('processing job %d\n', pdr_job(j, 1));
         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
         cd(job_dir);
-        load link_seq_latency;
-        tmp{i} = [tmp{i}; link_seq_latency(:, end) * SCALE];
+        load rx_concurrency;
+        tmp{i} = [tmp{i}; rx_concurrency * SCALE];
     end
 end
 idx = idx + 1;
@@ -33,42 +32,45 @@ data(:, idx) = tmp;
 
 
 %% CSMA
-SCALE = 1;
-
 fprintf('processing CSMA\n');
 pdr_job = csma_job;
 
-%len = length(job);
+BOOTSTRAP_SECONDS = 30;
+SCALE = 1;
+
 tmp = [];
 % each job
 for j = 1 : size(pdr_job, 1)
     fprintf('processing job %d\n', pdr_job(j, 1));
     job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
     cd(job_dir);
-    load link_seq_latency;
-    tmp = [tmp; link_seq_latency(:, end) * SCALE];
+    load link_pdrs;
+    thruput = sum(link_pdrs(:, 4)) / (pdr_job(j, 2) * 60 - BOOTSTRAP_SECONDS) * SCALE;
+    fprintf('throughput %f\n', thruput);
+    tmp = [tmp; thruput];
 end
 idx = idx + 1;
 for i = 1 : PDR_REQ_CNT
     data{i, idx} = tmp;
 end
 
-
 %% RTSCTS
-SCALE = 1;
-
 fprintf('processing RTSCTS\n');
 pdr_job = rtscts_job;
 
-%len = length(job);
+BOOTSTRAP_SECONDS = 30;
+SCALE = 1;
+
 tmp = [];
 % each job
 for j = 1 : size(pdr_job, 1)
     fprintf('processing job %d\n', pdr_job(j, 1));
     job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
     cd(job_dir);
-    load link_seq_latency;
-    tmp = [tmp; link_seq_latency(:, end) * SCALE];
+    load link_pdrs;
+    thruput = sum(link_pdrs(:, 4)) / (pdr_job(j, 2) * 60 - BOOTSTRAP_SECONDS) * SCALE;
+    fprintf('throughput %f\n', thruput);
+    tmp = [tmp; thruput];
 end
 idx = idx + 1;
 for i = 1 : PDR_REQ_CNT
@@ -77,11 +79,17 @@ end
 
 
 %% RIDB
-% us
-SCALE = 5 / RIDB_SLOT_LEN / 1000;
-
 fprintf('processing RIDB\n');
 job = ridb_job;
+
+SCALE = 1024 / 5;
+% dedicated ftsp slot
+if is_neteye
+    %SCALE = SCALE * 128 / 100;
+    SCALE = SCALE * 64 / 49;
+else
+    SCALE = SCALE * 128 / 59;
+end
 
 len = length(job);
 tmp = cell(len, 1);
@@ -93,8 +101,8 @@ for i = 1 : len
         fprintf('processing job %d\n', pdr_job(j, 1));
         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
         cd(job_dir);
-        load link_seq_latency;
-        tmp{i} = [tmp{i}; link_seq_latency(:, end) * SCALE];
+        load rx_concurrency;
+        tmp{i} = [tmp{i}; rx_concurrency * SCALE];
     end
 end
 idx = idx + 1;
@@ -102,12 +110,12 @@ data(:, idx) = tmp;
 
 
 %% RIDB_OLAMA
-% us
-SCALE = 5 / RIDBOLAMA_SLOT_LEN / 1000;
-
+%{
 fprintf('processing RIDB_OLAMA\n');
 job = ridbolama_job;
 
+SCALE = 1024 / 5;
+
 len = length(job);
 tmp = cell(len, 1);
 % each pdr req
@@ -118,20 +126,21 @@ for i = 1 : len
         fprintf('processing job %d\n', pdr_job(j, 1));
         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
         cd(job_dir);
-        load link_seq_latency;
-        tmp{i} = [tmp{i}; link_seq_latency(:, end) * SCALE];
+        load rx_concurrency;
+        tmp{i} = [tmp{i}; rx_concurrency * SCALE];
     end
 end
 idx = idx + 1;
 data(:, idx) = tmp;
-
+%}
 
 
 %% CMAC
-SCALE = 1;
-
 fprintf('processing CMAC\n');
 job = cmac_job;
+
+BOOTSTRAP_SECONDS = 420;
+SCALE = 1;
 
 len = length(job);
 tmp = cell(len, 1);
@@ -143,36 +152,59 @@ for i = 1 : len
         fprintf('processing job %d\n', pdr_job(j, 1));
         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
         cd(job_dir);
-        load link_seq_latency;
-        tmp{i} = [tmp{i}; link_seq_latency(:, end) * SCALE];
+        load link_pdrs;
+        thruput = sum(link_pdrs(:, 4)) / (pdr_job(j, 2) * 60 - BOOTSTRAP_SECONDS) * SCALE;
+        fprintf('throughput %f\n', thruput);
+        tmp{i} = [tmp{i}; thruput];
     end
 end
 idx = idx + 1;
 data(:, idx) = tmp;
 
-
 %% SCREAM
-% us
-SCALE = 5 / SCREAM_SLOT_LEN / 1000;
-
 fprintf('processing SCREAM\n');
-pdr_job = scream_job;
+SCALE = 1024 / 5;
+% dedicated ftsp slot
+if is_neteye
+    %SCALE = SCALE * (100 + 28) / 100;
+    SCALE = SCALE * (49 + 28) / 49;
+else
+    SCALE = SCALE * (59 + 28) / 59;
+end
 
-%len = length(job);
-tmp = [];
-% each job
-for j = 1 : size(pdr_job, 1)
-    fprintf('processing job %d\n', pdr_job(j, 1));
-    job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
-    cd(job_dir);
-    load link_seq_latency;
-    tmp = [tmp; link_seq_latency(:, end) * SCALE];
+% pdr_job = scream_job;
+
+% tmp = [];
+% % each job
+% for j = 1 : size(pdr_job, 1)
+%     fprintf('processing job %d\n', pdr_job(j, 1));
+%     job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+%     cd(job_dir);
+%     load rx_concurrency;
+%     tmp = [tmp; rx_concurrency * SCALE];
+% end
+% idx = idx + 1;
+% for i = 1 : PDR_REQ_CNT
+%     data{i, idx} = tmp;
+% end
+
+job = scream_job;
+len = length(job);
+tmp = cell(len, 1);
+% each pdr req
+for i = 1 : len
+    pdr_job = job{i};
+    % each job
+    for j = 1 : size(pdr_job, 1)
+        fprintf('processing job %d\n', pdr_job(j, 1));
+        job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+        cd(job_dir);
+        load rx_concurrency;
+        tmp{i} = [tmp{i}; rx_concurrency * SCALE];
+    end
 end
 idx = idx + 1;
-for i = 1 : PDR_REQ_CNT
-    data{i, idx} = tmp;
-end
-
+data(:, idx) = tmp;
 
 %% process data for display
 ALPHA = 0.05;
@@ -189,25 +221,33 @@ for i = 1 : M
 end
 
 %% display
-bw_ylabel = 'Latency (ms)';
+bw_ylabel = 'Throughput (pps)';
 % bw: short for barweb
 %barweb(barvalues, errors, width, groupnames, bw_title, bw_xlabel,
 %bw_ylabel, bw_colormap, gridstatus, bw_legend, error_sides, legend_type)
-h = barweb(barvalue, error, [], groupnames, [], bw_xlabel, bw_ylabel);
-h.legend = legend(bw_legend, 'orientation', 'horizontal');
+% h = barweb(barvalue', error', [], groupnames, [], bw_xlabel, bw_ylabel);
+fprintf('skip the error and continue execution, barerrorbar breaks down for row vector\n');
+h = barerrorbar({1:6, barvalue}, {1:6, barvalue, error, error, 'rx'});
+%h.legend = legend(bw_legend, 'orientation', 'horizontal');
+%h.legend = legend(bw_legend);
 
 %%
 set(gca, 'FontSize', 30);
-set(gca, 'yscale', 'log');
 ylabel(bw_ylabel);
-xlabel(bw_xlabel);
+% xlabel(bw_xlabel);
+xlabel('');
+set(gca, 'xticklabel', bw_legend);
 
 maximize;
 set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %
-str = ['peer_latency_bar'];
+str = ['peer_slot_throughput_bar_99'];
+
+if ~is_neteye
+    str = [str '_indriya'];
+end
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');
 saveas(gcf, [str '.fig']);

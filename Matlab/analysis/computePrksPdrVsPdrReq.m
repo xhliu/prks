@@ -7,7 +7,7 @@
 % 0.5 for Indriya
 CONVERGE_TIME_IN_HOUR = 1;
 
-job = prks_mixed_txpower_job;
+job = prks_nama_job;
 BOOTSTRAP_TIME = CONVERGE_TIME_IN_HOUR * 3600 * 2 ^ 20;
 fprintf('pdr of PRKS after %f hours\n', CONVERGE_TIME_IN_HOUR);
 
@@ -103,8 +103,8 @@ maximize;
 set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
-%
-str = ['prks_mix_txpower_pdr_vs_pdr_req'];
+%%
+str = ['prks_nama_pdr_vs_pdr_req_boxplot_dbg'];
 if ~is_neteye
     str = [str '_indriya'];
 end

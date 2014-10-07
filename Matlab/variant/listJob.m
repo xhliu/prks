@@ -94,9 +94,9 @@ job{2} = [21768 240;
           21772 240;
           ];
 % 90
-job{3} = [21615 240;
-          21804 240;    % not used for latest figures
-          ];
+job{3} = [21615 240;];
+%           21804 240;    % not used for latest figures
+%           ];
 % 95
 job{4} = [21765 240;
           21773 240;
@@ -204,7 +204,10 @@ prks_onama_job = job;
 end
 
 %% sync protocols
-% jobs = [];
+jobs = [];
+for i = 1 : length(prksr_job)
+    jobs = [jobs; prksr_job{i}(:, 1)];
+end
 % 
 % for i = 1 : length(prks_nama_job)
 %     jobs = [jobs; prks_nama_job{i}(:, 1)];
@@ -218,7 +221,7 @@ end
 %     jobs = [jobs; ridbolama_job{i}(:, 1)];
 % end
 % %}
-% sync_jobs = jobs;
+sync_jobs = jobs;
 
 %% DBG constants
 DBG_LOSS_FLAG = 0;

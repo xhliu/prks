@@ -560,7 +560,6 @@ void scheduleSlot(uint32_t g_slot_time) {
 		
 		// ensure receiver has switched to DATA channel
 		call BusyWait.wait(MIN_CW);
-//	#warning
 //		// randomize to sample NI during rx
 //		call BusyWait.wait(MIN_CW + backoff);
 		next_tx_slot = call Controller.nextTxSlot(current_slot, FALSE);
@@ -579,11 +578,11 @@ void scheduleSlot(uint32_t g_slot_time) {
 		// log here to account for tx slots w/o data		
 		call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, is_data_pending, call Controller.isRxSlot(current_slot), ret, getConflictSetSize(), next_tx_slot - current_slot, current_slot);
 	} else if (call Controller.isRxSlot(current_slot)) {
-		//status = 1;
+		; //status = 1;
 	} else {
 	// control slot
-	#ifdef OLAMA_DISABLED
 		//status = 2;
+	#ifdef OLAMA_DISABLED
 		// switch to control channel
 		//call CC2420Config.switchChannel(CC2420_CONTROL_CHANNEL);
 		call RadioState.setChannel(CC2420_CONTROL_CHANNEL);
@@ -602,7 +601,8 @@ void scheduleSlot(uint32_t g_slot_time) {
 		}
 	#endif
 	}
-	//call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, current_slot & SLOT_MASK, call RadioState.getChannel(), status, m_data_addr, current_slot, next_tx_slot - current_slot);
+//#warning log
+//	call UartLog.logTxRx(DBG_FLAG, DBG_TDMA_FLAG, __LINE__, current_slot & SLOT_MASK, call RadioState.getChannel(), status, m_data_addr, next_tx_slot - current_slot, current_slot);
 
 #else		//SCREAM start here
 	// time wraparound every 2 ^ 32 us; scale 100 times to avoid skipped slots

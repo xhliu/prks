@@ -5,26 +5,21 @@
 %% 
 % MAIN_DIR = '~/Projects/tOR/RawData/';
 % MAIN_DIR = '~/Downloads/Jobs/';
-% jobs = [];
-jobs = [
-43511
-43743
-43772];
-% jobs = [
-% 43512
-% 43767];
+% jobs = [20857];
 % 1) SCREAM or RIDB without OLAMA
-SLOT_LEN = 32; %32; %512;
+% SLOT_LEN = 32; %32; %512;
 
 % SLOT_LEN = 512;
+% jobs = [];
 % for i = 1 : length(prks_job)
 %     jobs = [jobs; prks_job{i}(:, 1)];
 % end
 
-% SLOT_LEN = 32; %32; %512;
-% for i = 1 : length(ridb_job)
-%     jobs = [jobs; ridb_job{i}(:, 1)];
-% end
+SLOT_LEN = 32;
+jobs = [];
+for i = 1 : length(scream_job)
+    jobs = [jobs; scream_job{i}(:, 1)];
+end
 
 
 fprintf('slot length %d\n', SLOT_LEN);

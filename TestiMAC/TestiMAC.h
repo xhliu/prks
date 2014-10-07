@@ -62,8 +62,8 @@
 //	#define HETER_TX_POWER
 //	#warning HETER_TX_POWER
 	// set pdr requirement by link
-	#define SET_PDR_REQ_BY_LINK
-	#warning SET_PDR_REQ_BY_LINK
+//	#define SET_PDR_REQ_BY_LINK
+//	#warning SET_PDR_REQ_BY_LINK
 
 	
 	// disable SPI resource arbitration

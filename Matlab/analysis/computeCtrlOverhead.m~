@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Author: Xiaohui Liu (whulxh@gmail.com)
-%   Date:   10/30/2013
-%   Function: compute concurrency in pkts / s; only for sync protocols
+%   Date:   7/10/2014
+%   Function: compute ctrl overhead: # of slots 
 %% 
 % MAIN_DIR = '~/Projects/tOR/RawData/';
 % MAIN_DIR = '~/Downloads/Jobs/';
-jobs = [];
+jobs = [20857];
 % 1) SCREAM or RIDB without OLAMA
 % SLOT_LEN = 32; %32; %512;
 
@@ -32,25 +32,7 @@ for job_id = 1 : length(jobs)
 %     else
         fprintf('processing %d-th job job %d\n', job_id, jobs(job_id));
 %     end
-
-% %% sanity check jobs
-% load debugs;
-% t = debugs;
-% % type = DBG_CONTROLLER_FLAG;
-% % line = 1018; %686; %575;
-% type = DBG_TDMA_FLAG;
-% line = 543;
-% t = t(t(:, 3) == type, :);
-% t = t(t(:, 4) == line, :);
-% s = t;
-% % sum(s(:, 9) > s(:, 10))
-% % s = s(s(:, 2) == 15, :);
-% s = s(:, 10);
-% 
-% load link_pdrs;
-% fprintf('job %d: %f, %d\n', job_id, max(s) / 32, size(link_pdrs, 1));
-
-if 1
+    load link_pd
     %%
     load txrxs;
     % time in us
@@ -68,22 +50,9 @@ if 1
 
     rxs = unwrap(rxs, SLOT_WRAP_LEN);
     s = floor(rxs(:, TIMESTAMP_IDX) / (SLOT_LEN * 1024));
-    % 
-    [c e] = hist(s, unique(s));
-    ce = [e c'];
-    plot(e);
-    % add slots w/o any rx
     total = max(s) - min(s) + 1;
-    rx_concurrency = [c'; zeros(total - length(c), 1)];
-    fprintf('<%d, %d>\n', min(s), max(s));
     
-%     ce(1:10, :)
-
-    % sanity check rx concurrency
-    load link_pdrs;
-    fprintf('total concurrency %d, total packets received %d, ratio: %f\n', sum(rx_concurrency), sum(link_pdrs(:, 4)), sum(rx_concurrency) / sum(link_pdrs(:, 4)));
-    save('rx_concurrency.mat', 'rx_concurrency');
-    cdfplot(rx_concurrency);
-    fprintf('rx_concurrency median %f, mean %f, scaled %f\n', median(rx_concurrency), mean(rx_concurrency), 128 / 59 * mean(rx_concurrency));
-end
+    % # of data packet
+    fprintf('<%d, %d, %d>\n', min(s), max(s), total, sum(link_pdrs(:, 3)), total/sum(link_pdrs(:, 3)));
+    
 end
