@@ -17,7 +17,7 @@
 // TDMA
 //#warning SCREAM enabled
 //#define SCREAM
-// basically PRKS but differ w/ const initial ER, no adaptation
+// basically PRKS but differ w/ const initial ER, no adaptation; OLAMA_DISABLED has to be enabled for original RIDB w/o ONAMA
 //#warning RIDB enabled
 //#define RIDB
 
@@ -36,6 +36,10 @@
 // links w/ pdr >= 99%
 //#define LINK_SET_PDR_99
 //#warning LINK_SET_PDR_99
+
+// randomize packet interval, uniform [t/2, 3t/2]
+#define RANDOM_PKT_INTERVAL
+#warning RANDOM_PKT_INTERVAL
 
 #if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 	#warning change Makefile & make telosb !!!
@@ -62,8 +66,9 @@
 //	#define HETER_TX_POWER
 //	#warning HETER_TX_POWER
 	// set pdr requirement by link
-	//#define SET_PDR_REQ_BY_LINK
-	//#warning SET_PDR_REQ_BY_LINK
+//	#define SET_PDR_REQ_BY_LINK
+//	#warning SET_PDR_REQ_BY_LINK
+
 	
 	// disable SPI resource arbitration
 	#define DUMMY_SPI
@@ -168,6 +173,9 @@ enum {
 	START_DATA_TIME = (uint32_t)BEACON_PERIOD_SHORT * BEACON_PERIOD_SHORT_CNT + 100000U,
 #else
 	START_DATA_TIME = INITIAL_ER_TIME,
+#endif
+#ifdef MULTIHOP
+#warning change period
 #endif
 //#warning period not 20
 	// CSMA/RTSCTS/CMAC: 1800UL, 	RIDB&SCREAM 22500UL, 	PRKS: 360000UL,

@@ -67,6 +67,10 @@ implementation {
 	App.Util -> UtilC;
 	components UartLogC;
 	App.UartLog -> UartLogC;
+#if defined(RANDOM_PKT_INTERVAL)
+	components RandomC;
+	App.Random -> RandomC;
+#endif
 
 #if defined(TEST_FTSP)
 	// ftsp

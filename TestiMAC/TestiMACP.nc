@@ -57,6 +57,9 @@ module TestiMACP {
 	#endif
 		interface Util;
 		interface UartLog;
+	#if defined(RANDOM_PKT_INTERVAL)
+		interface Random;
+	#endif
 	}
 }
 implementation {
@@ -161,6 +164,14 @@ void task sendTask() {
 event void MilliTimer.fired() {
 	bool locked_;
 	uint16_t counter_;
+	uint16_t period;
+	
+	period = PERIOD_MILLI;
+#if defined(RANDOM_PKT_INTERVAL)
+	period = (call Random.rand16()) % period + period / 2;
+	//call UartLog.logEntry(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, period);
+#endif
+	
 	atomic {
 	#if !defined(CMAC)
 		locked_ = locked;
@@ -187,7 +198,7 @@ event void MilliTimer.fired() {
 		return;
 
 	if (counter_ < MAX_PKT_CNT) {
-		call MilliTimer.startOneShot(PERIOD_MILLI);
+		call MilliTimer.startOneShot(period);
 	}
 	if (!locked_) {
 	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)

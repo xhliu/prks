@@ -37,6 +37,11 @@
 //#define LINK_SET_PDR_99
 //#warning LINK_SET_PDR_99
 
+// randomize packet interval, uniform [t/2, 3t/2]
+#define RANDOM_PKT_INTERVAL
+#warning RANDOM_PKT_INTERVAL
+
+
 #if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 	#warning change Makefile & make telosb !!!
 #else

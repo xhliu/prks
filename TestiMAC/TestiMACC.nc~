@@ -44,15 +44,8 @@ implementation {
 		App.Receive -> RouterC;
 //	 	App.Intercept -> RouterC;
 		App.Packet -> RouterC;
-	#if defined(DEFAULT_MAC)
+	#if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)
 	 	components ActiveMessageC as AM;
-		App.AMControl -> AM;
-		//App.AMPacket -> AM;
-	#elif defined(RTSCTS) || defined(CMAC)
-	 	components ActiveMessageC as AM;
-	 	App.AMSend -> RouterC;
-	 	App.Receive -> RouterC;
-	 	App.Packet -> RouterC;
 		App.AMControl -> AM;
 	#else
 		components AsyncCC2420TransceiverC as AM;

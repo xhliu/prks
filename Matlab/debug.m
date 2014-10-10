@@ -31,9 +31,9 @@ DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1;
 load debugs;
 t = debugs;
 type = DBG_CONTROLLER_FLAG;
-line = 1044; %686; %575;
-% type = DBG_TDMA_FLAG;
-% line = 605; %543; %1024;
+line = 1042;
+% type = DBG_HEARTBEAT_FLAG;
+% line = 172;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -50,15 +50,15 @@ s = s(:, 10);
 % max(s) / 32
 % s = mod(s, 2 ^ 17);
 % s = s(s(:, 6) == s(:, 7) - 1, :);
-s = mod(s, 128);
-s = unique(s);
+% s = mod(s, 128);
+% s = unique(s);
 % cnt = sum(s == 178);
 % length(s) - cnt - cnt
 % s = s(:, [2 10]);
 % [x ix] = sort(s(:, 10));
 % s = s(ix, :);
 % s(:, 10) = s(:, 10) - min(s(:, 10));
-plot(s);
+cdfplot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % plot(s);
@@ -94,7 +94,7 @@ r = [];
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
 % fprintf('warning: varying link pdr\n');
-pdr_req = 90;
+pdr_req = 95;
 LINK_PDR_IDX = 6;
 link_settling_time = [];
 for link_id = 1 : size(link_pdrs, 1)
