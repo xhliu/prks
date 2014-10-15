@@ -252,7 +252,7 @@ end
           
 %% sync protocols
 jobs = [];
-jobs = [jobs; scream_job(:, 1)];
+% jobs = [jobs; scream_job(:, 1)];
 
 for i = 1 : length(prks_job)
     jobs = [jobs; prks_job{i}(:, 1)];
@@ -260,6 +260,10 @@ end
 
 for i = 1 : length(ridb_job)
     jobs = [jobs; ridb_job{i}(:, 1)];
+end
+
+for i = 1 : length(scream_job)
+    jobs = [jobs; scream_job{i}(:, 1)];
 end
 %{
 for i = 1 : length(ridbolama_job)

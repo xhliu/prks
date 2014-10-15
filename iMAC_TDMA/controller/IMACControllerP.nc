@@ -684,7 +684,7 @@ inline async command bool Controller.isRxSlot(uint32_t current_slot) {
 	bool is_any_rx_pending;
 	local_link_er_table_entry_t *se;
 	
-	bool is_rx_conservative = FALSE;
+//	bool is_rx_conservative = FALSE;
 	is_any_rx_pending = FALSE;
 	for (i = 0; i < LOCAL_LINK_ER_TABLE_SIZE; i++) {
 		se = &localLinkERTable[i];
@@ -695,7 +695,7 @@ inline async command bool Controller.isRxSlot(uint32_t current_slot) {
 		if (!se->is_sender) {
 			if (se->is_rx_pending) {
 				is_any_rx_pending = TRUE;
-				is_rx_conservative = TRUE;
+//				is_rx_conservative = TRUE;
 				continue;
 			}
 			// INVALID_SLOT means sender has not decided next tx slot yet
@@ -709,9 +709,9 @@ inline async command bool Controller.isRxSlot(uint32_t current_slot) {
 			}
 		}
 	}
-#warning measure rx bcoz of being conservative
+//#warning measure rx bcoz of being conservative
 //	if (is_any_rx_pending)
-	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, is_any_rx_pending, is_rx_conservative, current_slot);
+//	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, is_any_rx_pending, is_rx_conservative, current_slot);
 	return is_any_rx_pending;
 }
 
@@ -992,7 +992,7 @@ error_t execController(am_addr_t nb, bool is_sender) {
 	uint8_t link_pdr, link_pdr_sample, reference_pdr, link_pdr_version;
 	// scaled
 	int32_t delta_i_dB;
-//	uint32_t g_now;
+	uint32_t g_now;
 	int16_t in_gain, out_gain, er_border_gain;
 	
 	idx = findLocalLinkERTableIdx(nb, is_sender);
@@ -1037,9 +1037,11 @@ error_t execController(am_addr_t nb, bool is_sender) {
 	if (call SignalMap.getLocalGain(nb, &in_gain, &out_gain) != SUCCESS)
 		in_gain = INVALID_GAIN;
 //#warning log for mixed power
-	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample, le->rx_er_border_idx + 1, in_gain / 128, er_border_gain / 128);
+//	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample, le->rx_er_border_idx + 1, in_gain / 128, er_border_gain / 128);
 //	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, reference_pdr, (le->rx_er_border_idx != EMPTY_ER_IDX) ? signalMap[le->rx_er_border_idx].nb : INVALID_ADDR, in_gain / 128, er_border_gain / 128); // ;-le->rx_nI.abs / 128
 //	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, le->rx_er_version, le->rx_er_border_idx + 1, -le->rx_interference_threshold, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME);
+#warning VARY_PERIOD log
+	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, le->rx_er_border_idx + 1, in_gain / 128, er_border_gain / 128, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME);
 	
 	ret = adjustER(idx, is_sender, delta_i_dB);
 	if (ret != SUCCESS)
@@ -1159,7 +1161,7 @@ error_t adjustER(int16_t idx, bool is_sender, int32_t delta_i_dB) {
 		#else
 			tx_power = CC2420_DEF_RFPOWER_DBM_SCALED;
 		#endif
-			#warning disabled tx prob.
+			#warning disabled tx prob. by default
 			/* // only when increasing ER
 			if (is_tx_prob_enabled_) {
 				if (0 == se->data_tx_slot_ratio) {

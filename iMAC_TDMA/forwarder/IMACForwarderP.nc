@@ -97,7 +97,7 @@ message_t m_control;
 bool is_data_pending;
 bool is_1st_tx_slot;
 
-#ifdef VARY_PDR_REQ
+#if defined(VARY_PDR_REQ) || defined(VARY_PERIOD)
 //#warning VARY_PDR_REQ enabled
 uint8_t wraparound_cnt;
 bool is_wraparound;
@@ -227,13 +227,15 @@ void getConflictSet() {
 void startForwarder() {
 	atomic enabled = TRUE;
 	//atomic const_ctrl_slot_ftsp_chance_mask = CTRL_SLOT_FTSP_CHANCE_MASK;
-#ifdef VARY_PDR_REQ	
+#if defined(VARY_PDR_REQ) || defined(VARY_PERIOD)
 	wraparound_cnt = 0;
 	is_wraparound = FALSE;
 	is_inc = TRUE;
 	pdr_req_idx = 0;
 	call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, pdr_req_idx);
+	#if defined(VARY_PDR_REQ)
 	call Controller.setLinkPdrReq(pdr_reqs[pdr_req_idx]);
+	#endif
 #endif
 	// we can look up once here bcoz my_link's position in localLinkERTable does not change
 	atomic my_local_link_idx = call Controller.findMyLinkLocalIdx();
@@ -264,7 +266,15 @@ async command bool ForwarderInfo.isForwarderEnabled() {
 //	atomic is_data_pending_ = is_data_pending;
 //	return is_data_pending_;
 //}
-
+#if defined(VARY_PERIOD)
+uint32_t period = PERIOD_MILLI;
+async command uint32_t ForwarderInfo.getPeriod() {
+	uint32_t period_;
+	atomic period_ = period;
+	return period_;
+}
+#endif
+	
 // get the link estimation header in the packet
 imac_header_t* getHeader(message_t* m) {
 	return (imac_header_t*)call SubPacket.getPayload(m, sizeof(imac_header_t));
@@ -365,17 +375,16 @@ async event void SlotTimer32khz.fired() {
 				local_interval = SLOT_LEN - elapsed_interval;
 				g_next_firing_time = g_now + local_interval;
 			}
-		#ifdef VARY_PDR_REQ
+		#if defined(VARY_PDR_REQ) || defined(VARY_PERIOD)
 			//#warning online pdr req change
 			// change period: 2 ^ 32 us; scale 100 times to avoid skipped slots
 			if (g_now < ((uint32_t)SLOT_LEN * 100)) {
 				if (!is_wraparound) {
 					// wraparound just occurred
 					is_wraparound = TRUE;
-					// switch every WRAPAROUND_CNT rounds, one round is 2^32 us; except 1st switch, after (WRAPAROUND_CNT + 1) rounds bcoz 1st round is not counted
+					// switch every WRAPAROUND_CNT rounds, one round is 2^32 us; except 1st switch, who is after (WRAPAROUND_CNT + 1) rounds bcoz 1st round is not counted
 					if (++wraparound_cnt >= WRAPAROUND_CNT) {
 						wraparound_cnt = 0;
-						// 70 -> 80 -> 90 -> 95 -> 90 -> 80 ->70
 						// 0 -> 1 -> 2 -> 3 -> 2 -> 1 -> 0
 						pdr_req_idx  = is_inc ? (pdr_req_idx + 1) : (pdr_req_idx - 1);
 						if (pdr_req_idx == sizeof(pdr_reqs) / sizeof(pdr_reqs[0])) {
@@ -384,8 +393,16 @@ async event void SlotTimer32khz.fired() {
 						}
 						if (0 == pdr_req_idx)
 							is_inc = TRUE;
-						call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, pdr_req_idx);
+						call UartLog.logEntry(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, pdr_req_idx);	
+					#if defined(VARY_PDR_REQ)
+						// 70 -> 80 -> 90 -> 95 -> 90 -> 80 ->70
 						call Controller.setLinkPdrReq(pdr_reqs[pdr_req_idx]);
+					#elif defined(VARY_PERIOD)
+						// 20 -> 40 -> 80 -> 160 -> 80 -> 40 -> 20
+						period = (PERIOD_MILLI << pdr_req_idx);
+					#else
+						#warning "sth smells fishy here"
+					#endif
 					}
 				}
 			} else {

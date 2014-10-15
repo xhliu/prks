@@ -9,7 +9,7 @@
 % jobs = async_jobs;
 
 % % PRKS, SCREAM, and RIDB (w/ or w/o OLAMA): sync
-is_sync_protocol = true;
+is_sync_protocol = false;
 jobs = sync_jobs;
 % 
 % for job_id = 1 : length(jobs)
@@ -32,13 +32,4 @@ for job_id = 1 : length(jobs)
 end
 
 %% link_seq_tx_cnt_latency [sender receiver seqno tx_attempt_cnt latency]
-
-
-
-
-
-
-
-
-
 

@@ -13,4 +13,8 @@ interface ForwarderInfo {
 	async command uint8_t getDataTxSlotRatio();
 	//async command bool isDataPending();
 	//async command uint32_t getNextTxSlot();
+#if defined(VARY_PERIOD)
+	//async command void setPeriod(uint32_t new_period);
+	async command uint32_t getPeriod();
+#endif
 }

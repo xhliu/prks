@@ -1,7 +1,14 @@
 clear
 clc
 
-jobs = [23212];
+jobs = [
+23226
+23230
+23234
+
+23227
+23231
+23235];
 % initial pkts for link estimation; excluded from analysis
 % applies to iMAC only
 CONVERGE_STEP = 60;
@@ -25,8 +32,8 @@ for job = 1 : length(jobs)
 fprintf('processing job %d: \n', job_id);
 DirDelimiter='/';
 
-% srcDir = '~/Projects/tOR/RawData';
-srcDir = '~/Downloads/Jobs';
+srcDir = '~/Projects/tOR/RawData';
+% srcDir = '~/Downloads/Jobs';
 srcDir2 = num2str(job_id); % Defined by users
 SRC_ID = 76;
 

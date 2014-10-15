@@ -31,7 +31,7 @@ DBG_OVERFLOW_FLAG = DBG_ERR_FLAG + 1;
 load debugs;
 t = debugs;
 type = DBG_CONTROLLER_FLAG;
-line = 1042;
+line = 1044;
 % type = DBG_HEARTBEAT_FLAG;
 % line = 172;
 t = t(t(:, 3) == type, :);
@@ -43,9 +43,11 @@ s = s(:, 4);
 cdfplot(s);
 unique(s)
 %%
+t = tx_successes;
+%%
 s = t;
 % sum(s(:, 9) > s(:, 10))
-% s = s(s(:, 2) == 15, :);
+s = s(s(:, 2) == 110, :);
 s = s(:, 10);
 % max(s) / 32
 % s = mod(s, 2 ^ 17);
@@ -58,7 +60,7 @@ s = s(:, 10);
 % [x ix] = sort(s(:, 10));
 % s = s(ix, :);
 % s(:, 10) = s(:, 10) - min(s(:, 10));
-cdfplot(s);
+plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % plot(s);

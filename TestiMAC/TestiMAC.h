@@ -38,8 +38,11 @@
 //#warning LINK_SET_PDR_99
 
 // randomize packet interval, uniform [t/2, 3t/2]
-#define RANDOM_PKT_INTERVAL
-#warning RANDOM_PKT_INTERVAL
+//#define RANDOM_PKT_INTERVAL
+//#warning RANDOM_PKT_INTERVAL
+// changing traffic/period
+#define VARY_PERIOD
+#warning VARY_PERIOD
 
 
 #if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)

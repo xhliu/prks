@@ -14,6 +14,9 @@ configuration IMACC {
 
  		interface AsyncSplitControl as ForwarderSwitch;
  		interface AsyncStdControl as ControllerSwitch;
+	#if defined(VARY_PERIOD)
+		interface ForwarderInfo;
+	#endif
  	};
 }
 
@@ -23,7 +26,9 @@ implementation {
 	Receive = Forwarder;
 	Packet = Forwarder;
 	ForwarderSwitch = Forwarder;
-	
+#if defined(VARY_PERIOD)	
+	ForwarderInfo = Forwarder;
+#endif	
 	components IMACControllerC as Controller;
 	ControllerSwitch = Controller;
 }

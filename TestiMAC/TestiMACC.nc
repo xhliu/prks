@@ -33,6 +33,9 @@ implementation {
 		App.AMSend -> IMACC;
 		App.Receive -> IMACC;
 		App.Packet -> IMACC;
+		#if defined(VARY_PERIOD)
+		App.ForwarderInfo -> IMACC;
+		#endif
 	 	App.ForwarderSwitch -> IMACC.ForwarderSwitch;
 	 	App.ControllerSwitch -> IMACC.ControllerSwitch;
 		App.AMPacket -> AM;

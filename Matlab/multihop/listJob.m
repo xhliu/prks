@@ -124,6 +124,7 @@ cmac_job = job;
 
 
 %% SCREAM
+% 1 shot based version
 SCREAM_SLOT_LEN = 32;
 scream_job = [22327 240
               22345 240];

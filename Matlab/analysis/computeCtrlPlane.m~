@@ -4,17 +4,13 @@
 %   Function: compute ctrl plane behavior: e.g., % to stay in ctrl; % to be
 %   receiver bcoz of being conservative; use job 23160
 %% 
-STATUS_IDX = 7;
-% filter out low pdr links
-MIN_PDR = 0.8;
-
 %% always keep first
 load debugs;
 t = debugs;
-type = DBG_CONTROLLER_FLAG;
-line = 714; %686; %575;
-% type = DBG_TDMA_FLAG;
-% line = 605; %543; %1024;
+% type = DBG_CONTROLLER_FLAG;
+% line = 716; %686; %575;
+type = DBG_TDMA_FLAG;
+line = 605; %543; %1024;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 
@@ -26,6 +22,7 @@ MIN_PDR = 0.8;
 receivers = s(s(:, end) < MIN_PDR, 2);
 
 %% frequency to stay in ctrl 
+STATUS_IDX = 7;
 ctrl_ratio = [];
 % only active nodes, either sender or receiver
 s = t(t(:, STATUS_IDX) < 2, :);
@@ -59,28 +56,14 @@ str = ['conservative_ratio'];
 % status, m_data_addr, next_tx_slot - current_slot, current_slot)
 %rx (DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, 0, 0, 0, 
 %is_any_rx_pending, is_rx_conservative, current_slot)
-% txs = t;
+txs = t;
 rxs = t;
-%%
 s = link_pdrs;
-s = s(s(:, end) > MIN_PDR, :);
-
-out_sync_ratio = [];
 for i = 1 : size(s, 1)
     sender = s(i, 1);
     receiver = s(i, 2);
     
-    % tx slots
-    tx = txs(txs(:, 2) == sender & txs(:, STATUS_IDX) == 0, :);
+    tx = txs(txs(:, 2) == sender & txs(:, ), :);
     rx = rxs(rxs(:, 2) == receiver, :);
-    
-    % rx slots
-    [c ia ib] = intersect(tx(:, 10), rx(:, 10));
-    out_sync_ratio = [out_sync_ratio; sender receiver sum(rx(ib, 9) == 1) / length(ib)];
 end
-cdfplot(out_sync_ratio(:, end));
-str = ['out_sync_ratio'];
-%%
-t = out_sync_ratio(:, end);
-t(t > 0.99) = [];
-cdfplot(t * 100);
+

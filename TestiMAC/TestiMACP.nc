@@ -60,6 +60,9 @@ module TestiMACP {
 	#if defined(RANDOM_PKT_INTERVAL)
 		interface Random;
 	#endif
+	#if defined(VARY_PERIOD)
+		interface ForwarderInfo;
+	#endif
 	}
 }
 implementation {
@@ -146,7 +149,11 @@ void task sendTask() {
 		dbg("TestiMAC", "%s: sending pkt %hu.\n", __FUNCTION__, counter);
 		atomic locked = TRUE;
 	#ifndef MULTIHOP
+	#if !defined(VARY_PERIOD)
 		call UartLog.logEntry(TX_SUCCESS_FLAG, my_receiver, hdr->seqno, getGlobalTime());
+	#else
+		call UartLog.logEntry(TX_SUCCESS_FLAG, my_receiver, hdr->seqno, call ForwarderInfo.getPeriod());
+	#endif
 	#endif
 	} else {
 		dbg("TestiMAC", "%s: sending pkt %hu failed.\n", __FUNCTION__, counter);
@@ -170,6 +177,8 @@ event void MilliTimer.fired() {
 #if defined(RANDOM_PKT_INTERVAL)
 	period = (call Random.rand16()) % period + period / 2;
 	//call UartLog.logEntry(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, period);
+#elif defined(VARY_PERIOD)
+	period = call ForwarderInfo.getPeriod();
 #endif
 	
 	atomic {
