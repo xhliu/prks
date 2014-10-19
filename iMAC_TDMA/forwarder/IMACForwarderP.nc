@@ -267,7 +267,11 @@ async command bool ForwarderInfo.isForwarderEnabled() {
 //	return is_data_pending_;
 //}
 #if defined(VARY_PERIOD)
-uint32_t period = PERIOD_MILLI;
+// period is actually tx. prob. %
+uint32_t period = 100;
+// represent saturated, heavy, medium, and light traffic load accordingly
+uint32_t period_scales[] = {1, 16, 128, 512};
+// @return ms from us
 async command uint32_t ForwarderInfo.getPeriod() {
 	uint32_t period_;
 	atomic period_ = period;
@@ -382,7 +386,7 @@ async event void SlotTimer32khz.fired() {
 				if (!is_wraparound) {
 					// wraparound just occurred
 					is_wraparound = TRUE;
-					// switch every WRAPAROUND_CNT rounds, one round is 2^32 us; except 1st switch, who is after (WRAPAROUND_CNT + 1) rounds bcoz 1st round is not counted
+					// switch every WRAPAROUND_CNT rounds, one round is 2^32 us, including the 1st switch
 					if (++wraparound_cnt >= WRAPAROUND_CNT) {
 						wraparound_cnt = 0;
 						// 0 -> 1 -> 2 -> 3 -> 2 -> 1 -> 0
@@ -398,8 +402,16 @@ async event void SlotTimer32khz.fired() {
 						// 70 -> 80 -> 90 -> 95 -> 90 -> 80 ->70
 						call Controller.setLinkPdrReq(pdr_reqs[pdr_req_idx]);
 					#elif defined(VARY_PERIOD)
-						// 20 -> 40 -> 80 -> 160 -> 80 -> 40 -> 20
-						period = (PERIOD_MILLI << pdr_req_idx);
+						// //20 -> 40 -> 80 -> 160 -> 80 -> 40 -> 20
+						//period = (SLOT_LEN << (pdr_req_idx * 3));
+						// 1 -> 16 -> 128 -> 512 slots
+						//period = SLOT_LEN * period_scales[pdr_req_idx];
+						#warning search light traffic
+						//period = SLOT_LEN;
+						//if (pdr_req_idx > 0)
+						//	period *= 8;
+						// tx prob %: 100 -> 2
+						period = 2;
 					#else
 						#warning "sth smells fishy here"
 					#endif

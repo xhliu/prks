@@ -714,6 +714,9 @@ bool isContend(uint8_t i, uint8_t j) {
 		return !(s1 == s2 && r1 == r2);
 	}
 
+//#warning empty ER for debug VARY_PERIOD
+//	return FALSE;
+	
 	// I'm s1 or r1
 	is_sender = (my_ll_addr == s1);
 	// r1 interfered by s2?

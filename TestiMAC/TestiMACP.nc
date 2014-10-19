@@ -57,7 +57,7 @@ module TestiMACP {
 	#endif
 		interface Util;
 		interface UartLog;
-	#if defined(RANDOM_PKT_INTERVAL)
+	#if defined(RANDOM_PKT_INTERVAL) || defined(VARY_PERIOD)
 		interface Random;
 	#endif
 	#if defined(VARY_PERIOD)
@@ -171,15 +171,20 @@ void task sendTask() {
 event void MilliTimer.fired() {
 	bool locked_;
 	uint16_t counter_;
-	uint16_t period;
+	uint32_t period;
 	
 	period = PERIOD_MILLI;
 #if defined(RANDOM_PKT_INTERVAL)
+	// [1/2 3/2]
 	period = (call Random.rand16()) % period + period / 2;
-	//call UartLog.logEntry(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, period);
 #elif defined(VARY_PERIOD)
 	period = call ForwarderInfo.getPeriod();
+//	// randomize to even out pkt arrivals
+//	// [1/16 31/16]
+//	period = (call Random.rand16()) % ((period * 30) >> 4) + (period >> 4);
 #endif
+//#warning VARY_PERIOD log	
+//	call UartLog.logEntry(DBG_FLAG, DBG_HEARTBEAT_FLAG, __LINE__, period);
 	
 	atomic {
 	#if !defined(CMAC)
@@ -209,6 +214,11 @@ event void MilliTimer.fired() {
 	if (counter_ < MAX_PKT_CNT) {
 		call MilliTimer.startOneShot(period);
 	}
+	
+#if defined(VARY_PERIOD)
+	if (call Random.rand16() % 100 >= period)
+		return;
+#endif	
 	if (!locked_) {
 	#if !defined(DEFAULT_MAC) && !defined(RTSCTS) && !defined(CMAC)
 		sendTask();

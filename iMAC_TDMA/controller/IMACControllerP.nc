@@ -1040,7 +1040,7 @@ error_t execController(am_addr_t nb, bool is_sender) {
 //	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, link_pdr_sample, le->rx_er_border_idx + 1, in_gain / 128, er_border_gain / 128);
 //	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, reference_pdr, (le->rx_er_border_idx != EMPTY_ER_IDX) ? signalMap[le->rx_er_border_idx].nb : INVALID_ADDR, in_gain / 128, er_border_gain / 128); // ;-le->rx_nI.abs / 128
 //	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, le->rx_er_version, le->rx_er_border_idx + 1, -le->rx_interference_threshold, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME);
-#warning VARY_PERIOD log
+//#warning VARY_PERIOD log
 	call UartLog.logTxRx(DBG_FLAG, DBG_CONTROLLER_FLAG, __LINE__, nb, link_pdr, le->rx_er_border_idx + 1, in_gain / 128, er_border_gain / 128, (SUCCESS == call GlobalTime.getGlobalTime(&g_now)) ? g_now : INVALID_TIME);
 	
 	ret = adjustER(idx, is_sender, delta_i_dB);

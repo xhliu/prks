@@ -10,7 +10,7 @@ idx = 0;
 data = cell(PDR_REQ_CNT, PROTOCOL_CNT);
 
 %% PRKS
-CONVERGE_TIME_IN_HOUR = 0;
+CONVERGE_TIME_IN_HOUR = 1;
 BOOTSTRAP_TIME = CONVERGE_TIME_IN_HOUR * 3600 * 2 ^ 20;
 fprintf('retx delay of PRKS after %f hours\n', CONVERGE_TIME_IN_HOUR);
 
@@ -345,18 +345,35 @@ bw_ylabel = 'Latency (ms)';
 % % bw: short for barweb
 % %barweb(barvalues, errors, width, groupnames, bw_title, bw_xlabel,
 % %bw_ylabel, bw_colormap, gridstatus, bw_legend, error_sides, legend_type)
+% if is_median
+%     h = barerrorbar({1:size(barvalue, 1), barvalue}, {repmat((1:size(barvalue, 1))', 1, PROTOCOL_CNT), barvalue, lo_err, hi_err, 'rx'});
+% else
+%     h = barweb(barvalue, error, [], groupnames, [], bw_xlabel, bw_ylabel);
+% end
+% h = barerrorbar({1:6, barvalue}, {1:6, barvalue, error, error, 'rx'});
+% 
+% h.legend = legend(bw_legend, 'orientation', 'horizontal');
+% %
+% set(gca, 'FontSize', 30);
+% set(gca, 'yscale', 'log');
+% ylabel(bw_ylabel);
+% xlabel(bw_xlabel);
+% set(gca, 'xticklabel', groupnames);
+% ylim([1 10^5]);
+
 if is_median
-    h = barerrorbar({1:size(barvalue, 1), barvalue}, {repmat((1:size(barvalue, 1))', 1, PROTOCOL_CNT), barvalue, lo_err, hi_err, 'rx'});
+    fprintf('skip the error and continue execution, barerrorbar breaks down for row vector\n');
+    h = barerrorbar({1:6, barvalue}, {1:6, barvalue, lo_err, hi_err, 'rx'});
 else
     h = barweb(barvalue, error, [], groupnames, [], bw_xlabel, bw_ylabel);
 end
-h.legend = legend(bw_legend, 'orientation', 'horizontal');
-%
+% h.legend = legend(bw_legend);
+%%
 set(gca, 'FontSize', 30);
-set(gca, 'yscale', 'log');
+% set(gca, 'yscale', 'log');
 ylabel(bw_ylabel);
 xlabel(bw_xlabel);
-set(gca, 'xticklabel', groupnames);
+set(gca, 'xticklabel', bw_legend);
 % ylim([1 10^5]);
 %%
 maximize;
@@ -365,9 +382,9 @@ cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %
 if is_median
-    str = ['peer_retx_latency_median_bar_with_ci_2'];
+    str = ['peer_retx_latency_median_bar_with_ci_2_99'];
 else
-    str = ['peer_retx_latency_mean_bar'];
+    str = ['peer_retx_latency_mean_bar_99'];
 end
 if ~is_neteye
     str = [str '_indriya'];

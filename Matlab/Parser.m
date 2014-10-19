@@ -1,14 +1,7 @@
 clear
 clc
 
-jobs = [
-23226
-23230
-23234
-
-23227
-23231
-23235];
+jobs = [23269];
 % initial pkts for link estimation; excluded from analysis
 % applies to iMAC only
 CONVERGE_STEP = 60;

@@ -51,7 +51,7 @@
 // PRKS specific
 	// run basic LAMA only: PRKS or RIDB
 //	#define OLAMA_DISABLED
-//	#warning OLAMA_DISABLED
+//	#warning OLAMA_DISABLED to debug VARY_PERIOD
 	
 	// PRKS-L: do not use refined a(t) and use SINR-vs-PDR gradient directly even it's away from target
 //	#define PRKSL
@@ -181,9 +181,9 @@ enum {
 #ifdef MULTIHOP
 #warning change period
 #endif
-//#warning period not 20
+#warning period not 20
 	// CSMA/RTSCTS/CMAC: 1800UL, 	RIDB&SCREAM 22500UL, 	PRKS: 360000UL,
-	PERIOD_MILLI = 20UL,	// 20
+	PERIOD_MILLI = 32,	// 20
 	MAX_PKT_CNT = 45000U,
 	
 	TYPE_SYNC = 12,

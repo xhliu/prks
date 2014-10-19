@@ -70,7 +70,7 @@ implementation {
 	App.Util -> UtilC;
 	components UartLogC;
 	App.UartLog -> UartLogC;
-#if defined(RANDOM_PKT_INTERVAL)
+#if defined(RANDOM_PKT_INTERVAL) || defined(VARY_PERIOD)
 	components RandomC;
 	App.Random -> RandomC;
 #endif
