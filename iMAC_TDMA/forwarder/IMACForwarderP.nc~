@@ -406,12 +406,17 @@ async event void SlotTimer32khz.fired() {
 						//period = (SLOT_LEN << (pdr_req_idx * 3));
 						// 1 -> 16 -> 128 -> 512 slots
 						//period = SLOT_LEN * period_scales[pdr_req_idx];
-						#warning search light traffic
 						//period = SLOT_LEN;
 						//if (pdr_req_idx > 0)
 						//	period *= 8;
-						// tx prob %: 100 -> 2
-						period = 2;
+						#warning tx prob %: 100 -> 3 -> 6
+						if (0 == pdr_req_idx) {
+							period = 100;
+						} else if (0 == pdr_req_idx) {
+							period = 3;
+						} else {
+							period = 6;
+						}
 					#else
 						#warning "sth smells fishy here"
 					#endif

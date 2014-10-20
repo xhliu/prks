@@ -50,8 +50,8 @@ t = tx_successes;
 %%
 s = t;
 % sum(s(:, 9) > s(:, 10))
-s = s(s(:, 2) == 110, :);
-s = s(:, 10) / 512; % / 10^6 / 3600;
+s = s(s(:, 2) == 10, :);
+s = s(:, 10); % / 10^6 / 3600;
 % max(s) / 32
 % s = mod(s, 2 ^ 17);
 % s = s(s(:, 6) == s(:, 7) - 1, :);
@@ -74,6 +74,7 @@ plot(s);
 % s(ix - 10 : ix + 10)
 % hold on;
 % length(s)
+% legend({'1', '2', '3', '4', '5', '10'});
 %%
 hold on;
 % figure;
@@ -150,7 +151,7 @@ for link_id = 1 : size(link_pdrs, 1)
     end
     
 %     plot(s(:, [6 8 9])); %s(:, 10) / 10^6 / 3600, 
-    plot(s(:, 10) / 10^6 / 3600, [s(:, 6 : 7), repmat(pdr_req, size(s, 1), 1)], 'linestyle', 'none', 'marker', '*');
+    plot(s(:, 10) / 10^6 / 3600, [s(:, 6 : 7), repmat(pdr_req, size(s, 1), 1)]); %, 'linestyle', 'none', 'marker', '*');
 %     plot([s(:, [6 7 8 9 10]) ewma repmat(pdr_req, size(s, 1), 1) repmat(0, size(s, 1), 1)]);
 %     plot([s(:, [6 7 8]) sinr repmat(pdr_req, size(s, 1), 1)]);
 %     title(['link ' num2str(link_id) ' , pdr req ' num2str(pdr_req)]);

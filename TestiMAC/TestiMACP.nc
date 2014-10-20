@@ -177,8 +177,8 @@ event void MilliTimer.fired() {
 #if defined(RANDOM_PKT_INTERVAL)
 	// [1/2 3/2]
 	period = (call Random.rand16()) % period + period / 2;
-#elif defined(VARY_PERIOD)
-	period = call ForwarderInfo.getPeriod();
+//#elif defined(VARY_PERIOD)
+//	period = call ForwarderInfo.getPeriod();
 //	// randomize to even out pkt arrivals
 //	// [1/16 31/16]
 //	period = (call Random.rand16()) % ((period * 30) >> 4) + (period >> 4);
@@ -216,7 +216,8 @@ event void MilliTimer.fired() {
 	}
 	
 #if defined(VARY_PERIOD)
-	if (call Random.rand16() % 100 >= period)
+	if (call Random.rand16() % 100 >= (call ForwarderInfo.getPeriod()))
+//	if (call Random.rand16() % 100 >= 3)
 		return;
 #endif	
 	if (!locked_) {

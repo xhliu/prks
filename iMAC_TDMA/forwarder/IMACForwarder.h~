@@ -80,7 +80,7 @@ enum {
 #if defined(VARY_PDR_REQ) || defined(VARY_PERIOD)
 #warning dbg WRAPAROUND_CNT 1
 	// how often to change pdr req, in terms of wraparounds
-	WRAPAROUND_CNT = ,
+	WRAPAROUND_CNT = 1, //2
 #endif
 		
 #ifdef SCREAM

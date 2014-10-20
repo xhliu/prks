@@ -268,7 +268,7 @@ async command bool ForwarderInfo.isForwarderEnabled() {
 //}
 #if defined(VARY_PERIOD)
 // period is actually tx. prob. %
-uint32_t period = 100;
+uint32_t period = 3;
 // represent saturated, heavy, medium, and light traffic load accordingly
 uint32_t period_scales[] = {1, 16, 128, 512};
 // @return ms from us
@@ -406,12 +406,17 @@ async event void SlotTimer32khz.fired() {
 						//period = (SLOT_LEN << (pdr_req_idx * 3));
 						// 1 -> 16 -> 128 -> 512 slots
 						//period = SLOT_LEN * period_scales[pdr_req_idx];
-						#warning search light traffic
 						//period = SLOT_LEN;
 						//if (pdr_req_idx > 0)
 						//	period *= 8;
-						// tx prob %: 100 -> 2
-						period = 2;
+						#warning tx prob %: 100 -> 3
+						if (0 == pdr_req_idx) {
+							period = 3; //100;
+						} else if (1 == pdr_req_idx) {
+							period = 100; //3;
+						//} else {
+						//	period = 6;
+						}
 					#else
 						#warning "sth smells fishy here"
 					#endif
