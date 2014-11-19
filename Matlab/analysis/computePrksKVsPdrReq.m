@@ -7,11 +7,15 @@
 % 0.5 for Indriya
 CONVERGE_TIME_IN_HOUR = 1;
 
-IN_GAIN_IDX = 9;
-ER_BORDER_GAIN_IDX = 10;
+% vary traffic load
+IN_GAIN_IDX = 8;
+ER_BORDER_GAIN_IDX = 9;
+% vary interval
+% IN_GAIN_IDX = 9;
+% ER_BORDER_GAIN_IDX = 10;
 % TX_POWER = -25;
 
-job = prks_job;
+job = prks_mixed_traffic_job;
 BOOTSTRAP_TIME = CONVERGE_TIME_IN_HOUR * 3600 * 2 ^ 20;
 % fprintf('pdr of PRKS after %f hours\n', CONVERGE_TIME_IN_HOUR);
 
@@ -40,11 +44,12 @@ for i = 1 : len
         load debugs;
         t = debugs;
         type = DBG_CONTROLLER_FLAG;
-        line = 1042;
+        line = 1044;    %1042
         % type = DBG_HEARTBEAT_FLAG;
         % line = 172;
         t = t(t(:, 3) == type, :);
-        t = t(t(:, 4) == line, :);
+%         t = t(t(:, 4) == line, :);
+        t = t(t(:, 4) == 1042 | t(:, 4) == 1044, :);
         % K = sender power / er border interferer power
         s = t(:, ER_BORDER_GAIN_IDX) - t(:, IN_GAIN_IDX);
 
@@ -77,7 +82,7 @@ set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 % cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
 %%
-str = ['prks_vary_interval_K_vs_pdr_req_boxplot'];
+str = ['prks_mixed_traffic_K_vs_pdr_req_boxplot'];
 if ~is_neteye
     str = [str '_indriya'];
 end

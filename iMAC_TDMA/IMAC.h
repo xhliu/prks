@@ -16,12 +16,12 @@ enum {
 	
 #warning pdr req; SINR_THRESHOLD MUST be consistent w/ pdr req
 	// PDR requirement
-	REFERENCE_DATA_PDR = 70,
+	REFERENCE_DATA_PDR = 95,
 	// SINR threshold to initialize ER based on pairwise interference model
 	//scaled: <30%, 1.6 = 205>, <40%, 1.8 = 231>, <50%, 2.2 = 282>, <60%, 2.4 = 308>, <70%, 2.8 * 128 = 359> <80%, 3.2 * 128 = 410> <90%, 4 * 128 = 512>, <95%, 4.5 * 128 = 576>, <99%, 16 * 128 = 2048>
 #ifndef CMAC
 	// in $CMAC/forwarder/IMACForwarder.h
-	SINR_THRESHOLD = 359,
+	SINR_THRESHOLD = 576,
 #endif
 	// RTSCTS needs this
 	REFERENCE_ACK_PDR = 90,

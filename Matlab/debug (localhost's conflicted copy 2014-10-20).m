@@ -50,21 +50,20 @@ t = tx_successes;
 %%
 s = t;
 % sum(s(:, 9) > s(:, 10))
-s = s(s(:, 2) == 18, :);
-s = s(:, 10) / 512;
+s = s(s(:, 2) == 10, :);
+s = s(:, 10); % / 10^6 / 3600;
 % max(s) / 32
 % s = mod(s, 2 ^ 17);
 % s = s(s(:, 6) == s(:, 7) - 1, :);
 % s = mod(s, 128);
 unique(s)
-% s = s(:, 9) - s(:, 8);
 % cnt = sum(s == 178);
 % length(s) - cnt - cnt
 % s = s(:, [2 10]);
 % [x ix] = sort(s(:, 10));
 % s = s(ix, :);
 % s(:, 10) = s(:, 10) - min(s(:, 10));
-cdfplot(s);
+plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % mean(s)
@@ -103,7 +102,7 @@ r = [];
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
 % fprintf('warning: varying link pdr\n');
-pdr_req = 80;
+pdr_req = 90;
 LINK_PDR_IDX = 6;
 link_settling_time = [];
 for link_id = 1 : size(link_pdrs, 1)
@@ -1338,11 +1337,4 @@ set(gca, 'yscale', 'log');
 load trimmed_link_pdrs;
 t = trimmed_link_pdrs;
 cdfplot(t(:, end) * 100);
-
-
-%%
-x = cell(2, 1);
-x{2} = rand(100, 1);
-sum(x{2})
-
 
