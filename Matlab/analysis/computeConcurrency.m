@@ -5,17 +5,17 @@
 %% 
 jobs = [];
 % 1) SCREAM or RIDB without OLAMA
-SLOT_LEN = 32; %32; %512;
-
-for i = 1 : length(scream_job)
-    jobs = [jobs; scream_job{i}(:, 1)];
-end
-% jobs = [jobs; scream_job(:, 1)];
-% 2) PRKS or RIDB with OLAMA
-% SLOT_LEN = 512;
-% for i = 1 : length(prks_job)
-%     jobs = [jobs; prks_job{i}(:, 1)];
+% SLOT_LEN = 32; %32; %512;
+% for i = 1 : length(scream_job)
+%     jobs = [jobs; scream_job{i}(:, 1)];
 % end
+% jobs = [jobs; scream_job(:, 1)];
+
+% 2) PRKS or RIDB with OLAMA
+SLOT_LEN = 512;
+for i = 1 : length(prks_job)
+    jobs = [jobs; prks_job{i}(:, 1)];
+end
 % for i = 1 : length(prksr_job)
 %     jobs = [jobs; prksr_job{i}(:, 1)];
 % end
@@ -32,17 +32,17 @@ fprintf('slot length %d\n', SLOT_LEN);
 for job_id = 1 : length(jobs)
     job_dir = [MAIN_DIR num2str(jobs(job_id))];
     cd(job_dir);
-    if exist('concurrency.mat', 'file')
-        fprintf('skip processed %d-th job %d\n', job_id, jobs(job_id));
-        continue;
-    else
+%     if exist('concurrency.mat', 'file')
+%         fprintf('skip processed %d-th job %d\n', job_id, jobs(job_id));
+%         continue;
+%     else
         fprintf('processing %d-th job job %d\n', job_id, jobs(job_id));
-    end
+%     end
 %%
 load debugs;
 t = debugs;
 type = DBG_TDMA_FLAG;
-line = 713; %543
+line = 579; %713; %543
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
 

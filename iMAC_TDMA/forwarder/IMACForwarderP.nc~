@@ -97,7 +97,7 @@ message_t m_control;
 bool is_data_pending;
 bool is_1st_tx_slot;
 
-#if defined(VARY_PDR_REQ)
+#if defined(VARY_PDR_REQ) || defined(VARY_PERIOD)
 //#warning VARY_PDR_REQ enabled
 uint8_t wraparound_cnt;
 bool is_wraparound;
@@ -227,7 +227,7 @@ void getConflictSet() {
 void startForwarder() {
 	atomic enabled = TRUE;
 	//atomic const_ctrl_slot_ftsp_chance_mask = CTRL_SLOT_FTSP_CHANCE_MASK;
-#if defined(VARY_PDR_REQ)
+#if defined(VARY_PDR_REQ) || defined(VARY_PERIOD)
 	wraparound_cnt = 0;
 	is_wraparound = FALSE;
 	is_inc = TRUE;
@@ -267,10 +267,9 @@ async command bool ForwarderInfo.isForwarderEnabled() {
 //	return is_data_pending_;
 //}
 #if defined(VARY_PERIOD)
-// period is actually tx. prob. %
-uint32_t period;
+uint32_t period = SLOT_LEN;
 // represent saturated, heavy, medium, and light traffic load accordingly
-uint32_t period_scales[] = {1, 2, 5, 10};
+uint32_t period_scales[] = {1, 8, 64, 512}; //too heavy and maybe undifferentiable {1, 2, 5, 10};
 //uint32_t periods[] = {20, 50, 100, 200};
 // @return ms from us
 async command uint32_t ForwarderInfo.getPeriod() {
@@ -294,9 +293,6 @@ uint8_t addLinkEstHeaderAndFooter(message_t *msg, uint8_t len, uint32_t next_slo
 command error_t Init.init() {
 #ifdef SCREAM
 	uint8_t i;
-#endif
-#if defined(VARY_PERIOD)
-	uint8_t period_idx;
 #endif
 	//call SlotTimer32khz.start(SM_BEACON_PERIOD_MILLI << 10);
 	g_next_firing_time = INVALID_TIME;
@@ -329,10 +325,7 @@ command error_t Init.init() {
 	data_tx_slot_cnt = 0;
 	slot_cnt = 0;
 	data_tx_slot_ratio = 100;
-#if defined(VARY_PERIOD)
-	period_idx = (call Random.rand16()) % (sizeof(period_scales) / sizeof(period_scales[0]));
-	period = SLOT_LEN * period_scales[period_idx];
-#endif
+
 	return SUCCESS;
 }
 
@@ -387,7 +380,7 @@ async event void SlotTimer32khz.fired() {
 				local_interval = SLOT_LEN - elapsed_interval;
 				g_next_firing_time = g_now + local_interval;
 			}
-		#if defined(VARY_PDR_REQ)
+		#if defined(VARY_PDR_REQ) || defined(VARY_PERIOD)
 			//#warning online pdr req change
 			// change period: 2 ^ 32 us; scale 100 times to avoid skipped slots
 			if (g_now < ((uint32_t)SLOT_LEN * 100)) {
@@ -409,6 +402,11 @@ async event void SlotTimer32khz.fired() {
 					#if defined(VARY_PDR_REQ)
 						// 70 -> 80 -> 90 -> 95 -> 90 -> 80 ->70
 						call Controller.setLinkPdrReq(pdr_reqs[pdr_req_idx]);
+					#elif defined(VARY_PERIOD)
+						// 1 -> 2 -> 5 -> 10 -> 5 -> 2 -> 1x
+						period = SLOT_LEN * period_scales[pdr_req_idx];
+					#else
+						#warning "sth smells fishy here"
 					#endif
 					}
 				}

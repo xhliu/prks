@@ -5,7 +5,7 @@
 %%
 idx = 0;
 % if is_neteye
-    data = cell(PDR_REQ_CNT, 3);
+    data = cell(PDR_REQ_CNT, 2);
 % else
 %     no iOrder
 %     data = cell(PDR_REQ_CNT, 2);
@@ -13,7 +13,7 @@ idx = 0;
 
 %% PRKS NAMA
 fprintf('processing PRKS NAMA\n');
-job = prks_nama_job;
+job = prks_job;
 
 len = length(job);
 tmp = cell(len, 1);
@@ -33,25 +33,25 @@ idx = idx + 1;
 data(:, idx) = tmp;
 
 %% PRKS ONAMA
-fprintf('processing PRKS ONAMA\n');
-job = prks_onama_job;
-
-len = length(job);
-tmp = cell(len, 1);
-% each pdr req
-for i = 1 : len
-    pdr_job = job{i};
-    % each job
-    for j = 1 : size(pdr_job, 1)
-        fprintf('processing job %d\n', pdr_job(j, 1));
-        job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
-        cd(job_dir);
-        load concurrency;
-        tmp{i} = [tmp{i}; concurrency];
-    end
-end
-idx = idx + 1;
-data(:, idx) = tmp;
+% fprintf('processing PRKS ONAMA\n');
+% job = prks_onama_job;
+% 
+% len = length(job);
+% tmp = cell(len, 1);
+% % each pdr req
+% for i = 1 : len
+%     pdr_job = job{i};
+%     % each job
+%     for j = 1 : size(pdr_job, 1)
+%         fprintf('processing job %d\n', pdr_job(j, 1));
+%         job_dir = [MAIN_DIR num2str(pdr_job(j, 1))];
+%         cd(job_dir);
+%         load concurrency;
+%         tmp{i} = [tmp{i}; concurrency];
+%     end
+% end
+% idx = idx + 1;
+% data(:, idx) = tmp;
 
 
 % if is_neteye
@@ -76,9 +76,10 @@ end
 
 %% display
 bw_ylabel = 'Concurrency (packets per slot)';
+bw_legend = {'PRKS-RANDOM-INTERVAL', 'iOrder'};
 % if is_neteye
-    bw_legend = {'PRKS-NAMA', 'PRKS-ONAMA', 'iOrder'};
-% else
+%     bw_legend = {'PRKS-NAMA', 'PRKS-ONAMA', 'iOrder'};
+% % else
 %     bw_legend = {'PRKS-NAMA', 'PRKS-ONAMA'};
 % end
 % bw: short for barweb
@@ -89,7 +90,7 @@ h = barweb(barvalue, error, [], groupnames, [], bw_xlabel, bw_ylabel);
 h.legend = legend(bw_legend);
 
 %%
-set(gca, 'FontSize', 40);
+set(gca, 'FontSize', 50);
 ylabel(bw_ylabel);
 xlabel(bw_xlabel);
 grid on;
@@ -98,12 +99,10 @@ maximize;
 set(gcf, 'Color', 'white');
 cd(FIGURE_DIR);
 %% cd('~/Dropbox/iMAC/Xiaohui/signalMap/figures/');
-
-if is_neteye
-    str = 'prks_onama_vs_nama_vs_iorder_concurrency';
-else
-    %str = 'prks_onama_vs_nama_concurrency_indriya';
-    str = 'prks_onama_vs_nama_vs_iorder_concurrency_indriya';
+%str = 'prks_onama_vs_nama_vs_iorder_concurrency';
+str = 'prks_random_interval_vs_iorder_concurrency';
+if ~is_neteye
+    str = [str '_indriya'];
 end
 export_fig(str, '-eps');
 export_fig(str, '-jpg', '-zbuffer');

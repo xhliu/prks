@@ -24,8 +24,8 @@
 // by default, PRKS is used w/ initialized ER as in RIDB
 
 // multihop? ; prior to IMAC.h, which uses it
-//#define MULTIHOP
-//#warning MULTIHOP
+#define MULTIHOP
+#warning MULTIHOP
 
 #include "IMAC.h"
 
@@ -41,8 +41,8 @@
 //#define RANDOM_PKT_INTERVAL
 //#warning RANDOM_PKT_INTERVAL
 // changing traffic/period
-#define VARY_PERIOD
-#warning VARY_PERIOD
+//#define VARY_PERIOD
+//#warning VARY_PERIOD
 
 
 #if defined(DEFAULT_MAC) || defined(RTSCTS) || defined(CMAC)

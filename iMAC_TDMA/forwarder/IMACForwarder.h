@@ -77,10 +77,10 @@ enum {
 //	// max # of slot search forward; to prevent inf loop
 //	MAX_SLOT_FORWARD = SLOT_MASK + 1,
 
-#if defined(VARY_PDR_REQ)
+#if defined(VARY_PDR_REQ) || defined(VARY_PERIOD)
 //#warning dbg WRAPAROUND_CNT 1
 	// how often to change pdr req, in terms of wraparounds
-	WRAPAROUND_CNT = 2, //2
+	WRAPAROUND_CNT = 1, //2
 #endif
 		
 #ifdef SCREAM

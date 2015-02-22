@@ -1,3 +1,11 @@
+%%
+% x = x{2};
+% y = y{2};
+plot(x' * 3600 * 5 / 512, [y' repmat(90, length(x), 1)]);
+%%
+xlim([0 600]);
+%%
+
 if 0
 %% DBG constants
 DBG_LOSS_FLAG = 0;
@@ -32,7 +40,7 @@ load debugs;
 t = debugs;
 type = DBG_CONTROLLER_FLAG;
 line = 1044;
-% type = DBG_HEARTBEAT_FLAG;
+% type = DBG_TDMA_FLAG;
 % line = 187;
 t = t(t(:, 3) == type, :);
 t = t(t(:, 4) == line, :);
@@ -50,7 +58,7 @@ t = tx_successes;
 %%
 s = t;
 % sum(s(:, 9) > s(:, 10))
-s = s(s(:, 2) == 18, :);
+s = s(s(:, 2) == 1, :);
 s = s(:, 10) / 512;
 % max(s) / 32
 % s = mod(s, 2 ^ 17);
@@ -64,7 +72,7 @@ unique(s)
 % [x ix] = sort(s(:, 10));
 % s = s(ix, :);
 % s(:, 10) = s(:, 10) - min(s(:, 10));
-cdfplot(s);
+plot(s);
 % ix = (x >= 2 ^ 15);
 % x(ix) = x(ix) - 2 ^ 16;
 % mean(s)
@@ -103,19 +111,21 @@ r = [];
 % le->rx_er_border_idx + 1, reference_pdr, delta_i_dB)
 load link_pdrs;
 % fprintf('warning: varying link pdr\n');
-pdr_req = 80;
+pdr_req = 90;
 LINK_PDR_IDX = 6;
 link_settling_time = [];
 for link_id = 1 : size(link_pdrs, 1)
     fprintf('link %d\n', link_id);
 %     fprintf('warning: fixed link id\n');
-%     link_id = 44;
+%     link_id = 29;
     
     s = t;
     % receiver
     s = s(s(:, 2) == link_pdrs(link_id, 2), :);
     % sender
     s = s(s(:, 5) == link_pdrs(link_id, 1), :);
+    
+%     s(58, :) = [];
     
     % various pdr req
     if isempty(s)
@@ -152,9 +162,9 @@ for link_id = 1 : size(link_pdrs, 1)
     end
     
 %     plot(s(:, [6 8 9])); %s(:, 10) / 10^6 / 3600, 
-    plot(s(:, 10) / 10^6 / 3600, [s(:, 6 : 7), repmat(pdr_req, size(s, 1), 1)]); %, 'linestyle', 'none', 'marker', '*');
+%     plot(s(:, 10) / 2 ^ 20 / 3600, [s(:, 6 : 7), repmat(pdr_req, size(s, 1), 1)]); %, 'linestyle', 'none', 'marker', '*');
 %     plot([s(:, [6 7 8 9 10]) ewma repmat(pdr_req, size(s, 1), 1) repmat(0, size(s, 1), 1)]);
-%     plot([s(:, [6 7 8]) sinr repmat(pdr_req, size(s, 1), 1)]);
+    plot(s(:, 10) / 2 ^ 20 / 3600, [s(:, [6]) repmat(pdr_req, size(s, 1), 1)]);
 %     title(['link ' num2str(link_id) ' , pdr req ' num2str(pdr_req)]);
     title(['link ' num2str(link_id)]);
     legend({'pdr', 'ER size'}, 'Location', 'Best');
